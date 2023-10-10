@@ -57,7 +57,7 @@ const Singleshoppage = () => {
               Sale
             </button>
             <br />
-            <img className="mt-md-5" src={productimg1} />
+            <img className="mt-md-5" src={productimg1} alt="product" />
           </Col>
 
           {/* carameldiv column */}

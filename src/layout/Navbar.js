@@ -95,7 +95,13 @@ const Navbar = ({ handleShow2 }) => {
           className="nav-item navbrand d-flex me-xxl-5 "
           style={{ textDecoration: "none" }}
         >
-          <img className="mx-xl-0" src={logoimg} width="150px" height="80px" />
+          <img
+            className="mx-xl-0"
+            src={logoimg}
+            width="150px"
+            height="80px"
+            alt="logo"
+          />
         </Link>
         <span
           id="navbtn"

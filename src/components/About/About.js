@@ -123,7 +123,7 @@ const About = () => {
               </div>
             </Col>
             <Col className="px-xl-5">
-              <img className="px-xl-4" src={chimg3} width="100%" />
+              <img className="px-xl-4" src={chimg3} width="100%" alt="img3" />
             </Col>
             {/* Spacer row for larger screens */}
             <Row className="d-none d-lg-block pt-5 pb-5 mt-5 mb-5">

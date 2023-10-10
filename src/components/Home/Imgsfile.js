@@ -12,7 +12,7 @@ const Imgsfile = () => {
 
   // Function to navigate to the '/shoppage' route
   const handleclick = () => {
-     window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
     navigate("/shoppage");
   };
 
@@ -21,18 +21,14 @@ const Imgsfile = () => {
     AOS.init();
   }, []);
 
-
-
-
-    const [imageData, setImageData] = useState([])
-    useEffect(()=>{
-      fetch(
-        "https://paradox122.000webhostapp.com/_API/Home_Below_Slider_Images_API.php"
-      )
-      .then((resp)=>resp.json())
-      .then((data)=>setImageData(data))
-      ;
-    },[])
+  const [imageData, setImageData] = useState([]);
+  useEffect(() => {
+    fetch(
+      "https://paradox122.000webhostapp.com/_API/Home_Below_Slider_Images_API.php"
+    )
+      .then((resp) => resp.json())
+      .then((data) => setImageData(data));
+  }, []);
   return (
     <div className="imgsgrid mt-4 pt-lg-4">
       <div className="container">
@@ -69,7 +65,12 @@ const Imgsfile = () => {
             className="col-sm-12 col-lg-6 col-lg-6 col-md-6 px-lg-5"
           >
             <div>
-              <img className="card-img-top  px-lg-5" src={imgc} width="100%" />
+              <img
+                className="card-img-top  px-lg-5"
+                src={imgc}
+                width="100%"
+                alt="chocolate"
+              />
             </div>
           </div>
           {/* Text and button section with animation */}

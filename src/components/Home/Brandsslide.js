@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { fetchBrands } from "../../actions"; // Import the fetchBrands action
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -81,7 +80,6 @@ const Brandsslide = () => {
     ],
   };
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   // Fetch brands data from Redux store
