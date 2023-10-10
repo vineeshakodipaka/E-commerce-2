@@ -26,6 +26,12 @@
        height: 100px;
     
     }
+
+          .shopcards .shopcards {
+              width: 100%;
+              height: 150px !important;
+    
+          }
 }
 @media screen and (min-width: 768px) {
     .shoppagecls .productname {
@@ -37,9 +43,10 @@
             height: 250px;
     
    }
-   .shopcards .shopcards{
-    width: 100%;
-    height: 150px !important;
+   .shopcards .shopcards {
+       width: 100%;
+       height: 400px !important;
 
    }
+ 
 }
