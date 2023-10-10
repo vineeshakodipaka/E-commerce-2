@@ -5,8 +5,6 @@ import { fetchBrands } from "../../actions";
 import mshimg from "../../Images/image 55.png";
 import { Card, Col, Container, Row } from "react-bootstrap";
 
-
-
 const NewBrandspage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -18,7 +16,6 @@ const NewBrandspage = () => {
   }, [dispatch]);
 
   const [selectedBrand, setSelectedBrand] = useState(null);
-
 
   const handleBrandClick = (brand) => {
     if (brand.hasSubcat) {
@@ -58,7 +55,7 @@ const NewBrandspage = () => {
       <Container className="mt-2">
         {selectedBrand && selectedBrand.hasSubcat ? (
           <Row className="px-xl-5 mx-lg-5 mx-4 pt-3 pb-3">
-            {selectedBrand.subcategories.map((subcat) => (
+            {selectedBrand.subcategories.map((subcat, index) => (
               <Col key={subcat.Subcat_id}>
                 <Card
                   className=" mt-2 mb-2"
@@ -67,9 +64,10 @@ const NewBrandspage = () => {
                   <center>
                     <Card.Body>
                       <Card.Img
-                        className="pt-3 pb-3 px-5 "
+                        className="pt-3 pb-3 px-5"
                         src={subcat.Subcat_img}
-                        alt="img"
+                        /* eslint-disable-next-line */
+                        alt="Subcategories"
                       />
                       <Card.Title>{subcat.Subcat_Name}</Card.Title>
                     </Card.Body>

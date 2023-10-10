@@ -11,7 +11,8 @@ const Singleshoppage = () => {
   const [showInfo, setShowInfo] = useState(false);
   const [showInfo1, setShowInfo1] = useState(false);
 
-  const [selectedQuantity, setSelectedQuantity] = useState(null);
+  // Removed the declaration and assignment of selectedQuantity
+  // const [selectedQuantity, setSelectedQuantity] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
 
   // Handle input change for custom quantity
@@ -19,10 +20,12 @@ const Singleshoppage = () => {
     const inputNumber = parseInt(e.target.value, 10);
     if (!isNaN(inputNumber) && inputNumber >= 1 && inputNumber <= 10) {
       setSearchTerm(inputNumber.toString());
-      setSelectedQuantity(inputNumber);
+      // Removed the setSelectedQuantity line since selectedQuantity is not used
+      // setSelectedQuantity(inputNumber);
     } else {
       setSearchTerm("");
-      setSelectedQuantity(null);
+      // Removed the setSelectedQuantity line since selectedQuantity is not used
+      // setSelectedQuantity(null);
     }
   };
 
@@ -35,7 +38,6 @@ const Singleshoppage = () => {
   const toggleInfo1 = () => {
     setShowInfo1(!showInfo1);
   };
-
   return (
     <div className="singleproductpage">
       <div className="position-relative mb-3">

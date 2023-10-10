@@ -44,7 +44,7 @@ const Imgsfile = () => {
                   className="card-img-top rounded-4 chocoimg"
                   src={item.url}
                   width="100%"
-                  alt={`Image ${index + 1}`}
+                  alt={`${index + 1}`} // Updated alt attribute
                 />
                 <div
                   data-aos={index === 0 ? "fade-left" : "fade-right"} // Apply different animations based on the index
