@@ -4,7 +4,7 @@ export const FETCH_PRODUCTS_REQUEST = "FETCH_PRODUCTS_REQUEST";
 export const FETCH_PRODUCTS_SUCCESS = "FETCH_PRODUCTS_SUCCESS";
 export const FETCH_PRODUCTS_FAILURE = "FETCH_PRODUCTS_FAILURE";
 
-export const fetchProductsRequest = () => ({ 
+export const fetchProductsRequest = () => ({
   type: FETCH_PRODUCTS_REQUEST,
 });
 
@@ -176,17 +176,15 @@ export const fetchBrandProducts = (brandId) => {
   };
 };
 
-
-
-
-
-
 // brandSubproductsActions.js
 // Action types
 
-export const FETCH_BRAND_SUBPRODUCTS_REQUEST = "FETCH_BRAND_SUBPRODUCTS_REQUEST";
-export const FETCH_BRAND_SUBPRODUCTS_SUCCESS = "FETCH_BRAND_SUBPRODUCTS_SUCCESS";
-export const FETCH_BRAND_SUBPRODUCTS_FAILURE = "FETCH_BRAND_SUBPRODUCTS_FAILURE";
+export const FETCH_BRAND_SUBPRODUCTS_REQUEST =
+  "FETCH_BRAND_SUBPRODUCTS_REQUEST";
+export const FETCH_BRAND_SUBPRODUCTS_SUCCESS =
+  "FETCH_BRAND_SUBPRODUCTS_SUCCESS";
+export const FETCH_BRAND_SUBPRODUCTS_FAILURE =
+  "FETCH_BRAND_SUBPRODUCTS_FAILURE";
 // Action creators
 // Action creators
 export const fetchBrandSubproductsRequest = () => ({
@@ -225,7 +223,3 @@ export const fetchBrandSubproducts = (Subcatid) => {
       });
   };
 };
-
-
-
-
