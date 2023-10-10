@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchBrands } from "../../actions";
-// import mshimg from "../../Images/image 55.png";
+import mshimg from "../../Images/image 55.png";
 import { Card, Col, Container, Row } from "react-bootstrap";
 
 const NewBrandspage = () => {
@@ -39,12 +39,12 @@ const NewBrandspage = () => {
   return (
     <div className="newbrands">
       <div className="position-relative">
-        {/* <img
+        <img
           src={mshimg}
           width="100%"
           style={{ height: "250px" }}
           alt="Brand Image"
-        /> */}
+        />
         <h3
           className="position-absolute top-50 start-50 translate-middle"
           style={{ color: "white" }}
@@ -63,11 +63,11 @@ const NewBrandspage = () => {
                 >
                   <center>
                     <Card.Body>
-                      {/* <Card.Img
+                      <Card.Img
                         className="pt-3 pb-3 px-5"
                         src={subcat.Subcat_img}
-                        alt="Subcategories" // eslint-disable-next-line
-                      /> */}
+                        alt={`Image ${index + 1}`}
+                      />
                       <Card.Title>{subcat.Subcat_Name}</Card.Title>
                     </Card.Body>
                   </center>
@@ -84,12 +84,12 @@ const NewBrandspage = () => {
                   onClick={() => handleBrandClick(brand)}
                   style={{ background: "none", border: "none" }}
                 >
-                  {/* <Card.Img
+                  <Card.Img
                     className="pt-3 pb-3 px-5 "
                     src={brand.Brand_image}
                     alt={brand.Brand_Name}
                     width="100%"
-                  /> */}
+                  />
 
                   {/* <Card.Title>{brand.Brand_Name}</Card.Title> */}
                 </Card>
