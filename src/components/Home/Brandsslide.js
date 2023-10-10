@@ -48,8 +48,6 @@ const Brandsslide = () => {
     );
   };
 
-
-
   // Number of cards to show per slide
   const slidesToShow = 2;
 
@@ -89,7 +87,6 @@ const Brandsslide = () => {
   // Fetch brands data from Redux store
   const brandsData = useSelector((state) => state.brands.brandsData);
 
-
   // Fetch brands data when the component mounts
   useEffect(() => {
     dispatch(fetchBrands());
@@ -99,8 +96,6 @@ const Brandsslide = () => {
 
   return (
     <div className="brandsliding">
-   
-
       <div className="container">
         <Container className="mt-2">
           <Row className="px-xl-5 mx-lg-5 mx-4 pt-3 pb-3">
@@ -115,6 +110,7 @@ const Brandsslide = () => {
                       <Card.Img
                         className="pt-3 pb-3 px-5 "
                         src={brand.Brand_image} // Use the brand image here
+                        alt={brand.Brand_Name}
                         // width="200px"
                         // height="150px"
                       />

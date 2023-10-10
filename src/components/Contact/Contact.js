@@ -2,13 +2,7 @@ import React, { useState } from "react";
 import comg1 from "../../Images/image 55.png";
 import comg2 from "../../Images/fruit.png";
 import comg3 from "../../Images/leaf.png";
-import {
-  Card,
-  Col,
-  Container,
-  Form,
-  Row,
-} from "react-bootstrap";
+import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import {
   FaPhoneAlt,
   FaEnvelope,
@@ -48,7 +42,7 @@ const Contact = () => {
     <div className="contactcls">
       {/* Top section with an image and title */}
       <div className="position-relative">
-        <img src={comg1} width="100%" style={{ height: "250px" }} />
+        <img src={comg1} width="100%" style={{ height: "250px" }} alt="img5" />
         <h3
           className="position-absolute fw-bold top-50 start-50 translate-middle"
           style={{ color: "white" }}
@@ -60,7 +54,7 @@ const Contact = () => {
         {/* 2-column layout */}
         <Row lg={2} md={1} xs={1} className="row2 g-5 justify-content-center">
           <Col xs={12} lg={5}>
-            <img className="rounded-4" width="100%" src={comg2} />
+            <img className="rounded-4" width="100%" src={comg2} alt="img4" />
           </Col>
           <Col xs={12} lg={5}>
             <h3>We'd love to talk about how we can work together.</h3>
@@ -123,7 +117,7 @@ const Contact = () => {
             <img
               className="leafimg rounded-5 mx-lg-5 px-lg-3 w-100 h-100 d-none d-md-block"
               src={comg3}
-              alt="Background"
+              alt="iconimg"
             />
             <div className="cardlocation mx-lg-5 px-3 py-3 col-lg-8 col-xl-6 col-md-5 me-md-5 mt-md-4  px-md-3">
               <Card className="p-lg-5 m-lg-5 rounded-5   px-3 py-3">

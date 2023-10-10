@@ -70,7 +70,12 @@ const Blogpage = () => {
   return (
     <div className="blogcls mb-5 mb-lg-0 mb-md-0">
       <div className="position-relative">
-        <img src={blimg} width="100%" style={{ height: "250px" }} />
+        <img
+          src={blimg}
+          width="100%"
+          style={{ height: "250px" }}
+          alt="Blog Header"
+        />
         <h3
           className="position-absolute top-50 start-50 translate-middle fw-bolder"
           style={{ color: "white" }}

@@ -14,7 +14,7 @@ const About = () => {
     <div className="aboutcls">
       {/* Header section */}
       <div className="position-relative">
-        <img src={chimg1} width="100%" style={{ height: "250px" }} />
+        <img src={chimg1} width="100%" style={{ height: "250px" }} alt="img1" />
         <h3
           className="position-absolute top-50 start-50 translate-middle"
           style={{ color: "white" }}
@@ -36,7 +36,7 @@ const About = () => {
                 className="px-xl-5 px-xxl-5 pt-lg-5 mt-lg-5"
                 src={chimg2}
                 width="100%"
-                alt="img"
+                alt="img2"
               />
             </Col>
             <Col>
