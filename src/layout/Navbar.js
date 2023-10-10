@@ -1,40 +1,24 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import { Form, Link, useNavigate } from "react-router-dom";
-import {
-  AiOutlineFileSearch,
-  AiOutlineSearch,
-  AiOutlineShoppingCart,
-} from "react-icons/ai";
-import { RiArrowDropDownLine, RiArrowDropDownFill } from "react-icons/ri";
+import { Link, useNavigate } from "react-router-dom";
+import { AiOutlineSearch } from "react-icons/ai";
+import { RiArrowDropDownFill } from "react-icons/ri";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  fetchProducts,
   searchProducts,
   fetchBrands, // Import the fetchBrands action
   setSelectedBrand, // Import the setSelectedBrand action
-  setSelectedSubcat, // Import the setSelectedSubcat action
 } from "../actions";
 import AOS from "aos"; // AOS library for animations
 import "aos/dist/aos.css"; // AOS library CSS
 import logoimg from "../Images/Elite Enterprise Logo.png";
 import "./Navbar.css";
-import {
-  NavDropdown,
-  Dropdown,
-  ButtonGroup,
-  Button,
-  InputGroup,
-  FormGroup,
-  Accordion,
-} from "react-bootstrap";
-import AccordionBody from "react-bootstrap/esm/AccordionBody";
-import AccordionItem from "react-bootstrap/esm/AccordionItem";
+import { NavDropdown, Button, InputGroup, Accordion } from "react-bootstrap";
+
 const Navbar = ({ handleShow2 }) => {
   const { totalQuantity } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState("");
-  const [isSearchExpanded, setSearchExpanded] = useState(false);
 
   const [isBrandDropdownOpen, setIsBrandDropdownOpen] = useState(false); // Track brand dropdown state
   const searchInputRef = React.useRef(null); // Reference to the search input element
@@ -82,34 +66,6 @@ const Navbar = ({ handleShow2 }) => {
     }
   };
 
-  const toggleSearchBar = () => {
-    setSearchExpanded(!isSearchExpanded);
-
-    // Check if the navigation menu is open, and if it is, close it
-    // const isNavMenuOpen = navbarCollapseRef.current?.classList.contains("show");
-    // if (isNavMenuOpen) {
-    //   navbarCollapseRef.current?.classList.remove("show");
-    // }
-  };
-
-  // Handle clicks outside of the search bar to hide it
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        searchInputRef.current &&
-        !searchInputRef.current.contains(event.target)
-      ) {
-        setSearchExpanded(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
   //handleclick for moving brands page
   const handlclick = () => {
     navigate("/brandspage");
@@ -156,7 +112,7 @@ const Navbar = ({ handleShow2 }) => {
           className="nav-item navbrand d-flex me-xxl-5 "
           style={{ textDecoration: "none" }}
         >
-          <img className="mx-xl-0" src={logoimg} width="150px" height="70px" />
+          <img className="mx-xl-0" src={logoimg} width="150px" height="80px" />
         </Link>
         <span
           id="navbtn"
@@ -252,7 +208,7 @@ const Navbar = ({ handleShow2 }) => {
                     onClick={handlclick}
                   >
                     Brands
-                    <RiArrowDropDownFill className="fs-3" />
+                    {/* <RiArrowDropDownFill className="fs-3" /> */}
                   </span>
                 }
                 className="basic-nav-dropdown"
@@ -340,51 +296,6 @@ const Navbar = ({ handleShow2 }) => {
               </Link>
             </li>
 
-            {/* <div>
-              <InputGroup
-                className={`input-group mb-lg-0 mb-2 col ${
-                  isSearchExpanded ? "expanded-icon" : ""
-                }`}
-                onClick={() => {
-                  toggleSearchBar();
-                }}
-                ref={searchInputRef}
-              >
-                {isSearchExpanded && (
-                  <input
-                    type="text"
-                    placeholder="Search products..."
-                    value={searchQuery}
-                    onChange={handleSearch}
-                    className="form-control rounded-pill ms-xl-4"
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        handleSearch(e);
-                      }
-                    }}
-                    onClick={(e) => {
-                      // Prevent click propagation to the parent div
-                      e.stopPropagation();
-                    }}
-                  />
-                )}
-                &nbsp;
-                <div>
-                  <AiOutlineSearch
-                    className={`rounded-circle p-2 ${
-                      isSearchExpanded ? "expanded-icon" : ""
-                    }`}
-                    style={{
-                      width: "38px",
-                      height: "38px",
-                      color: "white",
-                      background: "#E2CBA3",
-                    }}
-                  />
-                </div>
-              </InputGroup>
-            </div> */}
-
             <div className="d-none d-lg-block position-relative">
               <InputGroup>
                 <input
@@ -405,7 +316,7 @@ const Navbar = ({ handleShow2 }) => {
                 />
                 <AiOutlineSearch
                   className="position-absolute start-50 mx-5"
-                  style={{ marginTop: "11px" }}
+                  style={{ marginTop: "13.7px" }}
                 />
               </InputGroup>
             </div>

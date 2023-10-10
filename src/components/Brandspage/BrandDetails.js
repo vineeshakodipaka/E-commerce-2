@@ -29,14 +29,7 @@ const BrandDetails = () => {
   };
   return (
     <div className="container">
-      {/* <Row className="justify-content-center">
-        <Col lg={4}>
-          <h1 className="text-center">{brand.Brand_Name} Details</h1>
-          <img src={brand.Brand_image} width="100%" />
-        </Col>
-      </Row> */}
-
-      {/* <Shopcardslide /> */}
+   
 
       {brand.hasSubcat && (
         <div>

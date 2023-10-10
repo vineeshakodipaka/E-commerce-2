@@ -2,10 +2,10 @@ import React from "react";
 import chimg1 from "../../Images/image 55.png";
 import chimg2 from "../../Images/image 54.png";
 import chimg3 from "../../Images/chocolate 1.png";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { FaRegCircle } from "react-icons/fa";
 import "./About.css";
-import Cardsimgs from "../Home/Cardsimgs";
+
 import Cardsimgs2 from "./Cardsimgs2";
 import Brandpartners from "./Brandpartners";
 
