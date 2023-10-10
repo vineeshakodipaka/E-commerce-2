@@ -89,11 +89,6 @@ const Brandsslide = () => {
   // Fetch brands data from Redux store
   const brandsData = useSelector((state) => state.brands.brandsData);
 
-  // Function to navigate to the '/shoppage' route
-  const handleclick = () => {
-    window.scrollTo(0, 0);
-    navigate("/shoppage");
-  };
 
   // Fetch brands data when the component mounts
   useEffect(() => {

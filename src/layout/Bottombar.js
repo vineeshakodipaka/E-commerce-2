@@ -6,7 +6,7 @@ import { BsFillCartDashFill } from "react-icons/bs";
 import { AiFillMessage } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import "./Bottombar.css"; // Import the external CSS file
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Bottombar = () => {
   const [activeButton, setActiveButton] = useState(0); // State to track active button
