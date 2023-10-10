@@ -7,7 +7,7 @@ const Singleblog = () => {
   return (
     <div className="sblog mb-2">
       <div className="position-relative">
-        <img src={sbimg} width="100%" />
+        <img src={sbimg} width="100%" alt="img" />
         <div className="sb-card pb-lg-5 mx-3  mx-lg-5 px-lg-5">
           <Card
             className="rounded-4 px-lg-5 mx-lg-5 py-lg-3 px-md-4 py-2 px-2 py-md-3 "

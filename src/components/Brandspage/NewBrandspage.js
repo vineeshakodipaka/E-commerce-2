@@ -69,6 +69,7 @@ const NewBrandspage = () => {
                       <Card.Img
                         className="pt-3 pb-3 px-5 "
                         src={subcat.Subcat_img}
+                        alt="img"
                       />
                       <Card.Title>{subcat.Subcat_Name}</Card.Title>
                     </Card.Body>

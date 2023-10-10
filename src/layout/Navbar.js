@@ -62,7 +62,7 @@ const Navbar = ({ handleShow2 }) => {
     navigate("/brandspage");
   };
 
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     AOS.init({
@@ -70,12 +70,12 @@ const Navbar = ({ handleShow2 }) => {
     });
   }, []);
 
-  useEffect(() => {
-    // Refresh AOS when the dropdown state changes
-    if (isDropdownOpen) {
-      AOS.refresh();
-    }
-  }, [isDropdownOpen]);
+  // useEffect(() => {
+  //   // Refresh AOS when the dropdown state changes
+  //   if (isDropdownOpen) {
+  //     AOS.refresh();
+  //   }
+  // }, [isDropdownOpen]);
 
   const navbarCollapseRef = useRef(null);
 

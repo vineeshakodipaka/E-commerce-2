@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import blimg from "../../Images/image 55.png";
 import blimg1 from "../../Images/blogimg1.png";
 import blimg2 from "../../Images/blogimg2.png";
@@ -98,7 +98,7 @@ const Blogpage = () => {
                   className="cardimg rounded-5"
                   src={item.img}
                   width="100%"
-                  alt={`Image ${i + 1}`}
+                  alt="Blog Header"
                 />
                 <Card.Body className="bg-white">
                   <Card.Text

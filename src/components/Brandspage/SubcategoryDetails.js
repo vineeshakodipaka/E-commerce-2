@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Card, Col, Container, Row } from "react-bootstrap";
@@ -18,8 +18,6 @@ const SubcategoryDetails = () => {
   // State to control the cart pop-up visibility
   const [showCartPopup, setShowCartPopup] = useState(false);
 
-  // State to store the cart items (you can get this from your Redux store)
-  const [cartItems, setCartItems] = useState([]);
 
   // Find the brand that contains the selected subcategory
   const selectedBrand = brandsData.find((brand) => {

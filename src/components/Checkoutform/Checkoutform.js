@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Card, Col, Form, Row, table } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
+import {Col, Form, Row } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import "./Checkoutform.css";
 import { useNavigate } from "react-router-dom";
 const Checkoutform = ({ handleShow2 }) => {
   const cartItems = useSelector((state) => state.cart.items);
-  const { totalQuantity, totalPrice } = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
+  const {  totalPrice } = useSelector((state) => state.cart);
+
   const navigate = useNavigate();
   // Define state to manage form data
   const [formData, setFormData] = useState({

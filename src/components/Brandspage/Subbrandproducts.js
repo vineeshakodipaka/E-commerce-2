@@ -1,80 +1,4 @@
-// import React, { useEffect, useState } from "react";
-// import { Card, Col, Container, Row } from "react-bootstrap";
-// import { useLocation } from "react-router-dom";
 
-// const Subbrandproducts = () => {
-//   const location = useLocation();
-//   const queryParams = new URLSearchParams(location.search);
-//   const Subcatid = queryParams.get("Subcat_id");
-
-//   const [products, setProducts] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     // Fetch products for the specified Brand_id
-//     fetch(
-//       `https://paradox122.000webhostapp.com/_API/SubBrandsProduts.php?ConnectedToSubBrand_id=${Subcatid}`
-//     )
-//       .then((response) => {
-//         if (!response.ok) {
-//           throw new Error("Network response was not ok");
-//         }
-//         return response.json();
-//       })
-//       .then((data) => {
-//         // Set the fetched products in the state
-//         setProducts(data);
-//         setLoading(false); // Set loading to false when data is fetched successfully
-//       })
-//       .catch((error) => {
-//         setError(error.message);
-//         setLoading(false); // Set loading to false when there's an error
-//       });
-//   }, [Subcatid]);
-
-//   return (
-//     <div>
-//       {/* <h2>Products for Brand ID: {Subcatid}</h2> */}
-//       {loading ? (
-//         <p>Loading...</p>
-//       ) : error ? (
-//         <p>Error: {error}</p>
-//       ) : (
-//         <Container>
-//           {" "}
-//           <Row
-//             className="px-xl-5 mx-lg-5 mx-4 pt-3 pb-3 justify-content-center"
-//             lg={3}
-//             md={2}
-//             xs={1}
-//           >
-//             {products.map((product) => (
-//               <>
-//                 <Col>
-//                   <Card style={{ border: "none" }}>
-//                     <Card.Body>
-//                       <Card.Img
-//                         className="pt-3 pb-3 px-5 "
-//                         src={product.Product_img}
-//                         style={{ width: "250px", height: "120px" }}
-//                       />
-//                       <Card.Title className="text-center">{product.Product_name}</Card.Title>
-//                     </Card.Body>
-//                   </Card>
-//                 </Col>
-//               </>
-//             ))}
-//           </Row>
-//         </Container>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Subbrandproducts;
-
-// Subbrandproducts.js
 
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -116,8 +40,6 @@ const Subbrandproducts = () => {
   // State to control the cart pop-up visibility
   const [showCartPopup, setShowCartPopup] = useState(false);
 
-  // State to store the cart items (you can get this from your Redux store)
-  const [cartItems, setCartItems] = useState([]);
 
   // Function to handle adding a product to the cart
   const handleAddToCart = (product) => {
@@ -202,7 +124,6 @@ const Subbrandproducts = () => {
     ],
   };
 
-  const brandsData = useSelector((state) => state.brands.brandsData);
 
   return (
     <div>

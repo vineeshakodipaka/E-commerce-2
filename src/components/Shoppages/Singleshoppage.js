@@ -39,7 +39,7 @@ const Singleshoppage = () => {
   return (
     <div className="singleproductpage">
       <div className="position-relative mb-3">
-        <img src={spimg1} width="100%" style={{ height: "250px" }} />
+        <img src={spimg1} width="100%" style={{ height: "250px" }} alt="img" />
         <h3
           className="position-absolute top-50 start-50 translate-middle"
           style={{ color: "white" }}

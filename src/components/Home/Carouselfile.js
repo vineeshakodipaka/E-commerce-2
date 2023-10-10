@@ -1,32 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Carousel, Col, Row } from "react-bootstrap";
-import img1 from "../../Images/image-1.png";
-import img2 from "../../Images/image-3.png";
-import img3 from "../../Images/image-1.png";
+import { Carousel} from "react-bootstrap";
+
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import "./Carouselfile.css";
 import { useNavigate } from "react-router-dom";
 
-// const carouselData = [
-//   {
-//     src: img1,
-//     caption: "We do Creative Things for Success",
-//     content:
-//       "Simply dummy text of the printing and typesetting industry. Lorem had ceased to been the industry's standard.",
-//   },
-//   {
-//     src: img2,
-//     caption: "We do Creative Things for Success",
-//     content:
-//       "Simply dummy text of the printing and typesetting industry. Lorem had ceased to been the industry's standard.",
-//   },
-//   {
-//     src: img3,
-//     caption: "We do Creative Things for Success",
-//     content:
-//       "Simply dummy text of the printing and typesetting industry. Lorem had ceased to been the industry's standard.",
-//   },
-// ];
 
 const Carouselfile = () => {
   const navigate = useNavigate();

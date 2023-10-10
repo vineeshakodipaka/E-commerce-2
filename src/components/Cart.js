@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Card, Col, Container, Row, button } from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
 import {
   incrementQuantity,
   decrementQuantity,
@@ -10,7 +10,7 @@ import "./Cart.css";
 import { useNavigate } from "react-router-dom";
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.items);
-  const { totalQuantity, totalPrice } = useSelector((state) => state.cart);
+  const { totalPrice } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   const handleIncrementQuantity = (productId) => {

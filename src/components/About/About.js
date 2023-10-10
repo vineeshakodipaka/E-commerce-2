@@ -36,6 +36,7 @@ const About = () => {
                 className="px-xl-5 px-xxl-5 pt-lg-5 mt-lg-5"
                 src={chimg2}
                 width="100%"
+                alt="img"
               />
             </Col>
             <Col>

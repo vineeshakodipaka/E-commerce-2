@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 const Bottombar = () => {
   const [activeButton, setActiveButton] = useState(0); // State to track active button
   const { totalQuantity } = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
+
 
   return (
     <div className="bottompage d-lg-none d-md-none">

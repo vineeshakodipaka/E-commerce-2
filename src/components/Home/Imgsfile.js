@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import imga from "../../Images/image-2.png";
-import imgb from "../../Images/image-3.png";
+
 import imgc from "../../Images/chocolate 1.png";
 import "./Imgsfile.css";
 import { FaArrowRight } from "react-icons/fa";
