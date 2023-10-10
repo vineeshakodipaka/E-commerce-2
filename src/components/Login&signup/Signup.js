@@ -3,8 +3,6 @@ import "./Login&signup.css";
 import { Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
-import axios from "axios";
-
 const Signup = () => {
   const [formData, setFormData] = useState({
     username: "",

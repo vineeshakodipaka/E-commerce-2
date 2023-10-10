@@ -7,7 +7,6 @@ import Navbar from "./layout/Navbar";
 import Home from "./components/Home/Home";
 import Footer from "./layout/Footer";
 import About from "./components/About/About";
-import Teampage from "./components/team/Teampage";
 import Blogpage from "./components/Blog/Blogpage";
 //import Errorpage from "./components/Errorpage/Errorpage";
 import Contact from "./components/Contact/Contact";
@@ -48,7 +47,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/team" element={<Teampage />} />
+
         {/* <Route path="/blog" element={<Blogpage />} /> */}
         <Route path="/singleblog" element={<Singleblog />} />
         <Route path="/contact" element={<Contact />} />
@@ -57,7 +56,7 @@ const App = () => {
         <Route path="/singlecardpage/:cardId" element={<SingleCardPage />} />
         <Route path="/brandspage" element={<NewBrandspage />} />
         <Route path="/shoppage" element={<MainShop />} />
-        {/* <Route
+        <Route
           element={
             <Login
               handleShow2={handleShow}
@@ -65,7 +64,7 @@ const App = () => {
               show2={show}
             />
           }
-        /> */}
+        />
 
         <Route path="/signup" element={<Signup />} />
         <Route path="/brands/:brandId" element={<BrandDetails />} />
@@ -78,18 +77,18 @@ const App = () => {
           element={<Subcatdropdown />}
         />
 
-        {/* {isUserAuthenticated ? (
+        {isUserAuthenticated ? (
           // Render the /blog route only if authenticated
           <Route path="/blog" element={<Blogpage />} />
         ) : (
           // Redirect to the home page if not authenticated
           <Route path="/blog" element={<Navigate to="/" replace />} />
-        )} */}
+        )}
         <Route
           path="/checkout"
           element={<Checkoutform handleShow2={handleShow} />}
         />
-        <Route path="/blog" element={<Blogpage />} />
+
         <Route path="/brand-products" element={<BrandProductsPage />} />
         <Route path="/subbrand-products" element={<Subbrandproducts />} />
       </Routes>

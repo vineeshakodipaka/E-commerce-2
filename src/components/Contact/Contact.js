@@ -6,7 +6,6 @@ import {
   Card,
   Col,
   Container,
-  FloatingLabel,
   Form,
   Row,
 } from "react-bootstrap";
@@ -17,7 +16,6 @@ import {
   FaFacebook,
   FaTwitter,
   FaPinterest,
-  FaWhatsapp,
 } from "react-icons/fa";
 import "./Contact.css";
 

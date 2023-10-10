@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
-import { RiArrowDropDownFill } from "react-icons/ri";
 import { useSelector, useDispatch } from "react-redux";
 import {
   searchProducts,
@@ -21,12 +20,10 @@ const Navbar = ({ handleShow2 }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const [isBrandDropdownOpen, setIsBrandDropdownOpen] = useState(false); // Track brand dropdown state
-  const searchInputRef = React.useRef(null); // Reference to the search input element
+
   const navigate = useNavigate();
 
   const brandsData = useSelector((state) => state.brands.brandsData);
-  const selectedBrand = useSelector((state) => state.brands.selectedBrand);
-  const selectedSubcat = useSelector((state) => state.brands.selectedSubcat);
 
   useEffect(() => {
     // Fetch brand data from the API
@@ -48,12 +45,6 @@ const Navbar = ({ handleShow2 }) => {
     navigate(`/brands/Brand_id=${brand.Brand_id}`);
   };
 
-  const handleSubcatChange = (subcat) => {
-    const subcatId = subcat.Subcat_id;
-    // Use the useNavigate hook to navigate to the subcategory details page
-    navigate(`/subcategories/${subcatId}`);
-  };
-
   const handleSearch = (e) => {
     const query = e.target.value.toLowerCase();
 
@@ -72,14 +63,6 @@ const Navbar = ({ handleShow2 }) => {
   };
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  const handleMouseEnter2 = () => {
-    setIsDropdownOpen(true);
-  };
-
-  const handleMouseLeave2 = () => {
-    setIsDropdownOpen(false);
-  };
 
   useEffect(() => {
     AOS.init({
@@ -138,7 +121,6 @@ const Navbar = ({ handleShow2 }) => {
                 className={`nav-link nav-btns   b-link  rounded-3 ${
                   activeButton === 0 ? "active" : ""
                 }`}
-                // onMouseEnter={() => setActiveButton(0)}
                 onClick={() => {
                   navbarCollapseRef.current?.classList.remove("show");
                   setActiveButton(0);
@@ -162,17 +144,6 @@ const Navbar = ({ handleShow2 }) => {
               </Link>
             </li>
 
-            {/* <li className="nav-item px-xl-2">
-              <Link
-                to="/team"
-                className="nav-link nav-btns"
-                onClick={() =>
-                  navbarCollapseRef.current?.classList.remove("show")
-                }
-              >
-                Team
-              </Link>
-            </li> */}
             <li className="nav-item px-xl-2">
               <Link
                 to="/shoppage"

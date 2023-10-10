@@ -39,8 +39,7 @@ const Shoppage = ({ searchQuery }) => {
   // State to control the cart pop-up visibility
   const [showCartPopup, setShowCartPopup] = useState(false);
 
-  // State to store the cart items (you can get this from your Redux store)
-  const [cartItems, setCartItems] = useState([]);
+  
 
   // Function to handle adding a product to the cart
   const handleAddToCart = (product) => {

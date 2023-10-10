@@ -1,11 +1,9 @@
 import React from 'react';
 import cimg1 from '../../Images/Return Purchase.png';
 import cimg2 from '../../Images/Natural Food.png';
-import chimg3 from '../../Images/chocolate 1.png'
 import cimg3 from '../../Images/Phone Time.png';
 import cimg4 from '../../Images/Card Security.png';
 import { Card, Col, Row } from 'react-bootstrap';
-import { FaRegCircle } from 'react-icons/fa';
 import './Cardsimgs-2.css'
 
 const cimgs = [

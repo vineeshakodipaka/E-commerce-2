@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Login&signup.css";
-import { Col, Form, Row, Button, Modal } from "react-bootstrap";
+import { Col, Form, Row, Modal } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../AuthContext "; // Import the useAuth hook
@@ -57,11 +57,7 @@ const Login = ({ show2, handleClose2, handleShow2 }) => {
     }
   };
 
-  // State to control the cart pop-up visibility
-  // const [show, setShow] = useState(false);
-
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
+ 
 
   return (
     <>

@@ -19,15 +19,6 @@ const NewBrandspage = () => {
 
   const [selectedBrand, setSelectedBrand] = useState(null);
 
-  // const handleBrandClick = (brand) => {
-  //   if (brand.hasSubcat) {
-  //     setSelectedBrand(brand);
-  //   } else {
-  //     setSelectedBrand(null); // Clear the selectedBrand to show only sub-brands
-  //     // Handle the case when there are no sub-brands (e.g., show products)
-  //     // You can navigate to a different page or render the products here.
-  //   }
-  // };
 
   const handleBrandClick = (brand) => {
     if (brand.hasSubcat) {

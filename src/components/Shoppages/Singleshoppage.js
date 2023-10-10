@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import spimg1 from "../../Images/image 55.png";
 import productimg1 from "../../Images/Caramel-cruchies 1.png";
-import {
-  Col,
-  Container,
-  Row,
-  Dropdown,
-  DropdownButton,
-  FormControl,
-} from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { FaArrowRight } from "react-icons/fa";
 import "./Singleshoppage.css";
 import Shopcardslide from "./Shopcardslide";
@@ -18,19 +11,8 @@ const Singleshoppage = () => {
   const [showInfo, setShowInfo] = useState(false);
   const [showInfo1, setShowInfo1] = useState(false);
 
-  // Dropdown options for quantity selection
-  const initialOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "search"];
-  const [options, setOptions] = useState(initialOptions);
   const [selectedQuantity, setSelectedQuantity] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchMode, setSearchMode] = useState(false);
-
-  // Handle changes in quantity dropdown
-  const handleDropdownChange = (value) => {
-    setSelectedQuantity(value);
-    setSearchTerm("");
-    setSearchMode(value === "search");
-  };
 
   // Handle input change for custom quantity
   const handleInputChange = (e) => {
@@ -42,14 +24,6 @@ const Singleshoppage = () => {
       setSearchTerm("");
       setSelectedQuantity(null);
     }
-  };
-
-  // Size selection state and handler
-  const [size, setSize] = useState("");
-  const sizes = ["kg", "pc"];
-
-  const handleSizeChange = (e) => {
-    setSize(e.target.value);
   };
 
   // Toggle showInfo state for product information
@@ -127,21 +101,6 @@ const Singleshoppage = () => {
                       </div>
                     </div>
 
-                    {/* <div className="mb-2 mt-2 d-flex">
-                      <h6 className="mt-1">Size:</h6>
-                      <select
-                        className="size"
-                        value={size}
-                        onChange={handleSizeChange}
-                      >
-                        <option value="">Select Size</option>
-                        {sizes.map((value) => (
-                          <option key={value} value={value}>
-                            {value}
-                          </option>
-                        ))}
-                      </select>
-                    </div> */}
                     <button className="px-4 p-3 mt-3 mb-2 text-center rounded-4 shareproductbtn">
                       {" "}
                       Share this Product

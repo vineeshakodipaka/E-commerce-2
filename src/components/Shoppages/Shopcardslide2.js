@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -46,7 +44,6 @@ const Shopcardslide2 = ({ searchQuery }) => {
   const [showCartPopup, setShowCartPopup] = useState(false);
 
   // State to store the cart items (you can get this from your Redux store)
-  const [cartItems, setCartItems] = useState([]);
 
   // Function to handle adding a product to the cart
   const handleAddToCart = (product) => {
