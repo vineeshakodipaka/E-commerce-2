@@ -277,7 +277,7 @@ const Navbar = ({ handleShow2 }) => {
               <InputGroup>
                 <input
                   type="text"
-                  placeholder="Search products..."
+                  placeholder="Search products."
                   value={searchQuery}
                   onChange={handleSearch}
                   className="form-control rounded-pill ms-xl-4 mx-md-5 mx-3 "
@@ -293,7 +293,7 @@ const Navbar = ({ handleShow2 }) => {
                 />
                 <AiOutlineSearch
                   className="position-absolute start-50 mx-5"
-                  style={{ marginTop: "13.7px" }}
+                  style={{ marginTop: "12px" }}
                 />
               </InputGroup>
             </div>

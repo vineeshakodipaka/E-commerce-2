@@ -39,8 +39,6 @@ const Shoppage = ({ searchQuery }) => {
   // State to control the cart pop-up visibility
   const [showCartPopup, setShowCartPopup] = useState(false);
 
-  
-
   // Function to handle adding a product to the cart
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
@@ -59,7 +57,7 @@ const Shoppage = ({ searchQuery }) => {
       <Container>
         {/* Render product cards */}
         <Row
-          xs={1}
+          xs={2}
           md={2}
           lg={3}
           xl={4}
@@ -74,7 +72,7 @@ const Shoppage = ({ searchQuery }) => {
                       {/* Display "Sale" button if the product is on sale */}
                       {product.isSale && (
                         <button
-                          className="sale-button rounded-3 p-2"
+                          className="sale-button rounded-3 px-2"
                           style={{
                             background: "#DC0000",
                             border: "none",
@@ -94,25 +92,25 @@ const Shoppage = ({ searchQuery }) => {
                             className="rounded-3 p-4 mt-3 prdctimg"
                             src={product.Product_img}
                             alt={`Image ${i + 1}`}
-                            style={{ width: "100%", height: "250px" }}
+                            // style={{ width: "100%", height: "250px" }}
                           />
                         </div>
-                        <Card.Text
-                          className="text-center"
-                          style={{ height: "50px" }}
-                        >
-                          <h5 style={{ lineHeight: "1.2" }}>
+                        <Card.Text className="text-center">
+                          <h5
+                            className="productname"
+                            style={{ lineHeight: "1.2" }}
+                          >
                             {product.Product_name}
                           </h5>
                         </Card.Text>
                       </Row>
-                      <div className="px-3">
+                      <div className="px-3 ">
                         <hr />
                       </div>
                       {/* Display original and offer prices */}
                       <Row lg={2}>
-                        <Col lg={5} xl={6} md={6} xs={6}>
-                          <Card.Text className="mt-2">
+                        <Col lg={5} xl={6} md={6} xs={12}>
+                          <Card.Text className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 ms-4">
                             <p>
                               <span
                                 className="fw-normal"
@@ -127,7 +125,7 @@ const Shoppage = ({ searchQuery }) => {
                             </p>
                           </Card.Text>
                         </Col>
-                        <Col lg={7} xl={6} md={6} xs={6}>
+                        <Col lg={7} xl={6} md={6} xs={12}>
                           {/* Button to add the product to the cart */}
                           <Card.Text className="text-center  mt-xl-0 mt-md-2">
                             <button

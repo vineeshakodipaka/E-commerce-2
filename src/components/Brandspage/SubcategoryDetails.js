@@ -18,7 +18,6 @@ const SubcategoryDetails = () => {
   // State to control the cart pop-up visibility
   const [showCartPopup, setShowCartPopup] = useState(false);
 
-
   // Find the brand that contains the selected subcategory
   const selectedBrand = brandsData.find((brand) => {
     if (brand.subcategories) {
@@ -146,7 +145,7 @@ const SubcategoryDetails = () => {
                       {/* Display "Sale" button if the product is on sale */}
                       {product.isSale && (
                         <button
-                          className="sale-button rounded-3 p-2"
+                          className="sale-button rounded-3 px-2"
                           style={{
                             background: "#DC0000",
                             border: "none",
