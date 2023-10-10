@@ -1,0 +1,68 @@
+.homecarousel button{
+
+    border-radius: 10px;
+    background-color: #652700;
+    color: white;
+    border: none;
+}
+.homecarousel h5{
+    font-weight: 800;
+    font-family: 'Roboto';
+}
+.homecarousel .carousel-indicators{
+    display: none !important;
+}
+
+/* Carouselfile.css */
+/* For small screens */
+@media (max-width: 767px) {
+    .homecarousel   .carousel-caption h5 {
+      font-size: 0.8rem; /* Adjust font size for small screens */
+    }
+    .homecarousel .carousel-caption p {
+      font-size: 0.6rem; /* Adjust font size for small screens */
+    }
+    .homecarousel  .carousel-caption button {
+      font-size: 0.6rem; /* Adjust font size for small screens */
+    }
+  }
+
+/* For small screens */
+@media (max-width: 767px) {
+    /* Center the previous and next icons vertically */
+    .homecarousel  .rightangle,
+    .homecarousel  .leftangle {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  
+  .homecarousel  .rightangle,
+  .homecarousel  .leftangle {
+    position: absolute;
+    top: 50%;
+    bottom: 50%;
+    transform: translateY(-50%);
+  }
+/* For large screens */
+  
+@media (min-width: 767px){
+  .homecarousel .carousel-caption h5{
+    font-size: 50px;
+  }
+    .homecarousel .carouselimg {
+      height: 550px !important;
+    }
+     
+}
+ .homecarousel .carousel-caption {
+  bottom: 1.25rem;
+  color: #fff;
+  left: 15%;
+  padding-bottom: 1.25rem;
+  padding-top: 1.25rem;
+  position: absolute;
+  right: 15%;
+  text-align: center;
+}

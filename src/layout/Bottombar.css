@@ -1,0 +1,13 @@
+/* Add this CSS to your Bottombar.css */
+
+/* Style for the active link */
+.bottompage .b-link.active {
+    background-color: #eae6dc;
+    color: white;
+ 
+}
+
+.bottompage .active {
+    background-color: #eae6dc;
+ 
+}

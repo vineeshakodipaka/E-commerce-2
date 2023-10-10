@@ -1,0 +1,21 @@
+.cartpage .shopcards {
+
+    cursor: pointer;
+}
+
+.cartpage .shopcards:hover {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2), 0 6px 2px 0 rgba(0, 0, 0, .19);
+
+}
+
+.cartpage .cardimg {
+    overflow: hidden;
+}
+
+.cartpage .cardimg .prdctimg {
+    transition: all 1.3s ease;
+}
+
+.cartpage .cardimg:hover .prdctimg {
+    transform: scale(0.8);
+}

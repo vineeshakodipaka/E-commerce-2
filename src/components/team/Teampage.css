@@ -1,0 +1,33 @@
+/* Styles for .teamcls */
+.teamcls h5 {
+    color: #DDAB84;
+    font-family: Yellowtail;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.teamcls h4 {
+    color: #652700;
+    font-family: Roboto;
+    font-weight: 800;
+}
+
+.teamcls .p-cls p {
+    color: #525C60;
+    text-align: center;
+    font-weight: 400;
+    line-height: 165.4%;
+    /* 29.772px */
+}
+
+.teamcls .rtext {
+    color: #652700;
+    font-family: Roboto;
+    font-weight: 800;
+}
+
+.teamcls .rntext {
+    color: #DDAB84;
+    font-family: Yellowtail;
+    font-weight: 400;
+}
