@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchBrands } from "../../actions";
-import mshimg from "../../Images/image 55.png";
+import brandimg from "../../Images/image 55.png";
 import { Card, Col, Container, Row } from "react-bootstrap";
 
 const NewBrandspage = () => {
@@ -40,7 +40,7 @@ const NewBrandspage = () => {
     <div className="newbrands">
       <div className="position-relative">
         <img
-          src={mshimg}
+          src={brandimg}
           width="100%"
           style={{ height: "250px" }}
           alt="Brand Image"
@@ -66,7 +66,7 @@ const NewBrandspage = () => {
                       <Card.Img
                         className="pt-3 pb-3 px-5"
                         src={subcat.Subcat_img}
-                        alt={`Image ${index + 1}`}
+                        alt={`Subcat_Name ${index + 1}`}
                       />
                       <Card.Title>{subcat.Subcat_Name}</Card.Title>
                     </Card.Body>
@@ -77,7 +77,7 @@ const NewBrandspage = () => {
           </Row>
         ) : (
           <Row className="px-xl-5 mx-lg-5 mx-4 pt-3 pb-3" lg={3} xs={1} md={1}>
-            {brandsData.map((brand) => (
+            {brandsData.map((brand, ind) => (
               <Col key={brand.Brand_id}>
                 <Card
                   className=" mt-2 mb-2"
@@ -87,7 +87,7 @@ const NewBrandspage = () => {
                   <Card.Img
                     className="pt-3 pb-3 px-5 "
                     src={brand.Brand_image}
-                    alt={brand.Brand_Name}
+                    alt={`Brand_image ${ind + 1}`}
                     width="100%"
                   />
 
