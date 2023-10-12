@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Carousel} from "react-bootstrap";
+import { Carousel } from "react-bootstrap";
 
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import "./Carouselfile.css";
 import { useNavigate } from "react-router-dom";
-
 
 const Carouselfile = () => {
   const navigate = useNavigate();
@@ -35,15 +34,15 @@ const Carouselfile = () => {
       >
         {carouselData.map((item, index) => (
           <Carousel.Item key={index}>
-            <div className="position-relative ">
+            <div className="position-relative carouseldiv">
               <img
                 src={item.url}
                 className="d-block w-100 h-100vh carouselimg"
-                style={{ height: "400px" }}
+                // style={{ height: "400px" }}
                 alt={`Slide ${index + 1}`}
               />
               <div className="carousel-caption">
-                <div className="caption-content  mb-5 pb-5 w-50 ">
+                <div className="caption-content  mb-md-5 pb-md-5 pb-5 w-50 ">
                   <h5
                     className="text-start text-white"
                     style={{ color: "#B27B60" }}

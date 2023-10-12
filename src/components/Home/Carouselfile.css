@@ -36,6 +36,9 @@
       top: 50%;
       transform: translateY(-50%);
     }
+    .homecarousel .carouselimg{
+      height: 300px !important;
+    }
   }
   
   .homecarousel  .rightangle,
@@ -51,8 +54,8 @@
   .homecarousel .carousel-caption h5{
     font-size: 50px;
   }
-    .homecarousel .carouselimg {
-      height: 550px !important;
+    .homecarousel .carouseldiv .carouselimg {
+      height: 550px;
     }
      
 }
