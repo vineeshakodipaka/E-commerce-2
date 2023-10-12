@@ -19,3 +19,16 @@
 .cartpage .cardimg:hover .prdctimg {
     transform: scale(0.8);
 }
+@media screen and (max-width: 760px) {
+    .cartpage #prdctimg1{
+        width: 50px !important;
+        height: 50px !important;
+    }
+}
+.cartpage .checkout{
+   
+  background-color: #8F3300;
+   color: white;
+  border: none;
+
+}

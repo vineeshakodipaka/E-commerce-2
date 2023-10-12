@@ -11,7 +11,7 @@ const Brandpartners = () => {
   //navigate shoppage
   const handleclick = () => {
     window.scrollTo(0, 0);
-    navigate("/brands");
+    navigate("/brandspage");
   };
   return (
     <div style={{ background: "rgb(255, 247, 239)" }}>

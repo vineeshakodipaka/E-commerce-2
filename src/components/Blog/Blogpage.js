@@ -64,6 +64,7 @@ const blogimgs = [
 const Blogpage = () => {
   const navigate = useNavigate();
   const handlclick = () => {
+     window.scrollTo(0, 0);
     navigate("/singleblog");
   };
 

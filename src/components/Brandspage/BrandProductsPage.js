@@ -1,5 +1,3 @@
-
-
 // BrandProductsPage.js
 
 import React, { useState, useEffect } from "react";
@@ -40,8 +38,6 @@ const BrandProductsPage = () => {
 
   // State to control the cart pop-up visibility
   const [showCartPopup, setShowCartPopup] = useState(false);
-
-  
 
   // Function to handle adding a product to the cart
   const handleAddToCart = (product) => {
@@ -120,13 +116,11 @@ const BrandProductsPage = () => {
       {
         breakpoint: 576, // iPad mini and similar small screens
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
         },
       },
     ],
   };
-
-
 
   return (
     <div>
@@ -144,8 +138,8 @@ const BrandProductsPage = () => {
               <Slider {...settings}>
                 {/* //{searchQuery !== "" && Only render when there's a search query */}
                 {products.map((product, i) => (
-                  <div key={i}>
-                    <Card className="rounded-5 pt-1 pb-1 shopcards mx-2 mb-2">
+                  <div key={i} className="px-2">
+                    <Card className="rounded-3 pt-1 pb-1 shopcards mx-1 mb-2">
                       <Card.Body>
                         <div className="position-relative">
                           {/* Display "Sale" button if the product is on sale */}
@@ -168,28 +162,32 @@ const BrandProductsPage = () => {
                           <Row onClick={handleShopPage}>
                             <div className="cardimg">
                               <Card.Img
-                                className="rounded-3 p-4 mt-3 prdctimg"
+                                variant="top"
+                                className="rounded-3 mt-3 prdctimg"
                                 src={product.Product_img}
                                 alt={`Image ${i + 1}`}
-                                style={{ width: "100%", height: "250px" }}
+                                // style={{ width: "100%", height: "250px" }}
                               />
                             </div>
                             <Card.Text
                               className="text-center"
-                              style={{ height: "50px" }}
+                              // style={{ height: "50px" }}
                             >
-                              <h5 style={{ lineHeight: "1.2" }}>
+                              <h5
+                                className="productname mt-2"
+                                style={{ lineHeight: "1.2" }}
+                              >
                                 {product.Product_name}
                               </h5>
                             </Card.Text>
                           </Row>
-                          <div className="px-3">
+                          <div className="px-3 d-md-none d-lg-block d-none">
                             <hr />
                           </div>
                           {/* Display original and offer prices */}
-                          <Row lg={2}>
-                            <Col lg={5} xl={6} md={6} xs={6}>
-                              <Card.Text className="mt-2">
+                          <Row lg={2} className="row2cart">
+                            <Col lg={5} xl={6} md={6} xs={12}>
+                              <Card.Text className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
                                 <p>
                                   <span
                                     className="fw-normal"
@@ -199,12 +197,12 @@ const BrandProductsPage = () => {
                                   </span>
                                   <span className="fw-bold">
                                     {" "}
-                                    ₹{product.Product_offerPrice}
+                                    &nbsp; ₹{product.Product_offerPrice}
                                   </span>
                                 </p>
                               </Card.Text>
                             </Col>
-                            <Col lg={7} xl={6} md={6} xs={6}>
+                            <Col lg={7} xl={6} md={6} xs={12}>
                               {/* Button to add the product to the cart */}
                               <Card.Text className="text-center  mt-xl-0 mt-md-2">
                                 <button

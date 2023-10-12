@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import {
+  Card,
+  CardBody,
+  Col,
+  Container,
+  Modal,
+  Row,
+  Table,
+  Button,
+} from "react-bootstrap";
 import {
   incrementQuantity,
   decrementQuantity,
   removeFromCart,
 } from "../actions"; // Import the actions
 import "./Cart.css";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import PaymentComponent from "./Paymentgateway/PaymentComponent";
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const { totalPrice } = useSelector((state) => state.cart);
@@ -26,88 +36,76 @@ const Cart = () => {
     }
   };
 
-  const navigate = useNavigate();
-  const handlecheck = () => {
-    navigate("/checkout");
-  };
+  // const navigate = useNavigate();
+  // const handlecheck = () => {
+  //   navigate("/checkout");
+  // };
+
+  const [show, setShow] = useState(false);
+
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+
+  const price = 1000;
   return (
     <div className="container cartpage">
-      {cartItems.length === 0 ? (
-        <p>Your cart is empty.</p>
-      ) : (
-        <Container>
-          <Row
-            xs={1}
-            md={2}
-            lg={3}
-            xl={4}
-            className="g-4 cardsrow pb-md-5 mb-md-5  px-md-4 mx-md-5"
-          >
-            {cartItems.map((product, i) => (
-              <Col>
-                <Card className="rounded-5 pt-1 pb-1 shopcards">
-                  <Card.Body>
-                    <div className="position-relative">
-                      {/* Display "Sale" button if the product is on sale */}
-                      {/* {product.isFeatured && ( */}
-                        <button
-                          className="sale-button rounded-3 p-2"
-                          style={{
-                            background: "#DC0000",
-                            border: "none",
-                            color: "white",
-                            position: "absolute",
-                            top: "0",
-                            left: "0",
-                          }}
-                        >
-                          Sale
-                        </button>
-                      {/* )} */}
-                      {/* Handle clicking on a product card to navigate */}
-                      <Row>
-                        <div className="cardimg">
-                          <Card.Img
-                            className="rounded-3 p-4 mt-3 prdctimg"
-                            src={product.Product_img}
-                            alt={`Image ${i + 1}`}
-                            style={{ width: "100%", height: "250px" }}
-                          />
-                        </div>
-                        <Card.Text
-                          className="text-center"
-                          style={{ height: "50px" }}
-                        >
-                          <h5 style={{ lineHeight: "1.2" }}>
-                            {product.Product_name}
-                          </h5>
-                        </Card.Text>
-                      </Row>
-                      <div className="px-3">
-                        <hr />
-                      </div>
-                      {/* Display original and offer prices */}
-                      <Row lg={2}>
-                        <Col lg={5} xl={6} md={6} xs={6}>
-                          <Card.Text className="mt-2">
+      <Container>
+        <Row lg={2}>
+          <Col xs={12} lg={8}>
+            {" "}
+            {cartItems.length === 0 ? (
+              <div className="mx-5 mt-4">
+                <p style={{ textAlign: "center" }}>Your cart is empty.</p>
+              </div>
+            ) : (
+              <div>
+                <div className="d-lg-block d-md-block d-none">
+                  <Table>
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {cartItems.map((product, i) => (
+                        <tr key={i}>
+                          <td>
+                            {/* {product.isSale && (
+                            <button
+                              className="sale-button rounded-3 px-2"
+                              style={{
+                                background: "#DC0000",
+                                border: "none",
+                                color: "white",
+                              }}
+                            >
+                              Sale
+                            </button>
+                          )} */}
+                            <img
+                              className="rounded-3    prdctimg"
+                              src={product.Product_img}
+                              alt={`Image ${i + 1}`}
+                              id="prdctimg1"
+                              style={{ width: "80%", height: "100px" }}
+                            />
+                          </td>
+                          <td>{product.Product_name}</td>
+                          <td>
                             <p>
-                              <span
-                                className="fw-normal"
-                                style={{ color: "#B8B8B8" }}
-                              >
-                                <s>{product.Product_originalPrice}</s>
-                              </span>
+                              <s>₹{product.Product_originalPrice}</s>&nbsp;
                               <span className="fw-bold">
-                                {" "}
-                                {product.Product_offerPrice}
+                                ₹{product.Product_offerPrice}
                               </span>
                             </p>
-                          </Card.Text>
-                        </Col>
-                        <Col lg={7} xl={6} md={6} xs={6}>
-                          {/* Button to add the product to the cart */}
-                          <div>
+                          </td>
+                          <td>
                             <button
+                              className="p-2"
                               style={{ border: "none" }}
                               onClick={() =>
                                 handleDecrementQuantity(product.Product_id)
@@ -115,8 +113,9 @@ const Cart = () => {
                             >
                               -
                             </button>
-                            <span>{product.quantity}</span>
+                            <span className="fw-bold">{product.quantity}</span>
                             <button
+                              className="p-2"
                               style={{ border: "none" }}
                               onClick={() =>
                                 handleIncrementQuantity(product.Product_id)
@@ -124,31 +123,149 @@ const Cart = () => {
                             >
                               +
                             </button>
-                          </div>
-                        </Col>
-                      </Row>
+                          </td>
+                          <td>
+                            Total: ₹
+                            {product.Product_offerPrice * product.quantity}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </div>
+                <div className="d-lg-none d-md-none d-block ">
+                  {cartItems.map((product, i) => (
+                    <div key={i}>
+                      {/* {product.isSale && (
+                            <button
+                              className="sale-button rounded-3 px-2"
+                              style={{
+                                background: "#DC0000",
+                                border: "none",
+                                color: "white",
+                              }}
+                            >
+                              Sale
+                            </button>
+                          )} */}
+                      <center>
+                        <Card>
+                          <Card.Body>
+                            {" "}
+                            <img
+                              className="rounded-3 pt-3 pb-2   prdctimg"
+                              src={product.Product_img}
+                              alt={`Image ${i + 1}`}
+                              style={{ width: "80%", height: "150px" }}
+                            />
+                            <p>{product.Product_name}</p>
+                            <p>
+                              <s>₹{product.Product_originalPrice}</s>&nbsp;
+                              <span className="fw-bold">
+                                ₹{product.Product_offerPrice}
+                              </span>
+                            </p>
+                            <div>
+                              <button
+                                className="p-2"
+                                style={{ border: "none" }}
+                                onClick={() =>
+                                  handleDecrementQuantity(product.Product_id)
+                                }
+                              >
+                                -
+                              </button>
+                              <span className="fw-bold">
+                                {product.quantity}
+                              </span>
+                              <button
+                                className="p-2"
+                                style={{ border: "none" }}
+                                onClick={() =>
+                                  handleIncrementQuantity(product.Product_id)
+                                }
+                              >
+                                +
+                              </button>
+                            </div>
+                            <p>
+                              Total: ₹
+                              {product.Product_offerPrice * product.quantity}
+                            </p>
+                          </Card.Body>
+                        </Card>
+                      </center>
                     </div>
-                  </Card.Body>
-                </Card>
-              </Col>
-            )
-            )}
-          </Row>
-          <div className="px-md-4 mx-md-5 row">
-            <h5>Price Details:</h5>
-            <p> ₹{totalPrice}</p>
-          </div>
-          <button onClick={handlecheck}>Checkout</button>
-          {/* Display quantity of each item here */}
-          {/* <div className="item-quantities">
-            {cartItems.map((product) => (
-              <div key={product.id}>
-                {product.name}: {product.quantity}
+                  ))}
+                </div>
               </div>
-            ))}
-          </div> */}
-        </Container>
-      )}
+            )}
+          </Col>
+          <Col xs={12} lg={4}>
+            <Card>
+              <CardBody>
+                <h5>
+                  Cart totals
+                  <hr />
+                </h5>
+                <Row className="justify-content-between">
+                  <Col>
+                    <p>Sub total</p>
+                  </Col>
+                  <Col>
+                    {" "}
+                    <p> ₹{totalPrice}</p>
+                  </Col>
+                </Row>
+                <div>
+                  <p>Shipping:</p>
+
+                  <hr />
+                  <Row className="justify-content-between">
+                    {" "}
+                    <Col>
+                      <h6>Total</h6>
+                    </Col>
+                    <Col>
+                      {" "}
+                      <p> ₹{totalPrice}</p>
+                    </Col>
+                  </Row>
+                  <center>
+                    {/* <button
+                      className="checkout w-100 p-2 rounded-3 "
+                      onClick={handlecheck}
+                    >
+                      Proceed To Checkout
+                    </button> */}
+
+                    <button
+                      className="checkout w-100 p-2 rounded-3"
+                      onClick={handleShow}
+                    >
+                      Proceed To Checkout
+                    </button>
+                  </center>
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
+
+          <Modal show={show} onHide={handleClose} centered>
+            <Modal.Header closeButton>
+              <Modal.Title>Payment Gateway</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <PaymentComponent order_id="your_order_id" price={price} />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </Row>
+      </Container>
     </div>
   );
 };

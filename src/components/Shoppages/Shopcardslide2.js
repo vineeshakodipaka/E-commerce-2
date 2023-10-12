@@ -122,7 +122,7 @@ const Shopcardslide2 = ({ searchQuery }) => {
       {
         breakpoint: 576, // iPad mini and similar small screens
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
         },
       },
     ],
@@ -135,12 +135,12 @@ const Shopcardslide2 = ({ searchQuery }) => {
     <div className="shopcardslidecls">
       <Container>
         {/* Render product cards */}
-        <Row className="g-4 cardsrow pb-md-5 mx-3  py-md-3 mb-md-5 pt-5 ">
+        <Row className="g-4 cardsrow pb-md-5 mx-3 pb-1 mb-1  py-md-3 mb-md-5 pt-5 ">
           <Slider {...settings}>
             {searchQuery !== "" && // Only render when there's a search query
               featuredProducts.map((product, i) => (
-                <div key={i}>
-                  <Card className="rounded-5 pt-1 pb-1 shopcards mx-2 mb-2">
+                <div key={i} className="px-1">
+                  <Card className="rounded-3 pt-1 pb-1 shopcards   mb-2">
                     <Card.Body>
                       <div className="position-relative">
                         {/* Display "Sale" button if the product is on sale */}
@@ -163,28 +163,29 @@ const Shopcardslide2 = ({ searchQuery }) => {
                         <Row onClick={handleShopPage}>
                           <div className="cardimg">
                             <Card.Img
-                              className="rounded-3 p-4 mt-3 prdctimg"
+                              variant="top"
+                              className="rounded-3  mt-3 prdctimg"
                               src={product.Product_img}
                               alt={`Image ${i + 1}`}
-                              style={{ width: "100%", height: "250px" }}
+                              // style={{ width: "100%", height: "250px" }}
                             />
                           </div>
-                          <Card.Text
-                            className="text-center"
-                            style={{ height: "50px" }}
-                          >
-                            <h5 style={{ lineHeight: "1.2" }}>
+                          <Card.Text className="text-center mt-3 mb-lg-0 mb-2 ">
+                            <h5
+                              style={{ lineHeight: "1.2" }}
+                              className="productname"
+                            >
                               {product.Product_name}
                             </h5>
                           </Card.Text>
                         </Row>
-                        <div className="px-3">
+                        <div className="px-3 d-md-none d-lg-block d-none">
                           <hr />
                         </div>
                         {/* Display original and offer prices */}
-                        <Row lg={2}>
-                          <Col lg={5} xl={6} md={6} xs={6}>
-                            <Card.Text className="mt-2">
+                        <Row lg={2} className="row2cart">
+                          <Col lg={5} xl={6} md={6} xs={12}>
+                            <Card.Text className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
                               <p>
                                 <span
                                   className="fw-normal"
@@ -194,21 +195,20 @@ const Shopcardslide2 = ({ searchQuery }) => {
                                 </span>
                                 <span className="fw-bold">
                                   {" "}
-                                  ₹{product.Product_offerPrice}
+                                  &nbsp; ₹{product.Product_offerPrice}
                                 </span>
                               </p>
                             </Card.Text>
                           </Col>
-                          <Col lg={7} xl={6} md={6} xs={6}>
+                          <Col lg={7} xl={6} md={6} xs={12}>
                             {/* Button to add the product to the cart */}
                             <Card.Text className="text-center  mt-xl-0 mt-md-2">
                               <button
-                                className="rounded-3 cardbtn fw-normal p-2"
+                                className="rounded-3 cardbtn fw-normal p-1 p-md-2 px-2"
                                 style={{
                                   background: "#8F3300",
                                   border: "none",
                                   color: "white",
-                                  fontSize: "15px",
                                 }}
                                 onClick={() => handleAddToCart(product)}
                               >

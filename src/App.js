@@ -27,16 +27,26 @@ import { useAuth } from "./AuthContext "; // Import the AuthProvider from your c
 import Checkoutform from "./components/Checkoutform/Checkoutform";
 import BrandProductsPage from "./components/Brandspage/BrandProductsPage";
 import Subbrandproducts from "./components/Brandspage/Subbrandproducts";
+import Account from "./components/Account/Account";
+import PaymentComponent from "./components/Paymentgateway/PaymentComponent";
 const App = () => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [signupshow, signupsetShow] = useState(false);
+
+  const signuphandleClose = () => signupsetShow(false);
+  const signuphandleShow = () => signupsetShow(true);
+
   const { isAuthenticated } = useAuth(); // Access authentication status
 
   // Check if the userId cookie is present to determine authentication
   const userId = Cookies.get("userId");
+  Cookies.set("userId", userId);
+  console.log("user", userId);
+
   const isUserAuthenticated = isAuthenticated || !!userId;
 
   return (
@@ -56,17 +66,7 @@ const App = () => {
         <Route path="/singlecardpage/:cardId" element={<SingleCardPage />} />
         <Route path="/brandspage" element={<NewBrandspage />} />
         <Route path="/shoppage" element={<MainShop />} />
-        <Route
-          element={
-            <Login
-              handleShow2={handleShow}
-              handleClose2={handleClose}
-              show2={show}
-            />
-          }
-        />
 
-        <Route path="/signup" element={<Signup />} />
         <Route path="/brands/:brandId" element={<BrandDetails />} />
         <Route
           path="/subcategories/:subcatId"
@@ -78,21 +78,36 @@ const App = () => {
         />
 
         {isUserAuthenticated ? (
-          // Render the /blog route only if authenticated
-          <Route path="/blog" element={<Blogpage />} />
+          // Render the /account route only if authenticated
+          <Route path="/account" element={<Account userId={userId} />} />
         ) : (
           // Redirect to the home page if not authenticated
-          <Route path="/blog" element={<Navigate to="/" replace />} />
+          <Route path="/account" element={<Navigate to="/" replace />} />
         )}
         <Route
           path="/checkout"
           element={<Checkoutform handleShow2={handleShow} />}
         />
-
+        <Route
+          path="/checkout"
+          element={<PaymentComponent />}
+        />
+        <Route path="/blog" element={<Blogpage />} />
         <Route path="/brand-products" element={<BrandProductsPage />} />
         <Route path="/subbrand-products" element={<Subbrandproducts />} />
       </Routes>
-      <Login handleShow2={handleShow} handleClose2={handleClose} show2={show} />
+      <Login
+        handleShow2={handleShow}
+        handleClose2={handleClose}
+        show2={show}
+        handleShow3={signuphandleShow}
+      />
+      <Signup
+        handleShow3={signuphandleShow}
+        handleShow2={handleShow}
+        handleClose3={signuphandleClose}
+        show3={signupshow}
+      />
       <Bottombar />
       <Footer />
     </div>

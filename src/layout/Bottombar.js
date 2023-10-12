@@ -12,7 +12,6 @@ const Bottombar = () => {
   const [activeButton, setActiveButton] = useState(0); // State to track active button
   const { totalQuantity } = useSelector((state) => state.cart);
 
-
   return (
     <div className="bottompage d-lg-none d-md-none">
       <Navbar
@@ -25,32 +24,34 @@ const Bottombar = () => {
           {/* Home link */}
           <Link
             to="/"
-            className={`b-link px-lg-3  rounded-3 p-2 ${
+            className={`b-link px-3  rounded-3 p-1 text-center ${
               activeButton === 0 ? "active" : ""
             }`}
             onMouseEnter={() => setActiveButton(0)}
             style={{ color: "black", textDecoration: "none" }}
           >
             <AiFillHome size={20} color="#652700" />
-            <span > Home</span>
+            <br />
+            {activeButton === 0 && <p className="text-center mb-0"> Home</p>}
           </Link>
 
           {/* User link */}
           <Link
             to="/contact"
-            className={`b-link  rounded-3  p-2 ${
+            className={`b-link px-3  rounded-3 text-center  p-2 ${
               activeButton === 1 ? "active" : ""
             }`}
             onMouseEnter={() => setActiveButton(1)}
             style={{ color: "black", textDecoration: "none" }}
           >
             <FaUserAlt size={20} color="#652700" />
+            {activeButton === 1 && <p className="mb-0"> Contact</p>}
           </Link>
 
           {/* Cart link */}
           <Link
             to="/cart"
-            className={`b-link  rounded-3 p-2 ${
+            className={`b-link  px-3   rounded-3 text-center  p-2 ${
               activeButton === 2 ? "active" : ""
             }`}
             onMouseEnter={() => setActiveButton(2)}
@@ -65,12 +66,15 @@ const Bottombar = () => {
                 {totalQuantity}
               </span>
             </sup>
+            {activeButton === 2 && (
+              <p className="mb-0 me-3 text-center me-1">Cart</p>
+            )}
           </Link>
 
           {/* Message link */}
           <Link
             to="/"
-            className={`b-link  rounded-3 p-2 ${
+            className={`b-link  px-3   rounded-3 text-center  p-2 ${
               activeButton === 3 ? "active" : ""
             }`}
             onMouseEnter={() => setActiveButton(3)}
@@ -85,6 +89,7 @@ const Bottombar = () => {
                 0
               </span>
             </sup>
+            {activeButton === 3 && <p className=" mb-0"> Message</p>}
           </Link>
         </Nav>
       </Navbar>

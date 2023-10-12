@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-     "@babel/plugin-proposal-private-property-in-object": "^7.0.0",
+    "@babel/plugin-proposal-private-property-in-object": "^7.0.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -13,6 +13,7 @@
     "bootstrap-icons": "^1.11.1",
     "carousel": "^0.0.3",
     "js-cookie": "^3.0.5",
+    "razorpay": "^2.9.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.0",
     "react-dom": "^18.2.0",
@@ -38,8 +39,8 @@
       "react-app/jest"
     ],
     "rules": {
-    "jsx-a11y/img-redundant-alt": "off"
-  }
+      "jsx-a11y/img-redundant-alt": "off"
+    }
   },
   "browserslist": {
     "production": [

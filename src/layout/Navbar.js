@@ -87,6 +87,15 @@ const Navbar = ({ handleShow2 }) => {
   //active links
   const [activeButton, setActiveButton] = useState(0); // State to track active button
 
+  //  const [offcanvasOpen, setOffcanvasOpen] = useState(false);
+
+  //  const openOffcanvas = () => {
+  //    setOffcanvasOpen(true);
+  //  };
+
+  //  const closeOffcanvas = () => {
+  //    setOffcanvasOpen(false);
+  //  };
   return (
     <nav className="navbar navbar-expand-lg navbar headerbar mt-lg-4 mb-lg-4">
       <div className="container mx-lg-3 mx-xl-5 px-xl-5">
@@ -104,247 +113,276 @@ const Navbar = ({ handleShow2 }) => {
           />
         </Link>
         <span
-          id="navbtn"
           className="navbar-toggler"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasExample"
+          aria-controls="offcanvasExample"
         >
           <span className="navbar-toggler-icon"></span>
         </span>
         <div
-          className="collapse navbar-collapse"
-          id="navbarNav"
-          ref={navbarCollapseRef}
+          className="offcanvas offcanvas-start"
+          tabIndex="-1"
+          id="offcanvasExample"
+          aria-labelledby="offcanvasExampleLabel"
+          // ref={navbarCollapseRef}
         >
-          <ul className="navbar-nav ms-lg-3 ">
-            <li className="nav-item px-xl-2">
-              <Link
-                to="/"
-                className={`nav-link nav-btns   b-link  rounded-3 ${
-                  activeButton === 0 ? "active" : ""
-                }`}
-                onClick={() => {
-                  navbarCollapseRef.current?.classList.remove("show");
-                  setActiveButton(0);
-                }}
-              >
-                Home
-              </Link>
-            </li>
-            <li className="nav-item px-xl-2">
-              <Link
-                to="/about"
-                className={`nav-link nav-btns b-link  rounded-3 ${
-                  activeButton === 1 ? "active" : ""
-                }`}
-                onClick={() => {
-                  navbarCollapseRef.current?.classList.remove("show");
-                  setActiveButton(1);
-                }}
-              >
-                About
-              </Link>
-            </li>
+          <div className="offcanvas-header">
+            {/* <h5 className="offcanvas-title" id="offcanvasExampleLabel">
+              Offcanvas
+            </h5> */}
+          </div>
+          <div className="offcanvas-body">
+            <ul className="navbar-nav ms-lg-3 ">
+              <li className="nav-item px-xl-2 d-flex justify-content-between">
+                <Link
+                  to="/"
+                  aria-current="page"
+                  data-bs-auto-dismiss="false"
+                  className={`nav-link nav-btns  b-link  rounded-3 ${
+                    activeButton === 0 ? "active" : ""
+                  }`}
+                  onClick={() => {
+                    //  navbarCollapseRef.current?.classList.remove("show");
+                    setActiveButton(0);
+                  }}
+                >
+                  <span data-bs-dismiss="offcanvas">Home</span>
+                </Link>
+                <button
+                  type="button"
+                  className="btn-close text-reset mt-2 d-lg-none"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                ></button>
+              </li>
+              <li className="nav-item px-xl-2">
+                <Link
+                  to="/about"
+                  className={`nav-link nav-btns b-link  rounded-3 ${
+                    activeButton === 1 ? "active" : ""
+                  }`}
+                  onClick={() => {
+                    //   navbarCollapseRef.current?.classList.remove("show");
+                    setActiveButton(1);
+                  }}
+                >
+                  <span data-bs-dismiss="offcanvas">About</span>
+                </Link>
+              </li>
 
-            <li className="nav-item px-xl-2">
-              <Link
-                to="/shoppage"
-                className={`nav-link nav-btns b-link  rounded-3 ${
-                  activeButton === 2 ? "active" : ""
+              <li className="nav-item px-xl-2">
+                <Link
+                  to="/shoppage"
+                  className={`nav-link nav-btns b-link  rounded-3 ${
+                    activeButton === 2 ? "active" : ""
+                  }`}
+                  onClick={() => {
+                    navbarCollapseRef.current?.classList.remove("show");
+                    setActiveButton(2);
+                  }}
+                >
+                  <span data-bs-dismiss="offcanvas">Shop</span>
+                </Link>
+              </li>
+
+              <li
+                className={`basic-nav-dropdown nav-btns b-link  rounded-3 ${
+                  activeButton === 3 ? "active" : ""
                 }`}
                 onClick={() => {
-                  navbarCollapseRef.current?.classList.remove("show");
-                  setActiveButton(2);
+                  setActiveButton(3);
                 }}
               >
-                Shop
-              </Link>
-            </li>
-
-            <li
-              className={`basic-nav-dropdown nav-btns b-link  rounded-3 ${
-                activeButton === 3 ? "active" : ""
-              }`}
-              onClick={() => {
-                setActiveButton(3);
-              }}
-            >
-              <NavDropdown
-                show={isBrandDropdownOpen} // Show the dropdown based on the state
-                onMouseEnter={() => setIsBrandDropdownOpen(true)} // Open the dropdown when mouse enters
-                onMouseLeave={() => setIsBrandDropdownOpen(false)} // Close the dropdown when mouse leaves
-                title={
-                  <span
-                    className={`basic-nav-dropdown nav-btns b-link  rounded-3 ${
-                      activeButton === 3 ? "active" : ""
-                    }`}
-                    onClick={handlclick}
-                  >
-                    Brands
-                    {/* <RiArrowDropDownFill className="fs-3" /> */}
-                  </span>
-                }
-                className="basic-nav-dropdown"
-                id="basic-nav-dropdown"
-              >
-                {brandsData.map((brand) => (
-                  <div key={brand.Brand_id}>
-                    {brand.hasSubcat ? (
-                      <Accordion drop="end" className="accordian">
-                        <Accordion.Header className="accordian">
-                          <span
-                            className="nav-link navdroplink px-1 accordian"
-                            onClick={() => {
-                              handleBrandChange1(brand);
-                              setIsBrandDropdownOpen(false); // Close the dropdown when a brand is selected
-                              navbarCollapseRef.current?.classList.remove(
-                                "show"
-                              );
-                            }}
-                          >
+                <NavDropdown
+                  show={isBrandDropdownOpen} // Show the dropdown based on the state
+                  onMouseEnter={() => setIsBrandDropdownOpen(true)} // Open the dropdown when mouse enters
+                  onMouseLeave={() => setIsBrandDropdownOpen(false)} // Close the dropdown when mouse leaves
+                 // onClick={() => setIsBrandDropdownOpen(!isBrandDropdownOpen)}
+                  title={
+                    <span
+                      className={`basic-nav-dropdown nav-btns b-link  rounded-3 ${
+                        activeButton === 3 ? "active" : ""
+                      }`}
+                      onClick={handlclick}
+                    >
+                      Brands
+                      {/* <RiArrowDropDownFill className="fs-3" /> */}
+                    </span>
+                  }
+                  className="basic-nav-dropdown"
+                  id="basic-nav-dropdown"
+                >
+                  {brandsData.map((brand) => (
+                    <div key={brand.Brand_id}>
+                      {brand.hasSubcat ? (
+                        <Accordion drop="end" className="accordian">
+                          <Accordion.Header className="accordian">
+                            <span
+                              data-bs-dismiss="offcanvas"
+                              className="nav-link navdroplink px-1 accordian"
+                              id="navbrandname"
+                              onClick={() => {
+                                handleBrandChange1(brand);
+                                setIsBrandDropdownOpen(false); // Close the dropdown when a brand is selected
+                                navbarCollapseRef.current?.classList.remove(
+                                  "show"
+                                );
+                              }}
+                            >
+                              {brand.Brand_Name}
+                            </span>
+                          </Accordion.Header>
+                          <Accordion.Body className="mb-2 dropdown-menu2">
+                            {brand.subcategories.map((subcat) => (
+                              <Accordion.Item key={subcat.Subcat_id}>
+                                <Link
+                                  onClick={() => {
+                                    setIsBrandDropdownOpen(false); // Close the dropdown when a brand is selected
+                                    navbarCollapseRef.current?.classList.remove(
+                                      "show"
+                                    );
+                                  }}
+                                  to={`/subbrand-products?Subcat_id=${subcat.Subcat_id}`}
+                                  className="mx-2 nav-link navdroplink"
+                                >
+                                  <span
+                                    data-bs-dismiss="offcanvas"
+                                    id="navsubcatname"
+                                  >
+                                    {" "}
+                                    {subcat.Subcat_Name}
+                                  </span>
+                                </Link>
+                              </Accordion.Item>
+                            ))}
+                          </Accordion.Body>
+                        </Accordion>
+                      ) : (
+                        <NavDropdown.Item
+                          onClick={() => {
+                            handleBrandChange(brand);
+                            //setIsBrandDropdownOpen(false); // Close the dropdown when a brand is selected
+                            navbarCollapseRef.current?.classList.remove("show");
+                          }}
+                          className="nav-link navdroplink  px-4"
+                        >
+                          <span data-bs-dismiss="offcanvas" id="navbrandname">
                             {brand.Brand_Name}
                           </span>
-                        </Accordion.Header>
-                        <Accordion.Body className="mb-2 dropdown-menu2">
-                          {brand.subcategories.map((subcat) => (
-                            <Accordion.Item key={subcat.Subcat_id}>
-                              <Link
-                                onClick={() => {
-                                  setIsBrandDropdownOpen(false); // Close the dropdown when a brand is selected
-                                  navbarCollapseRef.current?.classList.remove(
-                                    "show"
-                                  );
-                                }}
-                                to={`/subbrand-products?Subcat_id=${subcat.Subcat_id}`}
-                                className="mx-2 nav-link navdroplink"
-                              >
-                                {subcat.Subcat_Name}
-                              </Link>
-                            </Accordion.Item>
-                          ))}
-                        </Accordion.Body>
-                      </Accordion>
-                    ) : (
-                      <NavDropdown.Item
-                        onClick={() => {
-                          handleBrandChange(brand);
-                          setIsBrandDropdownOpen(false); // Close the dropdown when a brand is selected
-                          navbarCollapseRef.current?.classList.remove("show");
-                        }}
-                        className="nav-link navdroplink  px-4"
-                      >
-                        {brand.Brand_Name}
-                      </NavDropdown.Item>
-                    )}
-                  </div>
-                ))}
-              </NavDropdown>
-            </li>
-            <li className="nav-item px-xl-2">
-              <Link
-                to="/contact"
-                className={`nav-link nav-btns b-link  rounded-3 ${
-                  activeButton === 4 ? "active" : ""
-                }`}
-                onClick={() => {
-                  navbarCollapseRef.current?.classList.remove("show");
-                  setActiveButton(4);
-                }}
-              >
-                Contact
-              </Link>
-            </li>
-            <li className="nav-item px-xl-2">
-              <Link
-                to="/blog"
-                className={`nav-link nav-btns b-link  rounded-3 ${
-                  activeButton === 5 ? "active" : ""
-                }`}
-                onClick={() => {
-                  navbarCollapseRef.current?.classList.remove("show");
-                  setActiveButton(5);
-                }}
-              >
-                Blogs
-              </Link>
-            </li>
+                        </NavDropdown.Item>
+                      )}
+                    </div>
+                  ))}
+                </NavDropdown>
+              </li>
+              <li className="nav-item px-xl-2">
+                <Link
+                  to="/contact"
+                  className={`nav-link nav-btns b-link  rounded-3 ${
+                    activeButton === 4 ? "active" : ""
+                  }`}
+                  onClick={() => {
+                    navbarCollapseRef.current?.classList.remove("show");
+                    setActiveButton(4);
+                  }}
+                >
+                  <span data-bs-dismiss="offcanvas"> Contact</span>
+                </Link>
+              </li>
+              <li className="nav-item px-xl-2">
+                <Link
+                  to="/blog"
+                  className={`nav-link nav-btns b-link  rounded-3 ${
+                    activeButton === 5 ? "active" : ""
+                  }`}
+                  onClick={() => {
+                    navbarCollapseRef.current?.classList.remove("show");
+                    setActiveButton(5);
+                  }}
+                >
+                  <span data-bs-dismiss="offcanvas">Blogs</span>
+                </Link>
+              </li>
 
-            <div className="d-none d-lg-block position-relative">
-              <InputGroup>
-                <input
-                  type="text"
-                  placeholder="Search products."
-                  value={searchQuery}
-                  onChange={handleSearch}
-                  className="form-control rounded-pill ms-xl-4 mx-md-5 mx-3 "
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      handleSearch(e);
-                    }
+              <div className="d-none d-lg-block">
+                <InputGroup className="position-relative">
+                  <div className="position-absolute searchbtn">
+                    <AiOutlineSearch
+                      className="searchicon fs-5"
+                      // style={{ marginTop: "12px" }}
+                    />
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Search products."
+                    value={searchQuery}
+                    onChange={handleSearch}
+                    className="form-control rounded-pill ms-xl-4 ms-lg-4 mx-md-5 mx-lg-1 mx-3 "
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        handleSearch(e);
+                      }
+                    }}
+                    onClick={(e) => {
+                      // Prevent click propagation to the parent div
+                      e.stopPropagation();
+                    }}
+                  />
+                </InputGroup>
+              </div>
+
+              <li className="nav-item px-lg-0 px-xl-2 ms-xl-4 my-3 my-lg-0 my-md-0">
+                {/* <Link to="/cart" className="nav-link "> */}
+                <Button
+                  onClick={() => {
+                    cartclick();
+                    navbarCollapseRef.current?.classList.remove("show");
                   }}
-                  onClick={(e) => {
-                    // Prevent click propagation to the parent div
-                    e.stopPropagation();
+                  className="cart-btn rounded-pill"
+                >
+                  <i
+                    className="fas fa-shopping-cart rounded-circle p-1"
+                    style={{ background: "#44160F", color: "white" }}
+                  ></i>
+                  <span className="px-3 px-lg-1" data-bs-dismiss="offcanvas">
+                    Cart-({totalQuantity})
+                  </span>
+                </Button>
+                {/* <span className="badge rounded-pill badge-notification bg-primary">{totalQuantity}</span> */}
+                {/* </Link> */}
+              </li>
+            </ul>
+
+            <ul className="navbar-nav ms-auto  ">
+              <li className="nav-item ">
+                <Link
+                  className={`nav-link nav-btns b-link  rounded-3 ${
+                    activeButton === 6 ? "active" : ""
+                  }`}
+                  onClick={() => {
+                    handleShow2();
+                    navbarCollapseRef.current?.classList.remove("show");
+                    setActiveButton(6);
                   }}
-                />
-                <AiOutlineSearch
-                  className="position-absolute start-50 mx-5"
-                  style={{ marginTop: "12px" }}
-                />
-              </InputGroup>
-            </div>
-          </ul>
-          <ul className="navbar-nav ">
-            <li className="nav-item px-lg-0 px-xl-2 ms-xl-4 my-3 my-lg-0 my-md-0">
-              {/* <Link to="/cart" className="nav-link "> */}
-              <Button
-                onClick={() => {
-                  cartclick();
-                  navbarCollapseRef.current?.classList.remove("show");
-                }}
-                className="cart-btn rounded-pill"
-              >
-                <i
-                  className="fas fa-shopping-cart rounded-circle p-1"
-                  style={{ background: "#44160F", color: "white" }}
-                ></i>
-                <span className="px-3 px-lg-1">Cart-({totalQuantity})</span>
-              </Button>
-              {/* <span className="badge rounded-pill badge-notification bg-primary">{totalQuantity}</span> */}
-              {/* </Link> */}
-            </li>
-          </ul>
-          <ul className="navbar-nav ms-auto  ">
-            <li className="nav-item ">
-              <Link
-                className={`nav-link nav-btns b-link  rounded-3 ${
-                  activeButton === 6 ? "active" : ""
-                }`}
-                onClick={() => {
-                  handleShow2();
-                  navbarCollapseRef.current?.classList.remove("show");
-                  setActiveButton(6);
-                }}
-              >
-                Login
-              </Link>
-            </li>
-          </ul>
+                >
+                  <span data-bs-dismiss="offcanvas">Login</span>
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <InputGroup className="d-lg-none ">
+      <InputGroup className="d-lg-none mx-2 ">
         {" "}
         <input
           type="text"
           placeholder="Search products..."
           value={searchQuery}
           onChange={handleSearch}
-          className="form-control rounded-pill ms-xl-4  mt-3 mx-md-5 mx-3 position-relative"
+          className="form-control rounded-3 ms-xl-4  px-5 p-3 mt-3  mx-3 position-relative"
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               handleSearch(e);
@@ -355,7 +393,10 @@ const Navbar = ({ handleShow2 }) => {
             e.stopPropagation();
           }}
         />
-        <AiOutlineSearch className="position-absolute end-0 me-4 mt-4" />
+        <div className="pt-2">
+          {" "}
+          <AiOutlineSearch className="position-absolute start-0 ms-4 fs-2 mt-4" />
+        </div>
       </InputGroup>
     </nav>
   );

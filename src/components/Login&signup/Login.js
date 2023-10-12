@@ -6,7 +6,7 @@ import axios from "axios";
 import { useAuth } from "../../AuthContext "; // Import the useAuth hook
 import Cookies from "js-cookie";
 
-const Login = ({ show2, handleClose2, handleShow2 }) => {
+const Login = ({ show2, handleClose2, handleShow3 }) => {
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
@@ -26,6 +26,8 @@ const Login = ({ show2, handleClose2, handleShow2 }) => {
     logout();
   };
 
+  
+
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -44,8 +46,10 @@ const Login = ({ show2, handleClose2, handleShow2 }) => {
         // Login successful, set the user ID in cookies and log in
         const userId = response.data.user.User_ID;
         Cookies.set("userId", userId);
+        console.log(userId);
         login(); // Call the login function to set isAuthenticated to true
-        navigate("/blog");
+        navigate("/account");
+        handleClose2();
       } else {
         // Login failed, display an error message
         alert("Login failed. Please check your credentials.");
@@ -56,8 +60,6 @@ const Login = ({ show2, handleClose2, handleShow2 }) => {
       alert("Login failed. Please try again later.");
     }
   };
-
- 
 
   return (
     <>
@@ -103,7 +105,13 @@ const Login = ({ show2, handleClose2, handleShow2 }) => {
                     <Link to="/forgotpassword" className="forgotlink fw-bold">
                       Forgot Your Password?
                     </Link>
-                    <Link to="/signup" className="signup fw-bold mt-2 mb-2">
+                    <Link
+                      onClick={() => {
+                        handleShow3();
+                        handleClose2();
+                      }}
+                      className="signup fw-bold mt-2 mb-2"
+                    >
                       Signup
                     </Link>
                   </Row>
@@ -122,6 +130,16 @@ const Login = ({ show2, handleClose2, handleShow2 }) => {
           </Modal.Body>
         </Modal>
       </center>
+
+      {/* Conditionally render the Signup modal */}
+      {/* <Modal show={showSignupModal} onHide={toggleSignupModal} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Signup</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Signup />
+        </Modal.Body>
+      </Modal> */}
     </>
   );
 };

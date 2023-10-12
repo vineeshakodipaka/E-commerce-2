@@ -17,21 +17,29 @@
 .shoppagecls .cardimg:hover .prdctimg {
     transform: scale(0.8);
 }
+
+
 @media screen and (max-width: 760px){
     .shoppagecls .productname {
         font-size: 15px;
+        text-align: left !important;
     }
     .shoppagecls .prdctimg {
        width: 100%;
        height: 100px;
     
     }
-
-          .shopcards .shopcards {
-              width: 100%;
-              height: 150px !important;
+.shoppagecls .price{
+    font-size: 20px;
+}
+   .shopcards .shopcards {
+     width: 100%;
+  
     
-          }
+  }
+    .shoppagecls .row2cart{
+        text-align: left !important;
+    }
 }
 @media screen and (min-width: 768px) {
     .shoppagecls .productname {

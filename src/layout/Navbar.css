@@ -21,27 +21,17 @@ margin-top: 9px;
   margin-top: 10px;
   display: flex;
 }
-/* Style for the active link */
-/* .headerbar .navbar-nav .nav-item .nav-link:focus {
-  background-color: none !important;
-  color:#652700 !important;
 
-} */
-.headerbar .active{
+/* .headerbar .active{
     background-color: #000066;
-}
+} */
 .headerbar:focus{
   background-color: none !important;
 }
 .headerbar:hover {
   background-color: none !important;
 }
-/* Style for the active link */
-.headerbar .b-link.active {
-  background-color: #000066;
-  color: white !important;
 
-}
 .headerbar .basic-nav-dropdown::after{
   color: white !important;
 }
@@ -135,18 +125,82 @@ color: #652700 !important;
   }
 }
 @media (max-width: 768px) {
-.headerbar .b-link.active {
+/* .headerbar .b-link.active {
     background-color: #000066;
     color: white !important;
     padding: 5px;
     margin-top: 3px;
     margin-bottom: 3px;
-  }
+  } */
   .headerbar .navbrand img{
         width: 120px;
           height: 68px;
   }
+  
 }
 .headerbar .accordion-button{
   box-shadow: none !important;
+}
+.headerbar .searchicon{
+    margin-top: 9px
+        /* width: 35px;
+        /* background: #ffd2bc; 
+        height: 22px; */
+}
+.headerbar .searchbtn{
+background: #ffd2bc;
+      padding: 0px 20px 7px 8px;
+  /* border-radius: 50% 0% 3% 50%; */
+  border-radius: 90px 0px 0px 90px
+}
+@media screen and (max-width: 760px) {
+  .headerbar .offcanvas{
+    width: 80% !important;
+   background: #000;
+  }
+    .headerbar .offcanvas .nav-item .nav-link {
+      width: 80% !important;
+      color: white !important;
+      background: none;
+    }
+  .headerbar .offcanvas .btn-close{
+    color: white !important;
+    background-color: white;
+  }
+    .headerbar .b-link.active{
+      background-color: white;
+      color: black !important;
+      padding: 0px !important;
+  
+    }
+   
+    .headerbar .active {
+      padding: 0px !important;
+      background-color: white;
+    }
+    .headerbar .basic-nav-dropdown .dropdown .accordian,
+    .headerbar .accordion .navdroplink,.headerbar #navsubcatname,#navbrandname {
+background-color: white;
+  color: black !important;
+    }
+    .headerbar .cart-btn {
+color: white;
+    }
+.headerbar .navbar-nav .nav-item .nav-link:hover {
+background-color: white;
+  color: black !important;
+  padding: 5px;
+}
+}
+
+@media screen and (min-width: 780px) {
+/* Style for the active link */
+  .headerbar .b-link.active {
+    background-color: #000066;
+    color: white !important;
+
+  }
+    .headerbar .active {
+      background-color: #000066;
+    }
 }

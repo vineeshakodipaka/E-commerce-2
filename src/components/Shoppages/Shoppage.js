@@ -66,7 +66,7 @@ const Shoppage = ({ searchQuery }) => {
           {searchQuery !== "" && // Only render when there's a search query
             products.map((product, i) => (
               <Col key={i}>
-                <Card className="rounded-5 pt-1 pb-1 shopcards">
+                <Card className="rounded-2 pt-1 pb-1 shopcards">
                   <Card.Body>
                     <div className="position-relative">
                       {/* Display "Sale" button if the product is on sale */}
@@ -89,13 +89,14 @@ const Shoppage = ({ searchQuery }) => {
                       <Row onClick={handleShopPage}>
                         <div className="cardimg">
                           <Card.Img
-                            className="rounded-3 p-4 mt-3 prdctimg"
+                            variant="top"
+                            className="rounded-3  mt-3 prdctimg"
                             src={product.Product_img}
                             alt={`Image ${i + 1}`}
                             // style={{ width: "100%", height: "250px" }}
                           />
                         </div>
-                        <Card.Text className="text-center">
+                        <Card.Text className="mt-2  text-center">
                           <h5
                             className="productname"
                             style={{ lineHeight: "1.2" }}
@@ -104,23 +105,24 @@ const Shoppage = ({ searchQuery }) => {
                           </h5>
                         </Card.Text>
                       </Row>
-                      <div className="px-3 ">
+                      <div className="px-3 d-md-none d-lg-block d-none">
                         <hr />
                       </div>
                       {/* Display original and offer prices */}
-                      <Row lg={2}>
+                      <Row lg={2} className="row2cart">
                         <Col lg={5} xl={6} md={6} xs={12}>
-                          <Card.Text className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 ms-4">
+                          <Card.Text className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
                             <p>
+                              <span className="fw-bold">
+                                {" "}
+                                ₹{product.Product_offerPrice}
+                              </span>
+                              &nbsp;
                               <span
                                 className="fw-normal"
                                 style={{ color: "#B8B8B8" }}
                               >
                                 <s>₹{product.Product_originalPrice}</s>
-                              </span>
-                              <span className="fw-bold">
-                                {" "}
-                                {product.Product_offerPrice}
                               </span>
                             </p>
                           </Card.Text>
@@ -129,12 +131,11 @@ const Shoppage = ({ searchQuery }) => {
                           {/* Button to add the product to the cart */}
                           <Card.Text className="text-center  mt-xl-0 mt-md-2">
                             <button
-                              className="rounded-3 cardbtn fw-normal p-2"
+                              className="rounded-3 cardbtn fw-normal p-1 p-md-2 px-2"
                               style={{
                                 background: "#8F3300",
                                 border: "none",
                                 color: "white",
-                                fontSize: "15px",
                               }}
                               onClick={() => handleAddToCart(product)}
                             >
