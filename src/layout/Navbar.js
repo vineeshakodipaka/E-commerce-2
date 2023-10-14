@@ -13,6 +13,8 @@ import "aos/dist/aos.css"; // AOS library CSS
 import logoimg from "../Images/Elite Enterprise Logo.png";
 import "./Navbar.css";
 import { NavDropdown, Button, InputGroup, Accordion } from "react-bootstrap";
+import { FaUser } from "react-icons/fa"; // Import the user icon
+import { useAuth } from "../AuthContext "; // Import the useAuth hook
 
 const Navbar = ({ handleShow2 }) => {
   const { totalQuantity } = useSelector((state) => state.cart);
@@ -96,6 +98,9 @@ const Navbar = ({ handleShow2 }) => {
   //  const closeOffcanvas = () => {
   //    setOffcanvasOpen(false);
   //  };
+
+  const { isAuthenticated, user, logout } = useAuth(); // Access authentication state and user information
+
   return (
     <nav className="navbar navbar-expand-lg navbar headerbar mt-lg-4 mb-lg-4">
       <div className="container mx-lg-3 mx-xl-5 px-xl-5">
@@ -355,7 +360,7 @@ const Navbar = ({ handleShow2 }) => {
               </li>
             </ul>
 
-            <ul className="navbar-nav ms-auto  ">
+            {/* <ul className="navbar-nav ms-auto  ">
               <li className="nav-item ">
                 <Link
                   className={`nav-link nav-btns b-link  rounded-3 ${
@@ -370,6 +375,33 @@ const Navbar = ({ handleShow2 }) => {
                   <span>Login</span>
                 </Link>
               </li>
+            </ul> */}
+
+            <ul className="navbar-nav ms-auto">
+              {isAuthenticated ? (
+                // Render the user icon when the user is authenticated
+                <li className="nav-item">
+                  <Link to="/account" className="nav-link">
+                    <FaUser />
+                  </Link>
+                </li>
+              ) : (
+                // Render the "Login" link when the user is not authenticated
+                <li className="nav-item">
+                  <Link
+                    className={`nav-link nav-btns b-link  rounded-3 ${
+                      activeButton === 6 ? "active" : ""
+                    }`}
+                    onClick={() => {
+                      handleShow2();
+                      navbarCollapseRef.current?.classList.remove("show");
+                      setActiveButton(6);
+                    }}
+                  >
+                    <span>Login</span>
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </div>
