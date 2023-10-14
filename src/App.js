@@ -46,7 +46,7 @@ const App = () => {
   const userId = Cookies.get("userId");
   Cookies.set("userId", userId);
   console.log("user", userId);
-
+ 
   const isUserAuthenticated = isAuthenticated || !!userId;
 
   return (

@@ -26,8 +26,6 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
     logout();
   };
 
-  
-
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -76,7 +74,7 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
 
                 <Form className="loginform" onSubmit={submitHandler}>
                   <Row className="justify-content-center ">
-                    <Form.Group as={Col} md="4">
+                    <Form.Group as={Col} md="4" xs="12">
                       <Form.Control
                         type="username"
                         name="username"
@@ -84,7 +82,7 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
                         onChange={changeHandler}
                         required
                         placeholder="Username"
-                        className="inputgrp"
+                        // className="inputgrp"
                       />
                     </Form.Group>
                   </Row>

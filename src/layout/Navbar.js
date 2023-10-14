@@ -131,7 +131,7 @@ const Navbar = ({ handleShow2 }) => {
           tabIndex="-1"
           id="offcanvasExample"
           aria-labelledby="offcanvasExampleLabel"
-          // ref={navbarCollapseRef}
+          ref={navbarCollapseRef}
         >
           <div className="offcanvas-header">
             {/* <h5 className="offcanvas-title" id="offcanvasExampleLabel">
@@ -381,8 +381,16 @@ const Navbar = ({ handleShow2 }) => {
               {isAuthenticated ? (
                 // Render the user icon when the user is authenticated
                 <li className="nav-item">
-                  <Link to="/account" className="nav-link">
-                    <FaUser />
+                  <Link
+                    to="/account"
+                    className="nav-link"
+                    onClick={() => {
+                      navbarCollapseRef.current?.classList.remove("show");
+                    }}
+                  >
+                    <span data-bs-dismiss="offcanvas">
+                      <FaUser />
+                    </span>
                   </Link>
                 </li>
               ) : (
