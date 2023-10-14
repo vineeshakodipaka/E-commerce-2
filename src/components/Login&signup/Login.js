@@ -87,7 +87,7 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
                     </Form.Group>
                   </Row>
                   <Row className="justify-content-center mt-4">
-                    <Form.Group as={Col} md="4" className="inputgrp">
+                    <Form.Group as={Col} md="4" xs="12" className="inputgrp">
                       <Form.Control
                         type="password"
                         name="password"
@@ -103,15 +103,17 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
                     <Link to="/forgotpassword" className="forgotlink fw-bold">
                       Forgot Your Password?
                     </Link>
-                    <Link
-                      onClick={() => {
-                        handleShow3();
-                        handleClose2();
-                      }}
-                      className="signup fw-bold mt-2 mb-2"
-                    >
-                      Signup
-                    </Link>
+                    <center>
+                      <Link
+                        onClick={() => {
+                          handleShow3();
+                          handleClose2();
+                        }}
+                        className="signup fw-bold mt-2 mb-2"
+                      >
+                        Signup
+                      </Link>
+                    </center>
                   </Row>
                   <button className="rounded-4 p-3 px-5 mt-1">Login</button>
                   {isAuthenticated ? (

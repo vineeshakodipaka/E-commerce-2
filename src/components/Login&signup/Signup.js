@@ -55,131 +55,138 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
   };
 
   return (
-    <center>
-      <Modal show={show3} onHide={handleClose3} centered>
-        <Modal.Body>
-          <Modal.Header closeButton style={{ border: "none" }}></Modal.Header>
-          <div className="signupcls text-center">
-          <h3 className="fs-2 elite mt-5">Elite</h3>
-          <h4>E n t e r p r i s e s</h4>
-          <Row className="mt-2">
-            <h3 className="singupfree">Sign Up For Free</h3>
-            <Form className="loginform" onSubmit={handleSubmit}>
-              <Row className="justify-content-center mt-3">
-                <Form.Group
-                  as={Col}
-                  md="4"
-                  lg="8"
-                  controlId="validationCustom02"
-                >
-                  {/* <Form.Label>Last name</Form.Label> */}
-                  <Form.Control
-                    type="text"
-                    name="username"
-                    value={formData.username}
-                    onChange={handleChange}
-                    placeholder="Username"
-                    required
-                  />
-                </Form.Group>
-              </Row>
-              <Row className="justify-content-center mt-4">
-                <Form.Group
-                  as={Col}
-                  md="4"
-                  lg="8"
-                  className="inputgrp"
-                  controlId="validationCustom02"
-                >
-                  {/* <Form.Label>Last name</Form.Label> */}
-                  <Form.Control
-                    type="text"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Email"
-                    required
-                  />
-                </Form.Group>
-              </Row>
-              <Row className="justify-content-center mt-4">
-                <Form.Group
-                  as={Col}
-                  md="4"
-                  lg="8"
-                  className="inputgrp"
-                  controlId="validationCustom02"
-                >
-                  {/* <Form.Label>Last name</Form.Label> */}
-                  <Form.Control
-                    type="text"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    placeholder="password"
-                    required
-                  />
-                </Form.Group>
-              </Row>
-              <Row className="justify-content-center mt-4">
-                <Form.Group
-                  as={Col}
-                  md="4"
-                  lg="8"
-                  className="inputgrp"
-                  controlId="validationCustom02"
-                >
-                  {/* <Form.Label>Last name</Form.Label> */}
-                  <Form.Control
-                    type="text"
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    placeholder="confirmPassword"
-                    required
-                  />
-                </Form.Group>
-              </Row>
-
-              <Row className="justify-content-center mt-4">
-                <Form.Group
-                  as={Col}
-                  md="4"
-                  lg="8"
-                  className="inputgrp"
-                  controlId="validationCustom02"
-                >
-                  {/* <Form.Label>Last name</Form.Label> */}
-                  <Form.Control
-                    type="text"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="Phone"
-                    required
-                  />
-                </Form.Group>
-              </Row>
+    <>
+      <center>
+        <Modal show={show3} onHide={handleClose3} centered>
+          <Modal.Body>
+            <Modal.Header closeButton style={{ border: "none" }}></Modal.Header>
+            <div className="signupcls text-center">
+              <h3 className="fs-2 elite mt-">Elite</h3>
+              <h4>E n t e r p r i s e s</h4>
               <Row className="mt-2">
-                <Link
-                  onClick={() => {
-                    handleShow2();
-                    handleClose3();
-                  }}
-                  className="haveanaccount fw-bold"
-                >
-                  already have an account?
-                </Link>
+                <h3 className="singupfree">Sign Up For Free</h3>
+                <Form className="loginform" onSubmit={handleSubmit}>
+                  <Row className="justify-content-center mt-3">
+                    <Form.Group
+                      as={Col}
+                      md="4"
+                      lg="8"
+                      xs="12"
+                      // controlId="validationCustom02"
+                    >
+                      {/* <Form.Label>Last name</Form.Label> */}
+                      <Form.Control
+                        type="text"
+                        name="username"
+                        value={formData.username}
+                        onChange={handleChange}
+                        placeholder="Username"
+                        required
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row className="justify-content-center mt-4">
+                    <Form.Group
+                      as={Col}
+                      md="4"
+                      lg="8"
+                      xs="12"
+                      className="inputgrp"
+                      // controlId="validationCustom02"
+                    >
+                      {/* <Form.Label>Last name</Form.Label> */}
+                      <Form.Control
+                        type="text"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="Email"
+                        required
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row className="justify-content-center mt-4">
+                    <Form.Group
+                      as={Col}
+                      md="4"
+                      lg="8"
+                      xs="12"
+                      className="inputgrp"
+                      // controlId="validationCustom02"
+                    >
+                      {/* <Form.Label>Last name</Form.Label> */}
+                      <Form.Control
+                        type="text"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        placeholder="password"
+                        required
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row className="justify-content-center mt-4">
+                    <Form.Group
+                      as={Col}
+                      md="4"
+                      lg="8"
+                      xs="12"
+                      className="inputgrp"
+                      // controlId="validationCustom02"
+                    >
+                      {/* <Form.Label>Last name</Form.Label> */}
+                      <Form.Control
+                        type="text"
+                        name="confirmPassword"
+                        value={formData.confirmPassword}
+                        onChange={handleChange}
+                        placeholder="confirmPassword"
+                        required
+                      />
+                    </Form.Group>
+                  </Row>
+
+                  <Row className="justify-content-center mt-4">
+                    <Form.Group
+                      as={Col}
+                      md="4"
+                      xs="12"
+                      lg="8"
+                      className="inputgrp"
+                      // controlId="validationCustom02"
+                    >
+                      {/* <Form.Label>Last name</Form.Label> */}
+                      <Form.Control
+                        type="text"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="Phone"
+                        required
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row className="mt-2">
+                    <Link
+                      onClick={() => {
+                        handleShow2();
+                        handleClose3();
+                      }}
+                      className="haveanaccount fw-bold"
+                    >
+                      already have an account?
+                    </Link>
+                  </Row>
+                  <button className="rounded-4 p-3 px-5 mt-1">
+                    Create Account
+                  </button>
+                </Form>
               </Row>
-              <button className="rounded-4 p-3 px-5 mt-1">
-                Create Account
-              </button>
-            </Form>
-          </Row>
-          </div>
-        </Modal.Body>
-      </Modal>
-    </center>
+            </div>
+          </Modal.Body>
+        </Modal>
+      </center>
+    </>
   );
 };
 
