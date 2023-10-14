@@ -1,17 +1,26 @@
 import React from "react";
-// import { useAuth } from "../../AuthContext ";
+import Cookies from "js-cookie"; // Import js-cookie
+import { useNavigate } from "react-router-dom";
 
 const Account = ({ userId }) => {
-  // const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Clear the user ID from cookies
+    Cookies.remove("userId");
+    // Redirect the user to the home page after logging out
+    navigate("/");
+  };
 
   return (
     <div className="text-center mt-4">
       <h1>Account Page</h1>
-
       <div>
-        {/* // <p>Username: {user.username}</p> */}
-        <p>User ID: {userId}</p> {/* Display the userId prop */}
+        <p>User ID: {userId}</p>
       </div>
+      <button className="btn btn-danger" onClick={handleLogout}>
+        Logout
+      </button>
     </div>
   );
 };

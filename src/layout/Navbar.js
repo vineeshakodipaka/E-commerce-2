@@ -15,6 +15,7 @@ import "./Navbar.css";
 import { NavDropdown, Button, InputGroup, Accordion } from "react-bootstrap";
 import { FaUser } from "react-icons/fa"; // Import the user icon
 import { useAuth } from "../AuthContext "; // Import the useAuth hook
+import Cookies from "js-cookie";
 
 const Navbar = ({ handleShow2 }) => {
   const { totalQuantity } = useSelector((state) => state.cart);
@@ -98,8 +99,8 @@ const Navbar = ({ handleShow2 }) => {
   //  const closeOffcanvas = () => {
   //    setOffcanvasOpen(false);
   //  };
-
-  const { isAuthenticated } = useAuth(); // Access authentication state and user information
+  const { isAuthenticated } = useAuth(); // Access isAuthenticated, user, and logout
+  const userId = Cookies.get("userId"); // Get the user ID from cookies
 
   return (
     <nav className="navbar navbar-expand-lg navbar headerbar mt-lg-4 mb-lg-4">
@@ -378,7 +379,7 @@ const Navbar = ({ handleShow2 }) => {
             </ul> */}
 
             <ul className="navbar-nav ms-auto">
-              {isAuthenticated ? (
+              {isAuthenticated || userId ? (
                 // Render the user icon when the user is authenticated
                 <li className="nav-item">
                   <Link
