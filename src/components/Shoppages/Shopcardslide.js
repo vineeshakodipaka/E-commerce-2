@@ -171,7 +171,7 @@ const Shopcardslide = ({ searchQuery }) => {
                           </div>
                           <Card.Text className="text-center  mt-3 mb-lg-0 mb-2  ">
                             <h5
-                              style={{ lineHeight: "1.2"}}
+                              style={{ lineHeight: "1.2" }}
                               className="productname"
                             >
                               {product.Product_name}
@@ -184,7 +184,7 @@ const Shopcardslide = ({ searchQuery }) => {
                         {/* Display original and offer prices */}
                         <Row lg={2} className="row2cart">
                           <Col lg={5} xl={6} md={6} xs={12}>
-                            <Card.Text className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
+                            <Card.Text className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price ">
                               <p>
                                 <span
                                   className="fw-normal"

@@ -185,7 +185,7 @@ const Shopcardslide2 = ({ searchQuery }) => {
                         {/* Display original and offer prices */}
                         <Row lg={2} className="row2cart">
                           <Col lg={5} xl={6} md={6} xs={12}>
-                            <Card.Text className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
+                            <Card.Text className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price ">
                               <p>
                                 <span
                                   className="fw-normal"
