@@ -131,7 +131,7 @@ const Shoppage = ({ searchQuery }) => {
                           {/* Button to add the product to the cart */}
                           <Card.Text className="text-center  mt-xl-0 mt-md-2">
                             <button
-                              className="rounded-3 cardbtn fw-normal p-1 p-md-2 px-2"
+                              className="rounded-3  fw-normal p-1 p-md-2 px-2"
                               style={{
                                 background: "#8F3300",
                                 border: "none",

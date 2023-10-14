@@ -109,8 +109,8 @@ const Singleshoppage = () => {
                     </button>
                   </Col>
                   <Col>
-                    <button className="px-4 p-3 text-center addtocart">
-                      ADD TO CART &nbsp;
+                    <button className="p-md-3 p-2 px-lg-4 px-md-3 p-lg-3 text-center addtocart">
+                      ADD TO CART
                       <FaArrowRight
                         className="ms-2 rounded-circle  text-black p-1"
                         style={{ backgroundColor: "#FFDAA9" }}
