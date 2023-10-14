@@ -99,7 +99,7 @@ const Navbar = ({ handleShow2 }) => {
   //    setOffcanvasOpen(false);
   //  };
 
-  const { isAuthenticated, user, logout } = useAuth(); // Access authentication state and user information
+  const { isAuthenticated } = useAuth(); // Access authentication state and user information
 
   return (
     <nav className="navbar navbar-expand-lg navbar headerbar mt-lg-4 mb-lg-4">
