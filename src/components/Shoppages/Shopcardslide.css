@@ -60,6 +60,9 @@
             height: 35px;
     
   }
+   .shopcardslidecls .cardbtn {
+       font-size: 10px !important;
+   }
 }
 
 @media screen and (min-width: 768px) {
@@ -79,5 +82,5 @@
         /* height: 500px !important; */
 
     }
-
+   
 }

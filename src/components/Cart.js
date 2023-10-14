@@ -151,47 +151,57 @@ const Cart = () => {
                       <center>
                         <Card>
                           <Card.Body>
-                            {" "}
-                            <img
-                              className="rounded-3 pt-3 pb-2   prdctimg"
-                              src={product.Product_img}
-                              alt={`Image ${i + 1}`}
-                              style={{ width: "80%", height: "150px" }}
-                            />
-                            <p>{product.Product_name}</p>
-                            <p>
-                              <s>₹{product.Product_originalPrice}</s>&nbsp;
-                              <span className="fw-bold">
-                                ₹{product.Product_offerPrice}
-                              </span>
-                            </p>
-                            <div>
-                              <button
-                                className="p-2"
-                                style={{ border: "none" }}
-                                onClick={() =>
-                                  handleDecrementQuantity(product.Product_id)
-                                }
-                              >
-                                -
-                              </button>
-                              <span className="fw-bold">
-                                {product.quantity}
-                              </span>
-                              <button
-                                className="p-2"
-                                style={{ border: "none" }}
-                                onClick={() =>
-                                  handleIncrementQuantity(product.Product_id)
-                                }
-                              >
-                                +
-                              </button>
-                            </div>
-                            <p>
-                              Total: ₹
-                              {product.Product_offerPrice * product.quantity}
-                            </p>
+                            <Row>
+                              <Col xs={5}>
+                                <img
+                                  className="rounded-3 pt-3 pb-2   "
+                                  src={product.Product_img}
+                                  alt={`Image ${i + 1}`}
+                                  style={{ width: "100%", height: "150px" }}
+                                />
+                              </Col>
+                              <Col xs={7}>
+                                <p>{product.Product_name}</p>
+                                <p>
+                                  <s>₹{product.Product_originalPrice}</s>&nbsp;
+                                  <span className="fw-bold">
+                                    ₹{product.Product_offerPrice}
+                                  </span>
+                                </p>
+                                <div>
+                                  <button
+                                    className="p-2"
+                                    style={{ border: "none" }}
+                                    onClick={() =>
+                                      handleDecrementQuantity(
+                                        product.Product_id
+                                      )
+                                    }
+                                  >
+                                    -
+                                  </button>
+                                  <span className="fw-bold">
+                                    {product.quantity}
+                                  </span>
+                                  <button
+                                    className="p-2"
+                                    style={{ border: "none" }}
+                                    onClick={() =>
+                                      handleIncrementQuantity(
+                                        product.Product_id
+                                      )
+                                    }
+                                  >
+                                    +
+                                  </button>
+                                </div>
+                                <p className="mt-2">
+                                  Total: ₹
+                                  {product.Product_offerPrice *
+                                    product.quantity}
+                                </p>
+                              </Col>
+                            </Row>
                           </Card.Body>
                         </Card>
                       </center>

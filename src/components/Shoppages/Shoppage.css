@@ -40,6 +40,9 @@
     .shoppagecls .row2cart{
         text-align: left !important;
     }
+    .shoppagecls .cardbtn{
+        font-size: 10px !important;
+    }
 }
 @media screen and (min-width: 768px) {
     .shoppagecls .productname {

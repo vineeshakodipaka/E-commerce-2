@@ -199,7 +199,7 @@ const Navbar = ({ handleShow2 }) => {
                   show={isBrandDropdownOpen} // Show the dropdown based on the state
                   onMouseEnter={() => setIsBrandDropdownOpen(true)} // Open the dropdown when mouse enters
                   onMouseLeave={() => setIsBrandDropdownOpen(false)} // Close the dropdown when mouse leaves
-                 // onClick={() => setIsBrandDropdownOpen(!isBrandDropdownOpen)}
+                  // onClick={() => setIsBrandDropdownOpen(!isBrandDropdownOpen)}
                   title={
                     <span
                       className={`basic-nav-dropdown nav-btns b-link  rounded-3 ${
@@ -367,7 +367,7 @@ const Navbar = ({ handleShow2 }) => {
                     setActiveButton(6);
                   }}
                 >
-                  <span data-bs-dismiss="offcanvas">Login</span>
+                  <span>Login</span>
                 </Link>
               </li>
             </ul>
