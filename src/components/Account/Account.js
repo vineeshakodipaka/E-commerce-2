@@ -1,16 +1,21 @@
 import React from "react";
-import Cookies from "js-cookie"; // Import js-cookie
-import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+// import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../AuthContext "; // Import your AuthContext
 
-const Account = ({ userId }) => {
-  const navigate = useNavigate();
+const Account = () => {
+  //const navigate = useNavigate();
+  const { logout, isAuthenticated } = useAuth(); // Use the logout function and isAuthenticated from your AuthContext
+  const userId = Cookies.get("userId"); // Get the user ID from cookies
 
   const handleLogout = () => {
-    // Clear the user ID from cookies
+    // Remove the user ID cookie and log the user out
     Cookies.remove("userId");
-    // Redirect the user to the home page after logging out
-    navigate("/");
+    logout();
   };
+
+  console.log("IsAuthenticated:", isAuthenticated);
+  console.log("User ID:", userId);
 
   return (
     <div className="text-center mt-4">

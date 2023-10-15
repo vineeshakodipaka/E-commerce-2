@@ -14,7 +14,7 @@ import logoimg from "../Images/Elite Enterprise Logo.png";
 import "./Navbar.css";
 import { NavDropdown, Button, InputGroup, Accordion } from "react-bootstrap";
 import { FaUser } from "react-icons/fa"; // Import the user icon
-import { useAuth } from "../AuthContext "; // Import the useAuth hook
+//import { AuthContext, useAuth } from "../AuthContext "; // Import the useAuth hook
 import Cookies from "js-cookie";
 
 const Navbar = ({ handleShow2 }) => {
@@ -99,8 +99,20 @@ const Navbar = ({ handleShow2 }) => {
   //  const closeOffcanvas = () => {
   //    setOffcanvasOpen(false);
   //  };
-  const { isAuthenticated } = useAuth(); // Access isAuthenticated, user, and logout
-  const userId = Cookies.get("userId"); // Get the user ID from cookies
+
+  const [userId, setUserId] = useState(Cookies.get("userId"));
+  console.log("userId--", userId);
+  console.log("userId Type", typeof userId);
+
+  useEffect(() => {
+    // Update the userId whenever it changes in the cookies
+    const interval = setInterval(() => {
+      setUserId(Cookies.get("userId"));
+    }, 1000); // Adjust the interval as needed
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <nav className="navbar navbar-expand-lg navbar headerbar mt-lg-4 mb-lg-4">
@@ -361,26 +373,41 @@ const Navbar = ({ handleShow2 }) => {
               </li>
             </ul>
 
-            {/* <ul className="navbar-nav ms-auto  ">
-              <li className="nav-item ">
-                <Link
-                  className={`nav-link nav-btns b-link  rounded-3 ${
-                    activeButton === 6 ? "active" : ""
-                  }`}
-                  onClick={() => {
-                    handleShow2();
-                    navbarCollapseRef.current?.classList.remove("show");
-                    setActiveButton(6);
-                  }}
-                >
-                  <span>Login</span>
-                </Link>
-              </li>
-            </ul> */}
+            <ul className="navbar-nav ms-auto  ">
+              {userId === undefined ? (
+                <li className="nav-item ">
+                  <Link
+                    className={`nav-link nav-btns b-link  rounded-3 ${
+                      activeButton === 6 ? "active" : ""
+                    }`}
+                    onClick={() => {
+                      handleShow2();
+                      navbarCollapseRef.current?.classList.remove("show");
+                      setActiveButton(6);
+                    }}
+                  >
+                    <span>Login</span>
+                  </Link>
+                </li>
+              ) : (
+                <li className="nav-item">
+                  <Link
+                    to="/account"
+                    className="nav-link"
+                    onClick={() => {
+                      navbarCollapseRef.current?.classList.remove("show");
+                    }}
+                  >
+                    <span data-bs-dismiss="offcanvas">
+                      <FaUser />
+                    </span>
+                  </Link>
+                </li>
+              )}
+            </ul>
 
-            <ul className="navbar-nav ms-auto">
-              {isAuthenticated || userId ? (
-                // Render the user icon when the user is authenticated
+            {/* <ul className="navbar-nav ms-auto">
+              {isAuthenticated && userId !== undefined ? (
                 <li className="nav-item">
                   <Link
                     to="/account"
@@ -395,23 +422,19 @@ const Navbar = ({ handleShow2 }) => {
                   </Link>
                 </li>
               ) : (
-                // Render the "Login" link when the user is not authenticated
                 <li className="nav-item">
                   <Link
-                    className={`nav-link nav-btns b-link  rounded-3 ${
-                      activeButton === 6 ? "active" : ""
-                    }`}
+                    className="nav-link nav-btns b-link  rounded-3"
                     onClick={() => {
                       handleShow2();
                       navbarCollapseRef.current?.classList.remove("show");
-                      setActiveButton(6);
                     }}
                   >
                     <span>Login</span>
                   </Link>
                 </li>
               )}
-            </ul>
+            </ul> */}
           </div>
         </div>
       </div>

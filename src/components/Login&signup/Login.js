@@ -13,18 +13,54 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
   });
 
   const navigate = useNavigate();
-  const { isAuthenticated, login, logout } = useAuth(); // Access authentication state and functions
+  const {login } = useAuth(); // Access authentication state and functions
+  //  const { isAuthenticated, login, logout } = useAuth(); // Access authentication state and functions
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
     setLoginData({ ...loginData, [name]: value });
   };
 
-  const handleLogout = () => {
-    // Remove the user ID cookie and log the user out
-    Cookies.remove("userId");
-    logout();
-  };
+  // const handleLogout = () => {
+  //   // Remove the user ID cookie and log the user out
+  //   Cookies.remove("userId");
+  //   logout();
+  // };
+
+  // const submitHandler = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     const response = await axios.post(
+  //       "https://paradox122.000webhostapp.com/_API/Login.php",
+  //       loginData,
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/x-www-form-urlencoded",
+  //         },
+  //       }
+  //     );
+
+  //     console.log("response-----------------------------", response.data);
+
+  //     if (response.data.message === "Login successful") {
+  //       // Login successful, set the user ID in cookies and log in
+  //       const userId = response.data.user.User_ID;
+  //       Cookies.set("userId", userId);
+
+  //       login(); // Call the login function to set isAuthenticated to true
+  //       navigate("/account");
+  //       handleClose2();
+  //     } else {
+  //       // Login failed, display an error message
+  //       alert("Login failed. Please check your credentials.");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //     // Handle network errors or other exceptions
+  //     alert("Login failed. Please try again later.");
+  //   }
+  // };
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -40,11 +76,18 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
         }
       );
 
+      // console.log("response-----------------------------", response.data);
+
       if (response.data.message === "Login successful") {
-        // Login successful, set the user ID in cookies and log in
-        const userId = response.data.user.User_ID;
-        Cookies.set("userId", userId);
-        console.log(userId);
+        // Check if user data is available in the response
+        if (response.data.user && response.data.user.User_ID) {
+          const userId = response.data.user.User_ID;
+          Cookies.set("userId", userId);
+        } else {
+          // User data is not available, set userId to null
+          Cookies.set("userId", null);
+        }
+
         login(); // Call the login function to set isAuthenticated to true
         navigate("/account");
         handleClose2();
@@ -116,14 +159,14 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
                     </center>
                   </Row>
                   <button className="rounded-4 p-3 px-5 mt-1">Login</button>
-                  {isAuthenticated ? (
+                  {/* {isAuthenticated ? (
                     <button
                       className="rounded-4 p-3 px-5 mt-2"
                       onClick={handleLogout}
                     >
                       Logout
                     </button>
-                  ) : null}
+                  ) : null} */}
                 </Form>
               </Row>
             </div>
