@@ -204,3 +204,6 @@ background-color: white;
       background-color: #000066;
     }
 }
+.headerbar .offcanvas-backdrop.show{
+  opacity: 0;
+}

@@ -331,7 +331,7 @@ const BrandProductsPage = () => {
                     <Card.Body>
                       <div className="position-relative">
                         {/* Display "Sale" button if the product is on sale */}
-                        {product.isSale === 1 && (
+                        {product.isSale && (
                           <button
                             className="sale-button rounded-3 px-2"
                             style={{
@@ -351,7 +351,7 @@ const BrandProductsPage = () => {
                           <div className="cardimg">
                             <Card.Img
                               variant="top"
-                              className="rounded-3 mt-3 prdctimg"
+                              className="rounded-3 mt-3 prdctimg  p-lg-4 pt-lg-4 pt-3 pb-3"
                               src={product.Product_img}
                               alt={`Image ${i + 1}`}
                               // style={{ width: "100%", height: "250px" }}
@@ -375,7 +375,7 @@ const BrandProductsPage = () => {
                         {/* Display original and offer prices */}
                         <Row lg={2} className="row2cart">
                           <Col lg={5} xl={6} md={6} xs={12}>
-                            <Card.Text className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
+                            {/* <Card.Text className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
                               <p>
                                 <span className="fw-bold">
                                   {" "}
@@ -389,6 +389,28 @@ const BrandProductsPage = () => {
                                   <s>₹{product.Product_originalPrice}</s>
                                 </span>
                               </p>
+                            </Card.Text> */}
+                            <Card.Text className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
+                              <p>
+                                {product.isSale ? (
+                                  <span className="fw-bold">
+                                    ₹{product.Product_offerPrice}
+                                  </span>
+                                ) : (
+                                  <span className="fw-bold">
+                                    ₹{product.Product_originalPrice}
+                                  </span>
+                                )}
+                                &nbsp;
+                                {product.isSale && (
+                                  <span
+                                    className="fw-normal"
+                                    style={{ color: "#B8B8B8" }}
+                                  >
+                                    <s>₹{product.Product_originalPrice}</s>
+                                  </span>
+                                )}
+                              </p>
                             </Card.Text>
                           </Col>
                           <Col lg={7} xl={6} md={6} xs={12}>
@@ -400,7 +422,6 @@ const BrandProductsPage = () => {
                                   background: "#8F3300",
                                   border: "none",
                                   color: "white",
-                                  
                                 }}
                                 onClick={() => handleAddToCart(product)}
                               >

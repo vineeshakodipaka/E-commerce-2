@@ -80,7 +80,7 @@ const Navbar = ({ handleShow2 }) => {
   //   }
   // }, [isDropdownOpen]);
 
-  const navbarCollapseRef = useRef(null);
+  const navbarCollapseRef = useRef();
 
   //navigate to cart
   const cartclick = () => {
@@ -145,6 +145,8 @@ const Navbar = ({ handleShow2 }) => {
           id="offcanvasExample"
           aria-labelledby="offcanvasExampleLabel"
           ref={navbarCollapseRef}
+          data-bs-scroll="true"
+          aria-controls="offcanvasExample"
         >
           <div className="offcanvas-header">
             {/* <h5 className="offcanvas-title" id="offcanvasExampleLabel">
@@ -374,8 +376,8 @@ const Navbar = ({ handleShow2 }) => {
             </ul>
 
             <ul className="navbar-nav ms-auto  ">
-              {userId === undefined ? (
-                <li className="nav-item ">
+              <li className="nav-item ">
+                {userId === undefined ? (
                   <Link
                     className={`nav-link nav-btns b-link  rounded-3 ${
                       activeButton === 6 ? "active" : ""
@@ -386,24 +388,22 @@ const Navbar = ({ handleShow2 }) => {
                       setActiveButton(6);
                     }}
                   >
-                    <span>Login</span>
+                    <span data-bs-dismiss="offcanvas">Login</span>
                   </Link>
-                </li>
-              ) : (
-                <li className="nav-item">
+                ) : (
                   <Link
                     to="/account"
                     className="nav-link"
                     onClick={() => {
-                      navbarCollapseRef.current?.classList.remove("show");
+                      // navbarCollapseRef.current?.classList.remove("show");
                     }}
                   >
                     <span data-bs-dismiss="offcanvas">
                       <FaUser />
                     </span>
                   </Link>
-                </li>
-              )}
+                )}
+              </li>
             </ul>
 
             {/* <ul className="navbar-nav ms-auto">

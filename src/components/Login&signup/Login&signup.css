@@ -35,3 +35,7 @@ font-family: Abel;
     color: white;
     font-family: Abel;
 }
+.logincls .login-popup {
+    z-index: 1000;
+    /* Adjust the z-index value as needed */
+}

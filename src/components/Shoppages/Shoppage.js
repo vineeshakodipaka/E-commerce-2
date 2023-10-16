@@ -90,7 +90,7 @@ const Shoppage = ({ searchQuery }) => {
                         <div className="cardimg">
                           <Card.Img
                             variant="top"
-                            className="rounded-3  mt-3 prdctimg"
+                            className="rounded-3  mt-3  p-lg-4 pt-lg-4 pt-3 pb-3 prdctimg"
                             src={product.Product_img}
                             alt={`Image ${i + 1}`}
                             // style={{ width: "100%", height: "250px" }}
@@ -111,7 +111,7 @@ const Shoppage = ({ searchQuery }) => {
                       {/* Display original and offer prices */}
                       <Row lg={2} className="row2cart">
                         <Col lg={5} xl={6} md={6} xs={12}>
-                          <Card.Text className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
+                          {/* <Card.Text className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
                             <p>
                               <span className="fw-bold">
                                 {" "}
@@ -124,6 +124,28 @@ const Shoppage = ({ searchQuery }) => {
                               >
                                 <s>₹{product.Product_originalPrice}</s>
                               </span>
+                            </p>
+                          </Card.Text> */}
+                          <Card.Text className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
+                            <p>
+                              {product.isSale ? (
+                                <span className="fw-bold">
+                                  ₹{product.Product_offerPrice}
+                                </span>
+                              ) : (
+                                <span className="fw-bold">
+                                  ₹{product.Product_originalPrice}
+                                </span>
+                              )}
+                              &nbsp;
+                              {product.isSale && (
+                                <span
+                                  className="fw-normal"
+                                  style={{ color: "#B8B8B8" }}
+                                >
+                                  <s>₹{product.Product_originalPrice}</s>
+                                </span>
+                              )}
                             </p>
                           </Card.Text>
                         </Col>

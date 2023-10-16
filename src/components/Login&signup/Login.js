@@ -13,7 +13,7 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
   });
 
   const navigate = useNavigate();
-  const {login } = useAuth(); // Access authentication state and functions
+  const { login } = useAuth(); // Access authentication state and functions
   //  const { isAuthenticated, login, logout } = useAuth(); // Access authentication state and functions
 
   const changeHandler = (e) => {
@@ -102,11 +102,17 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
     }
   };
 
+  
   return (
     <>
       {/* Cart Pop-up */}
       <center>
-        <Modal show={show2} onHide={handleClose2} centered>
+        <Modal
+          show={show2}
+          onHide={handleClose2}
+          centered
+          className="login-popup"
+        >
           <Modal.Body>
             <Modal.Header closeButton style={{ border: "none" }}></Modal.Header>
             <div className="logincls text-center">
@@ -125,6 +131,7 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
                         onChange={changeHandler}
                         required
                         placeholder="Username"
+                        autoFocus
                         // className="inputgrp"
                       />
                     </Form.Group>
@@ -138,6 +145,7 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
                         onChange={changeHandler}
                         required
                         placeholder="Password"
+                        autoFocus
                       />
                     </Form.Group>
                   </Row>
