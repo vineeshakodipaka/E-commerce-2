@@ -28,7 +28,10 @@ import Checkoutform from "./components/Checkoutform/Checkoutform";
 import BrandProductsPage from "./components/Brandspage/BrandProductsPage";
 import Subbrandproducts from "./components/Brandspage/Subbrandproducts";
 import Account from "./components/Account/Account";
-import PaymentComponent from "./components/Paymentgateway/PaymentComponent";
+import Dashboard from "./components/Account/Dashboard ";
+import AccountDetails from "./components/Account/AccountDetails ";
+import Addresses from "./components/Account/Addresses";
+
 const App = () => {
   const [show, setShow] = useState(false);
 
@@ -63,6 +66,19 @@ const App = () => {
     return () => clearInterval(interval);
   }, []);
 
+  //address data
+  const [addressData, setAddressData] = useState(null);
+
+  const handleFormSubmit = (formData) => {
+    // Assuming formData includes a UserID
+    const userId = formData.UserID;
+
+    // Save the address data to cookies
+    Cookies.set(`userAddress_${userId}`, JSON.stringify(formData));
+
+    setAddressData(formData);
+  };
+
   return (
     <div className="app">
       <Navbar handleShow2={handleShow} />
@@ -70,7 +86,17 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart" element={<Cart handleShowA={signuphandleShow} />} />
+        {/* <Route
+          path="cart"
+          element={
+            userId ? (
+              <Cart handleShowA={signuphandleShow} />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
+        /> */}
         {/* <Route path="/blog" element={<Blogpage />} /> */}
         <Route path="/singleblog" element={<Singleblog />} />
         <Route path="/contact" element={<Contact />} />
@@ -98,14 +124,30 @@ const App = () => {
         {userId === undefined ? (
           <Route path="/account" element={<Navigate to="/" replace />} />
         ) : (
-          <Route path="/account" element={<Account />} />
+          <Route path="/account/*" element={<Account />}>
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="accountDetails" element={<AccountDetails />} />
+            <Route
+              path="addresses"
+              element={
+                addressData && addressData.UserID ? (
+                  <Addresses addressData={addressData} />
+                ) : null
+              }
+            />
+          </Route>
         )}
 
         <Route
           path="/checkout"
-          element={<Checkoutform handleShow2={handleShow} />}
+          element={
+            <Checkoutform
+              handleShow2={handleShow}
+              handleFormSubmit={handleFormSubmit}
+            />
+          }
         />
-        <Route path="/checkout" element={<PaymentComponent />} />
+        {/* <Route path="/checkout" element={<PaymentComponent />} /> */}
         <Route path="/blog" element={<Blogpage />} />
         <Route path="/brand-products" element={<BrandProductsPage />} />
         <Route path="/subbrand-products" element={<Subbrandproducts />} />

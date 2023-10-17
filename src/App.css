@@ -2,3 +2,7 @@
 .app{
     overflow: hidden;
 }
+.modal-footer .btn-primary{
+    background-color: rgb(143, 51, 0) !important;
+    border: none;
+}

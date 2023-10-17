@@ -4,7 +4,7 @@ const PaymentComponent = ({ order_id, price }) => {
   const paymentHandler = async () => {
     const options = {
       key: "rzp_test_6KtffZXfPIHqEm", // Replace with your actual Razorpay key_id
-      name: "Your App Name",
+      name: "Elite EnterPrise",
       description: "Payment for Your Product",
       amount: price * 100, // Convert the price to paisa (e.g., 1000 paisa = 10 INR)
       //order_id: order_id, // Pass the order ID obtained from your backend
@@ -29,7 +29,7 @@ const PaymentComponent = ({ order_id, price }) => {
 
   return (
     <div>
-      <button onClick={paymentHandler}>Pay {price} INR</button>
+      <button onClick={paymentHandler}>Pay INR</button>
     </div>
   );
 };

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts, addToCart } from "../../actions";
+import { fetchProducts, addToCart, incrementQuantity } from "../../actions";
 import { useNavigate } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import "./Shoppage.css";
+import Cookies from "js-cookie";
 
 const Shoppage = ({ searchQuery }) => {
   const navigate = useNavigate();
@@ -45,6 +46,54 @@ const Shoppage = ({ searchQuery }) => {
     // Show the cart pop-up
     setShowCartPopup(true);
   };
+
+  //   const userId = Cookies.get("userId");
+
+  //   // Access cartItems from the Redux store
+  //   const cartItems = useSelector((state) => state.cart.items);
+
+  //   // ... Existing code
+
+  //   // Function to handle adding a product to the cart
+  // const handleAddToCart = (product) => {
+  //   // Only add items to the cart if the user is logged in
+  //   if (userId !== undefined) {
+  //     // Check if the product is already in the cart
+  //     const existingCartItem = cartItems.find(
+  //       (item) => item.Product_id === product.Product_id
+  //     );
+
+  //     if (existingCartItem) {
+  //       // If the product is already in the cart, increase the quantity
+  //       dispatch(incrementQuantity(product.Product_id));
+  //     } else {
+  //       // If the product is not in the cart, add it with a quantity of 1
+  //       dispatch(addToCart(product));
+  //     }
+
+  //     // Get the existing cart items from cookies or an empty array if none exists
+  //     const cartItemsCookie = Cookies.get("cartItems");
+  //     const existingCartItems = cartItemsCookie
+  //       ? JSON.parse(cartItemsCookie)
+  //       : [];
+
+  //     // Update the cart items in cookies
+  //     const updatedCart = existingCartItems.filter(
+  //       (item) => item.Product_id !== product.Product_id
+  //     );
+  //     updatedCart.push(product);
+
+  //     // Store the updated cart in cookies
+  //     Cookies.set("cartItems", JSON.stringify(updatedCart));
+
+  //     // Show the cart pop-up
+  //     setShowCartPopup(true);
+  //   } else {
+  //     // If the user is not logged in, you can prompt them to log in or take another action
+  //     // For example, you can display a login modal or navigate to a login page
+  //     // Implement the desired behavior for guest users here
+  //   }
+  // };
 
   // Function to navigate to the cart page
   const handleViewCart = () => {
@@ -193,3 +242,30 @@ const Shoppage = ({ searchQuery }) => {
 };
 
 export default Shoppage;
+
+
+
+
+
+
+
+
+// // Modify the handleAddToCart function in the Shoppage component
+
+// const handleAddToCart = (product) => {
+//   if (userId !== undefined) {
+//     // Send a request to the server to add the item to the user's cart
+//     axios.post('/add-to-cart', { userId, product })
+//       .then((response) => {
+//         // Handle the response (e.g., show a success message)
+//         setShowCartPopup(true);
+//       })
+//       .catch((error) => {
+//         // Handle errors
+//         console.error(error);
+//       });
+//   } else {
+//     // Handle the case where the user is not logged in
+//     // You can show a login modal or navigate to a login page
+//   }
+// };

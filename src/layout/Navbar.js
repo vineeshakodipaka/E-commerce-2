@@ -6,7 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   searchProducts,
   fetchBrands, // Import the fetchBrands action
-  setSelectedBrand, // Import the setSelectedBrand action
+  setSelectedBrand,
+  addToCart, // Import the setSelectedBrand action
 } from "../actions";
 import AOS from "aos"; // AOS library for animations
 import "aos/dist/aos.css"; // AOS library CSS
@@ -16,6 +17,7 @@ import { NavDropdown, Button, InputGroup, Accordion } from "react-bootstrap";
 import { FaUser } from "react-icons/fa"; // Import the user icon
 //import { AuthContext, useAuth } from "../AuthContext "; // Import the useAuth hook
 import Cookies from "js-cookie";
+import userEvent from "@testing-library/user-event";
 
 const Navbar = ({ handleShow2 }) => {
   const { totalQuantity } = useSelector((state) => state.cart);
@@ -82,7 +84,7 @@ const Navbar = ({ handleShow2 }) => {
 
   const navbarCollapseRef = useRef();
 
-  //navigate to cart
+ // navigate to cart
   const cartclick = () => {
     navigate("/cart");
   };
@@ -113,6 +115,17 @@ const Navbar = ({ handleShow2 }) => {
     // Clean up the interval when the component unmounts
     return () => clearInterval(interval);
   }, []);
+
+  // const [showLoginModal, setShowLoginModal] = useState(false);
+  // const cartclick = () => {
+  //   // Show the login modal if the user is not logged in
+  //   if (userId === undefined) {
+  //     // setShowLoginModal(true);
+  //   } else {
+  //     // Handle the cart click action for a logged-in user
+  //     navigate("/cart");
+  //   }
+  // };
 
   return (
     <nav className="navbar navbar-expand-lg navbar headerbar mt-lg-4 mb-lg-4">
@@ -358,7 +371,7 @@ const Navbar = ({ handleShow2 }) => {
                 <Button
                   onClick={() => {
                     cartclick();
-                    navbarCollapseRef.current?.classList.remove("show");
+                    //navbarCollapseRef.current?.classList.remove("show");
                   }}
                   className="cart-btn rounded-pill"
                 >
@@ -367,7 +380,7 @@ const Navbar = ({ handleShow2 }) => {
                     style={{ background: "#44160F", color: "white" }}
                   ></i>
                   <span className="px-3 px-lg-1" data-bs-dismiss="offcanvas">
-                    Cart-({totalQuantity})
+                    Cart-({userId === undefined ? 0 : totalQuantity})
                   </span>
                 </Button>
                 {/* <span className="badge rounded-pill badge-notification bg-primary">{totalQuantity}</span> */}
