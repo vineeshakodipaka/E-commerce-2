@@ -69,3 +69,13 @@
   right: 15%;
   text-align: center;
 }
+ .homecarousel .rightangle,
+ .homecarousel .leftangle {
+  color: white !important;
+  width: 45px !important;
+  height: 45px !important;
+  background: red !important;
+  border-radius: 50% !important;
+  padding: 10px !important;
+
+}

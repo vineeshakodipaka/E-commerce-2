@@ -7,20 +7,20 @@ import {
   searchProducts,
   fetchBrands, // Import the fetchBrands action
   setSelectedBrand,
-  addToCart, // Import the setSelectedBrand action
 } from "../actions";
 import AOS from "aos"; // AOS library for animations
 import "aos/dist/aos.css"; // AOS library CSS
-import logoimg from "../Images/Elite Enterprise Logo.png";
 import "./Navbar.css";
 import { NavDropdown, Button, InputGroup, Accordion } from "react-bootstrap";
 import { FaUser } from "react-icons/fa"; // Import the user icon
 //import { AuthContext, useAuth } from "../AuthContext "; // Import the useAuth hook
 import Cookies from "js-cookie";
-import userEvent from "@testing-library/user-event";
 
 const Navbar = ({ handleShow2 }) => {
-  const { totalQuantity } = useSelector((state) => state.cart);
+  // const cartLength = useSelector((state) => state.cart.cartLength); // Access cartLength from the Redux store
+  const cartItems = useSelector((state) => state.cart.cartDetails);
+  const cartLength = cartItems.length;
+
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -84,23 +84,13 @@ const Navbar = ({ handleShow2 }) => {
 
   const navbarCollapseRef = useRef();
 
- // navigate to cart
+  // navigate to cart
   const cartclick = () => {
     navigate("/cart");
   };
 
   //active links
   const [activeButton, setActiveButton] = useState(0); // State to track active button
-
-  //  const [offcanvasOpen, setOffcanvasOpen] = useState(false);
-
-  //  const openOffcanvas = () => {
-  //    setOffcanvasOpen(true);
-  //  };
-
-  //  const closeOffcanvas = () => {
-  //    setOffcanvasOpen(false);
-  //  };
 
   const [userId, setUserId] = useState(Cookies.get("userId"));
   console.log("userId--", userId);
@@ -127,6 +117,26 @@ const Navbar = ({ handleShow2 }) => {
   //   }
   // };
 
+
+   const [logoUrl, setLogoUrl] = useState(""); // State to store the logo URL
+
+  useEffect(() => {
+    // Fetch the image URL from the API
+    fetch("https://paradox122.000webhostapp.com/_API/FrontEndImages.php?FrontEnd_Id=1")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status) {
+          // Update the logo URL in the state
+          setLogoUrl(data.data.Logo);
+        } else {
+          // Handle the case where the data couldn't be retrieved
+          console.error("Failed to retrieve logo URL");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching logo URL:", error);
+      });
+  }, []);
   return (
     <nav className="navbar navbar-expand-lg navbar headerbar mt-lg-4 mb-lg-4">
       <div className="container mx-lg-3 mx-xl-5 px-xl-5">
@@ -137,7 +147,7 @@ const Navbar = ({ handleShow2 }) => {
         >
           <img
             className="mx-xl-0"
-            src={logoimg}
+            src={logoUrl}
             width="150px"
             height="80px"
             alt="logo"
@@ -380,7 +390,7 @@ const Navbar = ({ handleShow2 }) => {
                     style={{ background: "#44160F", color: "white" }}
                   ></i>
                   <span className="px-3 px-lg-1" data-bs-dismiss="offcanvas">
-                    Cart-({userId === undefined ? 0 : totalQuantity})
+                    Cart-({cartLength})
                   </span>
                 </Button>
                 {/* <span className="badge rounded-pill badge-notification bg-primary">{totalQuantity}</span> */}

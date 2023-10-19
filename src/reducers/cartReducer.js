@@ -1,124 +1,112 @@
-const cartReducer = (
-  state = { items: [], totalQuantity: 0, totalPrice: 0 },
-  action
-) => {
+
+import {
+  REMOVE_FROM_CART,
+  INCREMENT_QUANTITY,
+  DECREMENT_QUANTITY,
+} from "../actions/cartActions"; // Import the action type
+
+const initialState = {
+  carts: {},
+  cartDetails: [], // An array of items in the cart
+  isLoading: false,
+  error: null,
+  totalQuantity: 0, // Total quantity of items in the cart
+  totalPrice: 0, // Total price of items in the cart
+  // cartLength: 0, // Cart length
+};
+ 
+
+
+
+const cartReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "ADD_TO_CART":
-      const existingProduct = state.items.find(
-        (item) => item.Product_id === action.payload.Product_id
-      );
-      if (existingProduct) {
-        existingProduct.quantity += 1;
-      } else {
-        action.payload.quantity = 1;
-        state.items.push({ ...action.payload });
-      }
-
-      // Calculate the total price
-      const totalPrice = state.items.reduce((total, item) => {
-        return (
-          total +
-          parseFloat(
-            item.Product_offerPrice.replace("₹", "").replace(",", "")
-          ) *
-            item.quantity
-        );
-      }, 0);
-
+    case "FETCH_CART_SUCCESS":
+      // Handle fetching cart details from an API, if needed
+      const cartDetails = action.payload.data;
       return {
         ...state,
-        totalQuantity: state.totalQuantity + 1,
-        totalPrice: totalPrice.toFixed(2),
+        cartDetails,
+        isLoading: false,
+        error: null,
+        //cartLength: cartDetails.length, // Update cart length
+        totalPrice: calculateTotalPrice(action.payload.data), // Calculate the initial total price
       };
 
-    case "INCREMENT_QUANTITY":
-      const itemToIncrement = state.items.find(
-        (item) => item.Product_id === action.payload
-      );
-      if (itemToIncrement) {
-        itemToIncrement.quantity += 1;
-
-        // Recalculate the total price
-        const updatedTotalPrice = state.items.reduce((total, item) => {
-          return (
-            total +
-            parseFloat(
-              item.Product_offerPrice.replace("₹", "").replace(",", "")
-            ) *
-              item.quantity
-          );
-        }, 0);
-
-        return {
-          ...state,
-          totalQuantity: state.totalQuantity + 1,
-          totalPrice: updatedTotalPrice.toFixed(2),
-        };
-      }
-      return state;
-
-    case "DECREMENT_QUANTITY":
-      const itemToDecrement = state.items.find(
-        (item) => item.Product_id === action.payload
-      );
-      if (itemToDecrement && itemToDecrement.quantity > 0) {
-        itemToDecrement.quantity -= 1;
-
-        // Recalculate the total price
-        const updatedTotalPrice = state.items.reduce((total, item) => {
-          return (
-            total +
-            parseFloat(
-              item.Product_offerPrice.replace("₹", "").replace(",", "")
-            ) *
-              item.quantity
-          );
-        }, 0);
-
-        return {
-          ...state,
-          totalQuantity: state.totalQuantity - 1,
-          totalPrice: updatedTotalPrice.toFixed(2),
-        };
-      }
-      return state;
-
-    case "REMOVE_FROM_CART":
-      const updatedItems = state.items.filter(
-        (item) => item.Product_id !== action.payload
-      );
-
-      // Recalculate the total price and total quantity
-      const updatedTotalPriceAfterRemove = updatedItems.reduce(
-        (total, item) => {
-          return (
-            total +
-            parseFloat(
-              item.Product_offerPrice.replace("₹", "").replace(",", "")
-            ) *
-              item.quantity
-          );
-        },
-        0
-      );
-
-      const updatedTotalQuantityAfterRemove = updatedItems.reduce(
-        (total, item) => {
-          return total + item.quantity;
-        },
-        0
-      );
+    case INCREMENT_QUANTITY:
+      // Increment quantity logic...
+      const updatedCartDetailsIncrement = state.cartDetails.map((item) => {
+        if (item.UserCartDetails_ID === action.payload.itemID) {
+          return {
+            ...item,
+            Qty: Number(item.Qty) + 1,
+          };
+        }
+        return item;
+      });
 
       return {
         ...state,
-        items: updatedItems,
-        totalQuantity: updatedTotalQuantityAfterRemove,
-        totalPrice: updatedTotalPriceAfterRemove.toFixed(2),
+        cartDetails: updatedCartDetailsIncrement,
+        totalQuantity: calculateTotalQuantity(updatedCartDetailsIncrement),
+        totalPrice: calculateTotalPrice(updatedCartDetailsIncrement), // Recalculate total price
+        
+      };
+
+    case DECREMENT_QUANTITY:
+      // Decrement quantity logic...
+      const updatedCartDetailsDecrement = state.cartDetails.map((item) => {
+        if (item.UserCartDetails_ID === action.payload.itemID && item.Qty > 0) {
+          return {
+            ...item,
+            Qty: Number(item.Qty) - 1,
+          };
+        }
+        return item;
+      });
+
+      return {
+        ...state,
+        cartDetails: updatedCartDetailsDecrement,
+        totalQuantity: calculateTotalQuantity(updatedCartDetailsDecrement),
+        totalPrice: calculateTotalPrice(updatedCartDetailsDecrement), // Recalculate total price
+        
+      };
+
+    case REMOVE_FROM_CART:
+      const updatedCartDetailsRemove = state.cartDetails.filter((item) => {
+        return item.UserCartDetails_ID !== action.payload;
+      });
+
+      return {
+        ...state,
+        cartDetails: updatedCartDetailsRemove,
+        totalQuantity: calculateTotalQuantity(updatedCartDetailsRemove),
+        totalPrice: calculateTotalPrice(updatedCartDetailsRemove), // Recalculate total price
       };
 
     default:
       return state;
   }
+};
+
+// Helper function to calculate the total quantity
+const calculateTotalQuantity = (cartDetails) => {
+  return cartDetails.reduce((total, item) => total + item.Qty, 0);
+};
+
+// Helper function to calculate the total price
+const calculateTotalPrice = (cartDetails) => {
+  return cartDetails
+    .reduce((total, item) => {
+
+      const price = parseFloat(
+        item.isSale
+          ? item.Product_offerPrice.replace("₹", "").replace(",", "")
+          : item.Product_originalPrice.replace("₹", "").replace(",", "")
+      );
+      return total + price * item.Qty;
+    }, 0)
+    .toFixed(2);
 };
 
 export default cartReducer;

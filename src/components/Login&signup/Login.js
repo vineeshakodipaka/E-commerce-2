@@ -84,7 +84,7 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
           const userId = response.data.user.User_ID;
           Cookies.set("userId", userId);
         } else {
-          // User data is not available, set userId to null
+          // User data is not available, set userId to null 
           Cookies.set("userId", null);
         }
 

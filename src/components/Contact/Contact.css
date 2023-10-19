@@ -44,7 +44,7 @@
     font-size: 18px;
     font-weight: 600;
 }
-.contactcls input:focus{
+.contactcls input:focus,.contactcls textarea:focus{
     background: none;
     outline: none;
     box-shadow: none;

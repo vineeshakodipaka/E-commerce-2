@@ -109,10 +109,9 @@ const Brandsslide = () => {
                         className="pt-3 pb-3 px-5 "
                         src={brand.Brand_image} // Use the brand image here
                         alt={brand.Brand_Name}
-                        // width="200px"
-                        // height="150px"
+                      
                       />
-                      {/* <Card.Title>{brand.Brand_Name}</Card.Title> */}
+                  
                     </center>
                   </Card>
                 </Col>
@@ -120,18 +119,7 @@ const Brandsslide = () => {
             </Slider>
           </Row>
         </Container>
-        {/* {data.map((ele) => (
-            <div key={ele.id}>
-              <div className="mx-3 px-lg-2 pt-3 pb-5">
-                <img
-                  className="pt-3 pb-3"
-                  src={ele.image}
-                  width="200px"
-                  height="150px"
-                />
-              </div>
-            </div>
-          ))} */}
+      
       </div>
     </div>
   );

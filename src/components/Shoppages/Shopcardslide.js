@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts, addToCart } from "../../actions";
+import { fetchProducts } from "../../actions";
 import { useNavigate } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import Slider from "react-slick";
@@ -9,11 +9,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import "./Shopcardslide.css";
+import { useCartContext } from '../../CartContext'; // Import the useCartContext hook
 
 const Shopcardslide = ({ searchQuery }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.filteredProducts);
+  const { handleAddToCart } = useCartContext(); // Use the useCartContext hook to access the handleAddToCart function
 
   // Fetch products from the Redux store when the component mounts
   useEffect(() => {
@@ -43,13 +45,7 @@ const Shopcardslide = ({ searchQuery }) => {
   // State to control the cart pop-up visibility
   const [showCartPopup, setShowCartPopup] = useState(false);
 
-  // Function to handle adding a product to the cart
-  const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
-    // Show the cart pop-up
-    setShowCartPopup(true);
-  };
-
+  
   // Function to navigate to the cart page
   const handleViewCart = () => {
     window.scrollTo(0, 0);
@@ -170,14 +166,14 @@ const Shopcardslide = ({ searchQuery }) => {
                               // style={{ width: "100%", height: "250px" }}
                             />
                           </div>
-                          <Card.Text className="text-center  mt-3 mb-lg-0 mb-2  ">
+                          <div className="text-center  mt-3 mb-lg-0 mb-2  ">
                             <h5
                               style={{ lineHeight: "1.2" }}
                               className="productname"
                             >
                               {product.Product_name}
                             </h5>
-                          </Card.Text>
+                          </div>
                         </Row>
                         <div className="px-3 d-md-none d-lg-block d-none">
                           <hr />
@@ -185,7 +181,7 @@ const Shopcardslide = ({ searchQuery }) => {
                         {/* Display original and offer prices */}
                         <Row lg={2} className="row2cart">
                           <Col lg={5} xl={6} md={4} xs={12}>
-                            {/* <Card.Text className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price">
+                            {/* <div className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price">
                               <p className=" mx-lg-1">
                                 <s>₹{product.Product_originalPrice}</s>
                                 <br />
@@ -194,8 +190,8 @@ const Shopcardslide = ({ searchQuery }) => {
                                   ₹{product.Product_offerPrice}
                                 </span>
                               </p>
-                            </Card.Text> */}
-                            <Card.Text className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
+                            </div> */}
+                            <div className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
                               <p>
                                 {product.isSale ? (
                                   <span className="fw-bold">
@@ -216,11 +212,11 @@ const Shopcardslide = ({ searchQuery }) => {
                                   </span>
                                 )}
                               </p>
-                            </Card.Text>
+                            </div>
                           </Col>
                           <Col lg={7} xl={6} md={8} xs={12}>
                             {/* Button to add the product to the cart */}
-                            <Card.Text className="text-center  mt-xl-0 mt-md-2">
+                            <div className="text-center  mt-xl-0 mt-md-2">
                               <button
                                 className="rounded-3 cardbtn fw-normal  p-1 p-md-2 px-2"
                                 style={{
@@ -228,11 +224,11 @@ const Shopcardslide = ({ searchQuery }) => {
                                   border: "none",
                                   color: "white",
                                 }}
-                                onClick={() => handleAddToCart(product)}
+                                onClick={() =>{ handleAddToCart(product); setShowCartPopup(true);}}
                               >
                                 Add To Cart
                               </button>
-                            </Card.Text>
+                            </div>
                           </Col>
                         </Row>
                       </div>

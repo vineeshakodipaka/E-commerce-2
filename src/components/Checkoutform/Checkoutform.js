@@ -2,21 +2,29 @@ import React, { useState } from "react";
 import { Card, Col, Form, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./Checkoutform.css";
+import Cookies from "js-cookie";
 
-const Checkoutform = ({ handleFormSubmit}) => {
-  const cartItems = useSelector((state) => state.cart.items);
+const Checkoutform = ({ handleFormSubmit, baseUrl1 }) => {
+  const cartItems = useSelector((state) => state.cart.cartDetails);
   const { totalPrice } = useSelector((state) => state.cart);
 
+     const userId = Cookies.get("userId");
+
   // Define state to manage form data
+
   const [formData, setFormData] = useState({
-    UserID: "", 
-    Name:"",
+    UserID: userId,
+    Name: "",
     StreetAddress: "",
     City: "",
     State: "",
     ZipCode: "",
     Contry: "",
   });
+
+
+
+
 
   // Handle form submission
   const handleSubmit = async (e) => {
@@ -39,16 +47,23 @@ const Checkoutform = ({ handleFormSubmit}) => {
     };
 
     try {
-      const response = await fetch(
-        "https://paradox122.000webhostapp.com/_API/Add_addresess.php",
-        requestOptions
-      );
+      const response = await fetch(baseUrl1+"Add_addresess.php", requestOptions);
 
       if (response.ok) {
         const responseData = await response.json(); // Assuming the response is in JSON format
         console.log("Form submission successful. Response data:", responseData);
+        // Clear the input fields by resetting formData to its initial state
+        setFormData({
+          UserID: userId,
+          Name: "",
+          StreetAddress: "",
+          City: "",
+          State: "",
+          ZipCode: "",
+          Contry: "",
+        });
+        // Trigger a parent component's function if needed
         handleFormSubmit(formData);
-      
       } else {
         // Form submission failed, display an error message to the user
         alert("Form submission failed. Please try again.");
@@ -67,6 +82,13 @@ const Checkoutform = ({ handleFormSubmit}) => {
     setFormData({ ...formData, [name]: value });
   };
 
+
+
+
+
+
+
+
   return (
     <div className="checkoutcls">
       <h2 className="text-center">Checkout Shop</h2>
@@ -75,18 +97,7 @@ const Checkoutform = ({ handleFormSubmit}) => {
           <Row lg={2} xs={1} md={1}>
             <Col xs={12}>
               <Row className="mb-4">
-                <Form.Group as={Col} md="6" lg="5">
-                  <Form.Label className="formlabel"> UserId*</Form.Label>
-                  <Form.Control
-                    onChange={handleInputChange}
-                    name="UserID"
-                    value={formData.UserID}
-                    className="labelholder"
-                    required
-                    type="text"
-                    placeholder=" UserId"
-                  />
-                </Form.Group>
+
                 <Form.Group as={Col} md="6" lg="5">
                   <Form.Label className="formlabel"> Name*</Form.Label>
                   <Form.Control
@@ -177,17 +188,7 @@ const Checkoutform = ({ handleFormSubmit}) => {
                     <option value="Country 5">Australia</option>
                   </Form.Control>
                 </Form.Group>
-                {/* <Form.Group as={Col} md="6" lg="5">
-                  <Form.Label className="formlabel">Town/City</Form.Label>
-                  <Form.Control
-                    onChange={handleInputChange}
-                    name="city"
-                    className="labelholder"
-                    required
-                    type="text"
-                    placeholder="city"
-                  />
-                </Form.Group> */}
+               
               </Row>
             </Col>
             <Col>

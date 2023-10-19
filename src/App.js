@@ -31,6 +31,7 @@ import Account from "./components/Account/Account";
 import Dashboard from "./components/Account/Dashboard ";
 import AccountDetails from "./components/Account/AccountDetails ";
 import Addresses from "./components/Account/Addresses";
+import Cartofline from "./components/Cartofline";
 
 const App = () => {
   const [show, setShow] = useState(false);
@@ -66,18 +67,59 @@ const App = () => {
     return () => clearInterval(interval);
   }, []);
 
-  //address data
-  const [addressData, setAddressData] = useState(null);
+ 
 
-  const handleFormSubmit = (formData) => {
-    // Assuming formData includes a UserID
-    const userId = formData.UserID;
+ 
+const handleFormSubmit = (formData) => {
+  // Assuming formData includes a UserID
+  const userId = formData.UserID;
 
-    // Save the address data to cookies
-    Cookies.set(`userAddress_${userId}`, JSON.stringify(formData));
+  // Save the address data to local storage
+  localStorage.setItem(`userAddress_${userId}`, JSON.stringify(formData));
 
-    setAddressData(formData);
-  };
+  // setAddressData(formData);
+};
+
+
+
+
+
+// const handleAddToCart = (product) => {
+//   // Get the user ID from cookies or wherever it's stored
+//   const userId = Cookies.get("userId"); // Replace this with your actual method of getting the user ID
+
+//   // Prepare the data to send in the request
+//   const data = new FormData();
+//   data.append("User_ID", userId);
+//   data.append("Product_id", product.Product_id);
+//   data.append("Qty", "1"); // You can modify this to specify the quantity
+
+//   const requestOptions = {
+//     method: "POST",
+//     body: data,
+//     redirect: "follow",
+//   };
+
+//   fetch(
+//     "https://paradox122.000webhostapp.com/_API/Add_CartDetails.php",
+//     requestOptions
+//   )
+//     .then((response) => response.text())
+//     .then((result) => {
+//       // Handle the response from the server, e.g., show a success message
+//       console.log("xart,,,,,", result);
+//     })
+//     .catch((error) => {
+//       // Handle errors, e.g., show an error message
+//       console.error("Error:", error);
+//     });
+// };
+
+
+
+
+
+  const baseUrl = "https://paradox122.000webhostapp.com/_API/";
 
   return (
     <div className="app">
@@ -86,7 +128,14 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/cart" element={<Cart handleShowA={signuphandleShow} />} />
+        <Route
+          path="/cart"
+          element={<Cart handleShowA={signuphandleShow} baseUrl1={baseUrl} />}
+        />
+        <Route
+          path="/cartpage"
+          element={<Cartofline handleShowA={signuphandleShow} baseUrl1={baseUrl} />}
+        />
         {/* <Route
           path="cart"
           element={
@@ -101,7 +150,10 @@ const App = () => {
         <Route path="/singleblog" element={<Singleblog />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/singleproductpage" element={<Singleshoppage />} />
-        <Route path="/search-results" element={<Shoppage />} />
+        <Route
+          path="/search-results"
+          element={<Shoppage baseUrlCart={baseUrl} />}
+        />
         <Route path="/singlecardpage/:cardId" element={<SingleCardPage />} />
         <Route path="/brandspage" element={<NewBrandspage />} />
         <Route path="/shoppage" element={<MainShop />} />
@@ -130,9 +182,13 @@ const App = () => {
             <Route
               path="addresses"
               element={
-                addressData && addressData.UserID ? (
-                  <Addresses addressData={addressData} />
-                ) : null
+                <Addresses
+                  handleShow2={handleShow}
+                  handleClose2={handleClose}
+                  baseUrl1={baseUrl}
+                  show2={show}
+                  handleFormSubmit={handleFormSubmit}
+                />
               }
             />
           </Route>
@@ -144,6 +200,7 @@ const App = () => {
             <Checkoutform
               handleShow2={handleShow}
               handleFormSubmit={handleFormSubmit}
+              baseUrl1={baseUrl}
             />
           }
         />
