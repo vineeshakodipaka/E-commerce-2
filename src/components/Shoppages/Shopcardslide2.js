@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../actions";
+import { fetchProducts,addToCart } from "../../actions";
 import { useNavigate } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import Slider from "react-slick";
@@ -10,6 +10,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import "./Shopcardslide.css";
 import { useCartContext } from '../../CartContext'; // Import the useCartContext hook
+import Cookies from "js-cookie";
 
 const Shopcardslide2 = ({ searchQuery }) => {
   const navigate = useNavigate();
@@ -50,9 +51,25 @@ const Shopcardslide2 = ({ searchQuery }) => {
   
 
   // Function to navigate to the cart page
-  const handleViewCart = () => {
+ 
+  const userId = Cookies.get("userId"); // Use your method to get the user ID from cookies
+  const handleAddToCart1 = (product) => {
     window.scrollTo(0, 0);
-    navigate("/cart");
+    if (!userId) {
+      dispatch(addToCart(product));
+      setShowCartPopup(true);
+    } else {
+      setShowCartPopup(true);
+    }
+  };
+
+  const handleViewCart = () => {
+    setShowCartPopup(false); // Close the popup
+    if (!userId) {
+      navigate("/cartpage"); // Navigate to cartpage if userId is not available
+    } else {
+      navigate("/cart"); // Navigate to cart if userId is available
+    }
   };
 
   //sliding cards
@@ -227,6 +244,7 @@ const Shopcardslide2 = ({ searchQuery }) => {
                                 }}
                                 onClick={() => {
                                   handleAddToCart(product);
+                                   handleAddToCart1(product);
                                   setShowCartPopup(true);
                                 }}
                               >

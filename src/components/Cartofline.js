@@ -10,7 +10,7 @@ import {
 import "./Cart.css";
 import Cookies from "js-cookie";
 
-// import { useNavigate } from "react-router-dom";
+
 
 const Cartofline = ({ handleShowA }) => {
   const cartItems1 = useSelector((state) => state.cart1.items);
@@ -30,7 +30,7 @@ const Cartofline = ({ handleShowA }) => {
     const item = cartItems1.find((item) => item.Product_id === productId);
     if (item && item.quantity === 0) {
       dispatch(removeFromCart(productId));
-    }
+    } 
   };
 
   //checkout
@@ -42,6 +42,18 @@ const Cartofline = ({ handleShowA }) => {
       handleShowA();
     }
   };
+const handleRemoveFromCart = (productId) => {
+  const itemIndex = cartItems1.findIndex((item) => item.Product_id === productId);
+
+  if (itemIndex !== -1) {
+    // Use the index to remove the item from the array
+    cartItems1.splice(itemIndex, 1);
+    dispatch(removeFromCart(productId));
+  }
+};
+
+
+ 
 
   return (
     <div className="container cartpage">
@@ -70,18 +82,6 @@ const Cartofline = ({ handleShowA }) => {
                       {cartItems1.map((product, i) => (
                         <tr key={i}>
                           <td>
-                            {/* {product.isSale && (
-                            <button
-                              className="sale-button rounded-3 px-2"
-                              style={{
-                                background: "#DC0000",
-                                border: "none",
-                                color: "white",
-                              }}
-                            >
-                              Sale
-                            </button>
-                          )} */}
                             <img
                               className="rounded-3    prdctimg"
                               src={product.Product_img}
@@ -93,10 +93,15 @@ const Cartofline = ({ handleShowA }) => {
                           <td>{product.Product_name}</td>
                           <td>
                             <p>
-                              <s>₹{product.Product_originalPrice}</s>&nbsp;
-                              <span className="fw-bold">
-                                ₹{product.Product_offerPrice}
-                              </span>
+                              {product.isSale ? (
+                                <span className="fw-bold">
+                                  ₹{product.Product_offerPrice}
+                                </span>
+                              ) : (
+                                <span className="fw-bold">
+                                  ₹{product.Product_originalPrice}
+                                </span>
+                              )}
                             </p>
                           </td>
                           <td>
@@ -122,7 +127,26 @@ const Cartofline = ({ handleShowA }) => {
                           </td>
                           <td>
                             Total: ₹
-                            {product.Product_offerPrice * product.quantity}
+                            {product.isSale ? (
+                              <span className="fw-bold">
+                                {product.Product_offerPrice * product.quantity}
+                              </span>
+                            ) : (
+                              <span className="fw-bold">
+                                {product.Product_originalPrice *
+                                  product.quantity}
+                              </span>
+                            )}
+                          </td>
+                          <td>
+                            <button
+                              style={{ border: "none" }}
+                              onClick={() =>
+                                handleRemoveFromCart(product.Product_id)
+                              }
+                            >
+                              Remove
+                            </button>
                           </td>
                         </tr>
                       ))}
@@ -132,18 +156,6 @@ const Cartofline = ({ handleShowA }) => {
                 <div className="d-lg-none d-md-none d-block ">
                   {cartItems1.map((product, i) => (
                     <div key={i}>
-                      {/* {product.isSale && (
-                            <button
-                              className="sale-button rounded-3 px-2"
-                              style={{
-                                background: "#DC0000",
-                                border: "none",
-                                color: "white",
-                              }}
-                            >
-                              Sale
-                            </button>
-                          )} */}
                       <center>
                         <Card>
                           <Card.Body>
@@ -159,10 +171,15 @@ const Cartofline = ({ handleShowA }) => {
                               <Col xs={7}>
                                 <p>{product.Product_name}</p>
                                 <p>
-                                  <s>₹{product.Product_originalPrice}</s>&nbsp;
-                                  <span className="fw-bold">
-                                    ₹{product.Product_offerPrice}
-                                  </span>
+                                  {product.isSale ? (
+                                    <span className="fw-bold">
+                                      ₹{product.Product_offerPrice}
+                                    </span>
+                                  ) : (
+                                    <span className="fw-bold">
+                                      ₹{product.Product_originalPrice}
+                                    </span>
+                                  )}
                                 </p>
                                 <div>
                                   <button
@@ -193,9 +210,27 @@ const Cartofline = ({ handleShowA }) => {
                                 </div>
                                 <p className="mt-2">
                                   Total: ₹
-                                  {product.Product_offerPrice *
-                                    product.quantity}
+                                  {product.isSale ? (
+                                    <span className="fw-bold">
+                                      {product.Product_offerPrice *
+                                        product.quantity}
+                                    </span>
+                                  ) : (
+                                    <span className="fw-bold">
+                                      {product.Product_originalPrice *
+                                        product.quantity}
+                                    </span>
+                                  )}
                                 </p>
+
+                                <button
+                                  style={{ border: "none" }}
+                                  onClick={() =>
+                                    handleRemoveFromCart(product.product_Id)
+                                  }
+                                >
+                                  Remove
+                                </button>
                               </Col>
                             </Row>
                           </Card.Body>
@@ -243,13 +278,6 @@ const Cartofline = ({ handleShowA }) => {
                     check coupon
                   </button>
                   <center>
-                    {/* <button
-                      className="checkout w-100 p-2 rounded-3 "
-                      onClick={handlecheck}
-                    >
-                      Proceed To Checkout
-                    </button> */}
-
                     {cartItems1 && cartItems1.length !== 0 ? (
                       <button
                         className="btna w-100 p-2 rounded-3"

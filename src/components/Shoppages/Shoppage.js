@@ -43,22 +43,24 @@ const Shoppage = ({ searchQuery }) => {
   // State to control the cart pop-up visibility
   const [showCartPopup, setShowCartPopup] = useState(false);
 
-  const handleViewCart = () => {
-    window.scrollTo(0, 0);
-    navigate("/cart");
-  };
+
   const userId = Cookies.get("userId"); // Use your method to get the user ID from cookies
-  //Function to handle adding a product to the cart
   const handleAddToCart1 = (product) => {
-     window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
     if (!userId) {
       dispatch(addToCart(product));
-      // Show the cart pop-up
       setShowCartPopup(true);
-       navigate("/cartpage")
+    } else {
+      setShowCartPopup(true);
     }
-    else{
-      navigate('/cart')
+  };
+
+  const handleViewCart = () => {
+    setShowCartPopup(false); // Close the popup
+    if (!userId) {
+      navigate("/cartpage"); // Navigate to cartpage if userId is not available
+    } else {
+      navigate("/cart"); // Navigate to cart if userId is available
     }
   };
 

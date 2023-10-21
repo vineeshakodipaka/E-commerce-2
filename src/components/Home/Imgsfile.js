@@ -6,6 +6,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import AOS from "aos"; // AOS library for animations
 import "aos/dist/aos.css"; // AOS library CSS
+import { baseUrl } from "../../Globalvarible";
 
 const Imgsfile = () => {
   const navigate = useNavigate(); // React Router's useNavigate hook for navigation
@@ -24,7 +25,7 @@ const Imgsfile = () => {
   const [imageData, setImageData] = useState([]);
   useEffect(() => {
     fetch(
-      "https://paradox122.000webhostapp.com/_API/Home_Below_Slider_Images_API.php"
+      baseUrl+"Home_Below_Slider_Images_API.php"
     )
       .then((resp) => resp.json())
       .then((data) => setImageData(data));

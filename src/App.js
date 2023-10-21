@@ -23,7 +23,7 @@ import SubcategoryDetails from "./components/Brandspage/SubcategoryDetails";
 import BrandDetails from "./components/Brandspage/BrandDetails";
 import Subcatdropdown from "./components/Brandspage/Subcatdropdown";
 import Cookies from "js-cookie"; // Import js-cookie
-//import { useAuth } from "./AuthContext "; // Import the AuthProvider from your context file
+
 import Checkoutform from "./components/Checkoutform/Checkoutform";
 import BrandProductsPage from "./components/Brandspage/BrandProductsPage";
 import Subbrandproducts from "./components/Brandspage/Subbrandproducts";
@@ -32,6 +32,8 @@ import Dashboard from "./components/Account/Dashboard ";
 import AccountDetails from "./components/Account/AccountDetails ";
 import Addresses from "./components/Account/Addresses";
 import Cartofline from "./components/Cartofline";
+import AddressDetail from "./components/Account/AddressDetail";
+import { baseUrl } from "./Globalvarible";
 
 const App = () => {
   const [show, setShow] = useState(false);
@@ -44,14 +46,11 @@ const App = () => {
   const signuphandleClose = () => signupsetShow(false);
   const signuphandleShow = () => signupsetShow(true);
 
-  // const { isAuthenticated } = useAuth(); // Access authentication status
+ const [showCartPopup, setShowCartPopup] = useState(false);
+ const cartClose = () => setShowCartPopup(false);
+ const cartShow = () => setShowCartPopup(true);
 
-  // // Check if the userId cookie is present to determine authentication
-  // const userId = Cookies.get("userId");
-  // Cookies.set("userId", userId);
-  // console.log("user", userId);
-
-  // const isUserAuthenticated = isAuthenticated || !!userId;
+ 
 
   const [userId, setUserId] = useState(Cookies.get("userId"));
   console.log("userId--", userId);
@@ -84,42 +83,11 @@ const handleFormSubmit = (formData) => {
 
 
 
-// const handleAddToCart = (product) => {
-//   // Get the user ID from cookies or wherever it's stored
-//   const userId = Cookies.get("userId"); // Replace this with your actual method of getting the user ID
-
-//   // Prepare the data to send in the request
-//   const data = new FormData();
-//   data.append("User_ID", userId);
-//   data.append("Product_id", product.Product_id);
-//   data.append("Qty", "1"); // You can modify this to specify the quantity
-
-//   const requestOptions = {
-//     method: "POST",
-//     body: data,
-//     redirect: "follow",
-//   };
-
-//   fetch(
-//     "https://paradox122.000webhostapp.com/_API/Add_CartDetails.php",
-//     requestOptions
-//   )
-//     .then((response) => response.text())
-//     .then((result) => {
-//       // Handle the response from the server, e.g., show a success message
-//       console.log("xart,,,,,", result);
-//     })
-//     .catch((error) => {
-//       // Handle errors, e.g., show an error message
-//       console.error("Error:", error);
-//     });
-// };
 
 
 
 
-
-  const baseUrl = "https://paradox122.000webhostapp.com/_API/";
+  // const baseUrl = "https://paradox122.000webhostapp.com/_API/";
 
   return (
     <div className="app">
@@ -130,23 +98,22 @@ const handleFormSubmit = (formData) => {
         <Route path="/about" element={<About />} />
         <Route
           path="/cart"
-          element={<Cart handleShowA={signuphandleShow} baseUrl1={baseUrl} />}
+          element={
+            <Cart
+              handleShowA={signuphandleShow}
+              cartShow={cartShow}
+              baseUrl1={baseUrl}
+              cartClose={cartClose}
+            />
+          }
         />
         <Route
           path="/cartpage"
-          element={<Cartofline handleShowA={signuphandleShow} baseUrl1={baseUrl} />}
-        />
-        {/* <Route
-          path="cart"
           element={
-            userId ? (
-              <Cart handleShowA={signuphandleShow} />
-            ) : (
-              <Navigate to="/" />
-            )
+            <Cartofline handleShowA={signuphandleShow} baseUrl1={baseUrl} />
           }
-        /> */}
-        {/* <Route path="/blog" element={<Blogpage />} /> */}
+        />
+       
         <Route path="/singleblog" element={<Singleblog />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/singleproductpage" element={<Singleshoppage />} />
@@ -166,19 +133,13 @@ const handleFormSubmit = (formData) => {
           path="/subcatdropdown/:subcatdrop"
           element={<Subcatdropdown />}
         />
-        {/* {isUserAuthenticated ? (
-          // Render the /account route only if authenticated
-          <Route path="/account" element={<Account />} />
-        ) : (
-          // Redirect to the home page if not authenticated
-          <Route path="/account" element={<Navigate to="/" replace />} />
-        )} */}
+       
         {userId === undefined ? (
           <Route path="/account" element={<Navigate to="/" replace />} />
         ) : (
           <Route path="/account/*" element={<Account />}>
             <Route path="dashboard" element={<Dashboard />} />
-            <Route path="accountDetails" element={<AccountDetails />} />
+            <Route path="accountDetails" index element={<AccountDetails />} />
             <Route
               path="addresses"
               element={
@@ -204,7 +165,7 @@ const handleFormSubmit = (formData) => {
             />
           }
         />
-        {/* <Route path="/checkout" element={<PaymentComponent />} /> */}
+     
         <Route path="/blog" element={<Blogpage />} />
         <Route path="/brand-products" element={<BrandProductsPage />} />
         <Route path="/subbrand-products" element={<Subbrandproducts />} />
@@ -220,6 +181,12 @@ const handleFormSubmit = (formData) => {
         handleShow2={handleShow}
         handleClose3={signuphandleClose}
         show3={signupshow}
+      />
+      <AddressDetail
+        baseUrl1={baseUrl}
+        showCartPopup={showCartPopup}
+        // cartShow={cartShow}
+        cartClose={cartClose}
       />
       <Bottombar />
       <Footer />

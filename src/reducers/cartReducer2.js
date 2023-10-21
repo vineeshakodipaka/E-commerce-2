@@ -16,19 +16,21 @@ const cartReducer2 = (
 
       // Calculate the total price
       const totalPrice = state.items.reduce((total, item) => {
-        return (
-          total +
-          parseFloat(
-            item.Product_offerPrice.replace("₹", "").replace(",", "")
-          ) *
-            item.quantity
-        );
+        const price = item.isSale
+          ? parseFloat(
+              item.Product_offerPrice.replace("₹", "").replace(",", "")
+            )
+          : parseFloat(
+              item.Product_originalPrice.replace("₹", "").replace(",", "")
+            );
+        return total + price * item.quantity;
       }, 0);
 
       return {
         ...state,
         totalQuantity: state.totalQuantity + 1,
         totalPrice: totalPrice.toFixed(2),
+        isSale: state.items.some((item) => item.isSale),
       };
 
     case "INCREMENT_QUANTITY":
@@ -83,6 +85,9 @@ const cartReducer2 = (
       }
       return state;
 
+
+
+      
     case "REMOVE_FROM_CART":
       const updatedItems = state.items.filter(
         (item) => item.Product_id !== action.payload

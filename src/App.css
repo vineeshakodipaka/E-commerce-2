@@ -6,3 +6,7 @@
     background-color: rgb(143, 51, 0) !important;
     border: none;
 }
+.modal-open{
+    overflow: none;
+
+}

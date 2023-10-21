@@ -3,12 +3,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { fetchBrandSubproducts } from "../../actions"; // Import the action to fetch brand products
+import { fetchBrandSubproducts ,addToCart} from "../../actions"; // Import the action to fetch brand products
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import "../Shoppages/Shoppage.css";
 import { useCartContext } from '../../CartContext'; // Import the useCartContext hook
+import Cookies from "js-cookie";
 
 const Subbrandproducts = () => {
   const { handleAddToCart } = useCartContext(); // Use the useCartContext hook to access the handleAddToCart function
@@ -40,12 +41,26 @@ const Subbrandproducts = () => {
   // State to control the cart pop-up visibility
   const [showCartPopup, setShowCartPopup] = useState(false);
 
-  // Function to navigate to the cart page
-  const handleViewCart = () => {
+ 
+  const userId = Cookies.get("userId"); // Use your method to get the user ID from cookies
+  const handleAddToCart1 = (product) => {
     window.scrollTo(0, 0);
-    navigate("/cart");
+    if (!userId) {
+      dispatch(addToCart(product));
+      setShowCartPopup(true);
+    } else {
+      setShowCartPopup(true);
+    }
   };
 
+  const handleViewCart = () => {
+    setShowCartPopup(false); // Close the popup
+    if (!userId) {
+      navigate("/cartpage"); // Navigate to cartpage if userId is not available
+    } else {
+      navigate("/cart"); // Navigate to cart if userId is available
+    }
+  };
   return (
     <div>
       {/* <h2>Products for Brand ID: {brandId}</h2> */}
@@ -169,6 +184,7 @@ const Subbrandproducts = () => {
                                   }}
                                   onClick={() => {
                                     handleAddToCart(product);
+                                     handleAddToCart1(product);
                                     setShowCartPopup(true);
                                   }}
                                 >

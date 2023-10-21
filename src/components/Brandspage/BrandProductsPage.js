@@ -2,12 +2,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { fetchBrandProducts } from "../../actions"; // Import the action to fetch brand products
+import { fetchBrandProducts, addToCart } from "../../actions"; // Import the action to fetch brand products
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import "../Shoppages/Shoppage.css";
 import { useCartContext } from '../../CartContext'; // Import the useCartContext hook
+import Cookies from "js-cookie";
 
 
 const BrandProductsPage = () => {
@@ -40,10 +41,24 @@ const BrandProductsPage = () => {
 
   
 
-  // Function to navigate to the cart page
-  const handleViewCart = () => {
+  const userId = Cookies.get("userId"); // Use your method to get the user ID from cookies
+  const handleAddToCart1 = (product) => {
     window.scrollTo(0, 0);
-    navigate("/cart");
+    if (!userId) {
+      dispatch(addToCart(product));
+      setShowCartPopup(true);
+    } else {
+      setShowCartPopup(true);
+    }
+  };
+
+  const handleViewCart = () => {
+    setShowCartPopup(false); // Close the popup
+    if (!userId) {
+      navigate("/cartpage"); // Navigate to cartpage if userId is not available
+    } else {
+      navigate("/cart"); // Navigate to cart if userId is available
+    }
   };
 
   return (
@@ -165,6 +180,7 @@ const BrandProductsPage = () => {
                                 }}
                                 onClick={() => {
                                   handleAddToCart(product);
+                                   handleAddToCart1(product);
                                   setShowCartPopup(true);
                                 }}
                               >

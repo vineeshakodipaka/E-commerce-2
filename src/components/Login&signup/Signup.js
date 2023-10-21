@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Login&signup.css";
 import { Col, Form, Modal, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import { baseUrl } from "../../Globalvarible";
 
 const Signup = ({ show3, handleClose3, handleShow2 }) => {
   const [formData, setFormData] = useState({
@@ -36,12 +37,12 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
 
     try {
       const response = await fetch(
-        "https://paradox122.000webhostapp.com/_API/Signup.php",
+        baseUrl+"Signup.php",
         requestOptions
       );
 
       if (response.ok) {
-        // Signup successful, redirect to the login page
+        // Signup successful, redirect to the login page  
         navigate("/login");
       } else {
         // Signup failed, display an error message to the user

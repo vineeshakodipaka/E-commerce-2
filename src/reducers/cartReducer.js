@@ -1,5 +1,5 @@
 
-import {
+import { 
   REMOVE_FROM_CART,
   INCREMENT_QUANTITY,
   DECREMENT_QUANTITY,

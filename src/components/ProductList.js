@@ -6,9 +6,7 @@ import { fetchProducts, addToCart } from '../actions'; // Import addToCart actio
 const ProductList = () => {
   const dispatch = useDispatch();
   const products = useSelector(state => state.products.filteredProducts);
-  const loading = useSelector(state => state.products.loading);
-  const error = useSelector(state => state.products.error);
-
+ 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
   };
@@ -39,15 +37,7 @@ const ProductList = () => {
         </div>
           </div>
         ))}
-        {/* {loading ? <p>Loading...</p> :
-        error ? <p>Error: {error.message}</p> :
-        products.length === 0 ? <p>No products found.</p> :
-        <ul>
-          {products.map(product => (
-            <li key={product.id}>{product.title}</li>
-          ))}
-        </ul>
-      } */}
+       
     </div>
   </div>
   );

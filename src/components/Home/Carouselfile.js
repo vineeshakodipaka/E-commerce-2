@@ -4,6 +4,7 @@ import { Carousel } from "react-bootstrap";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import "./Carouselfile.css";
 import { useNavigate } from "react-router-dom";
+import { baseUrl } from "../../Globalvarible";
 
 const Carouselfile = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Carouselfile = () => {
   const [carouselData, setCarouselData] = useState([]);
   useEffect(() => {
     fetch(
-      "https://paradox122.000webhostapp.com/_API/Home_Slider_Images_API.php"
+      baseUrl+"Home_Slider_Images_API.php"
     )
       .then((resp) => resp.json())
       .then((res) => setCarouselData(res));

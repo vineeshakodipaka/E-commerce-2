@@ -1,5 +1,7 @@
 // src/actions/index.js
 
+import { baseUrl } from "../Globalvarible";
+
 export const FETCH_PRODUCTS_REQUEST = "FETCH_PRODUCTS_REQUEST";
 export const FETCH_PRODUCTS_SUCCESS = "FETCH_PRODUCTS_SUCCESS";
 export const FETCH_PRODUCTS_FAILURE = "FETCH_PRODUCTS_FAILURE";
@@ -22,7 +24,7 @@ export const fetchProducts = () => {
   return (dispatch) => {
     dispatch(fetchProductsRequest());
 
-    fetch("https://paradox122.000webhostapp.com/_API/Shop.php")
+    fetch(baseUrl+"Shop.php")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -106,7 +108,7 @@ export const fetchBrands = () => {
     // For demonstration purposes, I'll provide a basic example using a mock data structure.
 
     // Replace this with your actual API endpoint for fetching brands
-    fetch("https://paradox122.000webhostapp.com/_API/Brands.php")
+    fetch(baseUrl + "Brands.php")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -159,7 +161,7 @@ export const fetchBrandProducts = (brandId) => {
     dispatch(fetchBrandProductsRequest());
 
     fetch(
-      `https://paradox122.000webhostapp.com/_API/BrandsProduct.php?ConnectedToBrand_id=${brandId}`
+      baseUrl+`BrandsProduct.php?ConnectedToBrand_id=${brandId}`
     )
       .then((response) => {
         if (!response.ok) {
@@ -206,9 +208,7 @@ export const fetchBrandSubproducts = (Subcatid) => {
   return (dispatch) => {
     dispatch(fetchBrandSubproductsRequest());
 
-    fetch(
-      `https://paradox122.000webhostapp.com/_API/BrandsProduct.php?ConnectedToBrand_id=${Subcatid}`
-    )
+    fetch(baseUrl+`BrandsProduct.php?ConnectedToBrand_id=${Subcatid}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

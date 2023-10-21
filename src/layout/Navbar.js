@@ -8,19 +8,23 @@ import {
   fetchBrands, // Import the fetchBrands action
   setSelectedBrand,
 } from "../actions";
-import AOS from "aos"; // AOS library for animations
-import "aos/dist/aos.css"; // AOS library CSS
+import { fetchCartDetails } from "../actions/cartActions";
+
 import "./Navbar.css";
 import { NavDropdown, Button, InputGroup, Accordion } from "react-bootstrap";
 import { FaUser } from "react-icons/fa"; // Import the user icon
-//import { AuthContext, useAuth } from "../AuthContext "; // Import the useAuth hook
+
 import Cookies from "js-cookie";
+import { baseUrl } from "../Globalvarible";
 
 const Navbar = ({ handleShow2 }) => {
   // const cartLength = useSelector((state) => state.cart.cartLength); // Access cartLength from the Redux store
+const items = useSelector((state) => state.cart1.items); // Access cartLength from the Redux store
+const cartLength1 = items.length;
   const cartItems = useSelector((state) => state.cart.cartDetails);
-  const cartLength = cartItems.length;
 
+  const cartLength = cartItems.length;
+  const [userId, setUserId] = useState(Cookies.get("userId"));
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -34,6 +38,10 @@ const Navbar = ({ handleShow2 }) => {
     // Fetch brand data from the API
     dispatch(fetchBrands());
   }, [dispatch]);
+  useEffect(() => {
+    // Fetch brand data from the API
+    dispatch(fetchCartDetails(userId));
+  }, [dispatch,userId]);
 
   const handleBrandChange = (brand) => {
     if (brand.hasSubcat) {
@@ -67,32 +75,23 @@ const Navbar = ({ handleShow2 }) => {
     navigate("/brandspage");
   };
 
-  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  useEffect(() => {
-    AOS.init({
-      once: false, // Disable "once" option to trigger animations multiple times
-    });
-  }, []);
-
-  // useEffect(() => {
-  //   // Refresh AOS when the dropdown state changes
-  //   if (isDropdownOpen) {
-  //     AOS.refresh();
-  //   }
-  // }, [isDropdownOpen]);
 
   const navbarCollapseRef = useRef();
 
   // navigate to cart
   const cartclick = () => {
-    navigate("/cart");
+    if(!userId){
+    navigate("/cartpage");
+    }
+    else{
+      navigate("/cart");
+    }
   };
 
   //active links
   const [activeButton, setActiveButton] = useState(0); // State to track active button
 
-  const [userId, setUserId] = useState(Cookies.get("userId"));
+
   console.log("userId--", userId);
   console.log("userId Type", typeof userId);
 
@@ -106,23 +105,14 @@ const Navbar = ({ handleShow2 }) => {
     return () => clearInterval(interval);
   }, []);
 
-  // const [showLoginModal, setShowLoginModal] = useState(false);
-  // const cartclick = () => {
-  //   // Show the login modal if the user is not logged in
-  //   if (userId === undefined) {
-  //     // setShowLoginModal(true);
-  //   } else {
-  //     // Handle the cart click action for a logged-in user
-  //     navigate("/cart");
-  //   }
-  // };
-
-
-   const [logoUrl, setLogoUrl] = useState(""); // State to store the logo URL
+ 
+  const [logoUrl, setLogoUrl] = useState(""); // State to store the logo URL
 
   useEffect(() => {
     // Fetch the image URL from the API
-    fetch("https://paradox122.000webhostapp.com/_API/FrontEndImages.php?FrontEnd_Id=1")
+    fetch(
+      baseUrl+"FrontEndImages.php?FrontEnd_Id=1"
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data.status) {
@@ -390,7 +380,7 @@ const Navbar = ({ handleShow2 }) => {
                     style={{ background: "#44160F", color: "white" }}
                   ></i>
                   <span className="px-3 px-lg-1" data-bs-dismiss="offcanvas">
-                    Cart-({cartLength})
+                    Cart-({userId?cartLength:cartLength1})
                   </span>
                 </Button>
                 {/* <span className="badge rounded-pill badge-notification bg-primary">{totalQuantity}</span> */}

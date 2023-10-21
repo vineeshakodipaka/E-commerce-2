@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../AuthContext "; // Import the useAuth hook
 import Cookies from "js-cookie";
+import { baseUrl } from "../../Globalvarible";
 
 const Login = ({ show2, handleClose2, handleShow3 }) => {
   const [loginData, setLoginData] = useState({
@@ -21,53 +22,13 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
     setLoginData({ ...loginData, [name]: value });
   };
 
-  // const handleLogout = () => {
-  //   // Remove the user ID cookie and log the user out
-  //   Cookies.remove("userId");
-  //   logout();
-  // };
-
-  // const submitHandler = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const response = await axios.post(
-  //       "https://paradox122.000webhostapp.com/_API/Login.php",
-  //       loginData,
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/x-www-form-urlencoded",
-  //         },
-  //       }
-  //     );
-
-  //     console.log("response-----------------------------", response.data);
-
-  //     if (response.data.message === "Login successful") {
-  //       // Login successful, set the user ID in cookies and log in
-  //       const userId = response.data.user.User_ID;
-  //       Cookies.set("userId", userId);
-
-  //       login(); // Call the login function to set isAuthenticated to true
-  //       navigate("/account");
-  //       handleClose2();
-  //     } else {
-  //       // Login failed, display an error message
-  //       alert("Login failed. Please check your credentials.");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //     // Handle network errors or other exceptions
-  //     alert("Login failed. Please try again later.");
-  //   }
-  // };
 
   const submitHandler = async (e) => {
     e.preventDefault();
 
     try {
       const response = await axios.post(
-        "https://paradox122.000webhostapp.com/_API/Login.php",
+        baseUrl+"Login.php",
         loginData,
         {
           headers: {
@@ -92,7 +53,7 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
         navigate("/account");
         handleClose2();
       } else {
-        // Login failed, display an error message
+        // Login failed, display an error message 
         alert("Login failed. Please check your credentials.");
       }
     } catch (error) {
