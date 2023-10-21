@@ -1,28 +1,21 @@
 // SingleCardPage.js
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Card, Container, Button } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart, fetchProducts } from "../../actions"; // Import the addToCart action
 
 const SingleCardPage = () => {
   const { cardId } = useParams() || {};
-const card = useSelector((state) =>
-  state.products.filteredProducts.find(
-    (product) => product.Product_id === cardId
-  )
-);
-console.log("Card:", card);
-
-
+  const card = useSelector((state) =>
+    state.products.filteredProducts.find(
+      (product) => product.Product_id === cardId
+    )
+  );
+  console.log("Card:", card);
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-
-  }, [cardId]);
-
-
+  useEffect(() => {}, [cardId]);
 
   if (!card) {
     return (

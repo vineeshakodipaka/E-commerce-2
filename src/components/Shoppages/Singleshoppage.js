@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import spimg1 from "../../Images/image 55.png";
-import productimg1 from "../../Images/Caramel-cruchies 1.png";
-import { Button, Card, Col, Container, Modal, Row } from "react-bootstrap";
+
+import { Button, Col, Container, Modal, Row } from "react-bootstrap";
 import { FaArrowRight } from "react-icons/fa";
 import "./Singleshoppage.css";
 import Shopcardslide from "./Shopcardslide";
@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCartContext } from "../../CartContext";
-import { fetchProducts, addToCart } from "../../actions";
+import { addToCart } from "../../actions";
 
 const Singleshoppage = () => {
   const [showInfo, setShowInfo] = useState(false);
@@ -28,7 +28,7 @@ const Singleshoppage = () => {
       (product) => product.Product_id === cardId
     )
   );
-  const products = useSelector((state) => state.products.filteredProducts);
+
   const dispatch = useDispatch();
   // Removed the declaration and assignment of selectedQuantity
   // const [selectedQuantity, setSelectedQuantity] = useState(null);
