@@ -1,16 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import spimg1 from "../../Images/image 55.png";
 import productimg1 from "../../Images/Caramel-cruchies 1.png";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Modal, Row } from "react-bootstrap";
 import { FaArrowRight } from "react-icons/fa";
 import "./Singleshoppage.css";
 import Shopcardslide from "./Shopcardslide";
 import Shopcardslide2 from "./Shopcardslide2";
+import { useDispatch, useSelector } from "react-redux";
+import Cookies from "js-cookie";
+import { useNavigate, useParams } from "react-router-dom";
+import { useCartContext } from "../../CartContext";
+import { fetchProducts, addToCart } from "../../actions";
 
 const Singleshoppage = () => {
   const [showInfo, setShowInfo] = useState(false);
   const [showInfo1, setShowInfo1] = useState(false);
+  //single cartpage
 
+  const { handleAddToCart } = useCartContext(); // Use the useCartContext hook to access the handleAddToCart function
+  const navigate = useNavigate();
+  const [showCartPopup, setShowCartPopup] = useState(false);
+
+  const userId = Cookies.get("userId"); // Use your method to get the user ID from cookies
+  const { cardId } = useParams() || {};
+  const card = useSelector((state) =>
+    state.products.filteredProducts.find(
+      (product) => product.Product_id === cardId
+    )
+  );
+  const products = useSelector((state) => state.products.filteredProducts);
+  const dispatch = useDispatch();
   // Removed the declaration and assignment of selectedQuantity
   // const [selectedQuantity, setSelectedQuantity] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -38,6 +57,37 @@ const Singleshoppage = () => {
   const toggleInfo1 = () => {
     setShowInfo1(!showInfo1);
   };
+
+  //single cart
+
+  useEffect(() => {}, [cardId]);
+
+  if (!card) {
+    return (
+      <Container>
+        <p>Card not found.</p>
+      </Container>
+    );
+  }
+
+  const handleAddToCart1 = (product) => {
+    window.scrollTo(0, 0);
+    if (!userId) {
+      dispatch(addToCart(product));
+      setShowCartPopup(true);
+    } else {
+      setShowCartPopup(true);
+    }
+  };
+
+  const handleViewCart = () => {
+    setShowCartPopup(false); // Close the popup
+    if (!userId) {
+      navigate("/cartpage"); // Navigate to cartpage if userId is not available
+    } else {
+      navigate("/cart"); // Navigate to cart if userId is available
+    }
+  };
   return (
     <div className="singleproductpage">
       <div className="position-relative mb-3">
@@ -46,32 +96,57 @@ const Singleshoppage = () => {
           className="position-absolute top-50 start-50 translate-middle"
           style={{ color: "white" }}
         >
-          Caramel Crunchies Z6579
+          {card.Product_name}
         </h3>
       </div>
       <Container>
         <Row className="justify-content-center">
           <Col lg={5} md={5} className="mt-md-5">
-            <button
-              className="sale-button rounded-3 p-2"
-              style={{ background: "#DC0000", border: "none", color: "white" }}
-            >
-              Sale
-            </button>
-            <br />
-            <img className="mt-md-5" src={productimg1} alt="product" />
+            <div>
+              {card.isSale && (
+                <button
+                  className="sale-button rounded-3 p-2"
+                  style={{
+                    background: "#DC0000",
+                    border: "none",
+                    color: "white",
+                  }}
+                >
+                  Sale
+                </button>
+              )}
+
+              <br />
+              <img
+                className="mt-md-5 p-lg-4 pt-lg-4 pt-3 pb-3 prdctimg"
+                src={card.Product_img}
+                alt="product"
+                style={{ width: "60%" }}
+              />
+            </div>
           </Col>
 
           {/* carameldiv column */}
           <Col lg={5} md={5}>
             <div className="carameldiv mt-md-5">
-              <h3>Caramel Crunchies Z6579</h3>
+              <h3>{card.Product_name}</h3>
               <h5>
-                <span className="fw-normal fs-5 " style={{ color: "#B8B8B8" }}>
+                {card.isSale ? (
+                  <span className="fw-bold">₹{card.Product_offerPrice}</span>
+                ) : (
+                  <span className="fw-bold">₹{card.Product_originalPrice}</span>
+                )}
+                &nbsp;
+                {card.isSale && (
+                  <span className="fw-normal" style={{ color: "#B8B8B8" }}>
+                    <s>₹{card.Product_originalPrice}</s>
+                  </span>
+                )}
+                {/* <span className="fw-normal fs-5 " style={{ color: "#B8B8B8" }}>
                   <s>₹420</s>
                 </span>
                 &nbsp;&nbsp;
-                <span className="fs-4">₹525.00</span>
+                <span className="fs-4">₹525.00</span> */}
               </h5>
               <p className="fw-bold mt-4">For Extra Texture & Crunch.</p>
               <p> Caramelized biscuit granules.</p>
@@ -109,7 +184,14 @@ const Singleshoppage = () => {
                     </button>
                   </Col>
                   <Col>
-                    <button className="p-md-3 p-2 px-lg-4 px-md-3 p-lg-3 text-center addtocart">
+                    <button
+                      className="p-md-3 p-2 px-lg-4 px-md-3 p-lg-3 text-center addtocart"
+                      onClick={() => {
+                        handleAddToCart(card);
+                        handleAddToCart1(card);
+                        setShowCartPopup(true);
+                      }}
+                    >
                       ADD TO CART
                       <FaArrowRight
                         className="ms-2 rounded-circle  text-black p-1"
@@ -192,6 +274,22 @@ const Singleshoppage = () => {
           </Row>
         </div>
       </Container>
+
+      {/* Cart Pop-up */}
+      <Modal show={showCartPopup} onHide={() => setShowCartPopup(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Item Added to Cart</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Your item has been added to the cart.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowCartPopup(false)}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleViewCart}>
+            View Cart
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

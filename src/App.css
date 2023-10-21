@@ -10,3 +10,8 @@
     overflow: none;
 
 }
+.cartlink{
+    list-style: none !important;
+    text-decoration: none !important;
+    color: black !important;
+}

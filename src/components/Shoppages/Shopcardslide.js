@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts,addToCart } from "../../actions";
-import { useNavigate } from "react-router-dom";
+import { fetchProducts, addToCart } from "../../actions";
+import { Link, useNavigate } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import "./Shopcardslide.css";
-import { useCartContext } from '../../CartContext'; // Import the useCartContext hook
+import { useCartContext } from "../../CartContext"; // Import the useCartContext hook
 import Cookies from "js-cookie";
 
 const Shopcardslide = ({ searchQuery }) => {
@@ -37,18 +37,20 @@ const Shopcardslide = ({ searchQuery }) => {
   }, [searchQuery, products, dispatch]);
 
   // Function to navigate to the single product page
-  const handleShopPage = () => {
+  // const handleShopPage = () => {
+  //   // Scroll to the top of the page
+  //   window.scrollTo(0, 0);
+  //   navigate("/singleproductpage");
+  // };
+  const Scrollink = () => {
     // Scroll to the top of the page
     window.scrollTo(0, 0);
-    navigate("/singleproductpage");
   };
-
   // State to control the cart pop-up visibility
   const [showCartPopup, setShowCartPopup] = useState(false);
 
-  
   // Function to navigate to the cart page
-  
+
   const userId = Cookies.get("userId"); // Use your method to get the user ID from cookies
   const handleAddToCart1 = (product) => {
     window.scrollTo(0, 0);
@@ -173,32 +175,39 @@ const Shopcardslide = ({ searchQuery }) => {
                           </button>
                         )}
                         {/* Handle clicking on a product card to navigate */}
-                        <Row onClick={handleShopPage}>
-                          <div className="cardimg">
-                            <Card.Img
-                              variant="top"
-                              className="rounded-3  mt-3 p-lg-4 pt-lg-4 pt-3 pb-3  prdctimg"
-                              src={product.Product_img}
-                              alt={`Image ${i + 1}`}
-                              // style={{ width: "100%", height: "250px" }}
-                            />
+                        <Link
+                          className="cartlink"
+                          to={`/singleproductpage/${product.Product_id}`}
+                          onClick={() => {
+                            Scrollink();
+                          }}
+                        >
+                          <Row>
+                            <div className="cardimg">
+                              <Card.Img
+                                variant="top"
+                                className="rounded-3  mt-3 p-lg-4 pt-lg-4 pt-3 pb-3  prdctimg"
+                                src={product.Product_img}
+                                alt={`Image ${i + 1}`}
+                                // style={{ width: "100%", height: "250px" }}
+                              />
+                            </div>
+                            <div className="text-center  mt-3 mb-lg-0 mb-2  ">
+                              <h5
+                                style={{ lineHeight: "1.2" }}
+                                className="productname"
+                              >
+                                {product.Product_name}
+                              </h5>
+                            </div>
+                          </Row>
+                          <div className="px-3 d-md-none d-lg-block d-none">
+                            <hr />
                           </div>
-                          <div className="text-center  mt-3 mb-lg-0 mb-2  ">
-                            <h5
-                              style={{ lineHeight: "1.2" }}
-                              className="productname"
-                            >
-                              {product.Product_name}
-                            </h5>
-                          </div>
-                        </Row>
-                        <div className="px-3 d-md-none d-lg-block d-none">
-                          <hr />
-                        </div>
-                        {/* Display original and offer prices */}
-                        <Row lg={2} className="row2cart">
-                          <Col lg={5} xl={6} md={4} xs={12}>
-                            {/* <div className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price">
+                          {/* Display original and offer prices */}
+                          <Row lg={2} className="row2cart">
+                            <Col lg={5} xl={6} md={4} xs={12}>
+                              {/* <div className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price">
                               <p className=" mx-lg-1">
                                 <s>₹{product.Product_originalPrice}</s>
                                 <br />
@@ -208,46 +217,51 @@ const Shopcardslide = ({ searchQuery }) => {
                                 </span>
                               </p>
                             </div> */}
-                            <div className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
-                              <p>
-                                {product.isSale ? (
-                                  <span className="fw-bold">
-                                    ₹{product.Product_offerPrice}
-                                  </span>
-                                ) : (
-                                  <span className="fw-bold">
-                                    ₹{product.Product_originalPrice}
-                                  </span>
-                                )}
-                                &nbsp;
-                                {product.isSale && (
-                                  <span
-                                    className="fw-normal"
-                                    style={{ color: "#B8B8B8" }}
-                                  >
-                                    <s>₹{product.Product_originalPrice}</s>
-                                  </span>
-                                )}
-                              </p>
-                            </div>
-                          </Col>
-                          <Col lg={7} xl={6} md={8} xs={12}>
-                            {/* Button to add the product to the cart */}
-                            <div className="text-center  mt-xl-0 mt-md-2">
-                              <button
-                                className="rounded-3 cardbtn fw-normal  p-1 p-md-2 px-2"
-                                style={{
-                                  background: "#8F3300",
-                                  border: "none",
-                                  color: "white",
-                                }}
-                                onClick={() =>{ handleAddToCart(product); handleAddToCart1(product); setShowCartPopup(true);}}
-                              >
-                                Add To Cart
-                              </button>
-                            </div>
-                          </Col>
-                        </Row>
+                              <div className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
+                                <p>
+                                  {product.isSale ? (
+                                    <span className="fw-bold">
+                                      ₹{product.Product_offerPrice}
+                                    </span>
+                                  ) : (
+                                    <span className="fw-bold">
+                                      ₹{product.Product_originalPrice}
+                                    </span>
+                                  )}
+                                  &nbsp;
+                                  {product.isSale && (
+                                    <span
+                                      className="fw-normal"
+                                      style={{ color: "#B8B8B8" }}
+                                    >
+                                      <s>₹{product.Product_originalPrice}</s>
+                                    </span>
+                                  )}
+                                </p>
+                              </div>
+                            </Col>
+                            <Col lg={7} xl={6} md={8} xs={12}>
+                              {/* Button to add the product to the cart */}
+                              <div className="text-center  mt-xl-0 mt-md-2">
+                                <button
+                                  className="rounded-3 cardbtn fw-normal  p-1 p-md-2 px-2"
+                                  style={{
+                                    background: "#8F3300",
+                                    border: "none",
+                                    color: "white",
+                                  }}
+                                  onClick={() => {
+                                    handleAddToCart(product);
+                                    handleAddToCart1(product);
+                                    setShowCartPopup(true);
+                                  }}
+                                >
+                                  Add To Cart
+                                </button>
+                              </div>
+                            </Col>
+                          </Row>
+                        </Link>
                       </div>
                     </Card.Body>
                   </Card>

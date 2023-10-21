@@ -13,7 +13,6 @@ import Contact from "./components/Contact/Contact";
 import Singleshoppage from "./components/Shoppages/Singleshoppage";
 import Shoppage from "./components/Shoppages/Shoppage";
 import Bottombar from "./layout/Bottombar";
-import SingleCardPage from "./components/Shoppages/SingleCardPage";
 import Singleblog from "./components/Blog/Singleblog";
 import MainShop from "./components/Shoppages/MainShop";
 import NewBrandspage from "./components/Brandspage/NewBrandspage";
@@ -34,6 +33,7 @@ import Addresses from "./components/Account/Addresses";
 import Cartofline from "./components/Cartofline";
 import AddressDetail from "./components/Account/AddressDetail";
 import { baseUrl } from "./Globalvarible";
+
 
 const App = () => {
   const [show, setShow] = useState(false);
@@ -82,11 +82,6 @@ const handleFormSubmit = (formData) => {
 
 
 
-
-
-
-
-
   // const baseUrl = "https://paradox122.000webhostapp.com/_API/";
 
   return (
@@ -113,15 +108,15 @@ const handleFormSubmit = (formData) => {
             <Cartofline handleShowA={signuphandleShow} baseUrl1={baseUrl} />
           }
         />
-       
+
         <Route path="/singleblog" element={<Singleblog />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/singleproductpage" element={<Singleshoppage />} />
+        <Route path="/singleproductpage/:cardId" element={<Singleshoppage />} />
         <Route
           path="/search-results"
           element={<Shoppage baseUrlCart={baseUrl} />}
         />
-        <Route path="/singlecardpage/:cardId" element={<SingleCardPage />} />
+       
         <Route path="/brandspage" element={<NewBrandspage />} />
         <Route path="/shoppage" element={<MainShop />} />
         <Route path="/brands/:brandId" element={<BrandDetails />} />
@@ -133,7 +128,7 @@ const handleFormSubmit = (formData) => {
           path="/subcatdropdown/:subcatdrop"
           element={<Subcatdropdown />}
         />
-       
+
         {userId === undefined ? (
           <Route path="/account" element={<Navigate to="/" replace />} />
         ) : (
@@ -165,7 +160,7 @@ const handleFormSubmit = (formData) => {
             />
           }
         />
-     
+
         <Route path="/blog" element={<Blogpage />} />
         <Route path="/brand-products" element={<BrandProductsPage />} />
         <Route path="/subbrand-products" element={<Subbrandproducts />} />
@@ -189,6 +184,7 @@ const handleFormSubmit = (formData) => {
         cartClose={cartClose}
       />
       <Bottombar />
+
       <Footer />
     </div>
   );
