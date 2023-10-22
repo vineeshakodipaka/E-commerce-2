@@ -9,6 +9,8 @@ import {
 } from "../actions"; // Import the actions
 import "./Cart.css";
 import Cookies from "js-cookie";
+import { Player } from "@lottiefiles/react-lottie-player";
+import { baseUrl } from "../Globalvarible";
 
 
 
@@ -38,7 +40,7 @@ const Cartofline = ({ handleShowA }) => {
     if (!userId) {
       // User is not logged in
       // Show a signup or login form
-    //   navigate("/checkout");
+    
       handleShowA();
     }
   };
@@ -63,7 +65,13 @@ const handleRemoveFromCart = (productId) => {
             {" "}
             {cartItems1.length === 0 ? (
               <div className="mx-5 mt-4">
-                <p style={{ textAlign: "center" }}>Your cart is empty.</p>
+                <Player
+                  autoplay
+                  loop
+                  src={baseUrl + "Animations/Cart404.json"}
+                  style={{ height: "300px", width: "300px" }}
+                  visible={true}
+                ></Player>
               </div>
             ) : (
               <div>

@@ -36,7 +36,7 @@ export const fetchProducts = () => {
           dispatch(fetchProductsSuccess(data.products));
         } else {
           // If status is not true, you can dispatch an error or take other actions
-          console.error("API status is not true");
+        
           // Dispatch an error action if needed
           // dispatch(fetchProductsFailure("API status is not true"));
         }
@@ -120,13 +120,13 @@ export const fetchBrands = () => {
           // Dispatch the success action with the fetched data
           dispatch(fetchBrandsSuccess(data.brands));
         } else {
-          console.error("API status is not true");
+         
           // You can dispatch an error action if needed
           // dispatch(fetchBrandsFailure("API status is not true"));
         }
       })
       .catch((error) => {
-        console.error("Error fetching brands:", error);
+      
         // Dispatch an error action if needed
         // dispatch(fetchBrandsFailure(error));
       });

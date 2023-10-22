@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchBrands } from "../../actions";
 import brandimg from "../../Images/image 55.png";
 import { Card, Col, Container, Row } from "react-bootstrap";
-
+import "./Brandspage.css";
 const NewBrandspage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,6 +24,7 @@ const NewBrandspage = () => {
       setSelectedBrand(null);
       // Navigate to the BrandProductsPage with the selected Brand_id as a query parameter
       navigate(`/brand-products?Brand_id=${brand.Brand_id}`);
+      window.scrollTo(0, 0);
     }
   };
 
@@ -34,6 +35,7 @@ const NewBrandspage = () => {
       setSelectedBrand(null);
       // Navigate to the BrandProductsPage with the selected Brand_id as a query parameter
       navigate(`/subbrand-products?Subcat_id=${subcat.Subcat_id}`);
+      window.scrollTo(0, 0);
     }
   };
   return (
@@ -54,23 +56,20 @@ const NewBrandspage = () => {
       </div>
       <Container className="mt-2">
         {selectedBrand && selectedBrand.hasSubcat ? (
-          <Row className="px-xl-5 mx-lg-5 mx-4 pt-3 pb-3">
-            {selectedBrand.subcategories.map((subcat, index) => (
-              <Col key={subcat.Subcat_id}>
+          <Row className="pt-3 pb-3  justify-content-center">
+            <h2 className="text-center mb-4">Sub-Brands:</h2>
+            {selectedBrand.subcategories.map((subcat) => (
+              <Col lg={4} key={subcat.Subcat_id}>
                 <Card
-                  className=" mt-2 mb-2"
+                  className=" pt-4 pb-4 subbrandcard"
                   onClick={() => handleBrandClick2(subcat)}
+                  style={{ border: "1px solid #a52a2a" }}
                 >
-                  <center>
-                    <Card.Body>
-                      {/* <Card.Img
-                        className="pt-3 pb-3 px-5"
-                        src={subcat.Subcat_img}
-                        alt={`Subcat_Name ${index + 1}`}
-                      /> */}
-                      <Card.Title>{subcat.Subcat_Name}</Card.Title>
-                    </Card.Body>
-                  </center>
+                  <Card.Body>
+                    <Card.Title className="text-center">
+                      {subcat.Subcat_Name}
+                    </Card.Title>
+                  </Card.Body>
                 </Card>
               </Col>
             ))}
@@ -90,8 +89,6 @@ const NewBrandspage = () => {
                     alt={`Brand_image ${ind + 1}`}
                     width="100%"
                   />
-
-                  {/* <Card.Title>{brand.Brand_Name}</Card.Title> */}
                 </Card>
               </Col>
             ))}

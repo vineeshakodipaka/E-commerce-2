@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 import React, { createContext, useContext } from "react";
+import { baseUrl } from "./Globalvarible";
 
 const CartContext = createContext();
 
@@ -25,17 +26,17 @@ export const CartProvider = ({ children }) => {
     };
 
     fetch(
-      "https://paradox122.000webhostapp.com/_API/Add_CartDetails.php",
+      baseUrl+"Add_CartDetails.php",
       requestOptions
     )
       .then((response) => response.text())
       .then((result) => {
         // Handle the response from the server, e.g., show a success message
-        console.log("xart,,,,,", result);
+       
       })
       .catch((error) => {
         // Handle errors, e.g., show an error message
-        console.error("Error:", error);
+      
       });
   };
 

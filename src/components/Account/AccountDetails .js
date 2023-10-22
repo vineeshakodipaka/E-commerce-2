@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import Cookies from "js-cookie"; // Import Cookies if not already imported
+import { baseUrl } from "../../Globalvarible";
 
 const AccountDetails = () => {
   // Define state to manage form data
@@ -17,7 +18,7 @@ const AccountDetails = () => {
   useEffect(() => {
     // Fetch user details based on userId
     if (userId) {
-      fetch("http://paradox122.000webhostapp.com/_API/Get_UserDetails.php", {
+      fetch(baseUrl + "Get_UserDetails.php", {
         method: "POST",
         body: new URLSearchParams({ UserID: userId }),
         headers: {
@@ -36,51 +37,25 @@ const AccountDetails = () => {
             });
           } else {
             // Handle the case where user details couldn't be retrieved
-            console.error("Failed to retrieve user details");
           }
         })
-        .catch((error) => {
-          console.error("Error fetching user details:", error);
-        });
+        .catch((error) => {});
     }
   }, [userId]);
 
   // Handle form submission
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-  
 
-      // Create a FormData object and populate it with the form data
-      const formdata = new FormData();
-      formdata.append("UserID", userId); // Assuming you want to include the user's ID
-      formdata.append("Username", formData.username);
-      formdata.append("Email", formData.Email);
-      formdata.append("PhoneNumber", formData.PhoneNumber);
-      formdata.append("Password", formData.password);
+    // Create a FormData object and populate it with the form data
+    const formdata = new FormData();
+    formdata.append("UserID", userId); // Assuming you want to include the user's ID
+    formdata.append("Username", formData.username);
+    formdata.append("Email", formData.Email);
+    formdata.append("PhoneNumber", formData.PhoneNumber);
+    formdata.append("Password", formData.password);
 
-      // Define the request options
-      const requestOptions = {
-        method: "POST",
-        body: formdata,
-        redirect: "follow",
       };
-
-      try {
-        const response = await fetch(
-          "https://paradox122.000webhostapp.com/_API/Update_UserDetails.php",
-          requestOptions
-        );
-        const result = await response.text();
-        console.log(result);
-
-        // You might want to add some success handling here, e.g., show a success message.
-      } catch (error) {
-        console.error("Error:", error);
-        // Handle errors, e.g., show an error message.
-      }
-    };
-
- 
 
   // Handle input field changes and update form data
   const handleInputChange = (e) => {
@@ -124,7 +99,6 @@ const AccountDetails = () => {
                   />
                 </Form.Group>
               </Row>
-
               <Row className="mb-4">
                 <Form.Group as={Col} md="6" lg="6" xs="12">
                   <Form.Label className="formlabel">Email*</Form.Label>
@@ -153,6 +127,34 @@ const AccountDetails = () => {
                   />
                 </Form.Group>
               </Row>
+              <Row className="mb-4">
+                <Form.Group as={Col} md="6" lg="6" xs="12">
+                  <Form.Label className="formlabel">New password*</Form.Label>
+                  <Form.Control
+                    onChange={handleInputChange}
+                    name="City"
+                    value={formData.City}
+                    className="labelholder"
+                    required
+                    type="text"
+                    placeholder="*******"
+                  />
+                </Form.Group>
+                <Form.Group as={Col} md="6" lg="6" xs="12">
+                  <Form.Label className="formlabel">
+                    Confirm new password*
+                  </Form.Label>
+                  <Form.Control
+                    onChange={handleInputChange}
+                    name="ZipCode"
+                    value={formData.ZipCode}
+                    className="labelholder"
+                    required
+                    type="text"
+                    placeholder="*******"
+                  />
+                </Form.Group>
+              </Row>
             </Col>
           </Row>
           <button type="submit" className="rounded-4 p-3 mt-4 mb-4">
@@ -165,30 +167,3 @@ const AccountDetails = () => {
 };
 
 export default AccountDetails;
-
-// <Row className="mb-4">
-//   <Form.Group as={Col} md="6" lg="6" xs="12">
-//     <Form.Label className="formlabel">New password*</Form.Label>
-//     <Form.Control
-//       onChange={handleInputChange}
-//       name="City"
-//       value={formData.City}
-//       className="labelholder"
-//       required
-//       type="text"
-//       placeholder="*******"
-//     />
-//   </Form.Group>
-//   <Form.Group as={Col} md="6" lg="6" xs="12">
-//     <Form.Label className="formlabel">Confirm new password*</Form.Label>
-//     <Form.Control
-//       onChange={handleInputChange}
-//       name="ZipCode"
-//       value={formData.ZipCode}
-//       className="labelholder"
-//       required
-//       type="text"
-//       placeholder="*******"
-//     />
-//   </Form.Group>
-// </Row>;

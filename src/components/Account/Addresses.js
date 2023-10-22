@@ -5,10 +5,10 @@ import { Col, Form, Row,Modal } from "react-bootstrap";
 
 import UserDetails from "./UserDetails";
 
-const Addresses = ({ baseUrl1, handleFormSubmit }) => {
+const Addresses = ({ baseUrl1 }) => {
   // Define state to manage form data
 
-  // const [userAddresses, setUserAddresses] = useState([]);
+ 
   const userId = Cookies.get("userId"); // Retrieve userId from cookies
 
 
@@ -51,8 +51,7 @@ const Addresses = ({ baseUrl1, handleFormSubmit }) => {
       );
 
       if (response.ok) {
-        const responseData = await response.json(); // Assuming the response is in JSON format
-        console.log("Form submission successful. Response data:", responseData);
+     
         // Clear the input fields by resetting formData to its initial state
         setFormData({
           UserID: userId,
@@ -63,14 +62,14 @@ const Addresses = ({ baseUrl1, handleFormSubmit }) => {
           ZipCode: "",
           Contry: "",
         });
-        handleFormSubmit(formData);
-        closeModal();
+      
+        closeModal(); 
       } else {
         // Form submission failed, display an error message to the user
         alert("Form submission failed. Please try again.");
       }
     } catch (error) {
-      console.error("Form submission failed", error);
+    
       // Handle network errors or other exceptions
       alert("Form submission failed. Please try again later.");
     }

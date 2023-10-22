@@ -30,8 +30,7 @@ const Singleshoppage = () => {
   );
 
   const dispatch = useDispatch();
-  // Removed the declaration and assignment of selectedQuantity
-  // const [selectedQuantity, setSelectedQuantity] = useState(null);
+ 
   const [searchTerm, setSearchTerm] = useState("");
 
   // Handle input change for custom quantity
@@ -40,11 +39,10 @@ const Singleshoppage = () => {
     if (!isNaN(inputNumber) && inputNumber >= 1 && inputNumber <= 10) {
       setSearchTerm(inputNumber.toString());
       // Removed the setSelectedQuantity line since selectedQuantity is not used
-      // setSelectedQuantity(inputNumber);
+      
     } else {
       setSearchTerm("");
-      // Removed the setSelectedQuantity line since selectedQuantity is not used
-      // setSelectedQuantity(null);
+     
     }
   };
 
@@ -142,11 +140,7 @@ const Singleshoppage = () => {
                     <s>₹{card.Product_originalPrice}</s>
                   </span>
                 )}
-                {/* <span className="fw-normal fs-5 " style={{ color: "#B8B8B8" }}>
-                  <s>₹420</s>
-                </span>
-                &nbsp;&nbsp;
-                <span className="fs-4">₹525.00</span> */}
+               
               </h5>
               <p className="fw-bold mt-4">For Extra Texture & Crunch.</p>
               <p> Caramelized biscuit granules.</p>

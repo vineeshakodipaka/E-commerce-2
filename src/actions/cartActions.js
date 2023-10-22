@@ -55,12 +55,12 @@ export const incrementQuantity = (itemID,Qty) => {
             },
           });
         } else {
-          console.error("API error:", result.message);
+        
           // Handle errors or dispatch a different action if needed.
         }
       })
       .catch((error) => {
-        console.error("Network error:", error);
+       
         // Handle network errors or dispatch a different action if needed.
       });
   };
@@ -80,8 +80,7 @@ export const decrementQuantity = (itemID,Qty) => {
     fetch(baseUrl + "Update_CartDetails.php", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log("API Response:", result.status, result.message); // Log status and message
-
+       
         if (result.status === true) {
           dispatch({
             type: DECREMENT_QUANTITY,
@@ -91,12 +90,12 @@ export const decrementQuantity = (itemID,Qty) => {
             },
           });
         } else {
-          console.error("API error:", result.message);
+         
           // Handle errors or dispatch a different action if needed.
         }
       })
       .catch((error) => {
-        console.error("Network error:", error);
+      
         // Handle network errors or dispatch a different action if needed.
       });
   };

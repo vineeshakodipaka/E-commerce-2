@@ -43,9 +43,7 @@ const Cardsimgs2 = () => {
         ))}
       </Row>
     </div>
-    <div>
-      <Row></Row>
-    </div>
+   
     </div>
   );
 };

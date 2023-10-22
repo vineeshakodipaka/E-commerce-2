@@ -49,7 +49,7 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
         alert("Signup failed. Please try again.");
       }
     } catch (error) {
-      console.error("Signup failed", error);
+    
       // Handle network errors or other exceptions
       alert("Signup failed. Please try again later.");
     }
@@ -93,9 +93,9 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
                       lg="8"
                       xs="12"
                       className="inputgrp"
-                      // controlId="validationCustom02"
+                  
                     >
-                      {/* <Form.Label>Last name</Form.Label> */}
+                  
                       <Form.Control
                         type="text"
                         name="email"
@@ -113,9 +113,9 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
                       lg="8"
                       xs="12"
                       className="inputgrp"
-                      // controlId="validationCustom02"
+                     
                     >
-                      {/* <Form.Label>Last name</Form.Label> */}
+                   
                       <Form.Control
                         type="text"
                         name="password"
@@ -133,9 +133,9 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
                       lg="8"
                       xs="12"
                       className="inputgrp"
-                      // controlId="validationCustom02"
+                     
                     >
-                      {/* <Form.Label>Last name</Form.Label> */}
+                      
                       <Form.Control
                         type="text"
                         name="confirmPassword"
@@ -154,9 +154,9 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
                       xs="12"
                       lg="8"
                       className="inputgrp"
-                      // controlId="validationCustom02"
+                   
                     >
-                      {/* <Form.Label>Last name</Form.Label> */}
+                     
                       <Form.Control
                         type="text"
                         name="phone"

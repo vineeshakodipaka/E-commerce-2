@@ -8,7 +8,6 @@ import Home from "./components/Home/Home";
 import Footer from "./layout/Footer";
 import About from "./components/About/About";
 import Blogpage from "./components/Blog/Blogpage";
-//import Errorpage from "./components/Errorpage/Errorpage";
 import Contact from "./components/Contact/Contact";
 import Singleshoppage from "./components/Shoppages/Singleshoppage";
 import Shoppage from "./components/Shoppages/Shoppage";
@@ -18,22 +17,19 @@ import MainShop from "./components/Shoppages/MainShop";
 import NewBrandspage from "./components/Brandspage/NewBrandspage";
 import Login from "./components/Login&signup/Login";
 import Signup from "./components/Login&signup/Signup";
-import SubcategoryDetails from "./components/Brandspage/SubcategoryDetails";
 import BrandDetails from "./components/Brandspage/BrandDetails";
-import Subcatdropdown from "./components/Brandspage/Subcatdropdown";
-import Cookies from "js-cookie"; // Import js-cookie
 
+import Cookies from "js-cookie"; // Import js-cookie
 import Checkoutform from "./components/Checkoutform/Checkoutform";
 import BrandProductsPage from "./components/Brandspage/BrandProductsPage";
 import Subbrandproducts from "./components/Brandspage/Subbrandproducts";
 import Account from "./components/Account/Account";
-import Dashboard from "./components/Account/Dashboard ";
+
 import AccountDetails from "./components/Account/AccountDetails ";
 import Addresses from "./components/Account/Addresses";
 import Cartofline from "./components/Cartofline";
 import AddressDetail from "./components/Account/AddressDetail";
 import { baseUrl } from "./Globalvarible";
-
 
 const App = () => {
   const [show, setShow] = useState(false);
@@ -46,15 +42,12 @@ const App = () => {
   const signuphandleClose = () => signupsetShow(false);
   const signuphandleShow = () => signupsetShow(true);
 
- const [showCartPopup, setShowCartPopup] = useState(false);
- const cartClose = () => setShowCartPopup(false);
- const cartShow = () => setShowCartPopup(true);
-
- 
+  const [showCartPopup, setShowCartPopup] = useState(false);
+  const cartClose = () => setShowCartPopup(false);
+  const cartShow = () => setShowCartPopup(true);
 
   const [userId, setUserId] = useState(Cookies.get("userId"));
-  console.log("userId--", userId);
-  console.log("userId Type", typeof userId);
+  
 
   useEffect(() => {
     // Update the userId whenever it changes in the cookies
@@ -66,28 +59,12 @@ const App = () => {
     return () => clearInterval(interval);
   }, []);
 
- 
 
- 
-const handleFormSubmit = (formData) => {
-  // Assuming formData includes a UserID
-  const userId = formData.UserID;
-
-  // Save the address data to local storage
-  localStorage.setItem(`userAddress_${userId}`, JSON.stringify(formData));
-
-  // setAddressData(formData);
-};
-
-
-
-
-  // const baseUrl = "https://paradox122.000webhostapp.com/_API/";
 
   return (
     <div className="app">
       <Navbar handleShow2={handleShow} />
-      {/* <Errorpage /> */}
+     
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -116,24 +93,18 @@ const handleFormSubmit = (formData) => {
           path="/search-results"
           element={<Shoppage baseUrlCart={baseUrl} />}
         />
-       
+
         <Route path="/brandspage" element={<NewBrandspage />} />
         <Route path="/shoppage" element={<MainShop />} />
         <Route path="/brands/:brandId" element={<BrandDetails />} />
-        <Route
-          path="/subcategories/:subcatId"
-          element={<SubcategoryDetails />}
-        />
-        <Route
-          path="/subcatdropdown/:subcatdrop"
-          element={<Subcatdropdown />}
-        />
+       
+        
 
         {userId === undefined ? (
           <Route path="/account" element={<Navigate to="/" replace />} />
         ) : (
           <Route path="/account/*" element={<Account />}>
-            <Route path="dashboard" element={<Dashboard />} />
+            
             <Route path="accountDetails" index element={<AccountDetails />} />
             <Route
               path="addresses"
@@ -143,11 +114,11 @@ const handleFormSubmit = (formData) => {
                   handleClose2={handleClose}
                   baseUrl1={baseUrl}
                   show2={show}
-                  handleFormSubmit={handleFormSubmit}
+             
                 />
               }
             />
-          </Route>
+          </Route>  
         )}
 
         <Route
@@ -155,7 +126,7 @@ const handleFormSubmit = (formData) => {
           element={
             <Checkoutform
               handleShow2={handleShow}
-              handleFormSubmit={handleFormSubmit}
+             
               baseUrl1={baseUrl}
             />
           }
@@ -180,7 +151,7 @@ const handleFormSubmit = (formData) => {
       <AddressDetail
         baseUrl1={baseUrl}
         showCartPopup={showCartPopup}
-        // cartShow={cartShow}
+       
         cartClose={cartClose}
       />
       <Bottombar />

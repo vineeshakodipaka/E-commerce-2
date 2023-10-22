@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import "./Checkoutform.css";
 import Cookies from "js-cookie";
 
-const Checkoutform = ({ handleFormSubmit, baseUrl1 }) => {
+const Checkoutform = ({  baseUrl1 }) => {
   const cartItems = useSelector((state) => state.cart.cartDetails);
   const { totalPrice } = useSelector((state) => state.cart);
 
@@ -50,8 +50,7 @@ const Checkoutform = ({ handleFormSubmit, baseUrl1 }) => {
       const response = await fetch(baseUrl1+"Add_addresess.php", requestOptions);
 
       if (response.ok) {
-        const responseData = await response.json(); // Assuming the response is in JSON format
-        console.log("Form submission successful. Response data:", responseData);
+      
         // Clear the input fields by resetting formData to its initial state
         setFormData({
           UserID: userId,
@@ -63,13 +62,13 @@ const Checkoutform = ({ handleFormSubmit, baseUrl1 }) => {
           Contry: "",
         });
         // Trigger a parent component's function if needed
-        handleFormSubmit(formData);
+       
       } else {
         // Form submission failed, display an error message to the user
         alert("Form submission failed. Please try again.");
       }
     } catch (error) {
-      console.error("Form submission failed", error);
+ 
       // Handle network errors or other exceptions
       alert("Form submission failed. Please try again later.");
     }
@@ -81,12 +80,6 @@ const Checkoutform = ({ handleFormSubmit, baseUrl1 }) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
-
-
-
-
-
 
 
   return (
@@ -239,14 +232,7 @@ const Checkoutform = ({ handleFormSubmit, baseUrl1 }) => {
                         </td>
                       </tr>
                       <tr className="mt-2">
-                        {/* <Form.Check
-                          type="radio"
-                          id="cashOnDelivery"
-                          name="paymentMethod"
-                          value="Cash On Delivery"
-                          label="Cash On Delivery"
-                          onChange={handleInputChange}
-                        /> */}
+                       
 
                         <p>Pay with Cash upon delivery</p>
                       </tr>
@@ -254,7 +240,7 @@ const Checkoutform = ({ handleFormSubmit, baseUrl1 }) => {
                     <center>
                       <button
                         type="submit"
-                        // onClick={handleShow2}
+                        
                         className="rounded-4 p-3 w-100 mx-4 mt-4 mb-4 mx-lg-5"
                       >
                         Place Order

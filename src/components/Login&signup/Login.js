@@ -15,7 +15,6 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
 
   const navigate = useNavigate();
   const { login } = useAuth(); // Access authentication state and functions
-  //  const { isAuthenticated, login, logout } = useAuth(); // Access authentication state and functions
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
@@ -37,7 +36,6 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
         }
       );
 
-      // console.log("response-----------------------------", response.data);
 
       if (response.data.message === "Login successful") {
         // Check if user data is available in the response
@@ -57,7 +55,7 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
         alert("Login failed. Please check your credentials.");
       }
     } catch (error) {
-      console.error("Error:", error);
+     
       // Handle network errors or other exceptions
       alert("Login failed. Please try again later.");
     }
@@ -93,7 +91,7 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
                         required
                         placeholder="Username"
                         autoFocus
-                        // className="inputgrp"
+                       
                       />
                     </Form.Group>
                   </Row>
@@ -128,14 +126,7 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
                     </center>
                   </Row>
                   <button className="rounded-4 p-3 px-5 mt-1">Login</button>
-                  {/* {isAuthenticated ? (
-                    <button
-                      className="rounded-4 p-3 px-5 mt-2"
-                      onClick={handleLogout}
-                    >
-                      Logout
-                    </button>
-                  ) : null} */}
+                 
                 </Form>
               </Row>
             </div>
@@ -143,15 +134,7 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
         </Modal>
       </center>
 
-      {/* Conditionally render the Signup modal */}
-      {/* <Modal show={showSignupModal} onHide={toggleSignupModal} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Signup</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Signup />
-        </Modal.Body>
-      </Modal> */}
+    
     </>
   );
 };

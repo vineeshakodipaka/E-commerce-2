@@ -24,10 +24,10 @@ const UserDetails = ({ baseUrl1 }) => {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        console.log(data); // Log the response data
+      
         return data;
       } catch (error) {
-        console.error("Error fetching user addresses:", error);
+       
         return { status: false, message: "Error fetching user addresses" };
       }
     },

@@ -36,12 +36,6 @@ const Shopcardslide = ({ searchQuery }) => {
     }
   }, [searchQuery, products, dispatch]);
 
-  // Function to navigate to the single product page
-  // const handleShopPage = () => {
-  //   // Scroll to the top of the page
-  //   window.scrollTo(0, 0);
-  //   navigate("/singleproductpage");
-  // };
   const Scrollink = () => {
     // Scroll to the top of the page
     window.scrollTo(0, 0);
@@ -189,7 +183,7 @@ const Shopcardslide = ({ searchQuery }) => {
                                 className="rounded-3  mt-3 p-lg-4 pt-lg-4 pt-3 pb-3  prdctimg"
                                 src={product.Product_img}
                                 alt={`Image ${i + 1}`}
-                                // style={{ width: "100%", height: "250px" }}
+                               
                               />
                             </div>
                             <div className="text-center  mt-3 mb-lg-0 mb-2  ">
@@ -208,16 +202,7 @@ const Shopcardslide = ({ searchQuery }) => {
                         {/* Display original and offer prices */}
                         <Row lg={2} className="row2cart">
                           <Col lg={5} xl={6} md={4} xs={12}>
-                            {/* <div className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price">
-                              <p className=" mx-lg-1">
-                                <s>₹{product.Product_originalPrice}</s>
-                                <br />
-
-                                <span className="fw-bold">
-                                  ₹{product.Product_offerPrice}
-                                </span>
-                              </p>
-                            </div> */}
+                           
                             <div className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
                               <p>
                                 {product.isSale ? (

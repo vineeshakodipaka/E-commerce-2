@@ -8,6 +8,7 @@ import { Modal, Button } from "react-bootstrap";
 import "../Shoppages/Shoppage.css";
 import { useCartContext } from "../../CartContext"; // Import the useCartContext hook
 import Cookies from "js-cookie";
+import { Player } from "@lottiefiles/react-lottie-player";
 
 const Subbrandproducts = () => {
   const { handleAddToCart } = useCartContext(); // Use the useCartContext hook to access the handleAddToCart function
@@ -19,7 +20,7 @@ const Subbrandproducts = () => {
 
   const products = useSelector((state) => state.brandSubproducts.subproducts);
 
-  const loading = useSelector((state) => state.brandProducts.loading);
+
   const error = useSelector((state) => state.brandProducts.error);
 
   const dispatch = useDispatch();
@@ -58,10 +59,16 @@ const Subbrandproducts = () => {
   };
   return (
     <div>
-      {/* <h2>Products for Brand ID: {brandId}</h2> */}
-
-      {loading ? (
-        <p>Loading...</p>
+      {products.length === 0 ? (
+        <div>
+          <Player
+            autoplay
+            loop
+            src="https://paradox122.000webhostapp.com/_API/Animations/Cart404.json"
+            style={{ height: "300px", width: "300px" }}
+            visible={true}
+          ></Player>
+        </div>
       ) : error ? (
         <p>Error: {error}</p>
       ) : (
@@ -137,21 +144,6 @@ const Subbrandproducts = () => {
                           {/* Display original and offer prices */}
                           <Row lg={2} className="row2cart">
                             <Col lg={5} xl={6} md={6} xs={12}>
-                              {/* <div className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
-                                <p>
-                                  <span className="fw-bold">
-                                    {" "}
-                                    ₹{product.Product_offerPrice}
-                                  </span>
-                                  &nbsp;
-                                  <span
-                                    className="fw-normal"
-                                    style={{ color: "#B8B8B8" }}
-                                  >
-                                    <s>₹{product.Product_originalPrice}</s>
-                                  </span>
-                                </p>
-                              </div> */}
                               <div className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
                                 <p>
                                   {product.isSale ? (

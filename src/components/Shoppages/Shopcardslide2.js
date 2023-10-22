@@ -203,16 +203,7 @@ const Shopcardslide2 = ({ searchQuery }) => {
                         {/* Display original and offer prices */}
                         <Row lg={2} className="row2cart">
                           <Col lg={5} xl={6} md={4} xs={12}>
-                            {/* <Card.Text className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price">
-                              <p className=" mx-lg-1">
-                                <s>₹{product.Product_originalPrice}</s>
-                                <br />
-
-                                <span className="fw-bold">
-                                  ₹{product.Product_offerPrice}
-                                </span>
-                              </p>
-                            </Card.Text> */}
+                            
                             <div className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
                               <p>
                                 {product.isSale ? (

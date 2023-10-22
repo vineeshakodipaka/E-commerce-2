@@ -43,7 +43,7 @@ const productReducer = (state = initialState, action) => {
       };
     case SEARCH_PRODUCTS:
       const searchQuery = action.payload.toLowerCase();
-      console.log("Search Query:", action.payload);
+     
       if (searchQuery.trim() === "") {
         return {
           ...state,

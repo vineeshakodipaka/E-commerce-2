@@ -92,8 +92,6 @@ const cartLength1 = items.length;
   const [activeButton, setActiveButton] = useState(0); // State to track active button
 
 
-  console.log("userId--", userId);
-  console.log("userId Type", typeof userId);
 
   useEffect(() => {
     // Update the userId whenever it changes in the cookies
@@ -120,11 +118,11 @@ const cartLength1 = items.length;
           setLogoUrl(data.data.Logo);
         } else {
           // Handle the case where the data couldn't be retrieved
-          console.error("Failed to retrieve logo URL");
+      
         }
       })
       .catch((error) => {
-        console.error("Error fetching logo URL:", error);
+        
       });
   }, []);
   return (
@@ -162,9 +160,7 @@ const cartLength1 = items.length;
           aria-controls="offcanvasExample"
         >
           <div className="offcanvas-header">
-            {/* <h5 className="offcanvas-title" id="offcanvasExampleLabel">
-              Offcanvas
-            </h5> */}
+           
           </div>
           <div className="offcanvas-body">
             <ul className="navbar-nav ms-lg-3 ">
@@ -177,7 +173,7 @@ const cartLength1 = items.length;
                     activeButton === 0 ? "active" : ""
                   }`}
                   onClick={() => {
-                    //  navbarCollapseRef.current?.classList.remove("show");
+                    
                     setActiveButton(0);
                   }}
                 >
@@ -197,7 +193,7 @@ const cartLength1 = items.length;
                     activeButton === 1 ? "active" : ""
                   }`}
                   onClick={() => {
-                    //   navbarCollapseRef.current?.classList.remove("show");
+               
                     setActiveButton(1);
                   }}
                 >
@@ -232,7 +228,7 @@ const cartLength1 = items.length;
                   show={isBrandDropdownOpen} // Show the dropdown based on the state
                   onMouseEnter={() => setIsBrandDropdownOpen(true)} // Open the dropdown when mouse enters
                   onMouseLeave={() => setIsBrandDropdownOpen(false)} // Close the dropdown when mouse leaves
-                  // onClick={() => setIsBrandDropdownOpen(!isBrandDropdownOpen)}
+                  
                   title={
                     <span
                       className={`basic-nav-dropdown nav-btns b-link  rounded-3 ${
@@ -241,7 +237,7 @@ const cartLength1 = items.length;
                       onClick={handlclick}
                     >
                       Brands
-                      {/* <RiArrowDropDownFill className="fs-3" /> */}
+                     
                     </span>
                   }
                   className="basic-nav-dropdown"
@@ -296,7 +292,7 @@ const cartLength1 = items.length;
                         <NavDropdown.Item
                           onClick={() => {
                             handleBrandChange(brand);
-                            //setIsBrandDropdownOpen(false); // Close the dropdown when a brand is selected
+                           
                             navbarCollapseRef.current?.classList.remove("show");
                           }}
                           className="nav-link navdroplink  px-4"
@@ -344,7 +340,7 @@ const cartLength1 = items.length;
                   <div className="position-absolute searchbtn">
                     <AiOutlineSearch
                       className="searchicon fs-5"
-                      // style={{ marginTop: "12px" }}
+                    
                     />
                   </div>
                   <input
@@ -367,11 +363,11 @@ const cartLength1 = items.length;
               </div>
 
               <li className="nav-item px-lg-0 px-xl-2 ms-xl-4 my-3 my-lg-0 my-md-0">
-                {/* <Link to="/cart" className="nav-link "> */}
+              
                 <Button
                   onClick={() => {
                     cartclick();
-                    //navbarCollapseRef.current?.classList.remove("show");
+                  
                   }}
                   className="cart-btn rounded-pill"
                 >
@@ -383,8 +379,7 @@ const cartLength1 = items.length;
                     Cart-({userId?cartLength:cartLength1})
                   </span>
                 </Button>
-                {/* <span className="badge rounded-pill badge-notification bg-primary">{totalQuantity}</span> */}
-                {/* </Link> */}
+               
               </li>
             </ul>
 
@@ -419,35 +414,7 @@ const cartLength1 = items.length;
               </li>
             </ul>
 
-            {/* <ul className="navbar-nav ms-auto">
-              {isAuthenticated && userId !== undefined ? (
-                <li className="nav-item">
-                  <Link
-                    to="/account"
-                    className="nav-link"
-                    onClick={() => {
-                      navbarCollapseRef.current?.classList.remove("show");
-                    }}
-                  >
-                    <span data-bs-dismiss="offcanvas">
-                      <FaUser />
-                    </span>
-                  </Link>
-                </li>
-              ) : (
-                <li className="nav-item">
-                  <Link
-                    className="nav-link nav-btns b-link  rounded-3"
-                    onClick={() => {
-                      handleShow2();
-                      navbarCollapseRef.current?.classList.remove("show");
-                    }}
-                  >
-                    <span>Login</span>
-                  </Link>
-                </li>
-              )}
-            </ul> */}
+           
           </div>
         </div>
       </div>

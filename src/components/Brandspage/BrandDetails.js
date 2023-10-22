@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import "./Brandspage.css";
 const BrandDetails = () => {
  const selectedBrand = useSelector((state) => state.brands.selectedBrand);
  const brandsData = useSelector((state) => state.brands.brandsData);
@@ -22,33 +22,34 @@ const BrandDetails = () => {
    } else {
      // Navigate to the BrandProductsPage with the selected Subcat_id as a query parameter
      navigate(`/subbrand-products?Subcat_id=${subcat.Subcat_id}`);
+      window.scrollTo(0, 0);
    }
  };
 
   return (
     <div className="container">
-      {/* <Row className="justify-content-center">
-        <Col lg={4}>
-          <h1 className="text-center">{brand.Brand_Name} Details</h1>
-          <img src={brand.Brand_image} width="100%" />
-        </Col>
-      </Row> */}
-
-      {/* <Shopcardslide /> */}
-
       {brand.hasSubcat && (
         <div>
-          <h2 className="text-center">Subcategories:</h2>
-          <Row className="px-xl-5 mx-lg-5 mx-4 pt-3 pb-3">
+          <h2 className="text-center">Sub-Brands:</h2>
+          <Row className="pt-3 pb-3  justify-content-center">
             {brand.subcategories.map((subcat) => (
               <>
-                <Col>
+                <Col lg={4}>
                   {" "}
                   <Card
-                    className="pt-4 pb-4 mb-3 px-5"
+                    className="pt-4 pb-4 subbrandcard"
                     onClick={() => handleBrandClick2(subcat)}
+                    style={{ border: "1px solid #a52a2a" }}
                   >
-                    <h4 key={subcat.Subcat_id}>{subcat.Subcat_Name}</h4>
+                    <Card.Body>
+                      {" "}
+                      <Card.Title
+                        className="text-center"
+                        key={subcat.Subcat_id}
+                      >
+                        {subcat.Subcat_Name}
+                      </Card.Title>
+                    </Card.Body>
                   </Card>
                 </Col>
               </>
