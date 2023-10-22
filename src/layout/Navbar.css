@@ -207,3 +207,19 @@ background-color: white;
 .headerbar .offcanvas-backdrop.show{
   opacity: 0;
 }
+.headerbar .navdroplink:hover{
+background-color: #000066 !important;
+color: white !important;
+}
+.headerbar .navdroplink:active {
+  background-color: #000066 !important;
+  color: white !important;
+}
+.headerbar .accordion-item:active {
+  background-color: #000066 !important;
+  color: white !important;
+}
+.headerbar .accordion-item:hover {
+  background-color: #000066 !important;
+  color: white !important;
+}
