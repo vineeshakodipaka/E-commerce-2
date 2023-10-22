@@ -130,13 +130,14 @@ const Subbrandproducts = () => {
                                 </h5>
                               </div>
                             </Row>
-                            <div className="px-3 d-md-none d-lg-block d-none">
-                              <hr />
-                            </div>
-                            {/* Display original and offer prices */}
-                            <Row lg={2} className="row2cart">
-                              <Col lg={5} xl={6} md={6} xs={12}>
-                                {/* <div className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
+                          </Link>
+                          <div className="px-3 d-md-none d-lg-block d-none">
+                            <hr />
+                          </div>
+                          {/* Display original and offer prices */}
+                          <Row lg={2} className="row2cart">
+                            <Col lg={5} xl={6} md={6} xs={12}>
+                              {/* <div className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
                                 <p>
                                   <span className="fw-bold">
                                     {" "}
@@ -151,51 +152,50 @@ const Subbrandproducts = () => {
                                   </span>
                                 </p>
                               </div> */}
-                                <div className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
-                                  <p>
-                                    {product.isSale ? (
-                                      <span className="fw-bold">
-                                        ₹{product.Product_offerPrice}
-                                      </span>
-                                    ) : (
-                                      <span className="fw-bold">
-                                        ₹{product.Product_originalPrice}
-                                      </span>
-                                    )}
-                                    &nbsp;
-                                    {product.isSale && (
-                                      <span
-                                        className="fw-normal"
-                                        style={{ color: "#B8B8B8" }}
-                                      >
-                                        <s>₹{product.Product_originalPrice}</s>
-                                      </span>
-                                    )}
-                                  </p>
-                                </div>
-                              </Col>
-                              <Col lg={7} xl={6} md={6} xs={12}>
-                                {/* Button to add the product to the cart */}
-                                <div className="text-center  mt-xl-0 mt-md-2">
-                                  <button
-                                    className="rounded-3  fw-normal p-2"
-                                    style={{
-                                      background: "#8F3300",
-                                      border: "none",
-                                      color: "white",
-                                    }}
-                                    onClick={() => {
-                                      handleAddToCart(product);
-                                      handleAddToCart1(product);
-                                      setShowCartPopup(true);
-                                    }}
-                                  >
-                                    Add To Cart
-                                  </button>
-                                </div>
-                              </Col>
-                            </Row>
-                          </Link>
+                              <div className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
+                                <p>
+                                  {product.isSale ? (
+                                    <span className="fw-bold">
+                                      ₹{product.Product_offerPrice}
+                                    </span>
+                                  ) : (
+                                    <span className="fw-bold">
+                                      ₹{product.Product_originalPrice}
+                                    </span>
+                                  )}
+                                  &nbsp;
+                                  {product.isSale && (
+                                    <span
+                                      className="fw-normal"
+                                      style={{ color: "#B8B8B8" }}
+                                    >
+                                      <s>₹{product.Product_originalPrice}</s>
+                                    </span>
+                                  )}
+                                </p>
+                              </div>
+                            </Col>
+                            <Col lg={7} xl={6} md={6} xs={12}>
+                              {/* Button to add the product to the cart */}
+                              <div className="text-center  mt-xl-0 mt-md-2">
+                                <button
+                                  className="rounded-3  fw-normal p-2"
+                                  style={{
+                                    background: "#8F3300",
+                                    border: "none",
+                                    color: "white",
+                                  }}
+                                  onClick={() => {
+                                    handleAddToCart(product);
+                                    handleAddToCart1(product);
+                                    setShowCartPopup(true);
+                                  }}
+                                >
+                                  Add To Cart
+                                </button>
+                              </div>
+                            </Col>
+                          </Row>
                         </div>
                       </Card.Body>
                     </Card>
