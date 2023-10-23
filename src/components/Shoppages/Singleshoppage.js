@@ -11,6 +11,7 @@ import Cookies from "js-cookie";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCartContext } from "../../CartContext";
 import { addToCart } from "../../actions";
+import { incrementQuantity, decrementQuantity } from "../../actions/cartActions";
 
 const Singleshoppage = () => {
   const [showInfo, setShowInfo] = useState(false);
@@ -30,19 +31,17 @@ const Singleshoppage = () => {
   );
 
   const dispatch = useDispatch();
- 
+
   const [searchTerm, setSearchTerm] = useState("");
 
   // Handle input change for custom quantity
   const handleInputChange = (e) => {
     const inputNumber = parseInt(e.target.value, 10);
-    if (!isNaN(inputNumber) && inputNumber >= 1 && inputNumber <= 10) {
+    if (!isNaN(inputNumber) && inputNumber >= 1) {
       setSearchTerm(inputNumber.toString());
       // Removed the setSelectedQuantity line since selectedQuantity is not used
-      
     } else {
       setSearchTerm("");
-     
     }
   };
 
@@ -86,6 +85,15 @@ const Singleshoppage = () => {
       navigate("/cart"); // Navigate to cart if userId is available
     }
   };
+  
+  const handleIncrementQuantity = (itemID) => {
+    dispatch(incrementQuantity(itemID));
+  };
+
+  const handleDecrementQuantity = (itemID) => {
+    dispatch(decrementQuantity(itemID));
+  };
+
   return (
     <div className="singleproductpage">
       <div className="position-relative mb-3">
@@ -140,7 +148,6 @@ const Singleshoppage = () => {
                     <s>₹{card.Product_originalPrice}</s>
                   </span>
                 )}
-               
               </h5>
               <p className="fw-bold mt-4">For Extra Texture & Crunch.</p>
               <p> Caramelized biscuit granules.</p>
@@ -158,19 +165,65 @@ const Singleshoppage = () => {
                       <div className="d-flex">
                         <h6 className="mt-1">Quantity:</h6>
                         <div>
-                          <input
+                          {/* <input
                             className="quantity"
                             type="number"
                             placeholder="1"
-                            min="1"
-                            max="10"
                             value={searchTerm}
                             onChange={handleInputChange}
                             style={{ width: "50px" }}
-                          />
+                          /> */}
+                          {/* <input
+                            className="quantity"
+                            type="number"
+                            placeholder="1"
+                            value={card.Qty}
+                            onChange={(e) =>
+                              handleInputChange(e, card.UserCartDetails_ID)
+                            }
+                            style={{ width: "50px" }}
+                          /> */}
+
+
+
+
+
+
+
+
+{/* 
+                          increment decrementQuantity */}
+                          <button
+                            className="px-4 p-3 mt-3 mb-2 text-center rounded-4 shareproductbtn"
+                            onClick={() =>
+                              handleIncrementQuantity(card.UserCartDetails_ID)
+                            }
+                          >
+                            Increment
+                          </button>
+                          <p> {card.Qty}</p>
+                          <button
+                            className="px-4 p-3 mt-3 mb-2 text-center rounded-4 shareproductbtn"
+                            onClick={() =>
+                              handleDecrementQuantity(card.UserCartDetails_ID)
+                            }
+                          >
+                            Decrement
+                          </button>
                         </div>
                       </div>
                     </div>
+
+
+
+
+
+
+
+
+
+
+
 
                     <button className="px-4 p-3 mt-3 mb-2 text-center rounded-4 shareproductbtn">
                       {" "}
