@@ -12,7 +12,7 @@ const initialState = {
   error: null,
   totalQuantity: 0, // Total quantity of items in the cart
   totalPrice: 0, // Total price of items in the cart
-  // cartLength: 0, // Cart length
+   cartLength:0, // Cart length
 };
  
 
@@ -29,6 +29,8 @@ const cartReducer = (state = initialState, action) => {
         isLoading: false,
         error: null,
         //cartLength: cartDetails.length, // Update cart length
+        cartLength: calculateCartLength(cartDetails), // Update cart length
+
         totalPrice: calculateTotalPrice(action.payload.data), // Calculate the initial total price
       };
 
@@ -49,7 +51,7 @@ const cartReducer = (state = initialState, action) => {
         cartDetails: updatedCartDetailsIncrement,
         totalQuantity: calculateTotalQuantity(updatedCartDetailsIncrement),
         totalPrice: calculateTotalPrice(updatedCartDetailsIncrement), // Recalculate total price
-        
+        cartLength: calculateCartLength(updatedCartDetailsIncrement), // Update cart length
       };
 
     case DECREMENT_QUANTITY:
@@ -69,7 +71,7 @@ const cartReducer = (state = initialState, action) => {
         cartDetails: updatedCartDetailsDecrement,
         totalQuantity: calculateTotalQuantity(updatedCartDetailsDecrement),
         totalPrice: calculateTotalPrice(updatedCartDetailsDecrement), // Recalculate total price
-        
+        cartLength: calculateCartLength(updatedCartDetailsDecrement), // Update cart length
       };
 
     case REMOVE_FROM_CART:
@@ -107,6 +109,11 @@ const calculateTotalPrice = (cartDetails) => {
       return total + price * item.Qty;
     }, 0)
     .toFixed(2);
+};
+
+// Helper function to calculate cartLength based on total quantity
+const calculateCartLength = (cartDetails) => {
+  return cartDetails.reduce((total, item) => total + item.Qty, 0);
 };
 
 export default cartReducer;

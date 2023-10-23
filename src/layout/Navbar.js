@@ -18,12 +18,12 @@ import Cookies from "js-cookie";
 import { baseUrl } from "../Globalvarible";
 
 const Navbar = ({ handleShow2 }) => {
-  // const cartLength = useSelector((state) => state.cart.cartLength); // Access cartLength from the Redux store
-const items = useSelector((state) => state.cart1.items); // Access cartLength from the Redux store
-const cartLength1 = items.length;
-  const cartItems = useSelector((state) => state.cart.cartDetails);
+  
+ 
+  const cartLength = useSelector((state) => state.cart.cartLength);
+  const cartLength1 = useSelector((state) => state.cart1.cartLength1);
 
-  const cartLength = cartItems.length;
+
   const [userId, setUserId] = useState(Cookies.get("userId"));
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState("");
@@ -41,7 +41,7 @@ const cartLength1 = items.length;
   useEffect(() => {
     // Fetch brand data from the API
     dispatch(fetchCartDetails(userId));
-  }, [dispatch,userId]);
+  }, [dispatch, userId]);
 
   const handleBrandChange = (brand) => {
     if (brand.hasSubcat) {
@@ -75,23 +75,19 @@ const cartLength1 = items.length;
     navigate("/brandspage");
   };
 
-
   const navbarCollapseRef = useRef();
 
   // navigate to cart
   const cartclick = () => {
-    if(!userId){
-    navigate("/cartpage");
-    }
-    else{
+    if (!userId) {
+      navigate("/cartpage");
+    } else {
       navigate("/cart");
     }
   };
 
   //active links
   const [activeButton, setActiveButton] = useState(0); // State to track active button
-
-
 
   useEffect(() => {
     // Update the userId whenever it changes in the cookies
@@ -103,14 +99,11 @@ const cartLength1 = items.length;
     return () => clearInterval(interval);
   }, []);
 
- 
   const [logoUrl, setLogoUrl] = useState(""); // State to store the logo URL
 
   useEffect(() => {
     // Fetch the image URL from the API
-    fetch(
-      baseUrl+"FrontEndImages.php?FrontEnd_Id=1"
-    )
+    fetch(baseUrl + "FrontEndImages.php?FrontEnd_Id=1")
       .then((response) => response.json())
       .then((data) => {
         if (data.status) {
@@ -118,12 +111,9 @@ const cartLength1 = items.length;
           setLogoUrl(data.data.Logo);
         } else {
           // Handle the case where the data couldn't be retrieved
-      
         }
       })
-      .catch((error) => {
-        
-      });
+      .catch((error) => {});
   }, []);
   return (
     <nav className="navbar navbar-expand-lg navbar headerbar mt-lg-4 mb-lg-4">
@@ -159,9 +149,7 @@ const cartLength1 = items.length;
           data-bs-scroll="true"
           aria-controls="offcanvasExample"
         >
-          <div className="offcanvas-header">
-           
-          </div>
+          <div className="offcanvas-header"></div>
           <div className="offcanvas-body">
             <ul className="navbar-nav ms-lg-3 ">
               <li className="nav-item px-xl-2 d-flex justify-content-between">
@@ -173,7 +161,6 @@ const cartLength1 = items.length;
                     activeButton === 0 ? "active" : ""
                   }`}
                   onClick={() => {
-                    
                     setActiveButton(0);
                   }}
                 >
@@ -193,7 +180,6 @@ const cartLength1 = items.length;
                     activeButton === 1 ? "active" : ""
                   }`}
                   onClick={() => {
-               
                     setActiveButton(1);
                   }}
                 >
@@ -228,7 +214,6 @@ const cartLength1 = items.length;
                   show={isBrandDropdownOpen} // Show the dropdown based on the state
                   onMouseEnter={() => setIsBrandDropdownOpen(true)} // Open the dropdown when mouse enters
                   onMouseLeave={() => setIsBrandDropdownOpen(false)} // Close the dropdown when mouse leaves
-                  
                   title={
                     <span
                       className={`basic-nav-dropdown nav-btns b-link  rounded-3 ${
@@ -237,7 +222,6 @@ const cartLength1 = items.length;
                       onClick={handlclick}
                     >
                       Brands
-                     
                     </span>
                   }
                   className="basic-nav-dropdown"
@@ -292,7 +276,7 @@ const cartLength1 = items.length;
                         <NavDropdown.Item
                           onClick={() => {
                             handleBrandChange(brand);
-                           
+
                             navbarCollapseRef.current?.classList.remove("show");
                           }}
                           className="nav-link navdroplink  px-4"
@@ -338,10 +322,7 @@ const cartLength1 = items.length;
               <div className="d-none d-lg-block">
                 <InputGroup className="position-relative">
                   <div className="position-absolute searchbtn">
-                    <AiOutlineSearch
-                      className="searchicon fs-5"
-                    
-                    />
+                    <AiOutlineSearch className="searchicon fs-5" />
                   </div>
                   <input
                     type="text"
@@ -363,11 +344,9 @@ const cartLength1 = items.length;
               </div>
 
               <li className="nav-item px-lg-0 px-xl-2 ms-xl-4 my-3 my-lg-0 my-md-0">
-              
                 <Button
                   onClick={() => {
                     cartclick();
-                  
                   }}
                   className="cart-btn rounded-pill"
                 >
@@ -376,10 +355,9 @@ const cartLength1 = items.length;
                     style={{ background: "#44160F", color: "white" }}
                   ></i>
                   <span className="px-3 px-lg-1" data-bs-dismiss="offcanvas">
-                    Cart-({userId?cartLength:cartLength1})
+                    Cart-({userId ? cartLength : cartLength1})
                   </span>
                 </Button>
-               
               </li>
             </ul>
 
@@ -413,8 +391,6 @@ const cartLength1 = items.length;
                 )}
               </li>
             </ul>
-
-           
           </div>
         </div>
       </div>
