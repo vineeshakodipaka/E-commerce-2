@@ -49,9 +49,11 @@ export const fetchProducts = () => {
 
 export const ADD_TO_CART = "ADD_TO_CART";
 
-export const addToCart = (product) => ({
+export const addToCart = (product,Qty) => ({
   type: ADD_TO_CART,
-  payload: product,
+  payload:product,
+  Qty:Qty
+  
 });
 
 export const INCREMENT_QUANTITY = "INCREMENT_QUANTITY";
@@ -59,7 +61,7 @@ export const DECREMENT_QUANTITY = "DECREMENT_QUANTITY";
 
 export const incrementQuantity = (productId) => ({
   type: INCREMENT_QUANTITY,
-  payload: productId,
+  payload: productId
 });
 
 export const decrementQuantity = (productId) => ({

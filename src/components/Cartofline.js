@@ -5,14 +5,12 @@ import {
   incrementQuantity,
   decrementQuantity,
   removeFromCart,
-  
 } from "../actions"; // Import the actions
 import "./Cart.css";
 import Cookies from "js-cookie";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { baseUrl } from "../Globalvarible";
-
-
+import Marquee from "react-fast-marquee";
 
 const Cartofline = ({ handleShowA }) => {
   const cartItems1 = useSelector((state) => state.cart1.items);
@@ -21,18 +19,17 @@ const Cartofline = ({ handleShowA }) => {
 
   const userId = Cookies.get("userId");
 
-
-  const handleIncrementQuantity = (productId) => {
-    dispatch(incrementQuantity(productId));
+  const handleIncrementQuantity = (productId, Qty) => {
+    dispatch(incrementQuantity(productId, Qty));
   };
 
-  const handleDecrementQuantity = (productId) => {
-    dispatch(decrementQuantity(productId));
+  const handleDecrementQuantity = (productId, Qty) => {
+    dispatch(decrementQuantity(productId, Qty));
 
     const item = cartItems1.find((item) => item.Product_id === productId);
-    if (item && item.quantity === 0) {
-      dispatch(removeFromCart(productId));
-    } 
+    if (item && item.Qty === 0) {
+      dispatch(removeFromCart(productId, Qty));
+    }
   };
 
   //checkout
@@ -40,22 +37,21 @@ const Cartofline = ({ handleShowA }) => {
     if (!userId) {
       // User is not logged in
       // Show a signup or login form
-    
+
       handleShowA();
     }
   };
-const handleRemoveFromCart = (productId) => {
-  const itemIndex = cartItems1.findIndex((item) => item.Product_id === productId);
+  const handleRemoveFromCart = (productId) => {
+    const itemIndex = cartItems1.findIndex(
+      (item) => item.Product_id === productId
+    );
 
-  if (itemIndex !== -1) {
-    // Use the index to remove the item from the array
-    cartItems1.splice(itemIndex, 1);
-    dispatch(removeFromCart(productId));
-  }
-};
-
-
- 
+    if (itemIndex !== -1) {
+      // Use the index to remove the item from the array
+      cartItems1.splice(itemIndex, 1);
+      dispatch(removeFromCart(productId));
+    }
+  };
 
   return (
     <div className="container cartpage">
@@ -91,15 +87,17 @@ const handleRemoveFromCart = (productId) => {
                         <tr key={i}>
                           <td>
                             <img
-                              className="rounded-3    prdctimg"
+                              className="rounded-3  p-4  prdctimg"
                               src={product.Product_img}
                               alt={`Image ${i + 1}`}
                               id="prdctimg1"
-                              style={{ width: "80%", height: "100px" }}
+                              style={{ width: "150px", height: "150px" }}
                             />
                           </td>
-                          <td>{product.Product_name}</td>
-                          <td>
+                          <td style={{ width: "20%", verticalAlign: "middle" }}>
+                            <Marquee>{product.Product_name}</Marquee>
+                          </td>
+                          <td style={{ width: "15%", verticalAlign: "middle" }}>
                             <p>
                               {product.isSale ? (
                                 <span className="fw-bold">
@@ -112,20 +110,18 @@ const handleRemoveFromCart = (productId) => {
                               )}
                             </p>
                           </td>
-                          <td>
+                          <td style={{ width: "20%", verticalAlign: "middle" }}>
                             <button
-                              className="p-2"
-                              style={{ border: "none" }}
+                              className=" rounded-3  inc-dec-btn"
                               onClick={() =>
                                 handleDecrementQuantity(product.Product_id)
                               }
                             >
                               -
                             </button>
-                            <span className="fw-bold">{product.quantity}</span>
+                            <span className="fw-bold px-1">{product.Qty}</span>
                             <button
-                              className="p-2"
-                              style={{ border: "none" }}
+                              className=" rounded-3  inc-dec-btn"
                               onClick={() =>
                                 handleIncrementQuantity(product.Product_id)
                               }
@@ -133,22 +129,22 @@ const handleRemoveFromCart = (productId) => {
                               +
                             </button>
                           </td>
-                          <td>
+                          <td style={{ width: "20%", verticalAlign: "middle" }}>
                             Total: ₹
                             {product.isSale ? (
                               <span className="fw-bold">
-                                {product.Product_offerPrice * product.quantity}
+                                {product.Product_offerPrice * product.Qty}
                               </span>
                             ) : (
                               <span className="fw-bold">
-                                {product.Product_originalPrice *
-                                  product.quantity}
+                                {product.Product_originalPrice * product.Qty}
                               </span>
                             )}
                           </td>
-                          <td>
+                          <td style={{ verticalAlign: "middle" }}>
                             <button
-                              style={{ border: "none" }}
+                              rounded-3
+                              className="rounded-3 cartremove-btn p-2"
                               onClick={() =>
                                 handleRemoveFromCart(product.Product_id)
                               }
@@ -184,15 +180,14 @@ const handleRemoveFromCart = (productId) => {
                                       ₹{product.Product_offerPrice}
                                     </span>
                                   ) : (
-                                    <span className="fw-bold">
+                                    <span className="fw-bold ">
                                       ₹{product.Product_originalPrice}
                                     </span>
                                   )}
                                 </p>
                                 <div>
                                   <button
-                                    className="p-2"
-                                    style={{ border: "none" }}
+                                    className=" rounded-3  inc-dec-btn"
                                     onClick={() =>
                                       handleDecrementQuantity(
                                         product.Product_id
@@ -201,12 +196,9 @@ const handleRemoveFromCart = (productId) => {
                                   >
                                     -
                                   </button>
-                                  <span className="fw-bold">
-                                    {product.quantity}
-                                  </span>
+                                  <span className="fw-bold px-1">{product.Qty}</span>
                                   <button
-                                    className="p-2"
-                                    style={{ border: "none" }}
+                                    className=" rounded-3  inc-dec-btn"
                                     onClick={() =>
                                       handleIncrementQuantity(
                                         product.Product_id
@@ -220,19 +212,18 @@ const handleRemoveFromCart = (productId) => {
                                   Total: ₹
                                   {product.isSale ? (
                                     <span className="fw-bold">
-                                      {product.Product_offerPrice *
-                                        product.quantity}
+                                      {product.Product_offerPrice * product.Qty}
                                     </span>
                                   ) : (
                                     <span className="fw-bold">
                                       {product.Product_originalPrice *
-                                        product.quantity}
+                                        product.Qty}
                                     </span>
                                   )}
                                 </p>
 
                                 <button
-                                  style={{ border: "none" }}
+                                  className="rounded-3 cartremove-btn p-2"
                                   onClick={() =>
                                     handleRemoveFromCart(product.product_Id)
                                   }

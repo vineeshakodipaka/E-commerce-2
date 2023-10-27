@@ -8,12 +8,17 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import "./Footer.css";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   // Function to open the WhatsApp link in a new tab
   const openWhatsApp = () => {
     window.open("https://wa.me/917498847799", "_blank");
   };
+
+   const handleLinkClick = () => {
+     window.scrollTo(0, 0);
+   };
   return (
     <div className="footercls mt-lg-5 mt-md-5 ">
       <Container className="footer-container position-relative">
@@ -87,12 +92,34 @@ const Footer = () => {
           <Col xs="12" className="text-lg-start text-center">
             <div className="custom-border2 px-lg-4 pt-5">
               <h3>Utility Pages</h3>
-              <p>Terms & Condition</p>
-              <p>Refund Policy</p>
-              <p>Policy Privacy</p>
-              <p>Shop</p>
-              <p> My Account</p>
-              <p>Brands</p>
+              <Link to="/terms&condions" className="link" onClick={handleLinkClick}>
+                Terms & Condition
+              </Link>
+              <br />
+              <Link to="/refund" className="link" onClick={handleLinkClick}>
+                Refund Policy
+              </Link>
+              <br />
+              <Link
+                to="/privacypolicy"
+                className="link"
+                onClick={handleLinkClick}
+              >
+                Privacy Policy
+              </Link>
+              <br />
+              <Link to="/shoppage" className="link" onClick={handleLinkClick}>
+                Shop
+              </Link>
+              <br />
+              <Link to="/account" className="link" onClick={handleLinkClick}>
+                My Account
+              </Link>
+              <br />
+              <Link to="/brandspage" className="link" onClick={handleLinkClick}>
+                Brands
+              </Link>
+              <br />
             </div>
           </Col>
         </Row>

@@ -1,10 +1,9 @@
-
 import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 import Cookies from "js-cookie";
 import { useAuth } from "../../AuthContext ";
-import './Account.css'
+import "./Account.css";
 const Account = () => {
   const { logout } = useAuth();
 
@@ -14,22 +13,18 @@ const Account = () => {
     Cookies.remove("userId");
     logout();
   };
- const linkRef = React.useRef();
+  const linkRef = React.useRef();
 
- React.useEffect(() => {
-   // Trigger a click event on the Link element when the component mounts
-   linkRef.current.click();
- }, []);
+  React.useEffect(() => {
+    // Trigger a click event on the Link element when the component mounts
+    linkRef.current.click();
+  }, []);
   return (
     <div className="accountfile">
-      <div style={{ background: "#f6f6f6" }} className="pt-3 pb-3 fw-5">
-        <h1 className="text-center">My Account</h1>
-        <h4 className="text-center">Shop</h4>
-      </div>
       <Container>
-        <Row className="text-center justify-content-center">
-          <Col lg={2} xs={5}>
-            <nav className="navbar mt-lg-4 mb-lg-4  fw-bolder text-start mt-lg-5 pt-lg-4">
+        <Row className="text-center justify-content-center ">
+          <Col lg={2} xs={6} md={3}>
+            <nav className="navbar mt-lg-4 mb-lg-4   fw-bolder text-md-start  text-center mt-lg-5 pt-lg-4">
               <ul className="navbar-nav ms-lg-3">
                 <li
                   className={`nav-item px-xl-2 c-link   ${
@@ -58,6 +53,20 @@ const Account = () => {
                     Addresses
                   </Link>
                 </li>
+                <li
+                  className={`nav-item px-xl-2 c-link   ${
+                    activeButton === 2 ? "active" : ""
+                  }`}
+                >
+                  <Link
+                    to="myorders"
+                    className="nav-link  c-link"
+                    onClick={() => setActiveButton(2)}
+                  >
+                    MyOrders
+                  </Link>
+                </li>
+
                 <li className="nav-item px-xl-2">
                   <button className="btn btn-danger" onClick={handleLogout}>
                     Logout
@@ -66,7 +75,7 @@ const Account = () => {
               </ul>
             </nav>
           </Col>
-          <Col lg={10} xs={12}>
+          <Col lg={10} xs={12} md={9}>
             <Outlet />
           </Col>
         </Row>

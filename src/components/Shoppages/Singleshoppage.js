@@ -11,7 +11,6 @@ import Cookies from "js-cookie";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCartContext } from "../../CartContext";
 import { addToCart } from "../../actions";
-import { incrementQuantity, decrementQuantity } from "../../actions/cartActions";
 
 const Singleshoppage = () => {
   const [showInfo, setShowInfo] = useState(false);
@@ -32,16 +31,17 @@ const Singleshoppage = () => {
 
   const dispatch = useDispatch();
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [Qty, setQty] = useState("1");
 
   // Handle input change for custom quantity
   const handleInputChange = (e) => {
     const inputNumber = parseInt(e.target.value, 10);
-    if (!isNaN(inputNumber) && inputNumber >= 1) {
-      setSearchTerm(inputNumber.toString());
+    if (!isNaN(inputNumber) && inputNumber >= 1 && inputNumber <= 100) {
+      setQty(inputNumber.toString());
       // Removed the setSelectedQuantity line since selectedQuantity is not used
+      console.log(Qty);
     } else {
-      setSearchTerm("");
+      setQty("1");
     }
   };
 
@@ -67,10 +67,10 @@ const Singleshoppage = () => {
     );
   }
 
-  const handleAddToCart1 = (product) => {
+  const handleAddToCart1 = (product, Qty) => {
     window.scrollTo(0, 0);
     if (!userId) {
-      dispatch(addToCart(product));
+      dispatch(addToCart(product, Qty));
       setShowCartPopup(true);
     } else {
       setShowCartPopup(true);
@@ -84,14 +84,6 @@ const Singleshoppage = () => {
     } else {
       navigate("/cart"); // Navigate to cart if userId is available
     }
-  };
-  
-  const handleIncrementQuantity = (itemID) => {
-    dispatch(incrementQuantity(itemID));
-  };
-
-  const handleDecrementQuantity = (itemID) => {
-    dispatch(decrementQuantity(itemID));
   };
 
   return (
@@ -149,15 +141,8 @@ const Singleshoppage = () => {
                   </span>
                 )}
               </h5>
-              <p className="fw-bold mt-4">For Extra Texture & Crunch.</p>
-              <p> Caramelized biscuit granules.</p>
-              <p> Size : 3-610 mm.</p>
-              <p>
-                {" "}
-                Storage Condition -Store in cool, Dry, Hygienic place, Away from
-                direct sunlight..
-              </p>
-
+             
+              <p className="mt-3">{card.Product_desc}</p>
               <div>
                 <Row className="quantitycls mt-4 mb-5">
                   <Col>
@@ -165,65 +150,17 @@ const Singleshoppage = () => {
                       <div className="d-flex">
                         <h6 className="mt-1">Quantity:</h6>
                         <div>
-                          {/* <input
+                          <input
                             className="quantity"
                             type="number"
                             placeholder="1"
-                            value={searchTerm}
+                            value={Qty}
                             onChange={handleInputChange}
                             style={{ width: "50px" }}
-                          /> */}
-                          {/* <input
-                            className="quantity"
-                            type="number"
-                            placeholder="1"
-                            value={card.Qty}
-                            onChange={(e) =>
-                              handleInputChange(e, card.UserCartDetails_ID)
-                            }
-                            style={{ width: "50px" }}
-                          /> */}
-
-
-
-
-
-
-
-
-{/* 
-                          increment decrementQuantity */}
-                          <button
-                            className="px-4 p-3 mt-3 mb-2 text-center rounded-4 shareproductbtn"
-                            onClick={() =>
-                              handleIncrementQuantity(card.UserCartDetails_ID)
-                            }
-                          >
-                            Increment
-                          </button>
-                          <p> {card.Qty}</p>
-                          <button
-                            className="px-4 p-3 mt-3 mb-2 text-center rounded-4 shareproductbtn"
-                            onClick={() =>
-                              handleDecrementQuantity(card.UserCartDetails_ID)
-                            }
-                          >
-                            Decrement
-                          </button>
+                          />
                         </div>
                       </div>
                     </div>
-
-
-
-
-
-
-
-
-
-
-
 
                     <button className="px-4 p-3 mt-3 mb-2 text-center rounded-4 shareproductbtn">
                       {" "}
@@ -234,8 +171,8 @@ const Singleshoppage = () => {
                     <button
                       className="p-md-3 p-2 px-lg-4 px-md-3 p-lg-3 text-center addtocart"
                       onClick={() => {
-                        handleAddToCart(card);
-                        handleAddToCart1(card);
+                        handleAddToCart(card, Qty);
+                        handleAddToCart1(card, Qty);
                         setShowCartPopup(true);
                       }}
                     >

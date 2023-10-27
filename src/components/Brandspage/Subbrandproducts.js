@@ -9,6 +9,7 @@ import "../Shoppages/Shoppage.css";
 import { useCartContext } from "../../CartContext"; // Import the useCartContext hook
 import Cookies from "js-cookie";
 import { Player } from "@lottiefiles/react-lottie-player";
+import { baseUrl } from "../../Globalvarible";
 
 const Subbrandproducts = () => {
   const { handleAddToCart } = useCartContext(); // Use the useCartContext hook to access the handleAddToCart function
@@ -64,7 +65,7 @@ const Subbrandproducts = () => {
           <Player
             autoplay
             loop
-            src="https://paradox122.000webhostapp.com/_API/Animations/Cart404.json"
+            src={baseUrl+"Animations/Cart404.json"}
             style={{ height: "300px", width: "300px" }}
             visible={true}
           ></Player>

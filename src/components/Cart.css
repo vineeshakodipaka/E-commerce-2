@@ -37,3 +37,14 @@
 
         border: none;
 }
+.cartpage .cartremove-btn,.cartpage .inc-dec-btn{
+    border: 1px solid #652700;
+    background-color: white;
+}
+.cartpage .cartremove-btn:hover,.cartpage .inc-dec-btn:hover {
+    
+    background-color: #652700;
+    border: none;
+    color: white;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2), 0 6px 2px 0 rgba(0, 0, 0, .19);
+}

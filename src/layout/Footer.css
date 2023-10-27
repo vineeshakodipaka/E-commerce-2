@@ -79,3 +79,25 @@ font-weight: 700;
      box-shadow: 0 0 0 15px rgba(37, 211, 101, 0);
    }
  }
+ .footercls .link {
+  text-decoration: none;
+  /* Remove the default underline */
+    color: #000;
+      font-family: 'Open Sans';
+      font-weight: 400;
+      line-height: 165.4%;
+    
+  
+  /* Define styles for the underline on hover and when active (clicked) */
+  transition: text-decoration 0.3s;
+}
+
+.footercls .link:hover {
+  text-decoration: underline;
+  /* Show underline on hover */
+}
+
+.footercls .link:active {
+  text-decoration: underline;
+  /* Show underline when clicked */
+}

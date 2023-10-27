@@ -26,10 +26,15 @@ import Subbrandproducts from "./components/Brandspage/Subbrandproducts";
 import Account from "./components/Account/Account";
 
 import AccountDetails from "./components/Account/AccountDetails ";
-import Addresses from "./components/Account/Addresses";
+import Addressform from "./components/Account/Addressform";
 import Cartofline from "./components/Cartofline";
 import AddressDetail from "./components/Account/AddressDetail";
 import { baseUrl } from "./Globalvarible";
+import Privacypolicy from "./components/FooterPagesComponents/Privacypolicy";
+import Terms from "./components/FooterPagesComponents/Terms";
+import Refund from "./components/FooterPagesComponents/Refund";
+import Myorderdetails from "./components/Account/Myorderdetails";
+import OrderItems from "./components/Account/OrderItems";
 
 const App = () => {
   const [show, setShow] = useState(false);
@@ -47,7 +52,6 @@ const App = () => {
   const cartShow = () => setShowCartPopup(true);
 
   const [userId, setUserId] = useState(Cookies.get("userId"));
-  
 
   useEffect(() => {
     // Update the userId whenever it changes in the cookies
@@ -59,12 +63,10 @@ const App = () => {
     return () => clearInterval(interval);
   }, []);
 
-
-
   return (
     <div className="app">
       <Navbar handleShow2={handleShow} />
-     
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -97,44 +99,40 @@ const App = () => {
         <Route path="/brandspage" element={<NewBrandspage />} />
         <Route path="/shoppage" element={<MainShop />} />
         <Route path="/brands/:brandId" element={<BrandDetails />} />
-       
-        
 
         {userId === undefined ? (
           <Route path="/account" element={<Navigate to="/" replace />} />
         ) : (
           <Route path="/account/*" element={<Account />}>
-            
             <Route path="accountDetails" index element={<AccountDetails />} />
             <Route
               path="addresses"
               element={
-                <Addresses
+                <Addressform
                   handleShow2={handleShow}
                   handleClose2={handleClose}
                   baseUrl1={baseUrl}
                   show2={show}
-             
                 />
               }
             />
-          </Route>  
+            <Route path="myorders" element={<Myorderdetails />} />
+            <Route path="orderspage/:orderID" element={<OrderItems />} />
+          </Route>
         )}
 
         <Route
           path="/checkout"
-          element={
-            <Checkoutform
-              handleShow2={handleShow}
-             
-              baseUrl1={baseUrl}
-            />
-          }
+          element={<Checkoutform handleShow2={handleShow} baseUrl1={baseUrl} />}
         />
 
         <Route path="/blog" element={<Blogpage />} />
         <Route path="/brand-products" element={<BrandProductsPage />} />
         <Route path="/subbrand-products" element={<Subbrandproducts />} />
+        {/* //footer pages links */}
+        <Route path="/privacypolicy" element={<Privacypolicy />} />
+        <Route path="/terms&condions" element={<Terms />} />
+        <Route path="/refund" element={<Refund />} />
       </Routes>
       <Login
         handleShow2={handleShow}
@@ -151,7 +149,6 @@ const App = () => {
       <AddressDetail
         baseUrl1={baseUrl}
         showCartPopup={showCartPopup}
-       
         cartClose={cartClose}
       />
       <Bottombar />

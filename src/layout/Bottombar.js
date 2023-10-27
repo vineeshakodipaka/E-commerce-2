@@ -3,7 +3,7 @@ import { Navbar, Nav } from "react-bootstrap";
 import { AiFillHome } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
 import { BsFillCartDashFill } from "react-icons/bs";
-import { AiFillMessage } from "react-icons/ai";
+import { RiShoppingBagFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import "./Bottombar.css"; // Import the external CSS file
 import { useSelector } from "react-redux";
@@ -34,18 +34,17 @@ const Bottombar = () => {
             <br />
             {activeButton === 0 && <p className="text-center mb-0"> Home</p>}
           </Link>
-
-          {/* User link */}
+          {/* shop link */}
           <Link
-            to="/contact"
+            to="/shoppage"
             className={`b-link px-3  rounded-3 text-center  p-2 ${
               activeButton === 1 ? "active" : ""
             }`}
             onMouseEnter={() => setActiveButton(1)}
             style={{ color: "black", textDecoration: "none" }}
           >
-            <FaUserAlt size={20} color="#652700" />
-            {activeButton === 1 && <p className="mb-0"> Contact</p>}
+            <RiShoppingBagFill size={20} color="#652700" />
+            {activeButton === 1 && <p className="mb-0"> Shop</p>}
           </Link>
 
           {/* Cart link */}
@@ -71,25 +70,17 @@ const Bottombar = () => {
             )}
           </Link>
 
-          {/* Message link */}
+          {/* User link */}
           <Link
-            to="/"
-            className={`b-link  px-3   rounded-3 text-center  p-2 ${
+            to="/account"
+            className={`b-link px-3  rounded-3 text-center  p-2 ${
               activeButton === 3 ? "active" : ""
             }`}
             onMouseEnter={() => setActiveButton(3)}
             style={{ color: "black", textDecoration: "none" }}
           >
-            <AiFillMessage size={20} color="#652700" />
-            <sup>
-              <span
-                className="bg-danger rounded-circle px-1"
-                style={{ color: "white" }}
-              >
-                0
-              </span>
-            </sup>
-            {activeButton === 3 && <p className=" mb-0"> Message</p>}
+            <FaUserAlt size={20} color="#652700" />
+            {activeButton === 3 && <p className="mb-0"> Profile</p>}
           </Link>
         </Nav>
       </Navbar>

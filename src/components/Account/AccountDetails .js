@@ -54,8 +54,7 @@ const AccountDetails = () => {
     formdata.append("Email", formData.Email);
     formdata.append("PhoneNumber", formData.PhoneNumber);
     formdata.append("Password", formData.password);
-
-      };
+  };
 
   // Handle input field changes and update form data
   const handleInputChange = (e) => {
@@ -66,7 +65,6 @@ const AccountDetails = () => {
   return (
     <div className="checkoutcls">
       <Row className="mx-lg-5 px-lg-5 col-lg-12 text-start">
-        <h2 className=" px-lg-5 mt-3 mx-5">Account details</h2>
         <Form className="mt-2 px-5 mx-lg-5" onSubmit={handleFormSubmit}>
           <Row lg={2} xs={1} md={1}>
             <Col xs={12} lg={12}>

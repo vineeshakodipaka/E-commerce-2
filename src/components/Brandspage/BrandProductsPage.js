@@ -9,12 +9,15 @@ import "../Shoppages/Shoppage.css";
 import { useCartContext } from "../../CartContext"; // Import the useCartContext hook
 import Cookies from "js-cookie";
 import { Player } from "@lottiefiles/react-lottie-player";
+import { baseUrl } from "../../Globalvarible";
 
 const BrandProductsPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const brandId = queryParams.get("Brand_id");
+    const loading = useSelector((state) => state.brandProducts.loading);
+
 
   const products = useSelector((state) => state.brandProducts.products);
 
@@ -28,12 +31,11 @@ const BrandProductsPage = () => {
     dispatch(fetchBrandProducts(brandId));
   }, [dispatch, brandId]);
 
-
   const Scrollink = () => {
     // Scroll to the top of the page
     window.scrollTo(0, 0);
   };
-  
+
   // State to control the cart pop-up visibility
   const [showCartPopup, setShowCartPopup] = useState(false);
 
@@ -59,19 +61,33 @@ const BrandProductsPage = () => {
 
   return (
     <div>
-      {products.length === 0 ? (
+      {products.length === 0? (
         <div>
           <Player
             autoplay
             loop
-            src="https://paradox122.000webhostapp.com/_API/Animations/Cart404.json"
+            src={baseUrl + "Animations/Brand404.json"}
             style={{ height: "300px", width: "300px" }}
             visible={true}
           ></Player>
         </div>
-      ) : error ? (
-        <p>Error: {error}</p>
-      ) : (
+      ) : loading ? (
+        <div>
+          <Player
+            autoplay
+            loop
+            src={baseUrl + "Animations/loading.json"}
+            style={{ height: "300px", width: "300px" }}
+            visible={true}
+          ></Player>
+        </div>
+      ) :
+      error?(
+        <>
+        error:{error}
+        </>
+      ):
+      (
         <div className="shoppagecls">
           <Container>
             {/* Render product cards */}

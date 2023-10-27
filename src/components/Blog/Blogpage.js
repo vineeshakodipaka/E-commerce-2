@@ -1,72 +1,27 @@
 import React from "react";
 import blimg from "../../Images/image 55.png";
-import blimg1 from "../../Images/blogimg1.png";
-import blimg2 from "../../Images/blogimg2.png";
-import blimg3 from "../../Images/blogimg3.png";
-import blimg4 from "../../Images/blogimg4.png";
-import blimg5 from "../../Images/blogimg5.png";
-import blimg6 from "../../Images/blogimg6.png";
+
 import { FaUserAlt, FaArrowRight } from "react-icons/fa";
 import { Card, Col, Row } from "react-bootstrap";
 import "./Blogpage.css";
 import { useNavigate } from "react-router-dom";
-const blogimgs = [
-  {
-    img: blimg1,
-    date: "25Nov",
-    cname: "By Rachi Card",
-    caption1: "The Benefits of Vitamin D & How to Get It",
-    caption2:
-      "Simply dummy text of the printing and typesetting industry. Lorem Ipsum",
-  },
-  {
-    img: blimg2,
-    date: "25Nov",
-    cname: "By Rachi Card",
-    caption1: "Our Favorite Summertime Tomato",
-    caption2:
-      "Simply dummy text of the printing and typesetting industry. Lorem Ipsum",
-  },
-  {
-    img: blimg3,
-    date: "25Nov",
-    cname: "By Rachi Card",
-    caption1: "Benefits of Vitamin C & How to Get It",
-    caption2:
-      "Simply dummy text of the printing and typesetting industry. Lorem Ipsum",
-  },
-  {
-    img: blimg4,
-    date: "25Nov",
-    cname: "By Rachi Card",
-    caption1: "Research More Organic Foods",
-    caption2:
-      "Simply dummy text of the printing and typesetting industry. Lorem Ipsum",
-  },
-  {
-    img: blimg5,
-    date: "25Nov",
-    cname: "By Rachi Card",
-    caption1: "Everyday Fresh Fruites",
-    caption2:
-      "Simply dummy text of the printing and typesetting industry. Lorem Ipsum",
-  },
-  {
-    img: blimg6,
-    date: "25Nov",
-    cname: "By Rachi Card",
-    caption1: "Don't Use Plastic Product! it's Kill Nature",
-    caption2:
-      "Simply dummy text of the printing and typesetting industry. Lorem Ipsum",
-  },
-];
+import { useState } from "react";
+import { useEffect } from "react";
+import { baseUrl } from "../../Globalvarible";
 
 const Blogpage = () => {
+  const [blogimgs, setBlogimgs] = useState([]);
   const navigate = useNavigate();
   const handlclick = () => {
-     window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
     navigate("/singleblog");
   };
+
+  useEffect(() => {
+    fetch(baseUrl + "GetBlogs.php")
+      .then((resp) => resp.json())
+      .then((res) => setBlogimgs(res.data));
+  }, []);
 
   return (
     <div className="blogcls mb-5 mb-lg-0 mb-md-0">

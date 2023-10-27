@@ -20,24 +20,21 @@ export const fetchCartDetails = (userId) => {
 };
 
 
-// export const incrementQuantity = (productId) => {
-//   return { type: "INCREMENT_QUANTITY", payload: productId };
-// };
-
-// export const decrementQuantity = (productId) => {
-//   return { type: "DECREMENT_QUANTITY", payload: productId };
-// };
-// cartActions.js
 
 export const INCREMENT_QUANTITY = "INCREMENT_QUANTITY";
 export const DECREMENT_QUANTITY = "DECREMENT_QUANTITY";
 
 export const incrementQuantity = (itemID,Qty) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     const formdata = new FormData();
     formdata.append("UserCartDetails_ID", itemID);
-    formdata.append("Qty", Qty); // Assuming you want to increment by 1
-
+    if(Number(Qty)>=100){
+      formdata.append("Qty", "100"); // Assuming you want to increment by 1
+    }
+    else{
+      formdata.append("Qty", Qty); // Assuming you want to increment by 1
+    }
+ 
     const requestOptions = {
       method: "POST",
       body: formdata,
@@ -67,7 +64,7 @@ export const incrementQuantity = (itemID,Qty) => {
 };
 
 export const decrementQuantity = (itemID,Qty) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     const formdata = new FormData();
     formdata.append("UserCartDetails_ID", itemID);
     formdata.append("Qty", Qty); // Assuming you want to decrement by 1

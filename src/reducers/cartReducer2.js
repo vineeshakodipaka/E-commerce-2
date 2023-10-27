@@ -1,4 +1,3 @@
-
 const cartReducer2 = (
   state = { items: [], totalQuantity: 0, totalPrice: 0, cartLength1: 0 },
   action
@@ -9,9 +8,9 @@ const cartReducer2 = (
         (item) => item.Product_id === action.payload.Product_id
       );
       if (existingProduct) {
-        existingProduct.quantity += 1;
+        existingProduct.Qty += 1;
       } else {
-        action.payload.quantity = 1;
+        action.payload.Qty = Number(action.Qty);
         state.items.push({ ...action.payload });
       }
 
@@ -24,12 +23,12 @@ const cartReducer2 = (
           : parseFloat(
               item.Product_originalPrice.replace("₹", "").replace(",", "")
             );
-        return total + price * item.quantity;
+        return total + price * item.Qty;
       }, 0);
 
       // Calculate the total length
       const cartLength1 = state.items.reduce(
-        (total, item) => total + item.quantity,
+        (total, item) => total + item.Qty,
         0
       );
 
@@ -45,8 +44,8 @@ const cartReducer2 = (
       const itemToIncrement = state.items.find(
         (item) => item.Product_id === action.payload
       );
-      if (itemToIncrement) {
-        itemToIncrement.quantity += 1;
+      if (itemToIncrement &&  itemToIncrement.Qty<100) {
+        itemToIncrement.Qty += 1;
 
         // Recalculate the total price
         const updatedTotalPrice = state.items.reduce((total, item) => {
@@ -59,12 +58,12 @@ const cartReducer2 = (
             : parseFloat(
                 item.Product_originalPrice.replace("₹", "").replace(",", "")
               );
-          return total + price * item.quantity;
+          return total + price * item.Qty;
         }, 0);
 
         // Recalculate the total length
         const updatedTotalLength = state.items.reduce(
-          (total, item) => total + item.quantity,
+          (total, item) => total + item.Qty,
           0
         );
 
@@ -81,8 +80,8 @@ const cartReducer2 = (
       const itemToDecrement = state.items.find(
         (item) => item.Product_id === action.payload
       );
-      if (itemToDecrement && itemToDecrement.quantity > 0) {
-        itemToDecrement.quantity -= 1;
+      if (itemToDecrement && itemToDecrement.Qty > 0) {
+        itemToDecrement.Qty -= 1;
 
         // Recalculate the total price
         const updatedTotalPrice = state.items.reduce((total, item) => {
@@ -95,13 +94,13 @@ const cartReducer2 = (
           : parseFloat(
               item.Product_originalPrice.replace("₹", "").replace(",", "")
             );
-        return total + price * item.quantity;
+        return total + price * item.Qty;
        
         }, 0);
 
         // Recalculate the total length
         const updatedTotalLength = state.items.reduce(
-          (total, item) => total + item.quantity,
+          (total, item) => total + item.Qty,
           0
         );
 
@@ -119,7 +118,7 @@ const cartReducer2 = (
         (item) => item.Product_id !== action.payload
       );
 
-      // Recalculate the total price and total quantity
+      // Recalculate the total price and total Qty
       const updatedTotalPriceAfterRemove = updatedItems.reduce(
         (total, item) => {
           const price = item.isSale
@@ -131,14 +130,14 @@ const cartReducer2 = (
             : parseFloat(
                 item.Product_originalPrice.replace("₹", "").replace(",", "")
               );
-          return total + price * item.quantity;
+          return total + price * item.Qty;
         },
         0
       );
 
       // Recalculate the total length
       const updatedTotalLengthAfterRemove = updatedItems.reduce(
-        (total, item) => total + item.quantity,
+        (total, item) => total + item.Qty,
         0
       );
 

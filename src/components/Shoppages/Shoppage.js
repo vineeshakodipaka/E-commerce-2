@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts, addToCart } from "../../actions";
-
+ 
 import { Link, useNavigate } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import "./Shoppage.css";
@@ -43,10 +43,10 @@ const Shoppage = ({ searchQuery }) => {
   const [showCartPopup, setShowCartPopup] = useState(false);
 
   const userId = Cookies.get("userId"); // Use your method to get the user ID from cookies
-  const handleAddToCart1 = (product) => {
+  const handleAddToCart1 = (product,Qty) => {
     window.scrollTo(0, 0);
     if (!userId) {
-      dispatch(addToCart(product));
+      dispatch(addToCart(product,Qty));
       setShowCartPopup(true);
     } else {
       setShowCartPopup(true);
@@ -62,6 +62,9 @@ const Shoppage = ({ searchQuery }) => {
     }
   };
 
+
+
+
   return (
     <div className="shoppagecls">
       <Container>
@@ -74,8 +77,8 @@ const Shoppage = ({ searchQuery }) => {
           className="g-4 cardsrow  pb-md-5 py-md-3 mb-md-5 pt-5"
         >
           {searchQuery !== "" && // Only render when there's a search query
-            products.map((product, i) => (
-              <Col key={i}>
+            products.map((product, UserCartDetails_ID) => (
+              <Col key={product.UserCartDetails_ID}>
                 <Card className="rounded-2 pt-1 pb-1 shopcards">
                   <Card.Body>
                     <div className="position-relative">
@@ -105,11 +108,11 @@ const Shoppage = ({ searchQuery }) => {
                       >
                         <Row>
                           <div className="cardimg">
-                            <Card.Img
+                            <Card.Img 
                               variant="top"
                               className="rounded-3  mt-3  p-lg-4 pt-lg-4 pt-3 pb-3 prdctimg"
                               src={product.Product_img}
-                              alt={`Image ${i + 1}`}
+                              alt={`Image ${UserCartDetails_ID + 1}`}
                               // style={{ width: "100%", height: "250px" }}
                             />
                           </div>
@@ -126,6 +129,7 @@ const Shoppage = ({ searchQuery }) => {
                       <div className="px-3 d-md-none d-lg-block d-none">
                         <hr />
                       </div>
+
                       {/* Display original and offer prices */}
                       <Row lg={2} className="row2cart">
                         <Col lg={5} xl={6} md={6} xs={12}>
@@ -163,8 +167,8 @@ const Shoppage = ({ searchQuery }) => {
                                 color: "white",
                               }}
                               onClick={() => {
-                                handleAddToCart(product);
-                                handleAddToCart1(product);
+                                handleAddToCart(product, "1");
+                                handleAddToCart1(product, "1");
                                 setShowCartPopup(true);
                               }}
                             >

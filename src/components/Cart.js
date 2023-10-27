@@ -13,6 +13,7 @@ import {
 } from "../actions/cartActions";
 import { useNavigate } from "react-router-dom";
 import { Player } from "@lottiefiles/react-lottie-player";
+import Marquee from "react-fast-marquee";
 
 const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
   const dispatch = useDispatch();
@@ -63,7 +64,11 @@ const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
 
   const handleIncrementQuantity = (productId, Qty) => {
     dispatch(incrementQuantity(productId, Qty));
-  };
+     
+    if (Qty <= 100) {
+      Qty = 100;
+    }
+  };  
 
   const handleDecrementQuantity = (productId, Qty) => {
     dispatch(decrementQuantity(productId, Qty));
@@ -82,7 +87,6 @@ const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
         // User is logged in and has an address
         // Proceed to the payment gateway
         cartShow();
-       
       } else {
         // User is logged in but doesn't have an address
         // Show a form to add an address or perform any required actions
@@ -138,13 +142,13 @@ const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
                               src={product.Product_img}
                               alt={`Image ${i + 1}`}
                               id="prdctimg1"
-                              style={{ width: "100%", height: "60%" }}
+                              style={{ width: "150px", height: "150px" }}
                             />
                           </td>
-                          <td style={{ width: "20%" }}>
-                            {product.Product_name}
+                          <td style={{ width: "20%", verticalAlign: "middle" }}>
+                            <Marquee>{product.Product_name}</Marquee>
                           </td>
-                          <td style={{ width: "20%" }}>
+                          <td style={{ width: "15%", verticalAlign: "middle" }}>
                             <p>
                               {product.isSale ? (
                                 <span className="fw-bold">
@@ -157,11 +161,10 @@ const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
                               )}
                             </p>
                           </td>
-                          <td style={{ width: "12%" }}>
+                          <td style={{ width: "20%", verticalAlign: "middle" }}>
                             <button
-                              className="p-2"
-                              style={{ border: "none" }}
-                              onClick={() =>
+                              className="rounded-3 inc-dec-btn"
+                              onClick={() =>  
                                 handleDecrementQuantity(
                                   product.UserCartDetails_ID,
                                   Number(product.Qty) - 1
@@ -170,10 +173,9 @@ const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
                             >
                               -
                             </button>
-                            <span className="fw-bold">{product.Qty}</span>
+                            <span className="fw-bold px-1">{product.Qty}</span>
                             <button
-                              className="p-2"
-                              style={{ border: "none" }}
+                              className=" rounded-3 inc-dec-btn"
                               onClick={() =>
                                 handleIncrementQuantity(
                                   product.UserCartDetails_ID,
@@ -184,7 +186,7 @@ const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
                               +
                             </button>
                           </td>
-                          <td style={{ width: "20%" }}>
+                          <td style={{ width: "20%", verticalAlign: "middle" }}>
                             Total: ₹
                             {product.isSale ? (
                               <span className="fw-bold">
@@ -198,9 +200,9 @@ const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
                               </span>
                             )}
                           </td>
-                          <td>
+                          <td style={{ verticalAlign: "middle" }}>
                             <button
-                              style={{ border: "none" }}
+                              className="rounded-3 cartremove-btn p-2"
                               onClick={() =>
                                 handleRemoveFromCart(product.UserCartDetails_ID)
                               }
@@ -244,8 +246,7 @@ const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
                                 </p>
                                 <div>
                                   <button
-                                    className="p-2"
-                                    style={{ border: "none" }}
+                                    className="rounded-3  inc-dec-btn"
                                     onClick={() =>
                                       handleDecrementQuantity(
                                         product.UserCartDetails_ID,
@@ -255,10 +256,11 @@ const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
                                   >
                                     -
                                   </button>
-                                  <span className="fw-bold">{product.Qty}</span>
+                                  <span className="fw-bold px-1">
+                                    {product.Qty}
+                                  </span>
                                   <button
-                                    className="p-2"
-                                    style={{ border: "none" }}
+                                    className="rounded-3  inc-dec-btn"
                                     onClick={() =>
                                       handleIncrementQuantity(
                                         product.UserCartDetails_ID,
@@ -285,8 +287,7 @@ const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
                                 </p>
 
                                 <button
-                                  className="mt-2"
-                                  style={{ border: "none" }}
+                                  className="mt-2 rounded-3 cartremove-btn p-2"
                                   onClick={() =>
                                     handleRemoveFromCart(
                                       product.UserCartDetails_ID
@@ -337,7 +338,7 @@ const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
                       <p> ₹{totalPrice}</p>
                     </Col>
                   </Row>
-                  <input type="text" />
+                  <input type="text" placeholder="check coupon" />
                   <br />
                   <button className="coupon p-2 rounded-3 mt-2 mb-3">
                     check coupon

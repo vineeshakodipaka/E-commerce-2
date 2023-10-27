@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts, addToCart } from "../../actions";
 import { Link, useNavigate } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
-import Slider from "react-slick";
+import Slider from "react-slick"; 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
@@ -237,8 +237,8 @@ const Shopcardslide = ({ searchQuery }) => {
                                   color: "white",
                                 }}
                                 onClick={() => {
-                                  handleAddToCart(product);
-                                  handleAddToCart1(product);
+                                  handleAddToCart(product,"1");
+                                  handleAddToCart1(product,"1");
                                   setShowCartPopup(true);
                                 }}
                               >
