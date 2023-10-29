@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { fetchBrandSubproducts, addToCart } from "../../actions"; // Import the action to fetch brand products
 import { ButtonGroup, Card, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { Modal, Button } from "react-bootstrap";
+import {  Button } from "react-bootstrap";
 import "../Shoppages/Shoppage.css";
 import { useCartContext } from "../../CartContext"; // Import the useCartContext hook
 import Cookies from "js-cookie";

@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import spimg1 from "../../Images/image 55.png";
 
-import { Button, ButtonGroup, Card, Col, Container, Row } from "react-bootstrap";
+import {
+  Button,
+  ButtonGroup,
+  Card,
+  Col,
+  Container,
+  Row,
+} from "react-bootstrap";
 import { FaArrowRight } from "react-icons/fa";
 import "./Singleshoppage.css";
 import Shopcardslide from "./Shopcardslide";
@@ -29,14 +36,18 @@ const Singleshoppage = () => {
       (product) => product.Product_id === cardId
     )
   );
- const notificationAnimation = useSpring({
-   opacity: showCartPopup ? 1 : 0,
-   transform: showCartPopup ? "translateY(0)" : "translateY(-100%)",
- });
+  const notificationAnimation = useSpring({
+    opacity: showCartPopup ? 1 : 0,
+    transform: showCartPopup ? "translateY(0)" : "translateY(-100%)",
+  });
   const dispatch = useDispatch();
 
   const [Qty, setQty] = useState("1");
+  const [selectedImage, setSelectedImage] = useState(card.Product_img);
 
+  const handleImageClick = (newImage) => {
+    setSelectedImage(newImage);
+  };
   // Handle input change for custom quantity
   const handleInputChange = (e) => {
     const inputNumber = parseInt(e.target.value, 10);
@@ -62,27 +73,25 @@ const Singleshoppage = () => {
   //single cart
 
   useEffect(() => {
-     dispatch(fetchProducts())
-  }, [cardId,dispatch]);
+    dispatch(fetchProducts());
+  }, [cardId, dispatch]);
 
-  if (!card) {
-    return (
-      <Container>
-        <p>Card not found.</p>
-      </Container>
-    );
-  }
+  // if (!card) {
+  //   return (
+  //     <Container>
+  //       <p>Card not found.</p>
+  //     </Container>
+  //   );
+  // }
 
+  const handleAddToCart3 = () => {
+    setShowCartPopup(true);
 
-   const handleAddToCart3 = () => {
-     setShowCartPopup(true);
+    setTimeout(() => {
+      setShowCartPopup(false);
+    }, 8000); // Updated to 5 seconds
+  };
 
-     setTimeout(() => {
-       setShowCartPopup(false);
-     }, 8000); // Updated to 5 seconds
-   };
-
-  
   const handleAddToCart1 = (product, Qty) => {
     window.scrollTo(0, 0);
     if (!userId) {
@@ -114,25 +123,47 @@ const Singleshoppage = () => {
         </h3>
       </div>
       <Container>
-        <Row className="justify-content-center">
-          <Col lg={2} md={2} className="pt-md-4 px-xl-5 mt-md-5 imgcol">
-            <div>
-              <img src={card.Product_img2} alt="product" className="pb-3" />
-              <br />
-              <img src={card.Product_img3} alt="product" className="pb-3" />
-              <br />
-              <img src={card.Product_img4} alt="product" className="pb-3" />
-              <br />
-            </div>
+        <Row className="justify-content-center d-md-flex flex-md-row d-sm-block">
+          <Col
+            lg={2}
+            md={2}
+            className="pt-md-4 px-xl-5 mt-md-5 imgcol order-md-0 order-2"
+          >
+            <Row className="justify-content-center mt-md-0 mt-4">
+              <Col md={12} xs={3}>
+                <img
+                  src={card.Product_img2}
+                  alt="product"
+                  className="pb-3"
+                  onClick={() => handleImageClick(card.Product_img2)}
+                />
+              </Col>
+              <Col md={12} xs={3}>
+                <img
+                  src={card.Product_img3}
+                  alt="product"
+                  className="pb-3"
+                  onClick={() => handleImageClick(card.Product_img3)}
+                />
+              </Col>
+              <Col md={12} xs={3}>
+                <img
+                  src={card.Product_img}
+                  alt="product"
+                  className="pb-3"
+                  onClick={() => handleImageClick(card.Product_img)}
+                />
+              </Col>
+            </Row>
           </Col>
-          <Col lg={4} md={4} className="mt-md-5 ">
+          <Col lg={4} md={4} className="mt-md-5 order-md-1 order-1">
             <div>
               <br />
               <Card style={{ border: "none" }}>
                 <Card.Img
                   variant="top"
                   className=" singlecardprdctimg p-3"
-                  src={card.Product_img}
+                  src={selectedImage}
                   alt="product"
                   style={{
                     boxShadow: "0 2px 10px rgba(0,0,0,.1)",
@@ -144,7 +175,7 @@ const Singleshoppage = () => {
           </Col>
 
           {/* carameldiv column */}
-          <Col lg={6} md={6} className="px-xl-5">
+          <Col lg={6} md={6} className="px-xl-5 order-md-1 order-3">
             <div className="carameldiv mt-md-5">
               <p className="fs-3">{card.Product_name}</p>
               {card.isSale && (

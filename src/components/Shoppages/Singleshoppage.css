@@ -110,11 +110,8 @@
       height: 375px !important;
     }
     .singleproductpage .imgcol img {
-            width: 100% !important;
+            width: 50px !important;
+            height: 50px !important;
     }
-    .singleproductpage .imgcol img {
-           
-            height: 210px !important;
-    
-    }
+ 
 } 

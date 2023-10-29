@@ -60,9 +60,7 @@
             height: 35px;
     
   }
-   .shopcardslidecls .cardbtn {
-       font-size: 10px !important;
-   }
+  
    .slick-prev,
    .slick-next{
     display: none !important;
