@@ -286,16 +286,16 @@ const Shopcardslide2 = ({ searchQuery }) => {
           <Container className="d-flex justify-content-center align-items-center ">
             <ButtonGroup>
               <Button
-                className="cartpopupbtn p-2 px-4 mx-1 rounded-3"
-                onClick={() => setShowCartPopup(false)}
-              >
-                Close
-              </Button>
-              <Button
-                className="cartpopupbtn p-2 rounded-3"
+                className="cartpopupbtn2 p-2 rounded-3"
                 onClick={handleViewCart}
               >
                 View Cart
+              </Button>
+              <Button
+                className="cartpopupbtn1 p-2 px-4 mx-1 rounded-3"
+                onClick={() => setShowCartPopup(false)}
+              >
+                Close
               </Button>
             </ButtonGroup>
           </Container>

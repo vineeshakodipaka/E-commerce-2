@@ -85,7 +85,7 @@ const Shoppage = ({ searchQuery }) => {
 
  
 
-
+ 
   return (
     <div className="shoppagecls">
       <Container>
@@ -104,7 +104,7 @@ const Shoppage = ({ searchQuery }) => {
                   <Card.Body>
                     <div className="position-relative">
                       {/* Display "Sale" button if the product is on sale */}
-                       {product.isSale && (
+                      {product.isSale && (
                         <button
                           className="sale-button rounded-3 px-2"
                           style={{
@@ -236,20 +236,19 @@ const Shoppage = ({ searchQuery }) => {
           <Container className="d-flex justify-content-center align-items-center ">
             <ButtonGroup>
               <Button
-                className="cartpopupbtn p-2 px-4 mx-1 rounded-3"
-                onClick={() => setShowCartPopup(false)}
-              >
-                Close
-              </Button>
-              <Button
-                className="cartpopupbtn p-2 rounded-3"
+                className="cartpopupbtn2 p-2 rounded-3"
                 onClick={handleViewCart}
               >
                 View Cart
               </Button>
+              <Button
+                className="cartpopupbtn1 p-2 px-4 mx-1 rounded-3"
+                onClick={() => setShowCartPopup(false)}
+              >
+                Close
+              </Button>
             </ButtonGroup>
           </Container>
-         
         </Card>
       </animated.div>
     </div>
