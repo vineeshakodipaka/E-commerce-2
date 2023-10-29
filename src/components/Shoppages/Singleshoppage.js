@@ -43,7 +43,9 @@ const Singleshoppage = () => {
   const dispatch = useDispatch();
 
   const [Qty, setQty] = useState("1");
-  const [selectedImage, setSelectedImage] = useState(card.Product_img);
+  const [selectedImage, setSelectedImage] = useState("");
+  const [dataLoaded, setDataLoaded] = useState(false);
+
 
   const handleImageClick = (newImage) => {
     setSelectedImage(newImage);
@@ -72,18 +74,24 @@ const Singleshoppage = () => {
 
   //single cart
 
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [cardId, dispatch]);
+ useEffect(() => {
+   if (!dataLoaded) {
+     dispatch(fetchProducts());
 
-  // if (!card) {
-  //   return (
-  //     <Container>
-  //       <p>Card not found.</p>
-  //     </Container>
-  //   );
-  // }
-
+     if (card && card.Product_img) {
+       setSelectedImage(card.Product_img);
+       setDataLoaded(true);
+     }
+   }
+ }, [cardId, dispatch, card, dataLoaded]);
+  if (!card) {
+    return (
+      <Container>
+        <p>Card not found.</p>
+      </Container>
+    );
+  }
+ 
   const handleAddToCart3 = () => {
     setShowCartPopup(true);
 
