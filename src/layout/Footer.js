@@ -8,17 +8,37 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import "./Footer.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../AuthContext ";
 
 const Footer = () => {
   // Function to open the WhatsApp link in a new tab
   const openWhatsApp = () => {
     window.open("https://wa.me/917498847799", "_blank");
   };
-
+const navigate=useNavigate();
+const { setActiveButton } = useAuth();
    const handleLinkClick = () => {
      window.scrollTo(0, 0);
    };
+    const handleLinkClickshop = () => {
+      window.scrollTo(0, 0);
+        setActiveButton(2);
+      navigate("/shoppage")
+
+      
+    };
+     const handleLinkClickbrand = () => {
+       window.scrollTo(0, 0);
+         setActiveButton(3);
+         navigate("/brandspage");
+     };
+      const handleLinkClickacount = () => {
+        window.scrollTo(0, 0);
+        setActiveButton(7);
+        navigate("/account");
+      };
+     
   return (
     <div className="footercls mt-lg-5 mt-md-5 ">
       <Container className="footer-container position-relative">
@@ -92,7 +112,11 @@ const Footer = () => {
           <Col xs="12" className="text-lg-start text-center">
             <div className="custom-border2 px-lg-4 pt-5">
               <h3>Utility Pages</h3>
-              <Link to="/terms&condions" className="link" onClick={handleLinkClick}>
+              <Link
+                to="/terms&condions"
+                className="link"
+                onClick={handleLinkClick}
+              >
                 Terms & Condition
               </Link>
               <br />
@@ -108,15 +132,23 @@ const Footer = () => {
                 Privacy Policy
               </Link>
               <br />
-              <Link to="/shoppage" className="link" onClick={handleLinkClick}>
+              <Link
+                to="/shoppage"
+                className="link"
+                onClick={handleLinkClickshop}
+              >
                 Shop
               </Link>
               <br />
-              <Link to="/account" className="link" onClick={handleLinkClick}>
+              <Link to="/account" className="link" onClick={handleLinkClickacount}>
                 My Account
               </Link>
               <br />
-              <Link to="/brandspage" className="link" onClick={handleLinkClick}>
+              <Link
+                to="/brandspage"
+                className="link"
+                onClick={handleLinkClickbrand}
+              >
                 Brands
               </Link>
               <br />

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { ButtonGroup, Card, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts, addToCart } from "../../actions";
- 
+
 import { Link, useNavigate } from "react-router-dom";
-import { Modal, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import "./Shoppage.css";
 import { useCartContext } from "../../CartContext"; // Import the useCartContext hook
 import Cookies from "js-cookie";
+import { useAuth } from "../../AuthContext ";
+import { useSpring, animated } from "react-spring";
 
 const Shoppage = ({ searchQuery }) => {
   const navigate = useNavigate();
@@ -43,26 +45,45 @@ const Shoppage = ({ searchQuery }) => {
   const [showCartPopup, setShowCartPopup] = useState(false);
 
   const userId = Cookies.get("userId"); // Use your method to get the user ID from cookies
-  const handleAddToCart1 = (product,Qty) => {
-    window.scrollTo(0, 0);
+  const handleAddToCart1 = (product, Qty) => {
+    // window.scrollTo(0, 0);
     if (!userId) {
-      dispatch(addToCart(product,Qty));
+      dispatch(addToCart(product, Qty));
       setShowCartPopup(true);
     } else {
       setShowCartPopup(true);
     }
   };
 
+  const { setActiveButton } = useAuth();
   const handleViewCart = () => {
+    window.scrollTo(0, 0);
     setShowCartPopup(false); // Close the popup
     if (!userId) {
+      setActiveButton(6);
       navigate("/cartpage"); // Navigate to cartpage if userId is not available
     } else {
+      setActiveButton(6);
       navigate("/cart"); // Navigate to cart if userId is available
     }
   };
 
 
+   const handleAddToCart3 = () => {
+    setShowCartPopup(true);
+
+
+     setTimeout(() => {
+       setShowCartPopup(false);
+     }, 8000); // Updated to 5 seconds
+   };
+
+    const notificationAnimation = useSpring({
+      opacity: showCartPopup ? 1 : 0,
+      transform: showCartPopup ? "translateY(0)" : "translateY(-100%)",
+    });
+
+ 
 
 
   return (
@@ -78,12 +99,12 @@ const Shoppage = ({ searchQuery }) => {
         >
           {searchQuery !== "" && // Only render when there's a search query
             products.map((product, UserCartDetails_ID) => (
-              <Col key={product.UserCartDetails_ID}>
+              <Col key={UserCartDetails_ID}>
                 <Card className="rounded-2 pt-1 pb-1 shopcards">
                   <Card.Body>
                     <div className="position-relative">
                       {/* Display "Sale" button if the product is on sale */}
-                      {product.isSale && (
+                       {product.isSale && (
                         <button
                           className="sale-button rounded-3 px-2"
                           style={{
@@ -108,7 +129,7 @@ const Shoppage = ({ searchQuery }) => {
                       >
                         <Row>
                           <div className="cardimg">
-                            <Card.Img 
+                            <Card.Img
                               variant="top"
                               className="rounded-3  mt-3  p-lg-4 pt-lg-4 pt-3 pb-3 prdctimg"
                               src={product.Product_img}
@@ -169,7 +190,7 @@ const Shoppage = ({ searchQuery }) => {
                               onClick={() => {
                                 handleAddToCart(product, "1");
                                 handleAddToCart1(product, "1");
-                                setShowCartPopup(true);
+                                handleAddToCart3();
                               }}
                             >
                               Add To Cart
@@ -185,20 +206,52 @@ const Shoppage = ({ searchQuery }) => {
         </Row>
       </Container>
       {/* Cart Pop-up */}
-      <Modal show={showCartPopup} onHide={() => setShowCartPopup(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Item Added to Cart</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Your item has been added to the cart.</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowCartPopup(false)}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleViewCart}>
-            View Cart
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      {/* {showCartPopup && (
+        <animated.div
+          className=" position-fixed top-0 right-0 notification"
+          style={{
+            cardAnimation,
+            // position: "fixed",
+            // top: 0,
+            // right: 0,
+          }}
+        >
+          {/* <animated.div style={fadeOutAnimation}> */}
+
+      {/* </animated.div> */}
+      {/* </animated.div>
+      )} */}
+      <animated.div
+        className="notification m-2"
+        style={{
+          ...notificationAnimation,
+          position: "fixed",
+          top: 0,
+          right: 0,
+        }}
+      >
+        <Card className="popupcart text-center pt-2 pb-2 ">
+          <p>Item Added to Cart</p>
+          <p>Your item has been added to the cart.</p>
+          <Container className="d-flex justify-content-center align-items-center ">
+            <ButtonGroup>
+              <Button
+                className="cartpopupbtn p-2 px-4 mx-1 rounded-3"
+                onClick={() => setShowCartPopup(false)}
+              >
+                Close
+              </Button>
+              <Button
+                className="cartpopupbtn p-2 rounded-3"
+                onClick={handleViewCart}
+              >
+                View Cart
+              </Button>
+            </ButtonGroup>
+          </Container>
+         
+        </Card>
+      </animated.div>
     </div>
   );
 };

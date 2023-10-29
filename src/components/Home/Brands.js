@@ -6,12 +6,15 @@ import Col from "react-bootstrap/Col";
 import "./Brands.css";
 import Brandsslide from "./Brandsslide";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../AuthContext ";
 const Brands = () => {
   const navigate = useNavigate();
 
   //navigate brandspage
+  const { setActiveButton } = useAuth();
   const handleclick = () => {
     window.scrollTo(0, 0);
+      setActiveButton(3);
     navigate("/brandspage");
   };
   return (

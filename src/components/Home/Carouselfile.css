@@ -30,11 +30,14 @@
 /* For small screens */
 @media (max-width: 767px) {
     /* Center the previous and next icons vertically */
-    .homecarousel  .rightangle,
-    .homecarousel  .leftangle {
+    .homecarousel .carouselbtns  .rightangle,
+    .homecarousel .carouselbtns .leftangle {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
+      width: 20px !important;
+      height: 20px !important;
+     padding: 5px !important;
     }
     .homecarousel .carouselimg{
       height: 300px !important;

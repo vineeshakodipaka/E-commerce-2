@@ -106,7 +106,7 @@ background: none;
     font-family: 'Roboto';
     font-weight: 500;
 }
-.headerbar .cart-btn:hover{
+/* .headerbar .cart-btn:hover{
   background: none !important;
   color: #652700 !important;
   border: 1px solid #E0E0E0 !important;
@@ -115,7 +115,7 @@ background: none;
   background: none !important;
 color: #652700 !important;
   border: 1px solid #E0E0E0 !important;
-}
+} */
 
 /* dropdown brands */
 
@@ -173,7 +173,6 @@ background: #ffd2bc;
       padding: 0px !important;
   
     }
-   
     .headerbar .active {
       padding: 0px !important;
       background-color: white;
@@ -192,7 +191,11 @@ background-color: white;
   padding: 5px;
 }
 }
+.headerbar .b-linkacount.active {
+  background-color:none !important;
+ 
 
+}
 @media screen and (min-width: 780px) {
 /* Style for the active link */
   .headerbar .b-link.active {
@@ -200,7 +203,13 @@ background-color: white;
     color: white !important;
 
   }
-    .headerbar .active {
+        .headerbar .cart-btn.active {
+        background-color: #000066 !important;
+          color: white !important;
+    
+        }
+
+    .headerbar .b-link.active {
       background-color: #000066;
     }
 }

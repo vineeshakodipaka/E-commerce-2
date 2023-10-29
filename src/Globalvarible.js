@@ -1,1 +1,2 @@
-export const baseUrl = "https://paradox122.000webhostapp.com/_API/";
+
+export const baseUrl = "https://checkai.in/_API/";

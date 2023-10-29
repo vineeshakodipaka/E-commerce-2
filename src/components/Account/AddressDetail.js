@@ -21,7 +21,7 @@ const AddressDetail = ({ baseUrl1, showCartPopup, cartClose }) => {
         const response = await fetch(
           baseUrl1 + `Get_addresess.php?user_id=${userId}`,
           requestOptions
-        );
+        ); 
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }

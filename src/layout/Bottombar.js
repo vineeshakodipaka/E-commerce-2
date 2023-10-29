@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { AiFillHome } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
@@ -6,21 +6,33 @@ import { BsFillCartDashFill } from "react-icons/bs";
 import { RiShoppingBagFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import "./Bottombar.css"; // Import the external CSS file
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux"; 
+import Cookies from "js-cookie";
+import { fetchCartDetails } from "../actions/cartActions";
 
 const Bottombar = () => {
   const [activeButton, setActiveButton] = useState(0); // State to track active button
-  const { totalQuantity } = useSelector((state) => state.cart);
+  const cartLength = useSelector((state) => state.cart.cartLength);
+  const cartLength1 = useSelector((state) => state.cart1.cartLength1);
+  const dispatch = useDispatch();
+  const userId = Cookies.get("userId"); // Use your method to get the user ID from cookies
+  useEffect(() => {
+    // Fetch brand data from the API
+    dispatch(fetchCartDetails(userId));
+  }, [dispatch, userId]);
 
+  const handleLinkClick = () => {
+    window.scrollTo(0, 0);
+  };
   return (
     <div className="bottompage d-lg-none d-md-none">
       <Navbar
         fixed="bottom"
         bg="light"
-        className="bottomnav mx-auto d-flex justify-content-center"
+        className="bottomnav mx-0 px-0 d-flex justify-content-center"
         style={{ marginBottom: "-8px", borderRadius: "10px" }}
       >
-        <Nav className="d-flex gap-1 gap-lg-5 gap-md-5">
+        <Nav className="d-flex gap-4 bottomlinks gap-lg-5 gap-md-5">
           {/* Home link */}
           <Link
             to="/"
@@ -29,6 +41,7 @@ const Bottombar = () => {
             }`}
             onMouseEnter={() => setActiveButton(0)}
             style={{ color: "black", textDecoration: "none" }}
+            onClick={handleLinkClick}
           >
             <AiFillHome size={20} color="#652700" />
             <br />
@@ -40,6 +53,7 @@ const Bottombar = () => {
             className={`b-link px-3  rounded-3 text-center  p-2 ${
               activeButton === 1 ? "active" : ""
             }`}
+            onClick={handleLinkClick}
             onMouseEnter={() => setActiveButton(1)}
             style={{ color: "black", textDecoration: "none" }}
           >
@@ -49,10 +63,11 @@ const Bottombar = () => {
 
           {/* Cart link */}
           <Link
-            to="/cart"
+            to={!userId ? "/cartpage" : "/cart"}
             className={`b-link  px-3   rounded-3 text-center  p-2 ${
               activeButton === 2 ? "active" : ""
             }`}
+            onClick={handleLinkClick}
             onMouseEnter={() => setActiveButton(2)}
             style={{ color: "black", textDecoration: "none" }}
           >
@@ -62,7 +77,7 @@ const Bottombar = () => {
                 className="bg-danger rounded-circle px-1"
                 style={{ color: "white" }}
               >
-                {totalQuantity}
+                {userId ? cartLength : cartLength1}
               </span>
             </sup>
             {activeButton === 2 && (
@@ -73,6 +88,7 @@ const Bottombar = () => {
           {/* User link */}
           <Link
             to="/account"
+            onClick={handleLinkClick}
             className={`b-link px-3  rounded-3 text-center  p-2 ${
               activeButton === 3 ? "active" : ""
             }`}

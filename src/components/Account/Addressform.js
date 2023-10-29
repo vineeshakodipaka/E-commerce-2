@@ -39,7 +39,7 @@ const Addressform = ({ baseUrl1 }) => {
       method: "POST",
       body: formdata,
       redirect: "follow",
-    };
+    }; 
 
     try {
       const response = await fetch(

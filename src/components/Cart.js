@@ -163,8 +163,8 @@ const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
                           </td>
                           <td style={{ width: "20%", verticalAlign: "middle" }}>
                             <button
-                              className="rounded-3 inc-dec-btn"
-                              onClick={() =>  
+                              className="rounded-2 pt-1 pb-1 px-2 inc-dec-btn"
+                              onClick={() =>
                                 handleDecrementQuantity(
                                   product.UserCartDetails_ID,
                                   Number(product.Qty) - 1
@@ -173,9 +173,11 @@ const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
                             >
                               -
                             </button>
-                            <span className="fw-bold px-1">{product.Qty}</span>
+                            <span className="fw-bold px-1   pt-1 pb-1 px-lg-4 Qty">
+                              {product.Qty}
+                            </span>
                             <button
-                              className=" rounded-3 inc-dec-btn"
+                              className=" rounded-2 pt-1 pb-1 px-2 inc-dec-btn"
                               onClick={() =>
                                 handleIncrementQuantity(
                                   product.UserCartDetails_ID,
@@ -246,7 +248,7 @@ const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
                                 </p>
                                 <div>
                                   <button
-                                    className="rounded-3  inc-dec-btn"
+                                    className="rounded-3 pt-1 pb-1 px-2  inc-dec-btn"
                                     onClick={() =>
                                       handleDecrementQuantity(
                                         product.UserCartDetails_ID,
@@ -256,11 +258,11 @@ const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
                                   >
                                     -
                                   </button>
-                                  <span className="fw-bold px-1">
+                                  <span className="fw-bold  pt-1 pb-1 px-lg-4 px-1">
                                     {product.Qty}
                                   </span>
                                   <button
-                                    className="rounded-3  inc-dec-btn"
+                                    className="rounded-3  pt-1 pb-1 px-2  inc-dec-btn"
                                     onClick={() =>
                                       handleIncrementQuantity(
                                         product.UserCartDetails_ID,

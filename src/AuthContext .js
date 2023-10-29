@@ -30,8 +30,21 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  //active links
+
+  const [activeButton, setActiveButton] = useState(0); // State to track active button
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        user,
+        login,
+        logout,
+        setActiveButton,
+        activeButton,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -11,18 +11,16 @@ import {
 import { fetchCartDetails } from "../actions/cartActions";
 
 import "./Navbar.css";
-import { NavDropdown, Button, InputGroup, Accordion } from "react-bootstrap";
+import { NavDropdown, InputGroup, Accordion } from "react-bootstrap";
 import { FaUser } from "react-icons/fa"; // Import the user icon
 
 import Cookies from "js-cookie";
 import { baseUrl } from "../Globalvarible";
+import { useAuth } from "../AuthContext ";
 
 const Navbar = ({ handleShow2 }) => {
-  
- 
   const cartLength = useSelector((state) => state.cart.cartLength);
   const cartLength1 = useSelector((state) => state.cart1.cartLength1);
-
 
   const [userId, setUserId] = useState(Cookies.get("userId"));
   const dispatch = useDispatch();
@@ -87,7 +85,9 @@ const Navbar = ({ handleShow2 }) => {
   };
 
   //active links
-  const [activeButton, setActiveButton] = useState(0); // State to track active button
+  // const [activeButton, setActiveButton] = useState(0); // State to track active button
+const {activeButton,setActiveButton}=useAuth()
+
 
   useEffect(() => {
     // Update the userId whenever it changes in the cookies
@@ -115,6 +115,23 @@ const Navbar = ({ handleShow2 }) => {
       })
       .catch((error) => {});
   }, []);
+
+  // useEffect(() => {
+  //   const determineActiveButton = (path) => {
+  //     if (path === "/") return 0;
+  //     if (path === "/about") return 1;
+  //     if (path === "/shoppage") return 2;
+  //     if (path === "/brandspage") return 3;
+  //     if (path === "/contact") return 4;
+  //     if (path === "/blog") return 5;
+  //     if (path === "/cartpage") return 6;
+  //     // Add more paths and button indexes as needed
+  //     return 0; // Default to the first button if no match
+  //   };
+
+  //   setActiveButton(determineActiveButton(location.pathname));
+  // }, [location]);
+
   return (
     <nav className="navbar navbar-expand-lg navbar headerbar mt-lg-4 mb-lg-4">
       <div className="container mx-lg-3 mx-xl-5 px-xl-5">
@@ -344,11 +361,26 @@ const Navbar = ({ handleShow2 }) => {
               </div>
 
               <li className="nav-item px-lg-0 px-xl-2 ms-xl-4 my-3 my-lg-0 my-md-0">
-                <Button
+                {/* <Button
                   onClick={() => {
                     cartclick();
+                    setActiveButton(6);
                   }}
-                  className="cart-btn rounded-pill"
+                  // className="cart-btn rounded-pill"
+                  className={`cart-btn rounded-pill nav-link nav-btns b-link  rounded-3 ${
+                    activeButton === 6 ? "active" : ""
+                  }`}
+                > */}
+                <Link
+                  to={!userId ? "/cartpage" : "/cart"}
+                  className={`cart-btn nav-link rounded-pill nav-btns b-link  rounded-3 ${
+                    activeButton === 6 ? "active" : ""
+                  }`}
+                  onClick={() => {
+                    cartclick(); 
+                    navbarCollapseRef.current?.classList.remove("show");
+                    setActiveButton(6);
+                  }}
                 >
                   <i
                     className="fas fa-shopping-cart rounded-circle p-1"
@@ -357,7 +389,8 @@ const Navbar = ({ handleShow2 }) => {
                   <span className="px-3 px-lg-1" data-bs-dismiss="offcanvas">
                     Cart-({userId ? cartLength : cartLength1})
                   </span>
-                </Button>
+                </Link>
+                {/* </Button> */}
               </li>
             </ul>
 
@@ -366,12 +399,12 @@ const Navbar = ({ handleShow2 }) => {
                 {userId === undefined ? (
                   <Link
                     className={`nav-link nav-btns b-link  rounded-3 ${
-                      activeButton === 6 ? "active" : ""
+                      activeButton === 7 ? "active" : ""
                     }`}
                     onClick={() => {
                       handleShow2();
                       navbarCollapseRef.current?.classList.remove("show");
-                      setActiveButton(6);
+                      setActiveButton(7);
                     }}
                   >
                     <span data-bs-dismiss="offcanvas">Login</span>
@@ -379,8 +412,11 @@ const Navbar = ({ handleShow2 }) => {
                 ) : (
                   <Link
                     to="/account"
-                    className="nav-link"
+                    className={`nav-link b-linkacount   rounded-3 ${
+                      activeButton === 7 ? "active" : ""
+                    }`}
                     onClick={() => {
+                      setActiveButton(7);
                       // navbarCollapseRef.current?.classList.remove("show");
                     }}
                   >

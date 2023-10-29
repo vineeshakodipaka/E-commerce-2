@@ -7,13 +7,16 @@ import { useNavigate } from "react-router-dom";
 import AOS from "aos"; // AOS library for animations
 import "aos/dist/aos.css"; // AOS library CSS
 import { baseUrl } from "../../Globalvarible";
+import { useAuth } from "../../AuthContext ";
 
 const Imgsfile = () => {
   const navigate = useNavigate(); // React Router's useNavigate hook for navigation
 
   // Function to navigate to the '/shoppage' route
+  const {setActiveButton}=useAuth()
   const handleclick = () => {
     window.scrollTo(0, 0);
+      setActiveButton(2);
     navigate("/shoppage");
   };
 

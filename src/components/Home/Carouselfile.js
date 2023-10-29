@@ -5,13 +5,17 @@ import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import "./Carouselfile.css";
 import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../../Globalvarible";
+import { useAuth } from "../../AuthContext ";
 
 const Carouselfile = () => {
   const navigate = useNavigate();
 
+
+  const { setActiveButton } = useAuth();
   //navigate shoppage
   const handleclick = () => {
     window.scrollTo(0, 0);
+    setActiveButton(2);
     navigate("/shoppage");
   };
 
@@ -25,7 +29,7 @@ const Carouselfile = () => {
   }, []);
   return (
     <div className="homecarousel ">
-      <Carousel
+      <Carousel className="carouselbtns"
         nextIcon={
           <BsChevronRight className="rightangle" style={{ color: "black" }} />
         }

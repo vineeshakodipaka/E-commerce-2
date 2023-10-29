@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { ButtonGroup, Card, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts, addToCart } from "../../actions";
 import { Link, useNavigate } from "react-router-dom";
-import { Modal, Button } from "react-bootstrap";
+import {  Button } from "react-bootstrap";
 import Slider from "react-slick"; 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -11,6 +11,8 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import "./Shopcardslide.css";
 import { useCartContext } from "../../CartContext"; // Import the useCartContext hook
 import Cookies from "js-cookie";
+import { useSpring, animated } from "react-spring";
+import { useAuth } from "../../AuthContext ";
 
 const Shopcardslide = ({ searchQuery }) => {
   const navigate = useNavigate();
@@ -46,24 +48,28 @@ const Shopcardslide = ({ searchQuery }) => {
   // Function to navigate to the cart page
 
   const userId = Cookies.get("userId"); // Use your method to get the user ID from cookies
-  const handleAddToCart1 = (product) => {
-    window.scrollTo(0, 0);
+  const handleAddToCart1 = (product,Qty) => {
+  
     if (!userId) {
-      dispatch(addToCart(product));
+      dispatch(addToCart(product,Qty));
       setShowCartPopup(true);
     } else {
       setShowCartPopup(true);
     }
   };
-
+ const { setActiveButton } = useAuth();
   const handleViewCart = () => {
+    window.scrollTo(0, 0);
     setShowCartPopup(false); // Close the popup
     if (!userId) {
+      setActiveButton(6);
       navigate("/cartpage"); // Navigate to cartpage if userId is not available
     } else {
+      setActiveButton(6);
       navigate("/cart"); // Navigate to cart if userId is available
     }
   };
+
 
   //sliding cards
   const SamplePrevArrow = (props) => {
@@ -139,16 +145,30 @@ const Shopcardslide = ({ searchQuery }) => {
   // Filter the products to include only featured products
   const featuredProducts = products.filter((product) => product.isFeatured);
 
+
+
+     const handleAddToCart3 = () => {
+       setShowCartPopup(true);
+
+       setTimeout(() => {
+         setShowCartPopup(false);
+       }, 8000); // Updated to 5 seconds
+     };
+
+     const notificationAnimation = useSpring({
+       opacity: showCartPopup ? 1 : 0,
+       transform: showCartPopup ? "translateY(0)" : "translateY(-100%)",
+     });
+
   return (
     <div className="shopcardslidecls">
       <Container>
         {/* Render product cards */}
-        <Row className="g-4 cardsrow mx-3 pb-md-5 py-md-3 mb-md-5 pt-5 ">
+        <Row className="g-4 cardsrow mx-md-3 pb-md-5 py-md-3 mb-md-5 pt-5 ">
           <Slider {...settings}>
-            {
-              // Only render when there's a search query
-              featuredProducts.map((product, i) => (
-                <div key={i} className="px-1">
+            {searchQuery !== "" && // Only render when there's a search query
+              featuredProducts.map((product, UserCartDetails_ID) => (
+                <div key={UserCartDetails_ID} className="px-1">
                   <Card className="rounded-3 pt-1 pb-1 shopcards  mb-2">
                     <Card.Body>
                       <div className="position-relative">
@@ -182,8 +202,7 @@ const Shopcardslide = ({ searchQuery }) => {
                                 variant="top"
                                 className="rounded-3  mt-3 p-lg-4 pt-lg-4 pt-3 pb-3  prdctimg"
                                 src={product.Product_img}
-                                alt={`Image ${i + 1}`}
-                               
+                                alt={`Image ${UserCartDetails_ID + 1}`}
                               />
                             </div>
                             <div className="text-center  mt-3 mb-lg-0 mb-2  ">
@@ -202,7 +221,6 @@ const Shopcardslide = ({ searchQuery }) => {
                         {/* Display original and offer prices */}
                         <Row lg={2} className="row2cart">
                           <Col lg={5} xl={6} md={4} xs={12}>
-                           
                             <div className="mt-0 mt-lg-2 mt-md-2 ms-lg-0 price fs-5">
                               <p>
                                 {product.isSale ? (
@@ -237,9 +255,9 @@ const Shopcardslide = ({ searchQuery }) => {
                                   color: "white",
                                 }}
                                 onClick={() => {
-                                  handleAddToCart(product,"1");
-                                  handleAddToCart1(product,"1");
-                                  setShowCartPopup(true);
+                                  handleAddToCart(product, "1");
+                                  handleAddToCart1(product, "1");
+                                  handleAddToCart3();
                                 }}
                               >
                                 Add To Cart
@@ -251,27 +269,42 @@ const Shopcardslide = ({ searchQuery }) => {
                     </Card.Body>
                   </Card>
                 </div>
-              ))
-            }
+              ))}
           </Slider>
         </Row>
       </Container>
 
       {/* Cart Pop-up */}
-      <Modal show={showCartPopup} onHide={() => setShowCartPopup(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Item Added to Cart</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Your item has been added to the cart.</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowCartPopup(false)}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleViewCart}>
-            View Cart
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <animated.div
+        className="notification m-2"
+        style={{
+          ...notificationAnimation,
+          position: "fixed",
+          top: 0,
+          right: 0,
+        }}
+      >
+        <Card className="popupcart text-center pt-2 pb-2 ">
+          <p>Item Added to Cart</p>
+          <p>Your item has been added to the cart.</p>
+          <Container className="d-flex justify-content-center align-items-center ">
+            <ButtonGroup>
+              <Button
+                className="cartpopupbtn p-2 px-4 mx-1 rounded-3"
+                onClick={() => setShowCartPopup(false)}
+              >
+                Close
+              </Button>
+              <Button
+                className="cartpopupbtn p-2 rounded-3"
+                onClick={handleViewCart}
+              >
+                View Cart
+              </Button>
+            </ButtonGroup>
+          </Container>
+        </Card>
+      </animated.div>
     </div>
   );
 };

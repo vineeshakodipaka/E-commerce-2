@@ -18,14 +18,24 @@ const Ourproducts = () => {
       </div>
 
       <div className="container">
-        <h1 className="featuredproducts  px-4 pt-3 mt-4">FEATURED PRODUCTS</h1>
+        <h1
+          className="featuredproducts  px-4 pt-3 mt-4"
+          style={{ color: "#000066" }}
+        >
+          FEATURED PRODUCTS
+        </h1>
       </div>
 
       {/* Render the Shoppage component for featured products */}
       <Shopcardslide />
 
       <div className="container">
-        <h1 className="featuredproducts  px-4 mt-4">NEW ARRIVALS</h1>
+        <h1
+          className="featuredproducts  px-4 mt-4"
+          style={{ color: "#000066" }}
+        >
+          NEW ARRIVALS
+        </h1>
       </div>
 
       {/* Render the Shoppage component for new arrivals */}

@@ -95,3 +95,26 @@
     background: #652700;
   border: none;
 }
+
+.singleproductpage .singlecardprdctimg{
+  width: 100%;
+  height: 436px;
+}
+.singleproductpage .imgcol img {
+    width: 100%;
+    height: 150px;
+    
+}
+@media screen and (max-width: 760px) {
+    .singleproductpage .singlecardprdctimg {
+      height: 375px !important;
+    }
+    .singleproductpage .imgcol img {
+            width: 100% !important;
+    }
+    .singleproductpage .imgcol img {
+           
+            height: 210px !important;
+    
+    }
+} 
