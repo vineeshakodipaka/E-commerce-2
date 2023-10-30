@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import React, { useState, useEffect } from "react";
-import { Card, Modal } from "react-bootstrap";
+import { Button, Card, Modal } from "react-bootstrap";
 import "./Account.css";
 
 import { baseUrl } from "../../Globalvarible";
@@ -18,6 +18,8 @@ const AddressDetail = ({
   const [userAddresses, setUserAddresses] = useState([]);
   const userId = Cookies.get("userId"); // Retrieve userId from cookies
 
+  //for payment success
+const [showModal, setShowModal] = useState(false);
   const fetchUserAddresses = React.useCallback(async (userId) => {
     var requestOptions = {
       method: "GET",
@@ -82,8 +84,9 @@ const AddressDetail = ({
         fetch(baseUrl + "PlaceOrder.php", requestOptions)
           .then((response) => {
             response.text();
+           setShowModal(true);
           })
-          .then((result) => {})
+          .then((result) => { })
           .catch((error) => {});
       },
     };
@@ -106,6 +109,10 @@ const AddressDetail = ({
     await cartClose();
   };
 
+const closeModal = () => {
+  // Close the modal by setting showModal to false
+  setShowModal(false);
+};
   return (
     <div className="text-start address-details">
       <Modal className="modalbox" show={showCartPopup} onHide={cartClose}>
@@ -140,6 +147,20 @@ const AddressDetail = ({
             <div>No user addresses available.</div>
           )}
         </Modal.Body>
+      </Modal>
+
+      <Modal show={showModal} onHide={closeModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Order Placed</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Your Order has been placed successfully</p> 
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={closeModal}>
+            Close
+          </Button>
+        </Modal.Footer>
       </Modal>
     </div>
   );
