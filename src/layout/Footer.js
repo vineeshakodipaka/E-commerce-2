@@ -10,35 +10,40 @@ import {
 import "./Footer.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext ";
+import Cookies from "js-cookie";
 
 const Footer = () => {
+  const userId = Cookies.get("userId"); // Use your method to get the user ID from cookies
   // Function to open the WhatsApp link in a new tab
   const openWhatsApp = () => {
     window.open("https://wa.me/917498847799", "_blank");
   };
-const navigate=useNavigate();
-const { setActiveButton } = useAuth();
-   const handleLinkClick = () => {
-     window.scrollTo(0, 0);
-   };
-    const handleLinkClickshop = () => {
-      window.scrollTo(0, 0);
-        setActiveButton(2);
-      navigate("/shoppage")
+  const navigate = useNavigate();
+  const { setActiveButton } = useAuth();
+  const handleLinkClick = () => {
+    window.scrollTo(0, 0);
+  };
+  const handleLinkClickshop = () => {
+    window.scrollTo(0, 0);
+    setActiveButton(2);
+    navigate("/shoppage");
+  };
+  const handleLinkClickbrand = () => {
+    window.scrollTo(0, 0);
+    setActiveButton(3);
+    navigate("/brandspage");
+  };
+  const handleLinkClickacount = () => {
+    window.scrollTo(0, 0);
+    if (userId) {
+      setActiveButton(7);
+      navigate("/account");
+    } else {
+      setActiveButton(0);
+      navigate("/home");
+    }
+  };
 
-      
-    };
-     const handleLinkClickbrand = () => {
-       window.scrollTo(0, 0);
-         setActiveButton(3);
-         navigate("/brandspage");
-     };
-      const handleLinkClickacount = () => {
-        window.scrollTo(0, 0);
-        setActiveButton(7);
-        navigate("/account");
-      };
-     
   return (
     <div className="footercls mt-lg-5 mt-md-5 ">
       <Container className="footer-container position-relative">
@@ -140,7 +145,11 @@ const { setActiveButton } = useAuth();
                 Shop
               </Link>
               <br />
-              <Link to="/account" className="link" onClick={handleLinkClickacount}>
+              <Link
+                to="/account"
+                className="link"
+                onClick={handleLinkClickacount}
+              >
                 My Account
               </Link>
               <br />

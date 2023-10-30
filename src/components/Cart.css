@@ -41,11 +41,11 @@
     border: 1px solid #652700;
     background-color: white;
 }
-.cartpage .inc-dec-btn{
+.inc-dec-btn{
 background-color: #f8f9fa;
     border: 1px solid #dee2e6;
 }
-.cartpage .inc-dec-btn:hover{
+ .inc-dec-btn:hover{
 background-color: #dee2e6;
 }
 .cartpage .cartremove-btn:hover {
@@ -55,6 +55,6 @@ background-color: #dee2e6;
     color: white;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2), 0 6px 2px 0 rgba(0, 0, 0, .19);
 }
-.cartpage .Qty{
+.Qty{
 border: 1px solid #dee2e6;
 }

@@ -278,11 +278,15 @@ const Cartofline = ({ handleShowA }) => {
                       <p> ₹{totalPrice}</p>
                     </Col>
                   </Row>
-                  <input type="text" />
-                  <br />
-                  <button className="coupon p-2 rounded-3 mt-2 mb-3">
-                    check coupon
-                  </button>
+                  {userId ? (
+                    <>
+                      <input type="text" />
+                      <br />
+                      <button className="coupon p-2 rounded-3 mt-2 mb-3">
+                        check coupon
+                      </button>
+                    </>
+                  ) : null}
                   <center>
                     {cartItems1 && cartItems1.length !== 0 ? (
                       <button

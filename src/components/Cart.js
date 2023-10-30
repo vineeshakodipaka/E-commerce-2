@@ -14,14 +14,23 @@ import {
 import { useNavigate } from "react-router-dom";
 import { Player } from "@lottiefiles/react-lottie-player";
 import Marquee from "react-fast-marquee";
+import AddressDetail from "./Account/AddressDetail";
+import { baseUrl } from "../Globalvarible";
 
-const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
+const Cart = ({ handleShowA, baseUrl1 }) => {
   const dispatch = useDispatch();
   const userId = Cookies.get("userId"); // Use your method to get the user ID from cookies
   const cartItems = useSelector((state) => state.cart.cartDetails);
 
-  const { totalPrice } = useSelector((state) => state.cart);
 
+
+ const [showCartPopup, setShowCartPopup] = useState(false);
+ const cartClose = () => setShowCartPopup(false);
+ const cartShow = () => setShowCartPopup(true);
+
+
+  const totalPrice = useSelector((state) => state.cart.totalPrice);
+  // const [totalPrice, setTotalPrice] = useState(totalPrice1);
   const [userAddress, setUserAddress] = useState(null);
   const navigate = useNavigate();
 
@@ -64,11 +73,11 @@ const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
 
   const handleIncrementQuantity = (productId, Qty) => {
     dispatch(incrementQuantity(productId, Qty));
-     
-    if (Qty <= 100) {
+
+    if (Qty <= 100) { 
       Qty = 100;
     }
-  };  
+  };
 
   const handleDecrementQuantity = (productId, Qty) => {
     dispatch(decrementQuantity(productId, Qty));
@@ -81,7 +90,7 @@ const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
   };
 
   //checkout
-  const handleCheckout = () => {
+  const handleCheckout = (totalPrice) => {
     if (userId) {
       if (userAddress) {
         // User is logged in and has an address
@@ -92,7 +101,7 @@ const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
         // Show a form to add an address or perform any required actions
         navigate("/checkout");
       }
-    } else {
+    } else { 
       // User is not logged in
       // Show a signup or login form
       navigate("/checkout");
@@ -103,6 +112,42 @@ const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
   const handleRemoveFromCart = (userCartDetailsId) => {
     dispatch(removeFromCart(userCartDetailsId));
   };
+  const [inputValue, setInputValue] = useState("");
+  const [apiResponse, setApiResponse] = useState(null);
+
+  // ...
+
+  const [couponCode, setCouponCode] = useState("");
+
+  const handleCheckCoupon = () => {
+    const formdata = new FormData();
+    formdata.append("CouponCode", inputValue);
+
+    const requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+    };
+
+    fetch(baseUrl+"CheckCopun.php", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.status) {
+          setApiResponse(result);
+          setCouponCode(couponCode);
+        } else {
+          // Coupon is not available or invalid
+          setApiResponse(result);
+        }
+      })
+      // .catch((error) => console.log("API error", error));
+  };
+
+  const discountPercentage = apiResponse
+    ? parseFloat(apiResponse.data[0].DiscountPercent)
+    : 0;
+  const discountedPrice = totalPrice - (totalPrice * discountPercentage) / 100;
+
 
   return (
     <div className="container cartpage">
@@ -323,7 +368,7 @@ const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
                   </Col>
                   <Col>
                     {" "}
-                    <p> ₹{totalPrice}</p>
+                    <p>₹{apiResponse ? discountedPrice : totalPrice}</p>
                   </Col>
                 </Row>
                 <div>
@@ -337,14 +382,22 @@ const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
                     </Col>
                     <Col>
                       {" "}
-                      <p> ₹{totalPrice}</p>
+                      <p>₹{apiResponse ? discountedPrice : totalPrice}</p>
                     </Col>
                   </Row>
-                  <input type="text" placeholder="check coupon" />
+                  <input
+                    type="text"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                  />
                   <br />
-                  <button className="coupon p-2 rounded-3 mt-2 mb-3">
-                    check coupon
+                  <button
+                    className="coupon p-2 rounded-3 mt-2 mb-3"
+                    onClick={handleCheckCoupon}
+                  >
+                    Check Coupon
                   </button>
+                  
                   <center>
                     {cartItems.length !== 0 ? (
                       <button
@@ -363,6 +416,15 @@ const Cart = ({ handleShowA, baseUrl1, cartShow }) => {
           </Col>
         </Row>
       </Container>
+      <AddressDetail
+        totalPrice={totalPrice}
+        apiResponse={apiResponse}
+       
+        discountedPrice={discountedPrice}
+        couponCode={couponCode}
+        showCartPopup={showCartPopup}
+        cartClose={cartClose}
+      />
     </div>
   );
 };

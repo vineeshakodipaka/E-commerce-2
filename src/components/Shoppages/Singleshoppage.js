@@ -56,11 +56,23 @@ const Singleshoppage = () => {
     if (!isNaN(inputNumber) && inputNumber >= 1 && inputNumber <= 100) {
       setQty(inputNumber.toString());
       // Removed the setSelectedQuantity line since selectedQuantity is not used
-      console.log(Qty);
+      
     } else {
       setQty("1");
     }
   };
+   const handleIncrementQuantity = () => {
+     const newQty = parseInt(Qty, 10) + 1;
+     setQty(newQty.toString());
+   };
+
+   const handleDecrementQuantity = () => {
+     const newQty = parseInt(Qty, 10) - 1;
+     if (newQty >= 1) {
+       setQty(newQty.toString());
+     }
+   };
+
 
   // Toggle showInfo state for product information
   const toggleInfo = () => {
@@ -222,14 +234,39 @@ const Singleshoppage = () => {
                       <div className="d-flex">
                         <h6 className="mt-1">Quantity:</h6>
                         <div>
+                          <button
+                            className="rounded-3 pt-1 pb-1 px-2  inc-dec-btn"
+                            onClick={() =>
+                              handleDecrementQuantity(
+                                card.Product_id,
+                                Number(card.Qty) - 1
+                              )
+                            }
+                          >
+                            -
+                          </button>
                           <input
-                            className="quantity"
+                            className="quantity p-1"
                             type="number"
                             placeholder="1"
                             value={Qty}
                             onChange={handleInputChange}
-                            style={{ width: "50px" }}
+                            style={{
+                              width: "50px",
+                              border: "1px solid #dee2e6",
+                            }}
                           />
+                          <button
+                            className="rounded-3  pt-1 pb-1 px-2  inc-dec-btn"
+                            onClick={() =>
+                              handleIncrementQuantity(
+                                card.Product_id,
+                                Number(card.Qty) + 1
+                              )
+                            }
+                          >
+                            +
+                          </button>
                         </div>
                       </div>
                     </div>

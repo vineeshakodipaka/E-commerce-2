@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 import Cookies from "js-cookie";
 import { useAuth } from "../../AuthContext ";
 import "./Account.css";
 const Account = () => {
   const { logout } = useAuth();
-
-  const [activeButton, setActiveButton] = useState(0); // Initialize the first button as active
-
+const navigate=useNavigate()
+  const [activeButton1, setActiveButton1] = useState(0); // Initialize the first button as active
+ const { setActiveButton } = useAuth();
   const handleLogout = () => {
     Cookies.remove("userId");
     logout();
+    setActiveButton(0);
+    navigate('/')
   };
   const linkRef = React.useRef();
 
@@ -28,13 +30,13 @@ const Account = () => {
               <ul className="navbar-nav ms-lg-3">
                 <li
                   className={`nav-item px-xl-2 c-link   ${
-                    activeButton === 0 ? "active" : ""
+                    activeButton1 === 0 ? "active" : ""
                   }`}
                 >
                   <Link
                     to="accountDetails"
                     className="nav-link c-link "
-                    onClick={() => setActiveButton(0)}
+                    onClick={() => setActiveButton1(0)}
                     ref={linkRef}
                   >
                     Account Details
@@ -42,26 +44,26 @@ const Account = () => {
                 </li>
                 <li
                   className={`nav-item px-xl-2  c-link ${
-                    activeButton === 1 ? "active" : ""
+                    activeButton1 === 1 ? "active" : ""
                   }`}
                 >
                   <Link
                     to="addresses"
                     className="nav-link  c-link"
-                    onClick={() => setActiveButton(1)}
+                    onClick={() => setActiveButton1(1)}
                   >
                     Addresses
                   </Link>
                 </li>
                 <li
                   className={`nav-item px-xl-2 c-link   ${
-                    activeButton === 2 ? "active" : ""
+                    activeButton1 === 2 ? "active" : ""
                   }`}
                 >
                   <Link
                     to="myorders"
                     className="nav-link  c-link"
-                    onClick={() => setActiveButton(2)}
+                    onClick={() => setActiveButton1(2)}
                   >
                     MyOrders
                   </Link>

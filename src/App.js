@@ -28,7 +28,7 @@ import Account from "./components/Account/Account";
 import AccountDetails from "./components/Account/AccountDetails ";
 import Addressform from "./components/Account/Addressform";
 import Cartofline from "./components/Cartofline";
-import AddressDetail from "./components/Account/AddressDetail";
+//import AddressDetail from "./components/Account/AddressDetail";
 import { baseUrl } from "./Globalvarible";
 import Privacypolicy from "./components/FooterPagesComponents/Privacypolicy";
 import Terms from "./components/FooterPagesComponents/Terms";
@@ -77,6 +77,7 @@ const App = () => {
               handleShowA={signuphandleShow}
               cartShow={cartShow}
               baseUrl1={baseUrl}
+              showCartPopup={showCartPopup}
               cartClose={cartClose}
             />
           }
@@ -146,11 +147,11 @@ const App = () => {
         handleClose3={signuphandleClose}
         show3={signupshow}
       />
-      <AddressDetail
+      {/* <AddressDetail
         baseUrl1={baseUrl}
         showCartPopup={showCartPopup}
         cartClose={cartClose}
-      />
+      /> */}
       <Bottombar />
 
       <Footer />

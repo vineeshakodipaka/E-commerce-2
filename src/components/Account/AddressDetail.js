@@ -2,13 +2,22 @@ import Cookies from "js-cookie";
 import React, { useState, useEffect } from "react";
 import { Card, Modal } from "react-bootstrap";
 import "./Account.css";
-import { useSelector } from "react-redux";
-const AddressDetail = ({ baseUrl1, showCartPopup, cartClose }) => {
+
+import { baseUrl } from "../../Globalvarible";
+const AddressDetail = ({
+  baseUrl1,
+  showCartPopup,
+  cartClose,
+  apiResponse,
+  totalPrice,
+  discountedPrice,
+  couponCode,
+}) => {
   // Define state to manage form data
 
   const [userAddresses, setUserAddresses] = useState([]);
   const userId = Cookies.get("userId"); // Retrieve userId from cookies
-  const { totalPrice } = useSelector((state) => state.cart);
+  //const { totalPrice } = useSelector((state) => state.cart);
 
   const fetchUserAddresses = React.useCallback(
     async (userId) => {
@@ -19,9 +28,9 @@ const AddressDetail = ({ baseUrl1, showCartPopup, cartClose }) => {
 
       try {
         const response = await fetch(
-          baseUrl1 + `Get_addresess.php?user_id=${userId}`,
+          baseUrl + `Get_addresess.php?user_id=${userId}`,
           requestOptions
-        ); 
+        );
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -32,7 +41,7 @@ const AddressDetail = ({ baseUrl1, showCartPopup, cartClose }) => {
         return { status: false, message: "Error fetching user addresses" };
       }
     },
-    [baseUrl1]
+    []
   );
 
   useEffect(() => {
@@ -46,21 +55,27 @@ const AddressDetail = ({ baseUrl1, showCartPopup, cartClose }) => {
       });
     }
   }, [userId, fetchUserAddresses]);
+  //  const amountInPaise = totalPrice ;
 
   const paymentHandler = async (AddressID) => {
+
     const options = {
       key: "rzp_test_6KtffZXfPIHqEm", // Replace with your actual Razorpay key_id
       name: "Elite EnterPrise",
       description: "Payment for Your Product",
-      amount: totalPrice * 100, // Convert the price to paisa (e.g., 1000 paisa = 10 INR),
+      amount: apiResponse ? discountedPrice * 100 : totalPrice * 100, // Provide the amount in paise // Convert the price to paisa (e.g., 1000 paisa = 10 INR),
       theme: {
         color: "#686CFD",
       },
+
       handler: function (response) {
         // Call the Place Order API here
         var formdata = new FormData();
         formdata.append("User_ID", userId);
         formdata.append("AddressID", AddressID);
+        //coupon code
+
+        formdata.append("Couponcode", couponCode);
 
         var requestOptions = {
           method: "POST",
@@ -68,11 +83,10 @@ const AddressDetail = ({ baseUrl1, showCartPopup, cartClose }) => {
           redirect: "follow",
         };
 
-        fetch(
-          baseUrl1+"PlaceOrder.php",
-          requestOptions
-        )
-          .then((response) => response.text())
+        fetch(baseUrl1 + "PlaceOrder.php", requestOptions)
+          .then((response) => {
+            response.text();
+          })
           .then((result) => {})
           .catch((error) => {});
       },
@@ -103,13 +117,16 @@ const AddressDetail = ({ baseUrl1, showCartPopup, cartClose }) => {
           Select The Address
         </Modal.Header>
         <Modal.Body>
-       
           {userAddresses.length > 0 ? (
             userAddresses.map((userAddress, index) => (
+            
               <div key={index}>
                 <Card
                   className="m-2 addrescard"
-                  onClick={() => hadleclick(userAddress.AddressID)}
+                  onClick={() =>{
+                     hadleclick(userAddress.AddressID);
+                    
+                  }}
                 >
                   <Card.Body className="p-3">
                     <div>
