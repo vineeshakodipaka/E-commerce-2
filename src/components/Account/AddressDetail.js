@@ -17,32 +17,28 @@ const AddressDetail = ({
 
   const [userAddresses, setUserAddresses] = useState([]);
   const userId = Cookies.get("userId"); // Retrieve userId from cookies
-  //const { totalPrice } = useSelector((state) => state.cart);
 
-  const fetchUserAddresses = React.useCallback(
-    async (userId) => {
-      var requestOptions = {
-        method: "GET",
-        redirect: "follow",
-      };
+  const fetchUserAddresses = React.useCallback(async (userId) => {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
 
-      try {
-        const response = await fetch(
-          baseUrl + `Get_addresess.php?user_id=${userId}`,
-          requestOptions
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-
-        return data;
-      } catch (error) {
-        return { status: false, message: "Error fetching user addresses" };
+    try {
+      const response = await fetch(
+        baseUrl + `Get_addresess.php?user_id=${userId}`,
+        requestOptions
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
-    },
-    []
-  );
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
+      return { status: false, message: "Error fetching user addresses" };
+    }
+  }, []);
 
   useEffect(() => {
     if (userId) {
@@ -58,12 +54,12 @@ const AddressDetail = ({
   //  const amountInPaise = totalPrice ;
 
   const paymentHandler = async (AddressID) => {
-
+    //console.log("discountedPrice.....", parseInt(discountedPrice));
     const options = {
       key: "rzp_test_6KtffZXfPIHqEm", // Replace with your actual Razorpay key_id
       name: "Elite EnterPrise",
       description: "Payment for Your Product",
-      amount: apiResponse ? discountedPrice * 100 : totalPrice * 100, // Provide the amount in paise // Convert the price to paisa (e.g., 1000 paisa = 10 INR),
+      amount: apiResponse ? parseInt(discountedPrice * 100) : totalPrice * 100, // Provide the amount in paise // Convert the price to paisa (e.g., 1000 paisa = 10 INR),
       theme: {
         color: "#686CFD",
       },
@@ -83,7 +79,7 @@ const AddressDetail = ({
           redirect: "follow",
         };
 
-        fetch(baseUrl1 + "PlaceOrder.php", requestOptions)
+        fetch(baseUrl + "PlaceOrder.php", requestOptions)
           .then((response) => {
             response.text();
           })
@@ -119,13 +115,11 @@ const AddressDetail = ({
         <Modal.Body>
           {userAddresses.length > 0 ? (
             userAddresses.map((userAddress, index) => (
-            
               <div key={index}>
                 <Card
                   className="m-2 addrescard"
-                  onClick={() =>{
-                     hadleclick(userAddress.AddressID);
-                    
+                  onClick={() => {
+                    hadleclick(userAddress.AddressID);
                   }}
                 >
                   <Card.Body className="p-3">
