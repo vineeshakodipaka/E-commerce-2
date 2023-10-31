@@ -272,17 +272,17 @@ const Singleshoppage = () => {
                       </div>
                     </div>
                   </Col>
-                  <Row lg={2}>
+                  <Row lg={2} className=" mt-3">
                     <Col xs={6}>
-                      <button className="px-4 p-1 mt-3  p-lg-3 mb-2 text-center rounded-4 shareproductbtn">
+                      <button className="px-lg-4 p-2 px-2 p-lg-3 mb-2 text-center rounded-4 shareproductbtn">
                         {" "}
                         Share this Product
                       </button>
                     </Col>
-                    <Col xs={6} className=" pt-3">
+                    <Col xs={6}>
                       {" "}
                       <button
-                        className="p-md-3 p-1 px-lg-4 px-md-3 p-lg-3 text-center addtocart"
+                        className="px-lg-4 p-2 px-3  p-lg-3 mb-2 text-center addtocart"
                         onClick={() => {
                           handleAddToCart(card, Qty);
                           handleAddToCart1(card, Qty);
