@@ -233,6 +233,7 @@ const Singleshoppage = () => {
                     <div className="mb-2">
                       <div className="d-flex">
                         <h6 className="mt-1">Quantity:</h6>
+                        <br />
                         <div>
                           <button
                             className="rounded-3 pt-1 pb-1 px-2  inc-dec-btn"
@@ -270,28 +271,32 @@ const Singleshoppage = () => {
                         </div>
                       </div>
                     </div>
-
-                    <button className="px-4 p-3 mt-3 mb-2 text-center rounded-4 shareproductbtn">
+                  </Col>
+                  <Row lg={2}>
+                    <Col xs={6}>
+                      <button className="px-4 p-1 mt-3  p-lg-3 mb-2 text-center rounded-4 shareproductbtn">
+                        {" "}
+                        Share this Product
+                      </button>
+                    </Col>
+                    <Col xs={6} className=" pt-3">
                       {" "}
-                      Share this Product
-                    </button>
-                  </Col>
-                  <Col>
-                    <button
-                      className="p-md-3 p-2 px-lg-4 px-md-3 p-lg-3 text-center addtocart"
-                      onClick={() => {
-                        handleAddToCart(card, Qty);
-                        handleAddToCart1(card, Qty);
-                        handleAddToCart3();
-                      }}
-                    >
-                      ADD TO CART
-                      <FaArrowRight
-                        className="ms-2 rounded-circle  text-black p-1"
-                        style={{ backgroundColor: "#FFDAA9" }}
-                      />
-                    </button>
-                  </Col>
+                      <button
+                        className="p-md-3 p-1 px-lg-4 px-md-3 p-lg-3 text-center addtocart"
+                        onClick={() => {
+                          handleAddToCart(card, Qty);
+                          handleAddToCart1(card, Qty);
+                          handleAddToCart3();
+                        }}
+                      >
+                        ADD TO CART
+                        <FaArrowRight
+                          className="ms-2 rounded-circle  text-black p-1"
+                          style={{ backgroundColor: "#FFDAA9" }}
+                        />
+                      </button>
+                    </Col>
+                  </Row>
                 </Row>
               </div>
             </div>

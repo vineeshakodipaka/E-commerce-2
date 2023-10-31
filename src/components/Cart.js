@@ -22,12 +22,9 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
   const userId = Cookies.get("userId"); // Use your method to get the user ID from cookies
   const cartItems = useSelector((state) => state.cart.cartDetails);
 
-
-
- const [showCartPopup, setShowCartPopup] = useState(false);
- const cartClose = () => setShowCartPopup(false);
- const cartShow = () => setShowCartPopup(true);
-
+  const [showCartPopup, setShowCartPopup] = useState(false);
+  const cartClose = () => setShowCartPopup(false);
+  const cartShow = () => setShowCartPopup(true);
 
   const totalPrice = useSelector((state) => state.cart.totalPrice);
   // const [totalPrice, setTotalPrice] = useState(totalPrice1);
@@ -74,7 +71,7 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
   const handleIncrementQuantity = (productId, Qty) => {
     dispatch(incrementQuantity(productId, Qty));
 
-    if (Qty <= 100) { 
+    if (Qty <= 100) {
       Qty = 100;
     }
   };
@@ -101,7 +98,7 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
         // Show a form to add an address or perform any required actions
         navigate("/checkout");
       }
-    } else { 
+    } else {
       // User is not logged in
       // Show a signup or login form
       navigate("/checkout");
@@ -129,25 +126,37 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
       redirect: "follow",
     };
 
-    fetch(baseUrl+"CheckCopun.php", requestOptions)
+    fetch(baseUrl + "CheckCopun.php", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         if (result.status) {
           setApiResponse(result);
           setCouponCode(couponCode);
+          // setInputValue("");
         } else {
           // Coupon is not available or invalid
           setApiResponse(result);
+          // setInputValue("");
         }
       })
-      // .catch((error) => console.log("API error", error));
+      .catch((error) => {
+        alert("An error occurred while checking the coupon");
+      })
+      .finally(() => {
+        // Clear the input field
+        setInputValue("");
+      });
   };
 
-  const discountPercentage = apiResponse
-    ? parseFloat(apiResponse.data[0].DiscountPercent)
-    : 0;
-  const discountedPrice = totalPrice - (totalPrice * discountPercentage) / 100;
+  // const discountPercentage = apiResponse
+  //   ? parseFloat(apiResponse.data[0].DiscountPercent)
+  //   : 0;
+  const discountPercentage =
+    apiResponse && apiResponse.data && apiResponse.data.length > 0
+      ? parseFloat(apiResponse.data[0].DiscountPercent)
+      : 0;
 
+  const discountedPrice = totalPrice - (totalPrice * discountPercentage) / 100;
 
   return (
     <div className="container cartpage">
@@ -155,6 +164,7 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
         <Row lg={2}>
           <Col xs={12} lg={8}>
             {" "}
+          
             {cartItems === undefined ? (
               <div className="mx-5 mt-4">
                 <Player
@@ -397,7 +407,7 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
                   >
                     Check Coupon
                   </button>
-                  
+
                   <center>
                     {cartItems.length !== 0 ? (
                       <button
@@ -419,7 +429,6 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
       <AddressDetail
         totalPrice={totalPrice}
         apiResponse={apiResponse}
-       
         discountedPrice={discountedPrice}
         couponCode={couponCode}
         showCartPopup={showCartPopup}

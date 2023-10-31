@@ -43,13 +43,18 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
           const userId = response.data.user.User_ID;
           Cookies.set("userId", userId);
         } else {
-          // User data is not available, set userId to null 
+          // User data is not available, set userId to null
           Cookies.set("userId", null);
         }
 
         login(); // Call the login function to set isAuthenticated to true
         navigate("/account");
         handleClose2();
+        // Clear the input fields
+        setLoginData({
+          username: "",
+          password: "",
+        });
       } else {
         // Login failed, display an error message 
         alert("Login failed. Please check your credentials.");

@@ -42,8 +42,16 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
       );
 
       if (response.ok) {
-        // Signup successful, redirect to the login page  
+        // Signup successful, redirect to the login page
         navigate("/login");
+        // Clear the input fields by resetting the formData state
+        setFormData({
+          username: "",
+          password: "",
+          confirmPassword: "",
+          email: "",
+          phone: "",
+        });
       } else {
         // Signup failed, display an error message to the user
         alert("Signup failed. Please try again.");
