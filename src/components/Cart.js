@@ -164,8 +164,7 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
         <Row lg={2}>
           <Col xs={12} lg={8}>
             {" "}
-          
-            {cartItems === undefined ? (
+            {cartItems.length === 0 ? (
               <div className="mx-5 mt-4">
                 <Player
                   autoplay

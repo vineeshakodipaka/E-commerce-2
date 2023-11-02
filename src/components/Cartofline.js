@@ -17,7 +17,7 @@ const Cartofline = ({ handleShowA }) => {
   const { totalPrice } = useSelector((state) => state.cart1);
   const dispatch = useDispatch();
 
-  const userId = Cookies.get("userId");
+  const userId = Cookies.get("userId"); 
 
   const handleIncrementQuantity = (productId, Qty) => {
     dispatch(incrementQuantity(productId, Qty));

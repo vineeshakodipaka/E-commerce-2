@@ -37,7 +37,10 @@ const cartReducer = (state = initialState, action) => {
     case INCREMENT_QUANTITY:
       // Increment quantity logic...
       const updatedCartDetailsIncrement = state.cartDetails.map((item) => {
-        if (item.UserCartDetails_ID === action.payload.itemID && item.Qty<100) {
+        if (
+          item.UserCartDetails_ID === action.payload.itemID &&
+          item.Qty < 100
+        ) {
           return {
             ...item,
             Qty: Number(item.Qty) + 1,
@@ -84,7 +87,10 @@ const cartReducer = (state = initialState, action) => {
         cartDetails: updatedCartDetailsRemove,
         totalQuantity: calculateTotalQuantity(updatedCartDetailsRemove),
         totalPrice: calculateTotalPrice(updatedCartDetailsRemove), // Recalculate total price
+        cartLength: calculateCartLength(updatedCartDetailsRemove), // Update cart length here
       };
+
+   
 
     default:
       return state;
@@ -117,3 +123,4 @@ const calculateCartLength = (cartDetails) => {
 };
 
 export default cartReducer;
+ 

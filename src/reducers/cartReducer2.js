@@ -8,7 +8,7 @@ const cartReducer2 = (
         (item) => item.Product_id === action.payload.Product_id
       );
       if (existingProduct) {
-        existingProduct.Qty += 1;
+        existingProduct.Qty += 1; 
       } else {
         action.payload.Qty = Number(action.Qty);
         state.items.push({ ...action.payload });
