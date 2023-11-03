@@ -82,11 +82,11 @@ const Addressform = ({ baseUrl1 }) => {
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
   return (
-    <div className="text-start mx-lg-5 mx-3 px-lg-5 address-details">
-      <h3 className="mx-4 mx-lg-0 mx-md-1">Your Address Details</h3>
+    <div className="text-start mx-lg-5 mx-1 px-lg-5 address-details">
+      <h3 className="mx-4 mx-md-3">Saved Address</h3>
 
       <UserDetails baseUrl1={baseUrl1} />
-      <button className="mx-2 btna rounded-3 p-2" onClick={openModal}>
+      <button className="mx-4 mx-md-4 btna rounded-3 p-2" onClick={openModal}>
         Add New+
       </button>
 

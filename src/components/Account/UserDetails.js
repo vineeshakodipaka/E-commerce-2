@@ -1,7 +1,6 @@
-
 import Cookies from "js-cookie";
 import React, { useState, useEffect } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
 
 const UserDetails = ({ baseUrl1 }) => {
   // Define state to manage form data
@@ -9,11 +8,11 @@ const UserDetails = ({ baseUrl1 }) => {
   const [userAddresses, setUserAddresses] = useState([]);
   const userId = Cookies.get("userId"); // Retrieve userId from cookies
 
-  const fetchUserAddresses = React.useCallback(
+  const fetchUserAddresses = React.useCallback( 
     async (userId) => {
       var requestOptions = {
         method: "GET",
-        redirect: "follow",
+        redirect: "follow", 
       };
 
       try {
@@ -46,7 +45,7 @@ const UserDetails = ({ baseUrl1 }) => {
       };
 
       const response = await fetch(
-        baseUrl1+"DeleteAddress.php",
+        baseUrl1 + "DeleteAddress.php",
         requestOptions
       );
 
@@ -79,24 +78,36 @@ const UserDetails = ({ baseUrl1 }) => {
     <div className="text-start address-details">
       {userAddresses.map((userAddress, index) => (
         <div key={index}>
-          <Card className="m-2">
-            <Card.Body className="p-3">
-              <div>
-                <h4> Address:</h4>
-                <p className="fs-5">
-                  {userAddress.Name},{userAddress.StreetAddress},{" "}
-                  {userAddress.City},{userAddress.State}, {userAddress.ZipCode},
-                  {userAddress.Contry}
-                  <button
-                    className="btna rounded-4 mx-2 p-2"
-                    onClick={() => removeAddress(userAddress.AddressID)}
-                  >
-                    Remove
-                  </button>
-                </p>
-              </div>
-            </Card.Body>
-          </Card>
+          <Container>
+            <Row>
+              <Col lg={6} xs={12}>
+                {" "}
+                <Card className="m-2">
+                  <Card.Body className="p-3">
+                    <div>
+                      <h4> Address:</h4>
+                      <div>
+                        <p className="fs-5">{userAddress.Name}</p>
+                        <p className="fs-5">{userAddress.StreetAddress}</p>
+                        <p className="fs-5">
+                          {userAddress.City}&nbsp;{userAddress.ZipCode}
+                        </p>
+                        <p className="fs-5">{userAddress.State}</p>
+
+                        <p className="fs-5">{userAddress.Contry}</p>
+                        <button
+                          className="btna  p-2"
+                          onClick={() => removeAddress(userAddress.AddressID)}
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
+          </Container>
         </div>
       ))}
     </div>
