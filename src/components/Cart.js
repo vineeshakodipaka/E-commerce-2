@@ -188,13 +188,13 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {cartItems.map((product, i) => (
+                      {cartItems.map((product, UserCartDetails_ID) => (
                         <tr key={product.UserCartDetails_ID}>
                           <td>
                             <img
                               className="rounded-3  p-4  prdctimg"
                               src={product.Product_img}
-                              alt={`Image ${i + 1}`}
+                              alt={`Image ${UserCartDetails_ID + 1}`}
                               id="prdctimg1"
                               style={{ width: "150px", height: "150px" }}
                             />
@@ -382,6 +382,12 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
                 </Row>
                 <div>
                   <p>Shipping:</p>
+                  <p>
+                    
+                    {apiResponse && apiResponse.data && apiResponse.data[0]
+                      ? `DiscountPercent: ${apiResponse.data[0].DiscountPercent}`
+                      : totalPrice}%
+                  </p>
 
                   <hr />
                   <Row className="justify-content-between">

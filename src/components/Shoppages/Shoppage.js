@@ -6,17 +6,17 @@ import { fetchProducts, addToCart } from "../../actions";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import "./Shoppage.css";
-import { useCartContext } from "../../CartContext"; // Import the useCartContext hook
+
 import Cookies from "js-cookie";
 import { useAuth } from "../../AuthContext ";
 import { useSpring, animated } from "react-spring";
+import { addToCart1 } from "../../actions/cartActions";
 
 const Shoppage = ({ searchQuery }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.filteredProducts);
-  const { handleAddToCart } = useCartContext(); // Use the useCartContext hook to access the handleAddToCart function
-
+ 
   // Fetch products from the Redux store when the component mounts
   useEffect(() => {
     dispatch(fetchProducts());
@@ -51,7 +51,10 @@ const Shoppage = ({ searchQuery }) => {
       dispatch(addToCart(product, Qty));
       setShowCartPopup(true);
     } else {
-      setShowCartPopup(true);
+       dispatch(addToCart1(product, Qty));
+       setTimeout(() => {
+         setShowCartPopup(true);
+       }, 1000);
     }
   };
 
@@ -68,24 +71,31 @@ const Shoppage = ({ searchQuery }) => {
     }
   };
 
-  const handleAddToCart3 = () => {
-    setShowCartPopup(true);
+  // const handleAddToCart3 = () => {
+   
+  //   // setShowCartPopup(true);
 
-    setTimeout(() => {
-      setShowCartPopup(false);
-    }, 8000); // Updated to 5 seconds
-  };
+  //   // setTimeout(() => {
+  //   //   setShowCartPopup(false);
+  //   // }, 8000); // Updated to 5 seconds
+  // };
 
   const notificationAnimation = useSpring({
     opacity: showCartPopup ? 1 : 0,
     transform: showCartPopup ? "translateY(0)" : "translateY(-100%)",
   });
  const cartItems = useSelector((state) => state.cart.cartDetails);
-
+  const cartItems1 = useSelector((state) => state.cart1.items);
  // Function to check if a product is already in the cart
  const isProductInCart = (productId) => {
-   return cartItems.some((item) => item.Product_id === productId);
- };
+  if(!userId){
+ return cartItems1.some((item) => item.Product_id === productId);
+  }
+  else{
+     return cartItems.some((item) => item.Product_id === productId);
+  }
+ };  
+
 
  
   return (
@@ -182,7 +192,8 @@ const Shoppage = ({ searchQuery }) => {
                         <Col lg={7} xl={6} md={6} xs={12}>
                           {/* Button to add the product to the cart */}
                           <Card.Text className="text-center  mt-xl-0 mt-md-2">
-                            {isProductInCart(product.Product_id) ? (
+                            {isProductInCart(product.Product_id) ||
+                            product.isAddedToCart ? (
                               <button
                                 className="rounded-3  fw-normal p-1 p-md-2 px-2"
                                 style={{
@@ -190,7 +201,7 @@ const Shoppage = ({ searchQuery }) => {
                                   border: "none",
                                   color: "white",
                                 }}
-                                onClick={handleViewCart}
+                                 onClick={handleViewCart}
                               >
                                 View Cart
                               </button>
@@ -203,9 +214,9 @@ const Shoppage = ({ searchQuery }) => {
                                   color: "white",
                                 }}
                                 onClick={() => {
-                                  handleAddToCart(product, "1");
+                                  // handleAddToCart(product, "1");
                                   handleAddToCart1(product, "1");
-                                  handleAddToCart3();
+                                 
                                 }}
                               >
                                 Add To Cart
@@ -221,22 +232,7 @@ const Shoppage = ({ searchQuery }) => {
             ))}
         </Row>
       </Container>
-      {/* Cart Pop-up */}
-      {/* {showCartPopup && (
-        <animated.div
-          className=" position-fixed top-0 right-0 notification"
-          style={{
-            cardAnimation,
-            // position: "fixed",
-            // top: 0,
-            // right: 0,
-          }}
-        >
-          {/* <animated.div style={fadeOutAnimation}> */}
 
-      {/* </animated.div> */}
-      {/* </animated.div>
-      )} */}
       <animated.div
         className="notification m-2"
         style={{

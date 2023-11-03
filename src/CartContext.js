@@ -8,7 +8,7 @@ const CartContext = createContext();
 
 export const useCartContext = () => useContext(CartContext);
 
-export const CartProvider = ({ children }) => {
+export const CartProvider = ({ children }) => { 
   // Define your cart state and related functions here
 
   const handleAddToCart = (product, Qty) => {

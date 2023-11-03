@@ -4,25 +4,23 @@ import { Link, useLocation } from "react-router-dom";
 import { fetchBrandSubproducts, addToCart } from "../../actions"; // Import the action to fetch brand products
 import { ButtonGroup, Card, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import {  Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import "../Shoppages/Shoppage.css";
-import { useCartContext } from "../../CartContext"; // Import the useCartContext hook
+
 import Cookies from "js-cookie";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { baseUrl } from "../../Globalvarible";
 import { useAuth } from "../../AuthContext ";
 import { useSpring, animated } from "react-spring";
+import { addToCart1 } from "../../actions/cartActions";
 
 const Subbrandproducts = () => {
-  const { handleAddToCart } = useCartContext(); // Use the useCartContext hook to access the handleAddToCart function
-
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const Subcatid = queryParams.get("Subcat_id");
 
   const products = useSelector((state) => state.brandSubproducts.subproducts);
-
 
   const error = useSelector((state) => state.brandProducts.error);
 
@@ -42,17 +40,19 @@ const Subbrandproducts = () => {
   const [showCartPopup, setShowCartPopup] = useState(false);
 
   const userId = Cookies.get("userId"); // Use your method to get the user ID from cookies
-  const handleAddToCart1 = (product,Qty) => {
+  const handleAddToCart1 = (product, Qty) => {
     window.scrollTo(0, 0);
     if (!userId) {
-      dispatch(addToCart(product,Qty));
+      dispatch(addToCart(product, Qty));
       setShowCartPopup(true);
     } else {
-      setShowCartPopup(true);
+      dispatch(addToCart1(product, Qty));
+      setTimeout(() => {
+        setShowCartPopup(true);
+      }, 1000);
     }
   };
 
- 
   const { setActiveButton } = useAuth();
   const handleViewCart = () => {
     window.scrollTo(0, 0);
@@ -66,18 +66,21 @@ const Subbrandproducts = () => {
     }
   };
 
-  const handleAddToCart3 = () => {
-    setShowCartPopup(true);
-
-    setTimeout(() => {
-      setShowCartPopup(false);
-    }, 8000); // Updated to 5 seconds
-  };
-
   const notificationAnimation = useSpring({
     opacity: showCartPopup ? 1 : 0,
     transform: showCartPopup ? "translateY(0)" : "translateY(-100%)",
   });
+
+  const cartItems = useSelector((state) => state.cart.cartDetails);
+  const cartItems1 = useSelector((state) => state.cart1.items);
+  // Function to check if a product is already in the cart
+  const isProductInCart = (productId) => {
+    if (!userId) {
+      return cartItems1.some((item) => item.Product_id === productId);
+    } else {
+      return cartItems.some((item) => item.Product_id === productId);
+    }
+  };
 
   return (
     <div>
@@ -192,21 +195,34 @@ const Subbrandproducts = () => {
                             <Col lg={7} xl={6} md={6} xs={12}>
                               {/* Button to add the product to the cart */}
                               <div className="text-center  mt-xl-0 mt-md-2">
-                                <button
-                                  className="rounded-3  fw-normal p-2"
-                                  style={{
-                                    background: "#8F3300",
-                                    border: "none",
-                                    color: "white",
-                                  }}
-                                  onClick={() => {
-                                    handleAddToCart(product, "1");
-                                    handleAddToCart1(product, "1");
-                                    handleAddToCart3();
-                                  }}
-                                >
-                                  Add To Cart
-                                </button>
+                                {isProductInCart(product.Product_id) ||
+                                product.isAddedToCart ? (
+                                  <button
+                                    className="rounded-3  fw-normal p-1 p-md-2 px-2"
+                                    style={{
+                                      background: "#000066",
+                                      border: "none",
+                                      color: "white",
+                                    }}
+                                    onClick={handleViewCart}
+                                  >
+                                    View Cart
+                                  </button>
+                                ) : (
+                                  <button
+                                    className="rounded-3  fw-normal p-2"
+                                    style={{
+                                      background: "#8F3300",
+                                      border: "none",
+                                      color: "white",
+                                    }}
+                                    onClick={() => {
+                                      handleAddToCart1(product, "1");
+                                    }}
+                                  >
+                                    Add To Cart
+                                  </button>
+                                )}
                               </div>
                             </Col>
                           </Row>

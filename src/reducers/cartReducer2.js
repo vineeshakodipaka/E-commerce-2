@@ -38,7 +38,7 @@ const cartReducer2 = (
         totalPrice: totalPrice.toFixed(2),
         isSale: state.items.some((item) => item.isSale),
         cartLength1,
-      };
+      }; 
 
     case "INCREMENT_QUANTITY":
       const itemToIncrement = state.items.find(

@@ -3,6 +3,7 @@ import {
   REMOVE_FROM_CART,
   INCREMENT_QUANTITY,
   DECREMENT_QUANTITY,
+   ADD_TO_CART,
 } from "../actions/cartActions"; // Import the action type
 
 const initialState = {
@@ -90,32 +91,65 @@ const cartReducer = (state = initialState, action) => {
         cartLength: calculateCartLength(updatedCartDetailsRemove), // Update cart length here
       };
 
-   
+    case ADD_TO_CART:
+      const existingProductIndex = state.cartDetails.findIndex(
+        (item) => item.Product_id === action.payload.Product_id
+      );
+
+      if (existingProductIndex !== -1) {
+        // If the product already exists in the cart, update its quantity
+        state.cartDetails[existingProductIndex].Qty += 1;
+      } else {
+        // If the product is not in the cart, add it
+        action.payload.Qty = Number(action.Qty);
+        state.cartDetails.push({ ...action.payload });
+      }
+
+      return {
+        ...state,
+        totalQuantity: state.totalQuantity + 1,
+        cartLength: calculateCartLength(state.cartDetails), // Update cart length here
+      };
 
     default:
       return state;
   }
+
+
+  
 };
 
 // Helper function to calculate the total quantity
 const calculateTotalQuantity = (cartDetails) => {
   return cartDetails.reduce((total, item) => total + item.Qty, 0);
 };
-
-// Helper function to calculate the total price
 const calculateTotalPrice = (cartDetails) => {
   return cartDetails
     .reduce((total, item) => {
-
       const price = parseFloat(
-        item.isSale
+        item.isSale && item.Product_offerPrice
           ? item.Product_offerPrice.replace("₹", "").replace(",", "")
-          : item.Product_originalPrice.replace("₹", "").replace(",", "")
+          : (item.Product_originalPrice || "").replace("₹", "").replace(",", "")
       );
       return total + price * item.Qty;
-    }, 0)
+    }, 0) 
     .toFixed(2);
 };
+
+// Helper function to calculate the total price
+// const calculateTotalPrice = (cartDetails) => {
+//   return cartDetails
+//     .reduce((total, item) => {
+
+//       const price = parseFloat(
+//         item.isSale
+//           ? item.Product_offerPrice.replace("₹", "").replace(",", "")
+//           : item.Product_originalPrice.replace("₹", "").replace(",", "")
+//       );
+//       return total + price * item.Qty;
+//     }, 0)
+//     .toFixed(2);
+// };
 
 // Helper function to calculate cartLength based on total quantity
 const calculateCartLength = (cartDetails) => {

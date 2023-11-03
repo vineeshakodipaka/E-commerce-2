@@ -6,7 +6,7 @@ import {
   ButtonGroup,
   Card,
   Col,
-  Container,
+  Container, 
   Row,
 } from "react-bootstrap";
 import { FaArrowRight } from "react-icons/fa";
@@ -16,17 +16,17 @@ import Shopcardslide from "./Shopcardslide";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import { useNavigate, useParams } from "react-router-dom";
-import { useCartContext } from "../../CartContext";
+
 import { addToCart, fetchProducts } from "../../actions";
 import { useSpring, animated } from "react-spring";
+import { addToCart1 } from "../../actions/cartActions";
 
 const Singleshoppage = () => {
   const [showInfo, setShowInfo] = useState(false);
   const [showInfo1, setShowInfo1] = useState(false);
   //single cartpage
 
-  const { handleAddToCart } = useCartContext(); // Use the useCartContext hook to access the handleAddToCart function
-  const navigate = useNavigate();
+    const navigate = useNavigate();
   const [showCartPopup, setShowCartPopup] = useState(false);
 
   const userId = Cookies.get("userId"); // Use your method to get the user ID from cookies
@@ -83,6 +83,7 @@ const Singleshoppage = () => {
     setShowInfo1(!showInfo1);
   };
 
+
   //single cart
 
   useEffect(() => {
@@ -103,13 +104,7 @@ const Singleshoppage = () => {
     );
   }
 
-  const handleAddToCart3 = () => {
-    setShowCartPopup(true);
-
-    setTimeout(() => {
-      setShowCartPopup(false);
-    }, 8000); // Updated to 5 seconds
-  };
+ 
 
   const handleAddToCart1 = (product, Qty) => {
     window.scrollTo(0, 0);
@@ -117,7 +112,10 @@ const Singleshoppage = () => {
       dispatch(addToCart(product, Qty));
       setShowCartPopup(true);
     } else {
-      setShowCartPopup(true);
+      dispatch(addToCart1(product, Qty));
+      setTimeout(() => {
+        setShowCartPopup(true);
+      }, 1000);
     }
   };
 
@@ -158,6 +156,9 @@ const Singleshoppage = () => {
     const zoomedImage = document.getElementById("zoomed-image");
     zoomedImage.classList.remove("zoomed");
   };
+
+
+  
   return (
     <div className="singleproductpage">
       <div className="position-relative mb-3">
@@ -323,9 +324,10 @@ const Singleshoppage = () => {
                       <button
                         className="px-lg-4 p-2 px-3  p-lg-3 mb-2 text-center addtocart"
                         onClick={() => {
-                          handleAddToCart(card, Qty);
+                          
                           handleAddToCart1(card, Qty);
-                          handleAddToCart3();
+                          
+                          
                         }}
                       >
                         ADD TO CART

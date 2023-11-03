@@ -9,15 +9,15 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import "./Shopcardslide.css";
-import { useCartContext } from "../../CartContext"; // Import the useCartContext hook
+
 import Cookies from "js-cookie";
 import { useSpring, animated } from "react-spring";
+import { addToCart1 } from "../../actions/cartActions";
 
 const Shopcardslide2 = ({ searchQuery }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.filteredProducts);
-  const { handleAddToCart } = useCartContext(); // Use the useCartContext hook to access the handleAddToCart function
 
   // Fetch products from the Redux store when the component mounts
   useEffect(() => {
@@ -55,7 +55,10 @@ const Shopcardslide2 = ({ searchQuery }) => {
       dispatch(addToCart(product, Qty));
       setShowCartPopup(true);
     } else {
-      setShowCartPopup(true);
+      dispatch(addToCart1(product, Qty));
+      setTimeout(() => {
+        setShowCartPopup(true);
+      }, 1000);
     }
   };
 
@@ -63,10 +66,8 @@ const Shopcardslide2 = ({ searchQuery }) => {
     setShowCartPopup(false); // Close the popup
     window.scrollTo(0, 0);
     if (!userId) {
-     
       navigate("/cartpage"); // Navigate to cartpage if userId is not available
     } else {
-
       navigate("/cart"); // Navigate to cart if userId is available
     }
   };
@@ -140,20 +141,24 @@ const Shopcardslide2 = ({ searchQuery }) => {
       },
     ],
   };
-  const handleAddToCart3 = () => {
-    setShowCartPopup(true);
-
-    setTimeout(() => {
-      setShowCartPopup(false);
-    }, 8000); // Updated to 5 seconds
-  };
-
+  
   const notificationAnimation = useSpring({
     opacity: showCartPopup ? 1 : 0,
     transform: showCartPopup ? "translateY(0)" : "translateY(-100%)",
   });
   // Filter the products to include only featured products
   const featuredProducts = products.filter((product) => product.isNew);
+
+  const cartItems = useSelector((state) => state.cart.cartDetails);
+  const cartItems1 = useSelector((state) => state.cart1.items);
+  // Function to check if a product is already in the cart
+  const isProductInCart = (productId) => {
+    if (!userId) {
+      return cartItems1.some((item) => item.Product_id === productId);
+    } else {
+      return cartItems.some((item) => item.Product_id === productId);
+    }
+  };
 
   return (
     <div className="shopcardslidecls">
@@ -243,21 +248,36 @@ const Shopcardslide2 = ({ searchQuery }) => {
                           <Col lg={7} xl={6} md={8} xs={12}>
                             {/* Button to add the product to the cart */}
                             <Card.Text className="text-center  mt-xl-0 mt-md-2">
-                              <button
-                                className="rounded-3 cardbtn fw-normal p-1 p-md-2 px-2"
-                                style={{
-                                  background: "#8F3300",
-                                  border: "none",
-                                  color: "white",
-                                }}
-                                onClick={() => {
-                                  handleAddToCart(product, "1");
-                                  handleAddToCart1(product, "1");
-                                  handleAddToCart3();
-                                }}
-                              >
-                                Add To Cart
-                              </button>
+                              {isProductInCart(product.Product_id)  ||
+                            product.isAddedToCart ? (
+                                <button
+                                  className="rounded-3  fw-normal p-1 p-md-2 px-2"
+                                  style={{
+                                    background: "#000066",
+                                    border: "none",
+                                    color: "white",
+                                  }}
+                                  onClick={handleViewCart}
+                                >
+                                  View Cart
+                                </button>
+                              ) : (
+                                <button
+                                  className="rounded-3 cardbtn fw-normal p-1 p-md-2 px-2"
+                                  style={{
+                                    background: "#8F3300",
+                                    border: "none",
+                                    color: "white",
+                                  }}
+                                  onClick={() => {
+                                 
+                                    handleAddToCart1(product, "1");
+                                   
+                                  }}
+                                >
+                                  Add To Cart
+                                </button>
+                              )}
                             </Card.Text>
                           </Col>
                         </Row>

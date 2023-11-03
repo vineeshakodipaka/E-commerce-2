@@ -40,6 +40,10 @@ const Navbar = ({ handleShow2 }) => {
     // Fetch brand data from the API
     dispatch(fetchCartDetails(userId));
   }, [dispatch, userId]);
+ useEffect(() => {
+   // Fetch brand data from the API
+   dispatch(fetchCartDetails(userId));
+ }, [dispatch, userId]);
 
   const handleBrandChange = (brand) => {
     if (brand.hasSubcat) {

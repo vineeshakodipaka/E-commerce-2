@@ -1,8 +1,66 @@
+import Cookies from "js-cookie";
 import { baseUrl } from "../Globalvarible";
-
+ 
 // cartActions.js
+
+export const ADD_TO_CART = "ADD_TO_CART";
+
+export const addToCart1 = (product, Qty) => {
+  return (dispatch) => {
+    // Get the user ID from cookies or wherever it's stored
+    const userId = Cookies.get("userId"); // Replace this with your actual method of getting the user ID
+
+    // Prepare the data to send in the request
+    const data = new FormData();
+    data.append("User_ID", userId || ""); // Use an empty string if user ID is not available
+    data.append("Product_id", product.Product_id);
+    data.append("Qty", Qty); // You can modify this to specify the quantity
+
+    const requestOptions = {
+      method: "POST",
+      body: data,
+      redirect: "follow",
+    };
+
+    // Make the API request to add the item to the cart
+    fetch(baseUrl + "Add_CartDetails.php", requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        // Handle the response from the server, e.g., show a success message
+
+        // Once the item is successfully added to the cart, dispatch the action
+        dispatch({
+          type: ADD_TO_CART,
+          payload: product,
+          Qty: Qty,
+        });
+      })
+      .catch((error) => {
+        // Handle errors, e.g., show an error message
+      });
+  };
+};
+
+
+
+
+
+
+
+
+
 export const FETCH_CART_SUCCESS = "FETCH_CART_SUCCESS";
 export const FETCH_CART_ERROR = "FETCH_CART_ERROR";
+
+
+
+
+
+
+
+
+
+
 export const fetchCartDetails = (userId) => {
   return (dispatch) => {
     // Make an API request to get cart details

@@ -1,5 +1,6 @@
 // src/actions/index.js
 
+import Cookies from "js-cookie";
 import { baseUrl } from "../Globalvarible";
 
 export const FETCH_PRODUCTS_REQUEST = "FETCH_PRODUCTS_REQUEST";
@@ -21,39 +22,58 @@ export const fetchProductsFailure = (error) => ({
 });
 
 export const fetchProducts = () => {
+  const userId = Cookies.get("userId"); // Use your method to get the user ID from cookies
   return (dispatch) => {
     dispatch(fetchProductsRequest());
 
-    fetch(baseUrl+"Shop.php")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        if (data.status) {
-          dispatch(fetchProductsSuccess(data.products));
-        } else {
-          // If status is not true, you can dispatch an error or take other actions
-        
-          // Dispatch an error action if needed
-          // dispatch(fetchProductsFailure("API status is not true"));
-        }
-      })
-      .catch((error) => dispatch(fetchProductsFailure(error)));
+    if (userId) {
+      fetch(baseUrl + `Shop.php?user_id=${userId}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data.status) {
+            dispatch(fetchProductsSuccess(data.products));
+          } else {
+            // If status is not true, you can dispatch an error or take other actions
+            // Dispatch an error action if needed
+            // dispatch(fetchProductsFailure("API status is not true"));
+          }
+        })
+        .catch((error) => dispatch(fetchProductsFailure(error)));
+    } else {
+      fetch(baseUrl + "Shop.php")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data.status) {
+            dispatch(fetchProductsSuccess(data.products));
+          } else {
+            // If status is not true, you can dispatch an error or take other actions
+            // Dispatch an error action if needed
+            // dispatch(fetchProductsFailure("API status is not true"));
+          }
+        })
+        .catch((error) => dispatch(fetchProductsFailure(error)));
+    }
   };
 };
 
-// src/actions/index.js
+// src/actions/index.js 
 
 export const ADD_TO_CART = "ADD_TO_CART";
 
-export const addToCart = (product,Qty) => ({
+export const addToCart = (product, Qty) => ({
   type: ADD_TO_CART,
-  payload:product,
-  Qty:Qty
-  
+  payload: product,
+  Qty: Qty,
 });
 
 export const INCREMENT_QUANTITY = "INCREMENT_QUANTITY";
@@ -61,7 +81,7 @@ export const DECREMENT_QUANTITY = "DECREMENT_QUANTITY";
 
 export const incrementQuantity = (productId) => ({
   type: INCREMENT_QUANTITY,
-  payload: productId
+  payload: productId,
 });
 
 export const decrementQuantity = (productId) => ({
@@ -122,13 +142,11 @@ export const fetchBrands = () => {
           // Dispatch the success action with the fetched data
           dispatch(fetchBrandsSuccess(data.brands));
         } else {
-         
           // You can dispatch an error action if needed
           // dispatch(fetchBrandsFailure("API status is not true"));
         }
       })
       .catch((error) => {
-      
         // Dispatch an error action if needed
         // dispatch(fetchBrandsFailure(error));
       });
@@ -162,9 +180,7 @@ export const fetchBrandProducts = (brandId) => {
   return (dispatch) => {
     dispatch(fetchBrandProductsRequest());
 
-    fetch(
-      baseUrl+`BrandsProduct.php?ConnectedToBrand_id=${brandId}`
-    )
+    fetch(baseUrl + `BrandsProduct.php?ConnectedToBrand_id=${brandId}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -210,7 +226,7 @@ export const fetchBrandSubproducts = (Subcatid) => {
   return (dispatch) => {
     dispatch(fetchBrandSubproductsRequest());
 
-    fetch(baseUrl+`BrandsProduct.php?ConnectedToBrand_id=${Subcatid}`)
+    fetch(baseUrl + `BrandsProduct.php?ConnectedToBrand_id=${Subcatid}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
