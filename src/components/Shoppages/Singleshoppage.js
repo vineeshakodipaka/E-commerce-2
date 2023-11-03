@@ -12,7 +12,7 @@ import {
 import { FaArrowRight } from "react-icons/fa";
 import "./Singleshoppage.css";
 import Shopcardslide from "./Shopcardslide";
-import Shopcardslide2 from "./Shopcardslide2";
+
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import { useNavigate, useParams } from "react-router-dom";
@@ -45,7 +45,8 @@ const Singleshoppage = () => {
   const [Qty, setQty] = useState("1");
   const [selectedImage, setSelectedImage] = useState("");
   const [dataLoaded, setDataLoaded] = useState(false);
-
+  //img zoom
+  const [isZoomed, setIsZoomed] = useState(false);
 
   const handleImageClick = (newImage) => {
     setSelectedImage(newImage);
@@ -56,23 +57,21 @@ const Singleshoppage = () => {
     if (!isNaN(inputNumber) && inputNumber >= 1 && inputNumber <= 100) {
       setQty(inputNumber.toString());
       // Removed the setSelectedQuantity line since selectedQuantity is not used
-      
     } else {
       setQty("1");
     }
   };
-   const handleIncrementQuantity = () => {
-     const newQty = parseInt(Qty, 10) + 1;
-     setQty(newQty.toString());
-   };
+  const handleIncrementQuantity = () => {
+    const newQty = parseInt(Qty, 10) + 1;
+    setQty(newQty.toString());
+  };
 
-   const handleDecrementQuantity = () => {
-     const newQty = parseInt(Qty, 10) - 1;
-     if (newQty >= 1) {
-       setQty(newQty.toString());
-     }
-   };
-
+  const handleDecrementQuantity = () => {
+    const newQty = parseInt(Qty, 10) - 1;
+    if (newQty >= 1) {
+      setQty(newQty.toString());
+    }
+  };
 
   // Toggle showInfo state for product information
   const toggleInfo = () => {
@@ -86,16 +85,16 @@ const Singleshoppage = () => {
 
   //single cart
 
- useEffect(() => {
-   if (!dataLoaded) {
-     dispatch(fetchProducts());
+  useEffect(() => {
+    if (!dataLoaded) {
+      dispatch(fetchProducts());
 
-     if (card && card.Product_img) {
-       setSelectedImage(card.Product_img);
-       setDataLoaded(true);
-     }
-   }
- }, [cardId, dispatch, card, dataLoaded]);
+      if (card && card.Product_img) {
+        setSelectedImage(card.Product_img);
+        setDataLoaded(true);
+      }
+    }
+  }, [cardId, dispatch, card, dataLoaded]);
   if (!card) {
     return (
       <Container>
@@ -103,7 +102,7 @@ const Singleshoppage = () => {
       </Container>
     );
   }
- 
+
   const handleAddToCart3 = () => {
     setShowCartPopup(true);
 
@@ -131,6 +130,34 @@ const Singleshoppage = () => {
     }
   };
 
+  // img zoom
+  const handleMouseMove = (e) => {
+    if (isZoomed) {
+      // Calculate the position of the mouse relative to the image
+      const image = document.getElementById("zoomed-image");
+      const rect = image.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Set the transform origin and adjust the image position
+      const zoomedImage = document.getElementById("zoomed-image");
+      zoomedImage.style.transformOrigin = `${(x / rect.width) * 100}% ${
+        (y / rect.height) * 100
+      }%`;
+      zoomedImage.style.transform = "scale(2)"; // You can adjust the scale factor as needed
+    }
+  };
+
+  const handleZoomIn = () => {
+    setIsZoomed(true);
+  };
+
+  const handleZoomOut = () => {
+    // Reset the transformation and zoom state
+    const zoomedImage = document.getElementById("zoomed-image");
+    zoomedImage.style.transform = "scale(1)";
+    setIsZoomed(false);
+  };
   return (
     <div className="singleproductpage">
       <div className="position-relative mb-3">
@@ -179,17 +206,26 @@ const Singleshoppage = () => {
           <Col lg={4} md={4} className="mt-md-5 order-md-1 order-1">
             <div>
               <br />
-              <Card style={{ border: "none" }}>
-                <Card.Img
-                  variant="top"
-                  className=" singlecardprdctimg p-3"
-                  src={selectedImage}
-                  alt="product"
-                  style={{
-                    boxShadow: "0 2px 10px rgba(0,0,0,.1)",
-                    border: "none",
-                  }}
-                />
+              <Card
+                style={{
+                  boxShadow: "0 2px 10px rgba(0,0,0,.1)",
+                  border: "none",
+                  overflow: "hidden",
+                }}
+              >
+                <div
+                  onMouseMove={handleMouseMove}
+                  onMouseLeave={handleZoomOut}
+                  id="zoomed-image"
+                >
+                  <Card.Img
+                    variant="top"
+                    className=" singlecardprdctimg p-3"
+                    src={selectedImage}
+                    alt="product"
+                    onMouseEnter={handleZoomIn}
+                  />
+                </div>
               </Card>
             </div>
           </Col>
@@ -197,20 +233,23 @@ const Singleshoppage = () => {
           {/* carameldiv column */}
           <Col lg={6} md={6} className="px-xl-5 order-md-1 order-3">
             <div className="carameldiv mt-md-5">
-              <p className="fs-3">{card.Product_name}</p>
-              {card.isSale && (
-                <button
-                  className="sale-button rounded-3  px-4"
-                  style={{
-                    background: "#DC0000",
-                    border: "none",
-                    color: "white",
-                  }}
-                >
-                  Sale
-                </button>
-              )}
-              <p className="fs-4 mb-1 mt-1">
+              <div>
+                {card.isSale && (
+                  <button
+                    className="sale-button rounded-3 mt-4 px-4"
+                    style={{
+                      background: "#DC0000",
+                      border: "none",
+                      color: "white",
+                    }}
+                  >
+                    Sale
+                  </button>
+                )}
+              </div>
+              <p className="fs-3 pt-3 pb-0 mb-0">{card.Product_name}</p>
+
+              <p className="fs-4 mb-1 mt-0 pt-0">
                 Price
                 <br />
                 {card.isSale ? (
@@ -247,7 +286,7 @@ const Singleshoppage = () => {
                             -
                           </button>
                           <input
-                            className="quantity p-1"
+                            className="quantity p-1 text-center"
                             type="number"
                             placeholder="1"
                             value={Qty}
@@ -368,7 +407,6 @@ const Singleshoppage = () => {
             <h3 className=" text-center mt-5 mb-4">Related Products</h3>
             {/* Render related products from the Shoppage component */}
             <Shopcardslide />
-            <Shopcardslide2 />
           </Row>
         </div>
       </Container>

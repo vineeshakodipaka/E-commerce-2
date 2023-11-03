@@ -135,11 +135,7 @@ const {activeButton,setActiveButton}=useAuth()
   return (
     <nav className="navbar navbar-expand-lg navbar headerbar mt-lg-4 mb-lg-4">
       <div className="container mx-lg-3 mx-xl-5 px-xl-5">
-        <Link
-          to="/"
-          className="nav-item navbrand d-flex me-xxl-5 "
-          style={{ textDecoration: "none" }}
-        >
+      
           <img
             className="mx-xl-0"
             src={logoUrl}
@@ -147,7 +143,7 @@ const {activeButton,setActiveButton}=useAuth()
             height="80px"
             alt="logo"
           />
-        </Link>
+  
         <span
           className="navbar-toggler"
           type="button"
