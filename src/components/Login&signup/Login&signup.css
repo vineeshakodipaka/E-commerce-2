@@ -15,6 +15,9 @@ box-shadow: none ;
 background: #FFECE5;
 border: none;
 }
+.logincls .model{
+    padding-left: 0px;
+}
 .logincls input ,.signupcls input{
 color: #3B3B3B;
 font-family: Abel;

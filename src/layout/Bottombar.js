@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { AiFillHome } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
@@ -6,7 +6,7 @@ import { BsFillCartDashFill } from "react-icons/bs";
 import { RiShoppingBagFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import "./Bottombar.css"; // Import the external CSS file
-import { useSelector, useDispatch } from "react-redux"; 
+import { useSelector, useDispatch } from "react-redux";
 import Cookies from "js-cookie";
 import { fetchCartDetails } from "../actions/cartActions";
 
@@ -86,18 +86,39 @@ const Bottombar = () => {
           </Link>
 
           {/* User link */}
-          <Link
-            to="/account"
-            onClick={handleLinkClick}
-            className={`b-link px-3  rounded-3 text-center  p-2 ${
-              activeButton === 3 ? "active" : ""
-            }`}
-            onMouseEnter={() => setActiveButton(3)}
-            style={{ color: "black", textDecoration: "none" }}
-          >
-            <FaUserAlt size={20} color="#652700" />
-            {activeButton === 3 && <p className="mb-0"> Profile</p>}
-          </Link>
+          {userId === undefined ? (
+            <>
+              {" "}
+              {/* Home link */}
+              <Link
+                to="/"
+                onClick={handleLinkClick}
+                className={`b-link px-3  rounded-3 text-center  p-2 ${
+                  activeButton === 3 ? "active" : ""
+                }`}
+                onMouseEnter={() => setActiveButton(3)}
+                style={{ color: "black", textDecoration: "none" }}
+              >
+                <FaUserAlt size={20} color="#652700" />
+                {activeButton === 3 && <p className="mb-0"> Profile</p>}
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/account"
+                onClick={handleLinkClick}
+                className={`b-link px-3  rounded-3 text-center  p-2 ${
+                  activeButton === 3 ? "active" : ""
+                }`}
+                onMouseEnter={() => setActiveButton(3)}
+                style={{ color: "black", textDecoration: "none" }}
+              >
+                <FaUserAlt size={20} color="#652700" />
+                {activeButton === 3 && <p className="mb-0"> Profile</p>}
+              </Link>
+            </>
+          )}
         </Nav>
       </Navbar>
     </div>

@@ -30,4 +30,13 @@
 .brandsliding .slick-prev,.slick-prev:before {
     display: none;
 }
- 
+ .brandsliding .brandimg{
+    width: 300px;
+    height: 250px;
+ }
+ @media screen and (max-width: 760px) {
+    .brandsliding .brandimg {
+            width: 100% !important;
+          
+        }
+ }

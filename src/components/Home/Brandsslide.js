@@ -48,7 +48,7 @@ const Brandsslide = () => {
   };
 
   // Number of cards to show per slide
-  const slidesToShow = 2;
+  const slidesToShow = 4;
 
   const settings = {
     dots: false,
@@ -62,13 +62,13 @@ const Brandsslide = () => {
       {
         breakpoint: 1200, // Extra-large screens
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 4,
         },
       },
       {
         breakpoint: 992, // Large screens
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 3,
         },
       },
       {
@@ -95,23 +95,21 @@ const Brandsslide = () => {
   return (
     <div className="brandsliding">
       <div className="container">
-        <Container className="mt-2">
-          <Row className="px-xl-5 mx-lg-5 mx-4 pt-3 pb-3">
-            <Slider {...settings}>
+        <Container className="pt-2">
+          <Row className="pt-3 pb-3  px-lg-3">
+            <Slider {...settings}> 
               {prodta.map((brand) => (
                 <Col key={brand.Brand_id}>
                   <Card
-                    className=" mt-2 mb-2 mx-lg-5 p-lg-5"
+                    className=" mt-2 mb-2  "
                     style={{ background: "none", border: "none" }}
                   >
                     <center>
                       <Card.Img
-                        className="pt-3 pb-3 px-5 "
+                        className="pt-3 pb-3 brandimg"
                         src={brand.Brand_image} // Use the brand image here
                         alt={brand.Brand_Name}
-                      
                       />
-                  
                     </center>
                   </Card>
                 </Col>
@@ -119,7 +117,6 @@ const Brandsslide = () => {
             </Slider>
           </Row>
         </Container>
-      
       </div>
     </div>
   );
