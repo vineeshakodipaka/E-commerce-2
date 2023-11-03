@@ -101,7 +101,7 @@ const Brandsslide = () => {
               {prodta.map((brand) => (
                 <Col key={brand.Brand_id}>
                   <Card
-                    className=" mt-2 mb-2 mx-lg-5"
+                    className=" mt-2 mb-2 mx-lg-5 p-lg-5"
                     style={{ background: "none", border: "none" }}
                   >
                     <center>

@@ -102,9 +102,13 @@ const App = () => {
         <Route path="/brands/:brandId" element={<BrandDetails />} />
 
         {userId === undefined ? (
-          <Route path="/account" element={<Navigate to="/" replace />} />
+          <Route
+            path="/account/*"
+            element={<Navigate to="/account/accountDetails" replace />}
+          />
         ) : (
           <Route path="/account/*" element={<Account />}>
+            <Route index element={<Navigate to="accountDetails" replace />} />
             <Route path="accountDetails" index element={<AccountDetails />} />
             <Route
               path="addresses"

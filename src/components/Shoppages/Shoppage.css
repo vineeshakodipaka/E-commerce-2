@@ -10,13 +10,6 @@
     overflow: hidden;
 }
 
-.shoppagecls .cardimg .prdctimg {
-    transition: all 1.3s ease;
-}
-
-.shoppagecls .cardimg:hover .prdctimg {
-    transform: scale(0.8);
-}
 
 
 @media screen and (max-width: 760px){

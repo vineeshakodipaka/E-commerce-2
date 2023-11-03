@@ -135,15 +135,14 @@ const {activeButton,setActiveButton}=useAuth()
   return (
     <nav className="navbar navbar-expand-lg navbar headerbar mt-lg-4 mb-lg-4">
       <div className="container mx-lg-3 mx-xl-5 px-xl-5">
-      
-          <img
-            className="mx-xl-0"
-            src={logoUrl}
-            width="150px"
-            height="80px"
-            alt="logo"
-          />
-  
+        <img
+          className="mx-xl-0"
+          src={logoUrl}
+          width="150px"
+          height="80px"
+          alt="logo"
+        />
+
         <span
           className="navbar-toggler"
           type="button"
@@ -373,7 +372,7 @@ const {activeButton,setActiveButton}=useAuth()
                     activeButton === 6 ? "active" : ""
                   }`}
                   onClick={() => {
-                    cartclick(); 
+                    cartclick();
                     navbarCollapseRef.current?.classList.remove("show");
                     setActiveButton(6);
                   }}
@@ -407,7 +406,7 @@ const {activeButton,setActiveButton}=useAuth()
                   </Link>
                 ) : (
                   <Link
-                    to="/account"
+                    to="/account/accountDetails"
                     className={`nav-link b-linkacount   rounded-3 ${
                       activeButton === 7 ? "active" : ""
                     }`}

@@ -133,30 +133,30 @@ const Singleshoppage = () => {
   // img zoom
   const handleMouseMove = (e) => {
     if (isZoomed) {
-      // Calculate the position of the mouse relative to the image
       const image = document.getElementById("zoomed-image");
       const rect = image.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
-      // Set the transform origin and adjust the image position
       const zoomedImage = document.getElementById("zoomed-image");
       zoomedImage.style.transformOrigin = `${(x / rect.width) * 100}% ${
         (y / rect.height) * 100
       }%`;
-      zoomedImage.style.transform = "scale(2)"; // You can adjust the scale factor as needed
     }
   };
 
   const handleZoomIn = () => {
     setIsZoomed(true);
+    // Add the 'zoomed' class to apply the zoom effect
+    const zoomedImage = document.getElementById("zoomed-image");
+    zoomedImage.classList.add("zoomed");
   };
 
   const handleZoomOut = () => {
-    // Reset the transformation and zoom state
-    const zoomedImage = document.getElementById("zoomed-image");
-    zoomedImage.style.transform = "scale(1)";
     setIsZoomed(false);
+    // Remove the 'zoomed' class to reset the zoom effect
+    const zoomedImage = document.getElementById("zoomed-image");
+    zoomedImage.classList.remove("zoomed");
   };
   return (
     <div className="singleproductpage">

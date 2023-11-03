@@ -69,8 +69,8 @@ const navigate=useNavigate()
                   </Link>
                 </li>
 
-                <li className="nav-item px-xl-2">
-                  <button className="btn btn-danger" onClick={handleLogout}>
+                <li className="nav-item px-xl-2 ">
+                  <button className="btnlogout p-2 px-3" onClick={handleLogout}>
                     Logout
                   </button>
                 </li>

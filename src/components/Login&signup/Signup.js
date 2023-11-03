@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Login&signup.css";
 import { Col, Form, Modal, Row } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { baseUrl } from "../../Globalvarible";
 
 const Signup = ({ show3, handleClose3, handleShow2 }) => {
@@ -12,8 +12,7 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
     email: "",
     phone: "",
   });
-  const navigate = useNavigate();
-
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -42,8 +41,7 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
       );
 
       if (response.ok) {
-        // Signup successful, redirect to the login page
-        navigate("/login");
+        
         // Clear the input fields by resetting the formData state
         setFormData({
           username: "",
@@ -52,6 +50,9 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
           email: "",
           phone: "",
         });
+        // Close the modal
+        handleClose3();
+         handleShow2();
       } else {
         // Signup failed, display an error message to the user
         alert("Signup failed. Please try again.");

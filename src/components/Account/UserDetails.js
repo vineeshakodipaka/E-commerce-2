@@ -8,11 +8,11 @@ const UserDetails = ({ baseUrl1 }) => {
   const [userAddresses, setUserAddresses] = useState([]);
   const userId = Cookies.get("userId"); // Retrieve userId from cookies
 
-  const fetchUserAddresses = React.useCallback( 
+  const fetchUserAddresses = React.useCallback(
     async (userId) => {
       var requestOptions = {
         method: "GET",
-        redirect: "follow", 
+        redirect: "follow",
       };
 
       try {
@@ -82,7 +82,7 @@ const UserDetails = ({ baseUrl1 }) => {
             <Row>
               <Col lg={6} xs={12}>
                 {" "}
-                <Card className="m-2">
+                <Card className="m-2" style={{ background: "#9e9e9e14" }}>
                   <Card.Body className="p-3">
                     <div>
                       <h4> Address:</h4>

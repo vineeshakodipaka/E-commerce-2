@@ -68,22 +68,24 @@ const Shoppage = ({ searchQuery }) => {
     }
   };
 
-
-   const handleAddToCart3 = () => {
+  const handleAddToCart3 = () => {
     setShowCartPopup(true);
 
+    setTimeout(() => {
+      setShowCartPopup(false);
+    }, 8000); // Updated to 5 seconds
+  };
 
-     setTimeout(() => {
-       setShowCartPopup(false);
-     }, 8000); // Updated to 5 seconds
-   };
+  const notificationAnimation = useSpring({
+    opacity: showCartPopup ? 1 : 0,
+    transform: showCartPopup ? "translateY(0)" : "translateY(-100%)",
+  });
+ const cartItems = useSelector((state) => state.cart.cartDetails);
 
-    const notificationAnimation = useSpring({
-      opacity: showCartPopup ? 1 : 0,
-      transform: showCartPopup ? "translateY(0)" : "translateY(-100%)",
-    });
-
- 
+ // Function to check if a product is already in the cart
+ const isProductInCart = (productId) => {
+   return cartItems.some((item) => item.Product_id === productId);
+ };
 
  
   return (
@@ -180,21 +182,35 @@ const Shoppage = ({ searchQuery }) => {
                         <Col lg={7} xl={6} md={6} xs={12}>
                           {/* Button to add the product to the cart */}
                           <Card.Text className="text-center  mt-xl-0 mt-md-2">
-                            <button
-                              className="rounded-3  fw-normal p-1 p-md-2 px-2"
-                              style={{
-                                background: "#8F3300",
-                                border: "none",
-                                color: "white",
-                              }}
-                              onClick={() => {
-                                handleAddToCart(product, "1");
-                                handleAddToCart1(product, "1");
-                                handleAddToCart3();
-                              }}
-                            >
-                              Add To Cart
-                            </button>
+                            {isProductInCart(product.Product_id) ? (
+                              <button
+                                className="rounded-3  fw-normal p-1 p-md-2 px-2"
+                                style={{
+                                  background: "#000066",
+                                  border: "none",
+                                  color: "white",
+                                }}
+                                onClick={handleViewCart}
+                              >
+                                View Cart
+                              </button>
+                            ) : (
+                              <button
+                                className="rounded-3  fw-normal p-1 p-md-2 px-2"
+                                style={{
+                                  background: "#8F3300",
+                                  border: "none",
+                                  color: "white",
+                                }}
+                                onClick={() => {
+                                  handleAddToCart(product, "1");
+                                  handleAddToCart1(product, "1");
+                                  handleAddToCart3();
+                                }}
+                              >
+                                Add To Cart
+                              </button>
+                            )}
                           </Card.Text>
                         </Col>
                       </Row>
