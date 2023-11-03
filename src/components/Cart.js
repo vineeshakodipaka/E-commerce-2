@@ -385,8 +385,8 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
                   <p>
                     
                     {apiResponse && apiResponse.data && apiResponse.data[0]
-                      ? `DiscountPercent: ${apiResponse.data[0].DiscountPercent}`
-                      : totalPrice}%
+                      ? `DiscountPercent: ${apiResponse.data[0].DiscountPercent} %`
+                      : totalPrice}
                   </p>
 
                   <hr />
