@@ -5,12 +5,12 @@ import "./Account.css";
 
 import { baseUrl } from "../../Globalvarible";
 const AddressDetail = ({
-  baseUrl1,
+
   showCartPopup,
   cartClose,
   apiResponse,
   totalPrice,
-  discountedPrice,
+  discountedPrice, 
   couponCode,
 }) => {
   // Define state to manage form data
@@ -90,7 +90,7 @@ const [showModal, setShowModal] = useState(false);
           .catch((error) => {});
       },
     };
-
+document.body.style.overflow = "visible";
     // failure
     const rzp1 = new window.Razorpay(options);
     rzp1.on("payment.failed", function (response) {

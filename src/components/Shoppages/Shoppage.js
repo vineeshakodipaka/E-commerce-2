@@ -71,14 +71,7 @@ const Shoppage = ({ searchQuery }) => {
     }
   };
 
-  // const handleAddToCart3 = () => {
-   
-  //   // setShowCartPopup(true);
-
-  //   // setTimeout(() => {
-  //   //   setShowCartPopup(false);
-  //   // }, 8000); // Updated to 5 seconds
-  // };
+  
 
   const notificationAnimation = useSpring({
     opacity: showCartPopup ? 1 : 0,
@@ -214,7 +207,7 @@ const Shoppage = ({ searchQuery }) => {
                                   color: "white",
                                 }}
                                 onClick={() => {
-                                  // handleAddToCart(product, "1");
+                                 
                                   handleAddToCart1(product, "1");
                                  
                                 }}

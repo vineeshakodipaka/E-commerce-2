@@ -28,7 +28,7 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
 
   const totalPrice = useSelector((state) => state.cart.totalPrice);
   // const [totalPrice, setTotalPrice] = useState(totalPrice1);
-  const [userAddress, setUserAddress] = useState(null);
+  const [userAddress, setUserAddress] = useState([]);
   const navigate = useNavigate();
 
   // Assuming you have a function to handle API requests, for example, using the Fetch API.
@@ -189,7 +189,7 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
                     </thead>
                     <tbody>
                       {cartItems.map((product, UserCartDetails_ID) => (
-                        <tr key={product.UserCartDetails_ID}>
+                        <tr key={UserCartDetails_ID}>
                           <td>
                             <img
                               className="rounded-3  p-4  prdctimg"
@@ -272,8 +272,8 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
                   </Table>
                 </div>
                 <div className="d-lg-none d-md-none d-block ">
-                  {cartItems.map((product, i) => (
-                    <div key={product.UserCartDetails_ID}>
+                  {cartItems.map((product, UserCartDetails_ID) => (
+                    <div key={UserCartDetails_ID}>
                       <center>
                         <Card>
                           <Card.Body>
@@ -282,7 +282,7 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
                                 <img
                                   className="rounded-3 pt-3 pb-2   "
                                   src={product.Product_img}
-                                  alt={`Image ${i + 1}`}
+                                  alt={`Image ${UserCartDetails_ID + 1}`}
                                   style={{ width: "100%", height: "150px" }}
                                 />
                               </Col>
@@ -383,7 +383,6 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
                 <div>
                   <p>Shipping:</p>
                   <p>
-                    
                     {apiResponse && apiResponse.data && apiResponse.data[0]
                       ? `DiscountPercent: ${apiResponse.data[0].DiscountPercent} %`
                       : totalPrice}

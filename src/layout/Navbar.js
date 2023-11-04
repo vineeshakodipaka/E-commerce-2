@@ -120,21 +120,7 @@ const {activeButton,setActiveButton}=useAuth()
       .catch((error) => {});
   }, []);
 
-  // useEffect(() => {
-  //   const determineActiveButton = (path) => {
-  //     if (path === "/") return 0;
-  //     if (path === "/about") return 1;
-  //     if (path === "/shoppage") return 2;
-  //     if (path === "/brandspage") return 3;
-  //     if (path === "/contact") return 4;
-  //     if (path === "/blog") return 5;
-  //     if (path === "/cartpage") return 6;
-  //     // Add more paths and button indexes as needed
-  //     return 0; // Default to the first button if no match
-  //   };
-
-  //   setActiveButton(determineActiveButton(location.pathname));
-  // }, [location]);
+  
 
   return (
     <nav className="navbar navbar-expand-lg navbar headerbar mt-lg-4 mb-lg-4">

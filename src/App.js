@@ -151,11 +151,7 @@ const App = () => {
         handleClose3={signuphandleClose}
         show3={signupshow}
       />
-      {/* <AddressDetail
-        baseUrl1={baseUrl}
-        showCartPopup={showCartPopup}
-        cartClose={cartClose}
-      /> */}
+
       <Bottombar />
 
       <Footer />

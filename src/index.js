@@ -8,7 +8,6 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css"; // Add this line for Bootstrap Icons
 import { AuthProvider } from "./AuthContext "; // Import the AuthProvider from your context file
-import { CartProvider } from "./CartContext";
 
 // Use createRoot to render your app
 const root = document.getElementById("root");
@@ -18,9 +17,9 @@ rootElement.render(
   <Provider store={store}>
     <Router>
       <AuthProvider>
-        <CartProvider>
+      
           <App />
-        </CartProvider>
+      
       </AuthProvider>
     </Router>
   </Provider>

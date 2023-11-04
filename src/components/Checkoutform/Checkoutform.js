@@ -85,12 +85,11 @@ const Checkoutform = ({  baseUrl1 }) => {
   return (
     <div className="checkoutcls">
       <h2 className="text-center">Checkout Shop</h2>
-      <Row className="mx-lg-5 px-lg-5">
-        <Form className="mt-5 px-5 mx-lg-5" onSubmit={handleSubmit}>
-          <Row lg={2} xs={1} md={1}>
-            <Col xs={12}>
+      <Row className="mx-lg-5 px-xl-5">
+        <Form className="mt-5 px-5 mx-xl-5" onSubmit={handleSubmit}>
+          <Row xs={1} md={1}>
+            <Col xs={12} xl={6} lg={6} md={6} className="mt-md-5">
               <Row className="mb-4">
-
                 <Form.Group as={Col} md="6" lg="5">
                   <Form.Label className="formlabel"> Name*</Form.Label>
                   <Form.Control
@@ -103,7 +102,27 @@ const Checkoutform = ({  baseUrl1 }) => {
                     placeholder=" Name"
                   />
                 </Form.Group>
+
+                <Form.Group as={Col} md="6" lg="5">
+                  <Form.Label className="formlabel">Country*</Form.Label>
+                  <Form.Control
+                    as="select"
+                    onChange={handleInputChange}
+                    name="Contry"
+                    value={formData.Contry}
+                    className="labelholder form-select"
+                    required
+                  >
+                    <option value="">Select Country</option>
+                    <option value="Country 1">India</option>
+                    <option value="Country 2">Germany</option>
+                    <option value="Country 3">Canada</option>
+                    <option value="Country 4">France</option>
+                    <option value="Country 5">Australia</option>
+                  </Form.Control>
+                </Form.Group>
               </Row>
+
               <Row className="mb-4">
                 <Form.Group as={Col} md="6" lg="5">
                   <Form.Label className="formlabel">StreetAddress*</Form.Label>
@@ -162,31 +181,10 @@ const Checkoutform = ({  baseUrl1 }) => {
                   />
                 </Form.Group>
               </Row>
-              <Row className="mb-4">
-                <Form.Group as={Col} md="6" lg="5">
-                  <Form.Label className="formlabel">Country*</Form.Label>
-                  <Form.Control
-                    as="select"
-                    onChange={handleInputChange}
-                    name="Contry"
-                    value={formData.Contry}
-                    className="labelholder form-select"
-                    required
-                  >
-                    <option value="">Select Country</option>
-                    <option value="Country 1">India</option>
-                    <option value="Country 2">Germany</option>
-                    <option value="Country 3">Canada</option>
-                    <option value="Country 4">France</option>
-                    <option value="Country 5">Australia</option>
-                  </Form.Control>
-                </Form.Group>
-               
-              </Row>
             </Col>
-            <Col>
+            <Col xl={6} lg={6} md={6}>
               <Card>
-                <div className="px-md-2 px-lg-5 mx-lg-5 mx-md-2 px-2 mx-2 row mt-2 ">
+                <div className="px-md-2 px-lg-2 mx-lg-2 mx-xl-5 mx-md-2 px-2 mx-2 row mt-2 ">
                   <h2 className="mt-5 mb-2">Your Order</h2>
                   <hr />
 
@@ -198,55 +196,62 @@ const Checkoutform = ({  baseUrl1 }) => {
                       </tr>
                       <tr className="border-0 mt-4">
                         <td>
-                          {cartItems.map((product) => (
-                            <div>
+                          {cartItems.map((product, i) => (
+                            <span
+                              key={i}
+                              className="mt-2"
+                              style={{ marginTop: "1rem", display: "block" }}
+                            >
                               {product.Product_name}{" "}
                               <span className="ms-2">
-                                x &nbsp; {product.quantity}
+                                x &nbsp; {product.Qty}
                               </span>
-                            </div>
+                              <br />
+                            </span>
                           ))}
                         </td>
 
                         <td>
-                          {cartItems.map((product) => (
-                            <div>₹{product.Product_offerPrice} </div>
+                          {cartItems.map((product, i) => (
+                            <span
+                              key={i}
+                              className="mt-2"
+                              style={{ marginTop: "1rem", display: "block" }}
+                            >
+                              ₹{product.Product_offerPrice}
+                              <br />
+                            </span>
                           ))}
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <h5>Subtotal </h5>
+                          <h5 className="mt-2">Subtotal </h5>
                         </td>
-                        <td>
-                          <p> ₹{totalPrice}</p>
-                        </td>
+                        <td>₹{totalPrice}</td>
                       </tr>
 
                       <tr>
                         <td>
                           <h5>Total Price </h5>
                         </td>
-                        <td>
-                          <p> ₹{totalPrice}</p>
-                        </td>
+                        <td>₹{totalPrice}</td>
                       </tr>
                       <tr className="mt-2">
-                       
-
-                        <p>Pay with Cash upon delivery</p>
+                        <td>Pay with Cash upon delivery</td>
                       </tr>
                     </tbody>
+                  </table>
+                  <div className="justify-content-center">
                     <center>
                       <button
                         type="submit"
-                        
-                        className="rounded-4 p-3 w-100 mx-4 mt-4 mb-4 mx-lg-5"
+                        className="rounded-4 p-3 w-100  mt-4 mb-4 "
                       >
                         Place Order
                       </button>
                     </center>
-                  </table>
+                  </div>
                 </div>
               </Card>
             </Col>

@@ -3,6 +3,7 @@ import "./Login&signup.css";
 import { Col, Form, Modal, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { baseUrl } from "../../Globalvarible";
+import axios from "axios";
 
 const Signup = ({ show3, handleClose3, handleShow2 }) => {
   const [formData, setFormData] = useState({
@@ -12,7 +13,7 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
     email: "",
     phone: "",
   });
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -20,48 +21,61 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  if (formData.password !== formData.confirmPassword) {
+    // Password and confirm password do not match, show an error message
+    alert("Password and confirm password do not match.");
+    return; // Exit the function to prevent the API request
+  }
+    let data = new FormData();
+    data.append("username", formData.username);
+    data.append("password", formData.password);
+    data.append("email", formData.email);
+    data.append("phone", formData.phone);
 
-    // Create a FormData object and append the form fields
-    const formdata = new FormData();
-    formdata.append("username", formData.username);
-    formdata.append("password", formData.password);
-    formdata.append("email", formData.email);
-    formdata.append("phone", formData.phone);
-
-    const requestOptions = {
-      method: "POST",
-      body: formdata,
-      redirect: "follow",
+    let config = {
+      method: "post",
+      url: baseUrl + "Signup.php",
+      headers: {
+        "Content-Type": "multipart/form-data", // Set Content-Type to multipart/form-data
+      },
+      data: data,
     };
 
-    try {
-      const response = await fetch(
-        baseUrl+"Signup.php",
-        requestOptions
-      );
+  try {
+    const response = await axios(config);
 
-      if (response.ok) {
-        
-        // Clear the input fields by resetting the formData state
-        setFormData({
-          username: "",
-          password: "",
-          confirmPassword: "",
-          email: "",
-          phone: "",
-        });
-        // Close the modal
-        handleClose3();
-         handleShow2();
-      } else {
-        // Signup failed, display an error message to the user
-        alert("Signup failed. Please try again.");
-      }
-    } catch (error) {
     
-      // Handle network errors or other exceptions
-      alert("Signup failed. Please try again later.");
-    }
+    if (response.status === 200) {
+      // Clear the input fields by resetting the formData state
+      setFormData({
+        username: "",
+        password: "",
+        confirmPassword: "",
+        email: "",
+        phone: "",
+      });
+      // Close the modal
+      handleClose3();
+      
+    } 
+      // Check the response data for the "message" property
+      if (
+        response.data &&
+        response.data.status === false
+      ) {
+        
+
+        alert("Username already exists. Please choose a different username.");
+      } else {
+        alert("User Login Successfully!!");
+      }
+    
+  } catch (error) {
+    
+    // Handle network errors or other exceptions
+    alert("Signup failed. Please try again later.");
+  }
+
   };
 
   return (
@@ -82,9 +96,9 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
                       md="4"
                       lg="8"
                       xs="12"
-                      // controlId="validationCustom02"
+                
                     >
-                      {/* <Form.Label>Last name</Form.Label> */}
+                  
                       <Form.Control
                         type="text"
                         name="username"
@@ -102,9 +116,7 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
                       lg="8"
                       xs="12"
                       className="inputgrp"
-                  
                     >
-                  
                       <Form.Control
                         type="text"
                         name="email"
@@ -122,9 +134,7 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
                       lg="8"
                       xs="12"
                       className="inputgrp"
-                     
                     >
-                   
                       <Form.Control
                         type="text"
                         name="password"
@@ -142,9 +152,7 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
                       lg="8"
                       xs="12"
                       className="inputgrp"
-                     
                     >
-                      
                       <Form.Control
                         type="text"
                         name="confirmPassword"
@@ -163,9 +171,7 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
                       xs="12"
                       lg="8"
                       className="inputgrp"
-                   
                     >
-                     
                       <Form.Control
                         type="text"
                         name="phone"
