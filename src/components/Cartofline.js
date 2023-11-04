@@ -232,7 +232,7 @@ const Cartofline = ({ handleShowA }) => {
                                 <button
                                   className="rounded-3 cartremove-btn p-2"
                                   onClick={() =>
-                                    handleRemoveFromCart(product.product_Id)
+                                    handleRemoveFromCart(product.Product_id)
                                   }
                                 >
                                   Remove
