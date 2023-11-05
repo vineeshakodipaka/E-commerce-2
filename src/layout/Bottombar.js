@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {  useEffect } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { AiFillHome } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
@@ -9,9 +9,10 @@ import "./Bottombar.css"; // Import the external CSS file
 import { useSelector, useDispatch } from "react-redux";
 import Cookies from "js-cookie";
 import { fetchCartDetails } from "../actions/cartActions";
+import { useAuth } from "../AuthContext ";
 
 const Bottombar = () => {
-  const [activeButton, setActiveButton] = useState(0); // State to track active button
+ 
   const cartLength = useSelector((state) => state.cart.cartLength);
   const cartLength1 = useSelector((state) => state.cart1.cartLength1);
   const dispatch = useDispatch();
@@ -23,7 +24,10 @@ const Bottombar = () => {
 
   const handleLinkClick = () => {
     window.scrollTo(0, 0);
-  };
+  }; 
+
+ const { activeButton, setActiveButton } = useAuth();
+
   return (
     <div className="bottompage d-lg-none d-md-none">
       <Navbar
@@ -34,6 +38,7 @@ const Bottombar = () => {
       >
         <Nav className="d-flex gap-4 bottomlinks gap-lg-5 gap-md-5">
           {/* Home link */}
+
           <Link
             to="/"
             className={`b-link px-3  rounded-3 p-1 text-center ${
@@ -45,30 +50,30 @@ const Bottombar = () => {
           >
             <AiFillHome size={20} color="#652700" />
             <br />
-            {activeButton === 0 && <p className="text-center mb-0"> Home</p>}
+            {activeButton === 0 && <p className="text-center mb-0">Home</p>}
           </Link>
           {/* shop link */}
           <Link
             to="/shoppage"
             className={`b-link px-3  rounded-3 text-center  p-2 ${
-              activeButton === 1 ? "active" : ""
+              activeButton === 2 ? "active" : ""
             }`}
+            onMouseEnter={() => setActiveButton(2)}
             onClick={handleLinkClick}
-            onMouseEnter={() => setActiveButton(1)}
             style={{ color: "black", textDecoration: "none" }}
           >
             <RiShoppingBagFill size={20} color="#652700" />
-            {activeButton === 1 && <p className="mb-0"> Shop</p>}
+            {activeButton === 2 && <p className="mb-0"> Shop</p>}
           </Link>
 
           {/* Cart link */}
           <Link
             to={!userId ? "/cartpage" : "/cart"}
             className={`b-link  px-3   rounded-3 text-center  p-2 ${
-              activeButton === 2 ? "active" : ""
+              activeButton === 6 ? "active" : ""
             }`}
             onClick={handleLinkClick}
-            onMouseEnter={() => setActiveButton(2)}
+            onMouseEnter={() => setActiveButton(6)}
             style={{ color: "black", textDecoration: "none" }}
           >
             <BsFillCartDashFill size={20} color="#652700" />
@@ -80,7 +85,7 @@ const Bottombar = () => {
                 {userId ? cartLength : cartLength1}
               </span>
             </sup>
-            {activeButton === 2 && (
+            {activeButton === 6 && (
               <p className="mb-0 me-3 text-center me-1">Cart</p>
             )}
           </Link>
@@ -88,34 +93,33 @@ const Bottombar = () => {
           {/* User link */}
           {userId === undefined ? (
             <>
-              {" "}
-              {/* Home link */}
               <Link
                 to="/"
                 onClick={handleLinkClick}
                 className={`b-link px-3  rounded-3 text-center  p-2 ${
-                  activeButton === 3 ? "active" : ""
+                  activeButton === null ? "active" : ""
                 }`}
-                onMouseEnter={() => setActiveButton(3)}
+                onMouseEnter={() => setActiveButton(null)}
                 style={{ color: "black", textDecoration: "none" }}
               >
                 <FaUserAlt size={20} color="#652700" />
-                {activeButton === 3 && <p className="mb-0"> Profile</p>}
+                {activeButton === null && <p className="mb-0"> Profile</p>}
               </Link>
             </>
           ) : (
             <>
               <Link
-                to="/account"
+                to="/account/accountDetails"
                 onClick={handleLinkClick}
                 className={`b-link px-3  rounded-3 text-center  p-2 ${
-                  activeButton === 3 ? "active" : ""
+                  activeButton === 7 ? "active" : ""
                 }`}
-                onMouseEnter={() => setActiveButton(3)}
+              
+                onMouseEnter={() => setActiveButton(7)}
                 style={{ color: "black", textDecoration: "none" }}
               >
                 <FaUserAlt size={20} color="#652700" />
-                {activeButton === 3 && <p className="mb-0"> Profile</p>}
+                {activeButton === 7 && <p className="mb-0"> Profile</p>}
               </Link>
             </>
           )}

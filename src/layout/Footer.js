@@ -18,6 +18,7 @@ const Footer = () => {
   const openWhatsApp = () => {
     window.open("https://wa.me/917498847799", "_blank");
   };
+ 
   const navigate = useNavigate();
   const { setActiveButton } = useAuth();
   const handleLinkClick = () => {

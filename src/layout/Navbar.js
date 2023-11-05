@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -46,7 +46,7 @@ const Navbar = ({ handleShow2 }) => {
  }, [dispatch, userId]);
 
   const handleBrandChange = (brand) => {
-    if (brand.hasSubcat) {
+    if (brand.hasSubcat) { 
       setSelectedBrand(brand);
     } else {
       setSelectedBrand(null);
@@ -89,7 +89,7 @@ const Navbar = ({ handleShow2 }) => {
   };
 
   //active links
-  // const [activeButton, setActiveButton] = useState(0); // State to track active button
+ // State to track active button
 const {activeButton,setActiveButton}=useAuth()
 
 
@@ -119,8 +119,32 @@ const {activeButton,setActiveButton}=useAuth()
       })
       .catch((error) => {});
   }, []);
+ const location = useLocation();
+  useEffect(() => {
+    const determineActiveButton = (path) => {
+      if (path === "/") return 0;
+      if (path === "/about") return 1;
+      if (path === "/shoppage") return 2;
+      if (path === "/brandspage") return 3;
+      if (path === "/contact") return 4;
+      if (path === "/blog") return 5;
 
-  
+      if (path === "/cart" || path === "/cartpage") {
+        if (userId) {
+          return 6; // User is logged in, go to "/cart"
+        } else {
+          return 6; // User is not logged in, go to "/cartpage"
+        }
+      }
+
+      if (path === "/account/accountDetails") return 7;
+
+      return 0; // Default to the first button if no match
+    };
+
+    setActiveButton(determineActiveButton(location.pathname));
+  }, [location, userId, setActiveButton]);
+
 
   return (
     <nav className="navbar navbar-expand-lg navbar headerbar mt-lg-4 mb-lg-4">
@@ -168,6 +192,7 @@ const {activeButton,setActiveButton}=useAuth()
                 >
                   <span data-bs-dismiss="offcanvas">Home</span>
                 </Link>
+
                 <button
                   type="button"
                   className="btn-close text-reset mt-2 d-lg-none"
@@ -383,13 +408,10 @@ const {activeButton,setActiveButton}=useAuth()
               <li className="nav-item ">
                 {userId === undefined ? (
                   <Link
-                    className={`nav-link nav-btns b-link  rounded-3 ${
-                      activeButton === 7 ? "active" : ""
-                    }`}
+                    className={`nav-link nav-btns b-link  rounded-3`}
                     onClick={() => {
                       handleShow2();
                       navbarCollapseRef.current?.classList.remove("show");
-                      setActiveButton(7);
                     }}
                   >
                     <span data-bs-dismiss="offcanvas">Login</span>
@@ -398,11 +420,10 @@ const {activeButton,setActiveButton}=useAuth()
                   <Link
                     to="/account/accountDetails"
                     className={`nav-link b-linkacount   rounded-3 ${
-                      activeButton === 7 ? "active" : ""
+                      userId ? (activeButton === 7 ? "active" : "") : ""
                     }`}
                     onClick={() => {
                       setActiveButton(7);
-                      // navbarCollapseRef.current?.classList.remove("show");
                     }}
                   >
                     <span data-bs-dismiss="offcanvas">
