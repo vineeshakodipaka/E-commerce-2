@@ -1,4 +1,4 @@
-import React, {  useEffect } from "react";
+import React, { useEffect } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { AiFillHome } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
@@ -12,7 +12,6 @@ import { fetchCartDetails } from "../actions/cartActions";
 import { useAuth } from "../AuthContext ";
 
 const Bottombar = () => {
- 
   const cartLength = useSelector((state) => state.cart.cartLength);
   const cartLength1 = useSelector((state) => state.cart1.cartLength1);
   const dispatch = useDispatch();
@@ -24,9 +23,9 @@ const Bottombar = () => {
 
   const handleLinkClick = () => {
     window.scrollTo(0, 0);
-  }; 
+  };
 
- const { activeButton, setActiveButton } = useAuth();
+  const { activeButton, setActiveButton } = useAuth();
 
   return (
     <div className="bottompage d-lg-none d-md-none">
@@ -114,7 +113,6 @@ const Bottombar = () => {
                 className={`b-link px-3  rounded-3 text-center  p-2 ${
                   activeButton === 7 ? "active" : ""
                 }`}
-              
                 onMouseEnter={() => setActiveButton(7)}
                 style={{ color: "black", textDecoration: "none" }}
               >
