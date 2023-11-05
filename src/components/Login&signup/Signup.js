@@ -21,11 +21,11 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  if (formData.password !== formData.confirmPassword) {
-    // Password and confirm password do not match, show an error message
-    alert("Password and confirm password do not match.");
-    return; // Exit the function to prevent the API request
-  }
+    if (formData.password !== formData.confirmPassword) {
+      // Password and confirm password do not match, show an error message
+      alert("Password and confirm password do not match.");
+      return; // Exit the function to prevent the API request
+    }
     let data = new FormData();
     data.append("username", formData.username);
     data.append("password", formData.password);
@@ -41,41 +41,38 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
       data: data,
     };
 
-  try {
-    const response = await axios(config);
+    try {
+      const response = await axios(config);
 
-    
-    if (response.status === 200) {
-      // Clear the input fields by resetting the formData state
-      setFormData({
-        username: "",
-        password: "",
-        confirmPassword: "",
-        email: "",
-        phone: "",
-      });
-      // Close the modal
-      handleClose3();
-      
-    } 
+      if (response.status === 200) {
+        // Clear the input fields by resetting the formData state
+        setFormData({
+          username: "",
+          password: "",
+          confirmPassword: "",
+          email: "",
+          phone: "",
+        });
+      }
       // Check the response data for the "message" property
-      if (
-        response.data &&
-        response.data.status === false
-      ) {
-        
-
+      if (response.data && response.data.status === false) {
         alert("Username already exists. Please choose a different username.");
       } else {
-        alert("User Login Successfully!!");
+        handleClose3();
+        // Close the modal with a slight delay
+        setTimeout(() => {
+          handleClose3();
+          alert("Congratulations! You have successfully signed up.");
+          // Call handleShow2() after the user dismisses the alert
+          setTimeout(() => {
+            handleShow2();
+          }, 0); // Adding a minimal delay (0 milliseconds) to ensure it's called after the alert
+        }, 1000); // Delay for 1 second (adjust as needed)
       }
-    
-  } catch (error) {
-    
-    // Handle network errors or other exceptions
-    alert("Signup failed. Please try again later.");
-  }
-
+    } catch (error) {
+      // Handle network errors or other exceptions
+      alert("Signup failed. Please try again later.");
+    }
   };
 
   return (
@@ -91,14 +88,7 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
                 <h3 className="singupfree">Sign Up For Free</h3>
                 <Form className="loginform" onSubmit={handleSubmit}>
                   <Row className="justify-content-center mt-3">
-                    <Form.Group
-                      as={Col}
-                      md="4"
-                      lg="8"
-                      xs="12"
-                
-                    >
-                  
+                    <Form.Group as={Col} md="4" lg="8" xs="12">
                       <Form.Control
                         type="text"
                         name="username"
