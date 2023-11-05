@@ -2,7 +2,6 @@
   "name": "login_page",
   "version": "0.1.0",
   "private": true,
-"homepage": "https://candid-buttercream-889d5c.netlify.app/",
 
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.0.0",

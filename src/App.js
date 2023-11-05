@@ -105,7 +105,7 @@ const App = () => {
           <Route
             path="/account/*"
             element={<Navigate to="/account/accountDetails" replace />}
-          />
+          /> 
         ) : (
           <Route path="/account/*" element={<Account />}>
             <Route index element={<Navigate to="accountDetails" replace />} />
