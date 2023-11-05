@@ -2,6 +2,8 @@
   "name": "login_page",
   "version": "0.1.0",
   "private": true,
+"homepage": "https://candid-buttercream-889d5c.netlify.app/",
+
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.0.0",
     "@lottiefiles/react-lottie-player": "^3.5.3",
@@ -31,9 +33,10 @@
     "slick-carousel": "^1.8.1",
     "web-vitals": "^2.1.4"
   },
+  
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "CI=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

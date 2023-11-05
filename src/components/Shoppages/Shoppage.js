@@ -61,14 +61,6 @@ const Shoppage = ({ searchQuery }) => {
     }, 2000); // Updated to 5 seconds
   };
 
-  const handleAddToCart3 = () => {
-
-    setShowCartPopup(true);
-
-    setTimeout(() => {
-      setShowCartPopup(false);
-    }, 2000); // Updated to 5 seconds
-  };
   const { setActiveButton } = useAuth();
   const handleViewCart = () => {
     window.scrollTo(0, 0);
@@ -80,6 +72,9 @@ const Shoppage = ({ searchQuery }) => {
       setActiveButton(6);
       navigate("/cart"); // Navigate to cart if userId is available
     }
+    setTimeout(() => {
+      setShowCartPopup(false);
+    }, 2000); // Updated to 5 seconds
   };
 
   const notificationAnimation = useSpring({
@@ -214,7 +209,6 @@ const Shoppage = ({ searchQuery }) => {
                                 }}
                                 onClick={() => {
                                   handleAddToCart1(product, "1");
-
                                 }}
                               >
                                 Add To Cart
