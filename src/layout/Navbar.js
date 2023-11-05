@@ -136,7 +136,7 @@ const {activeButton,setActiveButton}=useAuth()
           return 6; // User is not logged in, go to "/cartpage"
         }
       }
-
+ 
       if (path === "/account/accountDetails") return 7;
 
       return 0; // Default to the first button if no match

@@ -21,27 +21,23 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
     setLoginData({ ...loginData, [name]: value });
   };
 
-
   const submitHandler = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        baseUrl+"Login.php",
-        loginData,
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        }
-      );
-
+      const response = await axios.post(baseUrl + "Login.php", loginData, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      });
 
       if (response.data.message === "Login successful") {
         // Check if user data is available in the response
         if (response.data.user && response.data.user.User_ID) {
           const userId = response.data.user.User_ID;
-          Cookies.set("userId", userId);
+          Cookies.set("userId", userId, { expires: 365 }); // Set the cookie to expire in 1 year
+
+          // Cookies.set("userId", userId);
         } else {
           // User data is not available, set userId to null
           Cookies.set("userId", null);
@@ -56,18 +52,16 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
           password: "",
         });
       } else {
-        // Login failed, display an error message 
+        // Login failed, display an error message
         alert("Login failed. Please check your credentials.");
       }
     } catch (error) {
-     
       // Handle network errors or other exceptions
       alert("Login failed. Please try again later.");
     }
   };
 
-  
-  return ( 
+  return (
     <>
       {/* Cart Pop-up */}
       <center>
@@ -96,7 +90,6 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
                         required
                         placeholder="Username"
                         autoFocus
-                       
                       />
                     </Form.Group>
                   </Row>
@@ -131,15 +124,12 @@ const Login = ({ show2, handleClose2, handleShow3 }) => {
                     </center>
                   </Row>
                   <button className="rounded-4 p-3 px-5 mt-1">Login</button>
-                 
                 </Form>
               </Row>
             </div>
           </Modal.Body>
         </Modal>
       </center>
-
-    
     </>
   );
 };
