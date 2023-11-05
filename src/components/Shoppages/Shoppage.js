@@ -16,7 +16,7 @@ const Shoppage = ({ searchQuery }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.filteredProducts);
- 
+
   // Fetch products from the Redux store when the component mounts
   useEffect(() => {
     dispatch(fetchProducts());
@@ -51,13 +51,24 @@ const Shoppage = ({ searchQuery }) => {
       dispatch(addToCart(product, Qty));
       setShowCartPopup(true);
     } else {
-       dispatch(addToCart1(product, Qty));
-       setTimeout(() => {
-         setShowCartPopup(true);
-       }, 1000);
+      dispatch(addToCart1(product, Qty));
+      setTimeout(() => {
+        setShowCartPopup(true);
+      }, 1000);
     }
+    setTimeout(() => {
+      setShowCartPopup(false);
+    }, 2000); // Updated to 5 seconds
   };
 
+  const handleAddToCart3 = () => {
+
+    setShowCartPopup(true);
+
+    setTimeout(() => {
+      setShowCartPopup(false);
+    }, 2000); // Updated to 5 seconds
+  };
   const { setActiveButton } = useAuth();
   const handleViewCart = () => {
     window.scrollTo(0, 0);
@@ -71,26 +82,21 @@ const Shoppage = ({ searchQuery }) => {
     }
   };
 
-  
-
   const notificationAnimation = useSpring({
     opacity: showCartPopup ? 1 : 0,
     transform: showCartPopup ? "translateY(0)" : "translateY(-100%)",
   });
- const cartItems = useSelector((state) => state.cart.cartDetails);
+  const cartItems = useSelector((state) => state.cart.cartDetails);
   const cartItems1 = useSelector((state) => state.cart1.items);
- // Function to check if a product is already in the cart
- const isProductInCart = (productId) => {
-  if(!userId){
- return cartItems1.some((item) => item.Product_id === productId);
-  }
-  else{
-     return cartItems.some((item) => item.Product_id === productId);
-  }
- };  
+  // Function to check if a product is already in the cart
+  const isProductInCart = (productId) => {
+    if (!userId) {
+      return cartItems1.some((item) => item.Product_id === productId);
+    } else {
+      return cartItems.some((item) => item.Product_id === productId);
+    }
+  };
 
-
- 
   return (
     <div className="shoppagecls">
       <Container>
@@ -194,7 +200,7 @@ const Shoppage = ({ searchQuery }) => {
                                   border: "none",
                                   color: "white",
                                 }}
-                                 onClick={handleViewCart}
+                                onClick={handleViewCart}
                               >
                                 View Cart
                               </button>
@@ -207,9 +213,8 @@ const Shoppage = ({ searchQuery }) => {
                                   color: "white",
                                 }}
                                 onClick={() => {
-                                 
                                   handleAddToCart1(product, "1");
-                                 
+
                                 }}
                               >
                                 Add To Cart

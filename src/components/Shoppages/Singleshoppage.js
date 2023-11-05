@@ -106,19 +106,21 @@ const Singleshoppage = () => {
 
  
 
-  const handleAddToCart1 = (product, Qty) => {
-    window.scrollTo(0, 0);
-    if (!userId) {
-      dispatch(addToCart(product, Qty));
-      setShowCartPopup(true);
-    } else {
-      dispatch(addToCart1(product, Qty));
-      setTimeout(() => {
-        setShowCartPopup(true);
-      }, 1000);
-    }
-  };
-
+   const handleAddToCart1 = (product, Qty) => {
+     // window.scrollTo(0, 0);
+     if (!userId) {
+       dispatch(addToCart(product, Qty));
+       setShowCartPopup(true);
+     } else {
+       dispatch(addToCart1(product, Qty));
+       setTimeout(() => {
+         setShowCartPopup(true);
+       }, 1000);
+     }
+     setTimeout(() => {
+       setShowCartPopup(false);
+     }, 2000); // Updated to 5 seconds
+   };
   const handleViewCart = () => {
     setShowCartPopup(false); // Close the popup
     if (!userId) {

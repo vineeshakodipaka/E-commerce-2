@@ -42,19 +42,21 @@ const BrandProductsPage = () => {
   const [showCartPopup, setShowCartPopup] = useState(false);
 
   const userId = Cookies.get("userId"); // Use your method to get the user ID from cookies
-  const handleAddToCart1 = (product, Qty) => {
-    window.scrollTo(0, 0);
-    if (!userId) {
-      dispatch(addToCart(product, Qty));
-      setShowCartPopup(true);
-    } else {
-      dispatch(addToCart1(product, Qty));
-      setTimeout(() => {
+    const handleAddToCart1 = (product, Qty) => {
+      // window.scrollTo(0, 0);
+      if (!userId) {
+        dispatch(addToCart(product, Qty));
         setShowCartPopup(true);
-      }, 1000);
-    }
-  };
-
+      } else {
+        dispatch(addToCart1(product, Qty));
+        setTimeout(() => {
+          setShowCartPopup(true);
+        }, 1000);
+      }
+      setTimeout(() => {
+        setShowCartPopup(false);
+      }, 2000); // Updated to 5 seconds
+    };
  const { setActiveButton } = useAuth();
  const handleViewCart = () => {
    window.scrollTo(0, 0);
