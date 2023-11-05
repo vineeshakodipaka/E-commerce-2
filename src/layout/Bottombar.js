@@ -33,8 +33,8 @@ const Bottombar = () => {
       <Navbar
         fixed="bottom"
         bg="light"
-        className="bottomnav mx-0 px-0 d-flex justify-content-center"
-        style={{ marginBottom: "-8px", borderRadius: "10px" }}
+        className="bottomnav mx-0 px-0 py-2 pb-2 d-flex justify-content-center"
+        style={{ marginBottom: "-4px", borderRadius: "10px" }}
       >
         <Nav className="d-flex gap-4 bottomlinks gap-lg-5 gap-md-5">
           {/* Home link */}
