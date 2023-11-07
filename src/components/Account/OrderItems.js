@@ -22,7 +22,7 @@ const OrderItems = () => {
         body: formdata,
         redirect: "follow",
       };
-
+ 
       try {
         const response = await fetch(
           baseUrl + "GetOrderDetails.php",

@@ -4,7 +4,7 @@ import {
   FETCH_BRANDS_SUCCESS,
 } from "../actions";
 const initialState = {
-  brandsData: [],
+  brandsData: [], 
   selectedBrand: "",
   selectedSubcat: "",
 };

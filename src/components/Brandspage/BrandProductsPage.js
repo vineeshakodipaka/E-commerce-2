@@ -52,6 +52,8 @@ const BrandProductsPage = () => {
         setTimeout(() => {
           setShowCartPopup(true);
         }, 1000);
+
+        
       }
       setTimeout(() => {
         setShowCartPopup(false);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Card, CardBody, Col, Container, Row, Table } from "react-bootstrap";
 
@@ -15,54 +15,32 @@ import { useNavigate } from "react-router-dom";
 import { Player } from "@lottiefiles/react-lottie-player";
 import Marquee from "react-fast-marquee";
 import AddressDetail from "./Account/AddressDetail";
+
+import { useApi } from "../ApiContext";
+import { useState } from "react";
 import { baseUrl } from "../Globalvarible";
 
 const Cart = ({ handleShowA, baseUrl1 }) => {
   const dispatch = useDispatch();
   const userId = Cookies.get("userId"); // Use your method to get the user ID from cookies
   const cartItems = useSelector((state) => state.cart.cartDetails);
+  const {
+    inputValue,
+    setInputValue,
+    apiResponse,
+    discountedPrice,
+    userAddress,
+    handleCheckCoupon,
+    totalPrice,
+    cartShow,
+    cartClose,
+    showCartPopup,
+  } = useApi(); // Use the useApi hook to access context values
+  const navigate = useNavigate(); // useNavigate should be declared from 'react-router-dom'
 
-  const [showCartPopup, setShowCartPopup] = useState(false);
-  const cartClose = () => setShowCartPopup(false);
-  const cartShow = () => setShowCartPopup(true);
-
-  const totalPrice = useSelector((state) => state.cart.totalPrice);
-  // const [totalPrice, setTotalPrice] = useState(totalPrice1);
-  const [userAddress, setUserAddress] = useState([]);
-  const navigate = useNavigate();
-
-  // Assuming you have a function to handle API requests, for example, using the Fetch API.
-  // This function returns the JSON response from the API.
-  const fetchUserAddress = React.useCallback(
-    async (userId) => {
-      try {
-        const response = await fetch(
-          baseUrl1 + `Get_addresess.php?user_id=` + userId
-        );
-
-        const data = await response.json();
-
-        return data;
-      } catch (error) {
-        return { status: false, message: "Error fetching user address" };
-      }
-    },
-    [baseUrl1]
-  );
-
-  //check if the userAddress available or not
-  useEffect(() => {
-    // Fetch user address when the component mounts
-    if (userId) {
-      fetchUserAddress(userId).then((data) => {
-        if (data.status) {
-          setUserAddress(data.data[0]);
-        } else {
-          setUserAddress(null);
-        }
-      });
-    }
-  }, [userId, fetchUserAddress]);
+  //coupon availblity
+ const [inputValue2, setInputValue2] = useState("");
+ const [showCouponButton2, setShowCouponButton2] = useState(false);
 
   useEffect(() => {
     dispatch(fetchCartDetails(userId));
@@ -86,8 +64,12 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
     }
   };
 
+  const handleRemoveFromCart = (userCartDetailsId) => {
+    dispatch(removeFromCart(userCartDetailsId));
+  };
+
   //checkout
-  const handleCheckout = (totalPrice) => {
+  const handleCheckout = () => {
     if (userId) {
       if (userAddress) {
         // User is logged in and has an address
@@ -106,57 +88,39 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
     }
   };
 
-  const handleRemoveFromCart = (userCartDetailsId) => {
-    dispatch(removeFromCart(userCartDetailsId));
-  };
-  const [inputValue, setInputValue] = useState("");
-  const [apiResponse, setApiResponse] = useState(null);
+  //coupon availblity
 
-  // ...
+  const handleCheckCouponavailble = (e) => {
+    // Make the API request and handle the response
+e.preventDefault();
+    var formdata = new FormData();
+    formdata.append("ZipCode", inputValue2);
 
-  const [couponCode, setCouponCode] = useState("");
-
-  const handleCheckCoupon = () => {
-    const formdata = new FormData();
-    formdata.append("CouponCode", inputValue);
-
-    const requestOptions = {
+    var requestOptions = {
       method: "POST",
       body: formdata,
       redirect: "follow",
     };
 
-    fetch(baseUrl + "CheckCopun.php", requestOptions)
+    fetch(baseUrl+"CheckZipAvailability.php", requestOptions)
       .then((response) => response.json())
-      .then((result) => {
-        if (result.status) {
-          setApiResponse(result);
-          setCouponCode(couponCode);
-          // setInputValue("");
+      .then((data) => {
+        if (data.status === true) {
+
+          setShowCouponButton2(true);
+         
         } else {
-          // Coupon is not available or invalid
-          setApiResponse(result);
-          // setInputValue("");
+          // The coupon is not available, so hide the button and display a popup
+          setShowCouponButton2(false);
+          alert("Unable to deliver at this address");
         }
       })
-      .catch((error) => {
-        alert("An error occurred while checking the coupon");
-      })
-      .finally(() => {
+      .catch((error) => console.log("error", error))
+       .finally(() => {
         // Clear the input field
-        setInputValue("");
+        setInputValue2("");
       });
   };
-
-  // const discountPercentage = apiResponse
-  //   ? parseFloat(apiResponse.data[0].DiscountPercent)
-  //   : 0;
-  const discountPercentage =
-    apiResponse && apiResponse.data && apiResponse.data.length > 0
-      ? parseFloat(apiResponse.data[0].DiscountPercent)
-      : 0;
-
-  const discountedPrice = totalPrice - (totalPrice * discountPercentage) / 100;
 
   return (
     <div className="container cartpage">
@@ -399,45 +363,57 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
                       <p>₹{apiResponse ? discountedPrice : totalPrice}</p>
                     </Col>
                   </Row>
-                  <input
-                    type="text"
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                  />
-                  <br />
-                  <button
-                    className="coupon p-2 rounded-3 mt-2 mb-3"
-                    onClick={handleCheckCoupon}
-                  >
-                    Check Coupon
-                  </button>
-
-                  <center>
-                    {cartItems.length !== 0 ? (
-                      <button
-                        className="btna w-100 p-2 rounded-3"
-                        onClick={() => {
-                          handleCheckout();
-                        }}
-                      >
-                        Proceed To Checkout
+                  <div>
+                    <form onSubmit={handleCheckCouponavailble}>
+                      <input
+                        type="text"
+                        value={inputValue2}
+                        onChange={(e) => setInputValue2(e.target.value)}
+                      />
+                      <br />
+                      <button type="submit" className="coupon p-2 rounded-3 mt-2 mb-3">
+                        Check Available
                       </button>
-                    ) : null}
-                  </center>
+                    </form>
+                  </div>
+
+                  <div>
+                    {cartItems.length !== 0 && showCouponButton2 && (
+                      <div>
+                        <form onSubmit={handleCheckCoupon}>
+                          <input
+                            type="text"
+                            required
+                            value={inputValue}
+                            onChange={(e) => setInputValue(e.target.value)}
+                          />
+                          <br />
+                          <button className="coupon p-2 rounded-3 mt-2 mb-3">
+                            Check Coupon
+                          </button>
+                        </form>
+                        {/* <input
+                          type="text"
+                          value={inputValue2}
+                          onChange={(e) => setInputValue2(e.target.value)}
+                        /> */}
+                        <br />
+                        <button
+                          className="btna w-100 p-2 rounded-3"
+                          onClick={handleCheckout}
+                        >
+                          Proceed To Checkout
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </CardBody>
             </Card>
           </Col>
         </Row>
       </Container>
-      <AddressDetail
-        totalPrice={totalPrice}
-        apiResponse={apiResponse}
-        discountedPrice={discountedPrice}
-        couponCode={couponCode}
-        showCartPopup={showCartPopup}
-        cartClose={cartClose}
-      />
+      <AddressDetail showCartPopup={showCartPopup} cartClose={cartClose} />
     </div>
   );
 };

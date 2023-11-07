@@ -197,7 +197,7 @@ const Addressform = ({ baseUrl1 }) => {
                           value={formData.ZipCode}
                           className="labelholder"
                           required
-                          type="text"
+                          type="number"
                           placeholder="ZipCode"
                         />
                       </Form.Group>

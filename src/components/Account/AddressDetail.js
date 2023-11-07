@@ -4,22 +4,23 @@ import { Button, Card, Modal } from "react-bootstrap";
 import "./Account.css";
 
 import { baseUrl } from "../../Globalvarible";
-const AddressDetail = ({
-
-  showCartPopup,
-  cartClose,
-  apiResponse,
-  totalPrice,
-  discountedPrice, 
-  couponCode,
-}) => {
+import { useApi } from "../../ApiContext";
+const AddressDetail = () => {
   // Define state to manage form data
 
   const [userAddresses, setUserAddresses] = useState([]);
   const userId = Cookies.get("userId"); // Retrieve userId from cookies
+  const {
+    apiResponse,
+    discountedPrice,
+    couponCode,
+    showCartPopup,
+    cartClose,
+    totalPrice,
+  } = useApi(); // Use the useApi hook to access context values
 
   //for payment success
-const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const fetchUserAddresses = React.useCallback(async (userId) => {
     var requestOptions = {
       method: "GET",
@@ -52,7 +53,7 @@ const [showModal, setShowModal] = useState(false);
         }
       });
     }
-  }, [userId, fetchUserAddresses]);
+  }, [userId, fetchUserAddresses, setUserAddresses]);
   //  const amountInPaise = totalPrice ;
 
   const paymentHandler = async (AddressID) => {
@@ -84,13 +85,13 @@ const [showModal, setShowModal] = useState(false);
         fetch(baseUrl + "PlaceOrder.php", requestOptions)
           .then((response) => {
             response.text();
-           setShowModal(true);
+            setShowModal(true);
           })
-          .then((result) => { })
+          .then((result) => {})
           .catch((error) => {});
       },
     };
-document.body.style.overflow = "visible";
+    document.body.style.overflow = "visible";
     // failure
     const rzp1 = new window.Razorpay(options);
     rzp1.on("payment.failed", function (response) {
@@ -109,10 +110,10 @@ document.body.style.overflow = "visible";
     await cartClose();
   };
 
-const closeModal = () => {
-  // Close the modal by setting showModal to false
-  setShowModal(false);
-};
+  const closeModal = () => {
+    // Close the modal by setting showModal to false
+    setShowModal(false);
+  };
   return (
     <div className="text-start address-details">
       <Modal className="modalbox" show={showCartPopup} onHide={cartClose}>
@@ -154,7 +155,7 @@ const closeModal = () => {
           <Modal.Title>Order Placed</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Your Order has been placed successfully</p> 
+          <p>Your Order has been placed successfully</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={closeModal}>

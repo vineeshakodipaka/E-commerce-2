@@ -1,16 +1,37 @@
 import React, { useState } from "react";
-import { Card, Col, Form, Row } from "react-bootstrap";
+import { Card, Col, Form, Row, Modal, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./Checkoutform.css";
 import Cookies from "js-cookie";
+import AddressDetail from "../Account/AddressDetail";
+import { useApi } from "../../ApiContext";
+import { useNavigate } from "react-router-dom";
 
-const Checkoutform = ({  baseUrl1 }) => {
+const Checkoutform = ({ baseUrl1 }) => {
   const cartItems = useSelector((state) => state.cart.cartDetails);
-  const { totalPrice } = useSelector((state) => state.cart);
 
-     const userId = Cookies.get("userId");
+  const {
+    totalPrice,
+
+    cartClose,
+    showCartPopup,
+
+    fetchUserAddress,
+    setUserAddress,
+  } = useApi(); // Use the useApi hook to access context values
+
+  const userId = Cookies.get("userId");
 
   // Define state to manage form data
+
+  //modal popup
+  const [showModal, setShowModal] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const navigate = useNavigate();
+  const showAlertInModal = (message) => {
+    setAlertMessage(message);
+    setShowModal(true);
+  };
 
   const [formData, setFormData] = useState({
     UserID: userId,
@@ -22,9 +43,7 @@ const Checkoutform = ({  baseUrl1 }) => {
     Contry: "",
   });
 
-
-
-
+  //checkout
 
   // Handle form submission
   const handleSubmit = async (e) => {
@@ -47,11 +66,17 @@ const Checkoutform = ({  baseUrl1 }) => {
     };
 
     try {
-      const response = await fetch(baseUrl1+"Add_addresess.php", requestOptions);
+      const response = await fetch(
+        baseUrl1 + "Add_addresess.php",
+        requestOptions
+      );
 
       if (response.ok) {
-      
         // Clear the input fields by resetting formData to its initial state
+        showAlertInModal(
+          "Your address has been saved successfully. You can now place your order."
+        );
+
         setFormData({
           UserID: userId,
           Name: "",
@@ -61,30 +86,56 @@ const Checkoutform = ({  baseUrl1 }) => {
           ZipCode: "",
           Contry: "",
         });
+        // After successfully saving the address, fetch the user address
+        fetchUserAddress(userId).then((data) => {
+          if (data.status) {
+            setUserAddress(data.data[0]);
+          } else {
+            setUserAddress(null);
+          }
+          // Now, the user address is checked and updated immediately
+          // You can choose to show the modal or perform any other actions as needed
+          // Note: Avoid calling functions that cause a re-render within a useEffect to prevent infinite loops
+          // showCartPopup(); // For example, if this re-renders the component, avoid it here
+        });
         // Trigger a parent component's function if needed
-       
       } else {
         // Form submission failed, display an error message to the user
         alert("Form submission failed. Please try again.");
       }
     } catch (error) {
- 
       // Handle network errors or other exceptions
       alert("Form submission failed. Please try again later.");
     }
   };
 
+  React.useEffect(() => {
+    // Check if the userAddress is available or not
+    // Fetch user address when the component mounts
+    if (userId) {
+      fetchUserAddress(userId).then((data) => {
+        if (data.status) {
+          setUserAddress(data.data[0]);
+        } else {
+          setUserAddress(null);
+        }
+      });
+    }
+  }, [userId, fetchUserAddress, setUserAddress]);
   // Handle input field changes and update form data
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
-
+  const Popupclose = () => {
+    setShowModal(false);
+    window.scroll(0, 0);
+    navigate("/cart");
+  };
   return (
     <div className="checkoutcls">
-      <h2 className="text-center">Checkout Shop</h2>
+      <h2 className="text-center">Delivery Address</h2>
       <Row className="mx-lg-5 px-xl-5">
         <Form className="mt-5 px-5 mx-xl-5" onSubmit={handleSubmit}>
           <Row xs={1} md={1}>
@@ -114,11 +165,11 @@ const Checkoutform = ({  baseUrl1 }) => {
                     required
                   >
                     <option value="">Select Country</option>
-                    <option value="Country 1">India</option>
-                    <option value="Country 2">Germany</option>
-                    <option value="Country 3">Canada</option>
-                    <option value="Country 4">France</option>
-                    <option value="Country 5">Australia</option>
+                    <option value="India">India</option>
+                    <option value="Germany">Germany</option>
+                    <option value="Canada">Canada</option>
+                    <option value="France">France</option>
+                    <option value="Australia">Australia</option>
                   </Form.Control>
                 </Form.Group>
               </Row>
@@ -161,11 +212,11 @@ const Checkoutform = ({  baseUrl1 }) => {
                     required
                   >
                     <option value="">Select State</option>
-                    <option value="State 1">Telangana</option>
-                    <option value="State 2">Andrapradesh</option>
-                    <option value="State 3">MadhyaPradesh</option>
-                    <option value="State 4">Maharashtra</option>
-                    <option value="State 5">Gujarat</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="Andrapradesh">Andrapradesh</option>
+                    <option value="MadhyaPradesh">MadhyaPradesh</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Gujarat">Gujarat</option>
                   </Form.Control>
                 </Form.Group>
                 <Form.Group as={Col} md="6" lg="5">
@@ -176,7 +227,7 @@ const Checkoutform = ({  baseUrl1 }) => {
                     value={formData.ZipCode}
                     className="labelholder"
                     required
-                    type="text"
+                    type="number"
                     placeholder="ZipCode"
                   />
                 </Form.Group>
@@ -218,7 +269,11 @@ const Checkoutform = ({  baseUrl1 }) => {
                               className="mt-2"
                               style={{ marginTop: "1rem", display: "block" }}
                             >
-                              ₹{product.Product_offerPrice}
+                              {product.isSale ? (
+                                <span>₹{product.Product_offerPrice}</span>
+                              ) : (
+                                <span>₹{product.Product_originalPrice}</span>
+                              )}
                               <br />
                             </span>
                           ))}
@@ -248,7 +303,7 @@ const Checkoutform = ({  baseUrl1 }) => {
                         type="submit"
                         className="rounded-4 p-3 w-100  mt-4 mb-4 "
                       >
-                        Place Order
+                        Save And Continue
                       </button>
                     </center>
                   </div>
@@ -258,6 +313,22 @@ const Checkoutform = ({  baseUrl1 }) => {
           </Row>
         </Form>
       </Row>
+
+      <AddressDetail showCartPopup={showCartPopup} cartClose={cartClose} />
+
+      <Modal show={showModal} onHide={() => Popupclose()}>
+        <Modal.Header closeButton>
+          <Modal.Title>Alert</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>{alertMessage}</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={() => Popupclose()}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

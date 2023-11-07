@@ -241,3 +241,28 @@ export const fetchBrandSubproducts = (Subcatid) => {
       });
   };
 };
+
+
+
+
+
+
+
+// Addresses actions
+
+export const FETCH_ADDRESSES_SUCCESS = "FETCH_DATA_SUCCESS";
+export const FETCH_ADDRESSES_FAILURE = "FETCH_DATA_FAILURE";
+
+export const fetchAddresses = (userId) => {
+  
+  return (dispatch) => {
+     fetch(baseUrl + `Get_addresess.php?user_id=${userId}`)
+       .then((response) => response.json()) // Assuming the response is in JSON format
+       .then((data) => {
+         dispatch({ type: "FETCH_ADDRESSES_SUCCESS", payload: data.data });
+       })
+       .catch((error) => {
+         dispatch({ type: "FETCH_ADDRESSES_FAILURE", error });
+       });
+  };
+};

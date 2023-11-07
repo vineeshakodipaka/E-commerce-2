@@ -25,7 +25,7 @@ const cartReducer = (state = initialState, action) => {
       // Handle fetching cart details from an API, if needed
       const cartDetails = action.payload.data;
       return {
-        ...state,
+        ...state, 
         cartDetails,
         isLoading: false,
         error: null,

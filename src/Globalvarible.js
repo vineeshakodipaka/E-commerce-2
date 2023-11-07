@@ -1,2 +1,1 @@
-
-export const baseUrl = "https://checkai.in/_API/";
+export const baseUrl = "https://www.checkai.in/_API/";

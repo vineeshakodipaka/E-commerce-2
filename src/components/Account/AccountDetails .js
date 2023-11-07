@@ -148,7 +148,7 @@ const AccountDetails = () => {
                     value={formData.ZipCode}
                     className="labelholder"
                     required
-                    type="text"
+                    type="number"
                     placeholder="*******"
                   />
                 </Form.Group>
