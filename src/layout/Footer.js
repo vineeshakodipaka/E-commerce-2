@@ -41,7 +41,7 @@ const Footer = () => {
       navigate("/account");
     } else {
       setActiveButton(0);
-      navigate("/home");
+      navigate("/");
     }
   };
 

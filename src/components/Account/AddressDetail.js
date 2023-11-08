@@ -5,11 +5,13 @@ import "./Account.css";
 
 import { baseUrl } from "../../Globalvarible";
 import { useApi } from "../../ApiContext";
+import { useNavigate } from "react-router-dom";
 const AddressDetail = () => {
   // Define state to manage form data
 
   const [userAddresses, setUserAddresses] = useState([]);
   const userId = Cookies.get("userId"); // Retrieve userId from cookies
+  const navigate=useNavigate()
   const {
     apiResponse,
     discountedPrice,
@@ -108,11 +110,13 @@ const AddressDetail = () => {
   const hadleclick = async (AddressID) => {
     paymentHandler(AddressID);
     await cartClose();
+
   };
 
   const closeModal = () => {
     // Close the modal by setting showModal to false
     setShowModal(false);
+      navigate("/");
   };
   return (
     <div className="text-start address-details">
@@ -158,7 +162,8 @@ const AddressDetail = () => {
           <p>Your Order has been placed successfully</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={closeModal}>
+       
+          <Button className="cartpopupbtn1 p-2 rounded-3" onClick={closeModal}>
             Close
           </Button>
         </Modal.Footer>

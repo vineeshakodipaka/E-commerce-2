@@ -368,10 +368,14 @@ e.preventDefault();
                       <input
                         type="text"
                         value={inputValue2}
+                        placeholder="Enter pin code"
                         onChange={(e) => setInputValue2(e.target.value)}
                       />
                       <br />
-                      <button type="submit" className="coupon p-2 rounded-3 mt-2 mb-3">
+                      <button
+                        type="submit"
+                        className="coupon p-2 rounded-3 mt-2 mb-3"
+                      >
                         Check Available
                       </button>
                     </form>
@@ -384,6 +388,7 @@ e.preventDefault();
                           <input
                             type="text"
                             required
+                            placeholder="Enter coupon code"
                             value={inputValue}
                             onChange={(e) => setInputValue(e.target.value)}
                           />

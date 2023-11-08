@@ -40,13 +40,13 @@ const Navbar = ({ handleShow2 }) => {
     // Fetch brand data from the API
     dispatch(fetchCartDetails(userId));
   }, [dispatch, userId]);
- useEffect(() => {
-   // Fetch brand data from the API
-   dispatch(fetchCartDetails(userId));
- }, [dispatch, userId]);
+  useEffect(() => {
+    // Fetch brand data from the API
+    dispatch(fetchCartDetails(userId));
+  }, [dispatch, userId]);
 
   const handleBrandChange = (brand) => {
-    if (brand.hasSubcat) { 
+    if (brand.hasSubcat) {
       setSelectedBrand(brand);
     } else {
       setSelectedBrand(null);
@@ -89,9 +89,8 @@ const Navbar = ({ handleShow2 }) => {
   };
 
   //active links
- // State to track active button
-const {activeButton,setActiveButton}=useAuth()
-
+  // State to track active button
+  const { activeButton, setActiveButton } = useAuth();
 
   useEffect(() => {
     // Update the userId whenever it changes in the cookies
@@ -119,7 +118,7 @@ const {activeButton,setActiveButton}=useAuth()
       })
       .catch((error) => {});
   }, []);
- const location = useLocation();
+  const location = useLocation();
   useEffect(() => {
     const determineActiveButton = (path) => {
       if (path === "/") return 0;
@@ -136,7 +135,7 @@ const {activeButton,setActiveButton}=useAuth()
           return 6; // User is not logged in, go to "/cartpage"
         }
       }
- 
+
       if (path === "/account/accountDetails") return 7;
 
       return 0; // Default to the first button if no match
@@ -145,17 +144,27 @@ const {activeButton,setActiveButton}=useAuth()
     setActiveButton(determineActiveButton(location.pathname));
   }, [location, userId, setActiveButton]);
 
- 
   return (
     <nav className="navbar navbar-expand-lg navbar headerbar mt-lg-4 mb-lg-4">
       <div className="container mx-lg-3 mx-xl-5 px-xl-5">
-        <img
-          className="mx-xl-0"
-          src={logoUrl}
-          width="150px"
-          height="80px"
-          alt="logo"
-        />
+        <Link
+          to="/"
+          
+          className={`nav-link nav-btns  ${
+            activeButton === 8 ? "active" : ""
+          }`}
+          onClick={() => {
+            setActiveButton(8);
+          }}
+        >
+          <img
+            className="mx-xl-0"
+            src={logoUrl}
+            width="150px"
+            height="80px"
+            alt="logo"
+          />
+        </Link>
 
         <span
           className="navbar-toggler"
