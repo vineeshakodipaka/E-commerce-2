@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Col, Form, Row } from "react-bootstrap";
+import { Col, Form, InputGroup, Row } from "react-bootstrap";
 import Cookies from "js-cookie"; // Import Cookies if not already imported
 import { baseUrl } from "../../Globalvarible";
-
+import { AiFillEye } from "react-icons/ai"; // Import AiFillEye icon
 const AccountDetails = () => {
   // Define state to manage form data
   const [formData, setFormData] = useState({
@@ -11,7 +11,14 @@ const AccountDetails = () => {
     PhoneNumber: "",
     password: "",
   });
+ 
+  // State to manage password visibility
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
+  // Toggle password visibility
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
   // Retrieve userId from cookies
   const userId = Cookies.get("userId");
 
@@ -114,15 +121,23 @@ const AccountDetails = () => {
                   <Form.Label className="formlabel">
                     Current password *
                   </Form.Label>
-                  <Form.Control
-                    onChange={handleInputChange}
-                    name="password"
-                    value={formData.password}
-                    className="labelholder"
-                    required
-                    type="password"
-                    placeholder="*******"
-                  />
+                  <div className="password-input-wrapper">
+                    <InputGroup className="position-relative">
+                      <Form.Control
+                        onChange={handleInputChange}
+                        name="password"
+                        value={formData.password}
+                        className="labelholder position-relative"
+                        required
+                        type={passwordVisible ? "text" : "password"}
+                        placeholder="*******"
+                      />
+                      <AiFillEye
+                        className="eye-icon position-absolute top-50 end-0  translate-middle"
+                        onClick={togglePasswordVisibility}
+                      />
+                    </InputGroup>
+                  </div>
                 </Form.Group>
               </Row>
               <Row className="mb-4">

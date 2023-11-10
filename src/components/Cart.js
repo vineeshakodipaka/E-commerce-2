@@ -40,8 +40,15 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
 
   //coupon availblity
  const [inputValue2, setInputValue2] = useState("");
- const [showCouponButton2, setShowCouponButton2] = useState(false);
+ const [showCouponButton2, setShowCouponButton2] = useState(
+   // Retrieve the showCouponButton2 value from localStorage or default to false
+   localStorage.getItem("showCouponButton2") === "true" || false
+ );
 
+ useEffect(() => {
+   // Save the showCouponButton2 value to localStorage whenever it changes
+   localStorage.setItem("showCouponButton2", showCouponButton2);
+ }, [showCouponButton2]);
   useEffect(() => {
     dispatch(fetchCartDetails(userId));
   }, [dispatch, userId]);
@@ -165,7 +172,7 @@ e.preventDefault();
                           </td>
                           <td style={{ width: "20%", verticalAlign: "middle" }}>
                             <Marquee>{product.Product_name}</Marquee>
-                          </td>  
+                          </td>
                           <td style={{ width: "15%", verticalAlign: "middle" }}>
                             <p>
                               {product.isSale ? (

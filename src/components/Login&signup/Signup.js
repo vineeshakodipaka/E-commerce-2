@@ -126,7 +126,7 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
                       className="inputgrp"
                     >
                       <Form.Control
-                        type="text"
+                        type="password"
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
@@ -144,7 +144,7 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
                       className="inputgrp"
                     >
                       <Form.Control
-                        type="text"
+                        type="password"
                         name="confirmPassword"
                         value={formData.confirmPassword}
                         onChange={handleChange}
@@ -163,7 +163,7 @@ const Signup = ({ show3, handleClose3, handleShow2 }) => {
                       className="inputgrp"
                     >
                       <Form.Control
-                        type="text"
+                        type="number"
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}

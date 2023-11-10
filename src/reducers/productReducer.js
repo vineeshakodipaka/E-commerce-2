@@ -58,10 +58,23 @@ const productReducer = (state = initialState, action) => {
         const filteredProducts = state.products.filter((product) =>
           product.Product_name.toLowerCase().includes(searchQuery)
         );
-        return {
-          ...state,
-          filteredProducts,
-        };
+      
+
+         if (filteredProducts.length === 0) {
+           // Return a state indicating that no matching products were found
+           return {
+             ...state,
+             filteredProducts,
+             noResultsFound: true,
+           };
+         } else {
+           // Return the filtered products
+           return {
+             ...state,
+             filteredProducts,
+             noResultsFound: false,
+           };
+         }
       }
     case INCREMENT_QUANTITY:
       const updatedCartDetailsIncrement = state.products.map((item) => {
