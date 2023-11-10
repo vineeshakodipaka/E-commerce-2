@@ -184,8 +184,8 @@ const Footer = () => {
       </Container>
 
       <hr />
-      <div className="mb-5 px-2">
-        <p className="text-center pt-3 pb-3">
+      <div className="mb-5 mb-md-5 px-2">
+        <p className="text-center pt-3 pb-md-0 pb-4">
           Copyright © <span className="fw-bolder">Elite Enterprise</span>|
           Designed & Developed By
           <span className="fw-bolder">Incinc Media</span>{" "}

@@ -186,7 +186,7 @@ const Addressform = ({ baseUrl1 }) => {
                       <Form.Group
                         className="mb-3"
                         as={Col}
-                        md="6"
+                        md="6" 
                         lg="6"
                         xs="12"
                       >
