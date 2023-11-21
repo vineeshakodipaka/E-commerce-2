@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import {
   FaInstagram,
@@ -11,6 +11,7 @@ import "./Footer.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext ";
 import Cookies from "js-cookie";
+import { baseUrl } from "../Globalvarible";
 
 const Footer = () => {
   const userId = Cookies.get("userId"); // Use your method to get the user ID from cookies
@@ -45,6 +46,12 @@ const Footer = () => {
     }
   };
 
+  const homeclick = () => {
+    window.scrollTo(0, 0);
+
+    setActiveButton(8);
+    navigate("/");
+  };
   const emailAddress = "needhelp@elite.com";
   const handleEmailClick = () => {
     window.location.href = `mailto:${emailAddress}`;
@@ -55,6 +62,22 @@ const Footer = () => {
   const handlePhoneClick = () => {
     window.location.href = `tel:${phoneNumber}`;
   };
+
+  const [logoUrl, setLogoUrl] = useState(""); // State to store the logo URL
+  useEffect(() => {
+    // Fetch the image URL from the API
+    fetch(baseUrl + "FrontEndImages.php?FrontEnd_Id=1")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status) {
+          // Update the logo URL in the state
+          setLogoUrl(data.data.Logo);
+        } else {
+          // Handle the case where the data couldn't be retrieved
+        }
+      })
+      .catch((error) => {});
+  }, []);
   return (
     <div className="footercls mt-lg-5 mt-md-5 ">
       <Container className="footer-container position-relative">
@@ -78,7 +101,15 @@ const Footer = () => {
           </Col>
           <Col xs="12" className="text-center ">
             <div className="pt-5">
-              <h3>Elite Enterprise</h3>
+              <img
+                className="pb-3"
+                src={logoUrl}
+                width="150px"
+                onClick={homeclick}
+                height="110px"
+                alt="logo"
+              />
+
               <p className="px-md-5 mx-md-5 mx-lg-0 px-lg-0">
                 Simply dummy text of the printing and typesetting industry.Lorem
                 Ipsum simply dummy text of the printing{" "}
