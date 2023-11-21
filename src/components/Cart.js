@@ -46,10 +46,14 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
   );
   const [apiData, setApiData] = useState(null);
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     // Save the showCouponButton2 value to localStorage whenever it changes
     localStorage.setItem("showCouponButton2", showCouponButton2);
   }, [showCouponButton2]);
+
+ 
   useEffect(() => {
     dispatch(fetchCartDetails(userId));
   }, [dispatch, userId]);
@@ -115,7 +119,14 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
       .then((data) => {
         if (data.status === true) {
           setShowCouponButton2(true);
-          setApiData(data.data[0]); // Set API data when status is true
+           setLoading(true); // Show loading animation immediately
+
+          setLoading(true); // Show loading animation immediately
+
+          setTimeout(() => {
+            setLoading(false); // Hide loading animation after 2 seconds
+            setApiData(data.data[0]); // Set API data when status is true
+          }, 2000);
         } else {
           // The coupon is not available, so hide the button and display a popup
           setShowCouponButton2(false);
@@ -128,6 +139,7 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
         setInputValue2("");
       });
   };
+
 
   // Load API data when showCouponButton2 is true on initial render
   useEffect(() => {
@@ -142,6 +154,18 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
     }
   }, [showCouponButton2]);
 
+  // Save necessary data to localStorage when showCouponButton2 changes
+  useEffect(() => {
+    if (showCouponButton2) {
+      localStorage.setItem(
+        "savedData",
+        JSON.stringify({
+          apiData,
+          inputValue2,
+        })
+      );
+    }
+  }, [showCouponButton2, apiData, inputValue2]);
 
   return (
     <div className="container cartpage">
@@ -368,10 +392,27 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
                 </Row>
                 <div>
                   <p>Shipping:</p>
+                  {/* Show loading animation for 2 seconds */}
+                  {loading && (
+                    <Player
+                      autoplay
+                      loop
+                      src={baseUrl + "Animations/loading.json"}
+                      style={{ height: "50px", width: "50px" }}
+                      visible={true}
+                    />
+                  )}
+
+                  {/* Display API data after loading */}
                   {apiData && (
                     <div>
-                      <p>Estimated Days: {apiData.estimated_Days}</p>
-                      <p>ZipCode: {apiData.ZipCode}</p>
+                     
+
+                      {/* Display data from apiData */}
+                      <div>
+                        <p>Estimated Days: {apiData.estimated_Days}</p>
+                        <p>ZipCode: {apiData.ZipCode}</p>
+                      </div>
                     </div>
                   )}
                   <p>

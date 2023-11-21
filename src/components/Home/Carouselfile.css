@@ -15,17 +15,7 @@
 
 /* Carouselfile.css */
 /* For small screens */
-@media (max-width: 767px) {
-    .homecarousel   .carousel-caption h5 {
-      font-size: 0.8rem; /* Adjust font size for small screens */
-    }
-    .homecarousel .carousel-caption p {
-      font-size: 0.6rem; /* Adjust font size for small screens */
-    }
-    .homecarousel  .carousel-caption button {
-      font-size: 0.6rem; /* Adjust font size for small screens */
-    }
-  }
+
  .homecarousel .carouselimg {
 filter: brightness(0.9);
  }
@@ -85,6 +75,9 @@ filter: brightness(0.9);
   .homecarousel .carousel-caption h5{
     font-size: 50px;
   }
+     .homecarousel .carousel-caption p {
+       font-size: 20px;
+     }
     .homecarousel .carouseldiv .carouselimg {
       height: 550px;
     }

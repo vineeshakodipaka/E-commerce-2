@@ -52,14 +52,14 @@ const Carouselfile = () => {
               />
               <div className="carousel-caption ">
                 <div className="caption-content mb-lg-0 pb-lg-0 mt-lg-4  mb-3 pb-5 ">
-                  <h5 className="text-white" style={{ color: "#B27B60" }}>
+                  <h5 className="text-white " style={{ color: "#B27B60" }}>
                     {item.caption}
                   </h5>
                   <p className=" text-white" style={{ color: "#525C60" }}>
                     {item.content}
                   </p>
                   <div className="shopnowbtn">
-                    <button className="d-flex   px-4 p-2" onClick={handleclick}>
+                    <button className="d-flex   px-4 p-2 fs-6" onClick={handleclick}>
                       Shop now
                     </button>
                   </div>

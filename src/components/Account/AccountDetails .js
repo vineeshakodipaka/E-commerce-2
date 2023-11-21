@@ -145,8 +145,7 @@ const AccountDetails = () => {
                   <Form.Label className="formlabel">New password*</Form.Label>
                   <Form.Control
                     onChange={handleInputChange}
-                    name="City"
-                    value={formData.City}
+                   
                     className="labelholder"
                     required
                     type="text"
@@ -159,11 +158,11 @@ const AccountDetails = () => {
                   </Form.Label>
                   <Form.Control
                     onChange={handleInputChange}
-                    name="ZipCode"
-                    value={formData.ZipCode}
+                 
+                
                     className="labelholder"
                     required
-                    type="number"
+                    type="password"
                     placeholder="*******"
                   />
                 </Form.Group>
