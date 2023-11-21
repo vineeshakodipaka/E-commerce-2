@@ -44,6 +44,7 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
     // Retrieve the showCouponButton2 value from localStorage or default to false
     localStorage.getItem("showCouponButton2") === "true" || false
   );
+  const [apiData, setApiData] = useState(null);
 
   useEffect(() => {
     // Save the showCouponButton2 value to localStorage whenever it changes
@@ -114,6 +115,7 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
       .then((data) => {
         if (data.status === true) {
           setShowCouponButton2(true);
+          setApiData(data.data[0]); // Set API data when status is true
         } else {
           // The coupon is not available, so hide the button and display a popup
           setShowCouponButton2(false);
@@ -126,6 +128,20 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
         setInputValue2("");
       });
   };
+
+  // Load API data when showCouponButton2 is true on initial render
+  useEffect(() => {
+    if (showCouponButton2) {
+      // Retrieve necessary data from localStorage or any other source
+      const savedData = JSON.parse(localStorage.getItem("savedData"));
+
+      if (savedData) {
+        setApiData(savedData.apiData);
+        setInputValue2(savedData.inputValue2);
+      }
+    }
+  }, [showCouponButton2]);
+
 
   return (
     <div className="container cartpage">
@@ -352,6 +368,12 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
                 </Row>
                 <div>
                   <p>Shipping:</p>
+                  {apiData && (
+                    <div>
+                      <p>Estimated Days: {apiData.estimated_Days}</p>
+                      <p>ZipCode: {apiData.ZipCode}</p>
+                    </div>
+                  )}
                   <p>
                     {apiResponse && apiResponse.data && apiResponse.data[0]
                       ? `DiscountPercent: ${apiResponse.data[0].DiscountPercent} %`
