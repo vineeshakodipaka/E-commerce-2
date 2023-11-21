@@ -198,37 +198,40 @@ background-color: white;
 }
 @media screen and (min-width: 780px) {
 /* Style for the active link */
-  .headerbar .b-link.active {
-    background-color: #000066;
-    color: white !important;
+  .headerbar .b-link.active ,.headerbar .b-link:hover{
+   border:1px solid  #000066;
+    color: #000066 !important;
 
   }
-        .headerbar .cart-btn.active {
-        background-color: #000066 !important;
-          color: white !important;
+        .headerbar .cart-btn.active, .headerbar .cart-btn:hover {
+      border: 1px solid #000066;
+        color: #000066 !important;
     
         }
 
-    .headerbar .b-link.active {
+    /* .headerbar .b-link.active {
       background-color: #000066;
-    }
+    } */
 }
 .headerbar .offcanvas-backdrop.show{
   opacity: 0;
 }
 .headerbar .navdroplink:hover{
-background-color: #000066 !important;
-color: white !important;
+  border: 1px solid #000066;
+  color: #000066 !important;
+  background-color: white !important;
 }
 .headerbar .navdroplink:active {
-  background-color: #000066 !important;
-  color: white !important;
+  border: 1px solid #000066;
+  color: #000066 !important;
+  background-color: white !important;
+  
 }
 .headerbar .accordion-item:active {
-  background-color: #000066 !important;
-  color: white !important;
+  border: 1px solid #000066 !important;
+    color: #000066 !important;
 }
 .headerbar .accordion-item:hover {
-  background-color: #000066 !important;
-  color: white !important;
+    border: 1px solid #000066 !important;
+      color: #000066 !important;
 }

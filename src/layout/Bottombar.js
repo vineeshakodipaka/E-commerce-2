@@ -11,7 +11,7 @@ import Cookies from "js-cookie";
 import { fetchCartDetails } from "../actions/cartActions";
 import { useAuth } from "../AuthContext ";
 
-const Bottombar = () => {
+const Bottombar = ({ handleShow2 }) => {
   const cartLength = useSelector((state) => state.cart.cartLength);
   const cartLength1 = useSelector((state) => state.cart1.cartLength1);
   const dispatch = useDispatch();
@@ -93,8 +93,11 @@ const Bottombar = () => {
           {userId === undefined ? (
             <>
               <Link
-                to="/"
-                onClick={handleLinkClick}
+                // to="/"
+                onClick={() => {
+                  handleLinkClick();
+                  handleShow2();
+                }}
                 className={`b-link px-3  rounded-3 text-center  p-2 ${
                   activeButton === null ? "active" : ""
                 }`}

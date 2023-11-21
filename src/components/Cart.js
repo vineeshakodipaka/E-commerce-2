@@ -39,16 +39,16 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
   const navigate = useNavigate(); // useNavigate should be declared from 'react-router-dom'
 
   //coupon availblity
- const [inputValue2, setInputValue2] = useState("");
- const [showCouponButton2, setShowCouponButton2] = useState(
-   // Retrieve the showCouponButton2 value from localStorage or default to false
-   localStorage.getItem("showCouponButton2") === "true" || false
- );
+  const [inputValue2, setInputValue2] = useState("");
+  const [showCouponButton2, setShowCouponButton2] = useState(
+    // Retrieve the showCouponButton2 value from localStorage or default to false
+    localStorage.getItem("showCouponButton2") === "true" || false
+  );
 
- useEffect(() => {
-   // Save the showCouponButton2 value to localStorage whenever it changes
-   localStorage.setItem("showCouponButton2", showCouponButton2);
- }, [showCouponButton2]);
+  useEffect(() => {
+    // Save the showCouponButton2 value to localStorage whenever it changes
+    localStorage.setItem("showCouponButton2", showCouponButton2);
+  }, [showCouponButton2]);
   useEffect(() => {
     dispatch(fetchCartDetails(userId));
   }, [dispatch, userId]);
@@ -99,7 +99,7 @@ const Cart = ({ handleShowA, baseUrl1 }) => {
 
   const handleCheckCouponavailble = (e) => {
     // Make the API request and handle the response
-e.preventDefault();
+    e.preventDefault();
     var formdata = new FormData();
     formdata.append("ZipCode", inputValue2);
 
@@ -109,13 +109,11 @@ e.preventDefault();
       redirect: "follow",
     };
 
-    fetch(baseUrl+"CheckZipAvailability.php", requestOptions)
+    fetch(baseUrl + "CheckZipAvailability.php", requestOptions)
       .then((response) => response.json())
       .then((data) => {
         if (data.status === true) {
-
           setShowCouponButton2(true);
-         
         } else {
           // The coupon is not available, so hide the button and display a popup
           setShowCouponButton2(false);
@@ -123,7 +121,7 @@ e.preventDefault();
         }
       })
       .catch((error) => console.log("error", error))
-       .finally(() => {
+      .finally(() => {
         // Clear the input field
         setInputValue2("");
       });
@@ -346,6 +344,7 @@ e.preventDefault();
                   <Col>
                     <p>Sub total</p>
                   </Col>
+                  <Col></Col>
                   <Col>
                     {" "}
                     <p>₹{apiResponse ? discountedPrice : totalPrice}</p>

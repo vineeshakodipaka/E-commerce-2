@@ -18,7 +18,7 @@ const Footer = () => {
   const openWhatsApp = () => {
     window.open("https://wa.me/917498847799", "_blank");
   };
- 
+
   const navigate = useNavigate();
   const { setActiveButton } = useAuth();
   const handleLinkClick = () => {
@@ -45,6 +45,16 @@ const Footer = () => {
     }
   };
 
+  const emailAddress = "needhelp@elite.com";
+  const handleEmailClick = () => {
+    window.location.href = `mailto:${emailAddress}`;
+  };
+
+  const phoneNumber = "+917498847799";
+
+  const handlePhoneClick = () => {
+    window.location.href = `tel:${phoneNumber}`;
+  };
   return (
     <div className="footercls mt-lg-5 mt-md-5 ">
       <Container className="footer-container position-relative">
@@ -53,9 +63,15 @@ const Footer = () => {
             <div className="custom-border px-lg-4 pt-5">
               <h3>Contact Us</h3>
               <h5>Email</h5>
-              <p>needhelp@elite.com</p>
+              <p>
+                {/* Clickable email link */}
+                <span onClick={handleEmailClick}> {emailAddress}</span>
+              </p>
               <h5>Phone</h5>
-              <p>666 888 888</p>
+              <p>
+                {/* Clickable phone number */}
+                <span onClick={handlePhoneClick}>{phoneNumber}</span>
+              </p>
               <h5>Address</h5>
               <p>Mumbai Andheri, India</p>
             </div>

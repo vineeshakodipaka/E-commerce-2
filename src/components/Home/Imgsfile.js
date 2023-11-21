@@ -83,7 +83,7 @@ const Imgsfile = () => {
             className="col-sm-12 col-lg-6 col-lg-6 col-md-6 "
           >
             <div className="mt-lg-5 ">
-              <p className="p1 fs-4">About As</p>
+              <p className="p1 fs-2">About Us</p>
               <h3>We Believe in Working Accredited Farmers</h3>
               <p className="p2">
                 Simply dummy text of the printing and typesetting industry.

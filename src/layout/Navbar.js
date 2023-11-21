@@ -197,8 +197,8 @@ const Navbar = ({ handleShow2 }) => {
         >
           <div className="offcanvas-header"></div>
           <div className="offcanvas-body">
-            <ul className="navbar-nav ms-lg-3 ">
-              <li className="nav-item px-xl-2 d-flex justify-content-between">
+            <ul className="navbar-nav ms-lg-3 ms-xl-5 px-xl-5">
+              <li className="nav-item px-xl-2 d-flex justify-content-between ">
                 <Link
                   to="/"
                   aria-current="page"
@@ -263,7 +263,7 @@ const Navbar = ({ handleShow2 }) => {
                   onMouseLeave={() => setIsBrandDropdownOpen(false)} // Close the dropdown when mouse leaves
                   title={
                     <span
-                      className={`basic-nav-dropdown nav-btns b-link  rounded-3 ${
+                      className={`basic-nav-dropdown nav-btns  rounded-3 ${
                         activeButton === 3 ? "active" : ""
                       }`}
                       onClick={handlclick}
@@ -307,7 +307,7 @@ const Navbar = ({ handleShow2 }) => {
                                     );
                                   }}
                                   to={`/subbrand-products?Subcat_id=${subcat.Subcat_id}`}
-                                  className="mx-2 nav-link navdroplink"
+                                  className="mx-2 nav-link "
                                 >
                                   <span
                                     data-bs-dismiss="offcanvas"

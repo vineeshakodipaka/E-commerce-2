@@ -12,30 +12,30 @@ const Ourproducts = () => {
       <div style={{ background: "#FFDAA9" }}>
         <Container>
           <Row className="pt-5 pb-5 text-center ourproductsrow">
-            <h4>Our Products</h4>
+            <h1>Our Products</h1>
           </Row>
         </Container>
       </div>
 
       <div className="container">
-        <h1
+        <h2
           className="featuredproducts  px-4 pt-3 mt-4"
           style={{ color: "#000066" }}
         >
           FEATURED PRODUCTS
-        </h1>
+        </h2>
       </div>
 
       {/* Render the Shoppage component for featured products */}
       <Shopcardslide />
 
       <div className="container">
-        <h1
+        <h2
           className="featuredproducts  px-4 mt-4"
           style={{ color: "#000066" }}
         >
           NEW ARRIVALS
-        </h1>
+        </h2>
       </div>
 
       {/* Render the Shoppage component for new arrivals */}
