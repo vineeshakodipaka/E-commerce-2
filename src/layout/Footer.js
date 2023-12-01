@@ -106,13 +106,14 @@ const Footer = () => {
                 src={logoUrl}
                 width="150px"
                 onClick={homeclick}
-                height="110px"
+                height="100px"
                 alt="logo"
               />
 
               <p className="px-md-5 mx-md-5 mx-lg-0 px-lg-0">
-                Simply dummy text of the printing and typesetting industry.Lorem
-                Ipsum simply dummy text of the printing{" "}
+                Welcome to Elite Enterprise, your trusted partner in delivering
+                excellence. Based in the vibrant city of Mumbai, we stand as a
+                beacon of innovation and reliability in the business landscape.
               </p>
               <Row lg="6" xs="6" md="8" className="justify-content-center">
                 <Col>

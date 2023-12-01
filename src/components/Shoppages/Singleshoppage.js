@@ -6,7 +6,7 @@ import {
   ButtonGroup,
   Card,
   Col,
-  Container, 
+  Container,
   Row,
 } from "react-bootstrap";
 import { FaArrowRight } from "react-icons/fa";
@@ -26,7 +26,7 @@ const Singleshoppage = () => {
   const [showInfo1, setShowInfo1] = useState(false);
   //single cartpage
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [showCartPopup, setShowCartPopup] = useState(false);
 
   const userId = Cookies.get("userId"); // Use your method to get the user ID from cookies
@@ -83,7 +83,6 @@ const Singleshoppage = () => {
     setShowInfo1(!showInfo1);
   };
 
-
   //single cart
 
   useEffect(() => {
@@ -104,23 +103,21 @@ const Singleshoppage = () => {
     );
   }
 
- 
-
-   const handleAddToCart1 = (product, Qty) => {
-     // window.scrollTo(0, 0);
-     if (!userId) {
-       dispatch(addToCart(product, Qty));
-       setShowCartPopup(true);
-     } else {
-       dispatch(addToCart1(product, Qty));
-       setTimeout(() => {
-         setShowCartPopup(true);
-       }, 1000);
-     }
-     setTimeout(() => {
-       setShowCartPopup(false);
-     }, 2000); // Updated to 5 seconds
-   };
+  const handleAddToCart1 = (product, Qty) => {
+    // window.scrollTo(0, 0);
+    if (!userId) {
+      dispatch(addToCart(product, Qty));
+      setShowCartPopup(true);
+    } else {
+      dispatch(addToCart1(product, Qty));
+      setTimeout(() => {
+        setShowCartPopup(true);
+      }, 1000);
+    }
+    setTimeout(() => {
+      setShowCartPopup(false);
+    }, 2000); // Updated to 5 seconds
+  };
   const handleViewCart = () => {
     setShowCartPopup(false); // Close the popup
     if (!userId) {
@@ -159,8 +156,6 @@ const Singleshoppage = () => {
     zoomedImage.classList.remove("zoomed");
   };
 
-
-  
   return (
     <div className="singleproductpage">
       <div className="position-relative mb-3">
@@ -206,50 +201,55 @@ const Singleshoppage = () => {
               </Col>
             </Row>
           </Col>
-          <Col lg={4} md={4} className="mt-md-5 order-md-1 order-1">
+          <Col lg={4} md={4} className="mt-md-5 order-md-1 order-1 pt-4">
             <div>
               <br />
-              <Card
-                style={{
-                  boxShadow: "0 2px 10px rgba(0,0,0,.1)",
-                  border: "none",
-                  overflow: "hidden",
-                }}
-              >
-                <div
-                  onMouseMove={handleMouseMove}
-                  onMouseLeave={handleZoomOut}
-                  id="zoomed-image"
-                >
-                  <Card.Img
-                    variant="top"
-                    className=" singlecardprdctimg p-3"
-                    src={selectedImage}
-                    alt="product"
-                    onMouseEnter={handleZoomIn}
-                  />
+              <div className="position-relative">
+                <div>
+                  {card.isSale && (
+                    <button
+                      className="sale-button  rounded-3 position-absolute  px-4"
+                      style={{
+                        background: "#DC0000",
+                        border: "none",
+                        color: "white",
+                        top: "-30px" /* Adjust this value for vertical positioning */,
+                        right:
+                          "0px" /* Adjust this value for horizontal positioning */,
+                      }}
+                    >
+                      Sale
+                    </button>
+                  )}
                 </div>
-              </Card>
+                <Card
+                  style={{
+                    boxShadow: "0 2px 10px rgba(0,0,0,.1)",
+                    border: "none",
+                    overflow: "hidden",
+                  }}
+                >
+                  <div
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleZoomOut}
+                    id="zoomed-image"
+                  >
+                    <Card.Img
+                      variant="top"
+                      className=" singlecardprdctimg p-3"
+                      src={selectedImage}
+                      alt="product"
+                      onMouseEnter={handleZoomIn}
+                    />
+                  </div>
+                </Card>
+              </div>
             </div>
           </Col>
 
           {/* carameldiv column */}
           <Col lg={6} md={6} className="px-xl-5 order-md-1 order-3">
             <div className="carameldiv mt-md-5">
-              <div>
-                {card.isSale && (
-                  <button
-                    className="sale-button rounded-3 mt-4 px-4"
-                    style={{
-                      background: "#DC0000",
-                      border: "none",
-                      color: "white",
-                    }}
-                  >
-                    Sale
-                  </button>
-                )}
-              </div>
               <p className="fs-3 pt-3 pb-0 mb-0">{card.Product_name}</p>
 
               <p className="fs-4 mb-1 mt-0 pt-0">
@@ -326,10 +326,7 @@ const Singleshoppage = () => {
                       <button
                         className="px-lg-4 p-2 px-3  p-lg-3 mb-2 text-center addtocart"
                         onClick={() => {
-                          
                           handleAddToCart1(card, Qty);
-                          
-                          
                         }}
                       >
                         ADD TO CART

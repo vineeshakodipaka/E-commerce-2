@@ -69,7 +69,6 @@ const Navbar = ({ handleShow2 }) => {
     if (query.trim() !== "") {
       navigate(`/search-results?search=${query}`);
     } else {
-   
     }
   };
 
@@ -132,12 +131,8 @@ const Navbar = ({ handleShow2 }) => {
         path.startsWith("/subbrand-products")
       )
         return 2;
-   
-       if (
-         path === "/brandspage" ||
-         path.startsWith("/brands")
-       )
-         return 3;
+
+      if (path === "/brandspage" || path.startsWith("/brands")) return 3;
       if (path === "/contact") return 4;
       if (path === "/blog") return 5;
 
@@ -157,13 +152,14 @@ const Navbar = ({ handleShow2 }) => {
     setActiveButton(determineActiveButton(location.pathname));
   }, [location, userId, setActiveButton]);
 
-  
   return (
-    <nav className="navbar navbar-expand-lg navbar headerbar mt-lg-4 mb-lg-4">
-      <div className="container mx-lg-3 mx-xl-5 px-xl-5">
+    <nav className="navbar navbar-expand-lg navbar headerbar mt-lg-4 mb-lg-4 mx-xxxl-5 ms-xxxl-2 px-xxxl-5">
+      <div className="container mx-lg-3 mx-xl-5 px-xl-5 mx-xxl-5 px-xxl-5 mx-xxxl-2 ms-xxxl-2">
         <Link
           to="/"
-          className={`nav-link nav-btns  ${activeButton === 8 ? "active" : ""}`}
+          className={`ms-xxxl-5 nav-link nav-btns  ${
+            activeButton === 8 ? "active" : ""
+          }`}
           onClick={() => {
             setActiveButton(8);
           }}
@@ -197,8 +193,8 @@ const Navbar = ({ handleShow2 }) => {
         >
           <div className="offcanvas-header"></div>
           <div className="offcanvas-body">
-            <ul className="navbar-nav ms-lg-3 ms-xl-5 px-xl-5">
-              <li className="nav-item px-xl-2 d-flex justify-content-between ">
+            <ul className="navbar-nav ms-lg-3 ms-xl-5 px-xl-5 ms-xxl-5 px-xxl-5">
+              <li className="nav-item px-xl-2 s-xxl-5 d-flex justify-content-between ">
                 <Link
                   to="/"
                   aria-current="page"
@@ -284,7 +280,6 @@ const Navbar = ({ handleShow2 }) => {
                               className="nav-link navdroplink px-1 accordian"
                               id="navbrandname"
                               onClick={() => {
-                            
                                 handleBrandChange1(brand);
                                 setIsBrandDropdownOpen(false); // Close the dropdown when a brand is selected
                                 navbarCollapseRef.current?.classList.remove(
@@ -300,7 +295,6 @@ const Navbar = ({ handleShow2 }) => {
                               <Accordion.Item key={subcat.Subcat_id}>
                                 <Link
                                   onClick={() => {
-                                  
                                     setIsBrandDropdownOpen(false); // Close the dropdown when a brand is selected
                                     navbarCollapseRef.current?.classList.remove(
                                       "show"
@@ -325,7 +319,7 @@ const Navbar = ({ handleShow2 }) => {
                         <NavDropdown.Item
                           onClick={() => {
                             handleBrandChange(brand);
-                           
+
                             navbarCollapseRef.current?.classList.remove("show");
                           }}
                           className="nav-link navdroplink  px-4"

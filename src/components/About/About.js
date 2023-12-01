@@ -31,7 +31,7 @@ const About = () => {
             xs={1}
             className="px-3 pt-xl-5 px-xxl-5 mx-xxl-5 px-lg-5 mx-xl-5"
           >
-            <Col className="px-xl-5">
+            <Col className="px-xl-5 pt-lg-4">
               <img
                 className="px-xl-5 px-xxl-5 pt-lg-5 mt-lg-5"
                 src={chimg2}
@@ -41,42 +41,93 @@ const About = () => {
             </Col>
             <Col>
               <div className="mt-4 pt-xl-2 px-xl-4 pt-xxl-5 mt-xxl-5">
-                <h4 className="text-center text-lg-start">About Us</h4>
-                <h3 className="text-center text-lg-start">
+                <h1 className="text-center text-lg-start aboutus">About Us</h1>
+                <h3 className="text-center text-lg-start pt-2 pb-4">
                   We do Creative
                   <br /> Things for Success
                 </h3>
-                <p>
-                  Simply dummy text of the printing and typesetting industry.
-                  Lorem had ceased to been the industry's standard dummy text
-                  ever since the 1500s, when an unknown printer took a
-                  galley.Simply dummy text of the printing and typesetting
-                  industry. Lorem had ceased to been the industry's standard
-                  dummy text ever since the 1500s, when an unknown printer took
-                  a galley.
-                </p>
-                <p className="pt-3">
-                  Simply dummy text of the printing and typesetting industry.
-                  Lorem had ceased to been the industry's standard dummy text
-                  ever since the 1500s, when an unknown printer took a galley.
-                  <br />
-                  Simply dummy text of the printing and typesetting industry.
-                  Lorem had ceased to been the industry's standard dummy text
-                  ever since the 1500s, when an unknown printer took a
-                  galley.Simply dummy text of the printing and typesetting
-                  industry. Lorem had ceased to been the industry's standard
-                  dummy text ever since the 1500s, when an unknown printer took
-                  a galley.
-                </p>
-                <p className="pt-3">
-                  Simply dummy text of the printing and typesetting industry.
-                  Lorem had ceased to been the industry's standard dummy text
-                  ever since the 1500s, when an unknown printer took a galley.
-                  <br />
-                  Simply dummy text of the printing and typesetting industry.
-                  Lorem had ceased to been the industry's standard dummy text
-                  ever since the 1500s, when an unknown printer took a galley.
-                </p>
+                <div>
+                  <p>
+                    <h5 className="fw-bold"> *About Elite Enterprise* </h5>
+                    Welcome to Elite Enterprise, your trusted partner in
+                    delivering excellence. Based in the vibrant city of Mumbai,
+                    we stand as a beacon of innovation and reliability in the
+                    business landscape. At Elite Enterprise, we believe in not
+                    just meeting expectations but surpassing them, setting new
+                    benchmarks for quality and service in every endeavor.
+                  </p>
+                  <p>
+                    <h5 className="fw-bold"> *Our Commitment to</h5>
+                    Excellence* Elite Enterprise is not just a business; it's a
+                    commitment to excellence. We take pride in our unwavering
+                    dedication to delivering top-tier products and services
+                    tailored to meet the diverse needs of our clients. Our team
+                    of professionals brings a wealth of expertise to the table,
+                    ensuring that every project, big or small, is executed with
+                    precision and finesse.
+                  </p>
+                  <p>
+                    <h5 className="fw-bold">
+                      *A Foundation of Trust and Integrity*
+                    </h5>
+                    Trust is the cornerstone of our relationships, and we build
+                    it through transparency, integrity, and a customer-centric
+                    approach. At Elite Enterprise, we understand that trust is
+                    earned, and we strive to earn it with every interaction. Our
+                    commitment to ethical business practices sets us apart,
+                    fostering enduring partnerships with our clients.
+                    *Innovative Solutions for a Dynamic World* The business
+                    landscape is ever-evolving, and at Elite Enterprise, we
+                    thrive in this dynamic environment. Our passion for
+                    innovation drives us to stay at the forefront of industry
+                    trends, offering cutting-edge solutions that empower our
+                    clients to navigate the challenges of today and tomorrow.
+                    *Our Competitive Edge* In a market brimming with
+                    competition, Elite Enterprise distinguishes itself through a
+                    combination of quality, agility, and a customer-centric
+                    ethos. We constantly analyze industry trends, adapting our
+                    strategies to stay ahead of the curve. Our commitment to
+                    continuous improvement propels us to explore new avenues and
+                    push the boundaries of what's possible.
+                  </p>
+                  <p>
+                    <h5 className="fw-bold"> *Client-Centric Approach*</h5>
+                    Excellence* Elite Enterprise is not just a business; it's a
+                    commitment to excellence. We take pride in our unwavering
+                    dedication to delivering top-tier products and services
+                    tailored to meet the diverse needs of our clients. Our team
+                    of professionals brings a wealth of expertise to the table,
+                    ensuring that every project, big or small, is executed with
+                    precision and finesse. At Elite Enterprise, our clients are
+                    at the heart of everything we do. We understand that each
+                    client is unique, with distinct needs and aspirations. Our
+                    client-centric approach ensures that we not only meet
+                    expectations but exceed them. We forge lasting relationships
+                    by delivering solutions that add tangible value to our
+                    clients' businesses.
+                  </p>
+                  <p>
+                    <h5 className="fw-bold"> *Collaborative Partnerships*</h5>
+                    We view our clients not just as customers but as partners in
+                    success. Through open communication and collaboration, we
+                    work hand in hand to achieve mutual goals. Our emphasis on
+                    building long-term relationships has been instrumental in
+                    our growth and success.
+                  </p>
+                  <p>
+                 
+                    <h5 className="fw-bold">
+                      *Elite Enterprise: Your Vision, Our Mission*
+                    </h5>
+                    Our mission is simple – to transform your vision into
+                    reality. Whether you're seeking innovative solutions,
+                    reliable services, or a trusted partner for your business,
+                    Elite Enterprise is here to exceed your expectations. Join
+                    us on this journey of excellence, where your success is our
+                    success. Choose Elite Enterprise – Where Excellence Meets
+                    Innovation.
+                  </p>
+                </div>
               </div>
             </Col>
           </Row>

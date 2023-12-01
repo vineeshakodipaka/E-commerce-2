@@ -1,29 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { Col, Form, InputGroup, Row } from "react-bootstrap";
-import Cookies from "js-cookie"; // Import Cookies if not already imported
+import { Col, Form, InputGroup, Row, Alert } from "react-bootstrap"; // Import Alert from react-bootstrap
+import Cookies from "js-cookie";
 import { baseUrl } from "../../Globalvarible";
-import { AiFillEye } from "react-icons/ai"; // Import AiFillEye icon
+import { AiFillEye } from "react-icons/ai";
+
 const AccountDetails = () => {
-  // Define state to manage form data
   const [formData, setFormData] = useState({
     username: "",
     Email: "",
     PhoneNumber: "",
     password: "",
   });
- 
-  // State to manage password visibility
+
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  // Toggle password visibility
+  const [updateSuccess, setUpdateSuccess] = useState(false); // State for update success
+
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
-  // Retrieve userId from cookies
+
   const userId = Cookies.get("userId");
 
   useEffect(() => {
-    // Fetch user details based on userId
     if (userId) {
       fetch(baseUrl + "Get_UserDetails.php", {
         method: "POST",
@@ -35,7 +34,6 @@ const AccountDetails = () => {
         .then((response) => response.json())
         .then((data) => {
           if (data.status) {
-            // Update the form data with the retrieved user details
             setFormData({
               username: data.data.username,
               Email: data.data.Email,
@@ -50,20 +48,41 @@ const AccountDetails = () => {
     }
   }, [userId]);
 
-  // Handle form submission
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    // Create a FormData object and populate it with the form data
     const formdata = new FormData();
-    formdata.append("UserID", userId); // Assuming you want to include the user's ID
+    formdata.append("UserID", userId);
     formdata.append("Username", formData.username);
     formdata.append("Email", formData.Email);
     formdata.append("PhoneNumber", formData.PhoneNumber);
     formdata.append("Password", formData.password);
+
+    const requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+    };
+
+    try {
+      const response = await fetch(
+        baseUrl + "Update_UserDetails.php",
+        requestOptions
+      );
+
+      if (response.ok) {
+        setUpdateSuccess(true); // Update success state to show the info box
+        setTimeout(() => {
+          setUpdateSuccess(false); // Hide the info box after 5 seconds
+        }, 5000);
+      } else {
+        console.error("Error updating user details:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
-  // Handle input field changes and update form data
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -76,8 +95,6 @@ const AccountDetails = () => {
           <Row lg={2} xs={1} md={1}>
             <Col xs={12} lg={12}>
               <Row className="mb-4">
-                {/* Your input fields */}
-                {/* Populate them with values from the state */}
                 <Form.Group as={Col} md="6" lg="6" xs="12">
                   <Form.Label className="formlabel"> Username*</Form.Label>
                   <Form.Control
@@ -116,7 +133,7 @@ const AccountDetails = () => {
                     type="text"
                     placeholder="Email"
                   />
-                </Form.Group>{" "}
+                </Form.Group>
                 <Form.Group as={Col} md="6" lg="6" xs="12">
                   <Form.Label className="formlabel">
                     Current password *
@@ -140,39 +157,18 @@ const AccountDetails = () => {
                   </div>
                 </Form.Group>
               </Row>
-              <Row className="mb-4">
-                <Form.Group as={Col} md="6" lg="6" xs="12">
-                  <Form.Label className="formlabel">New password*</Form.Label>
-                  <Form.Control
-                    onChange={handleInputChange}
-                   
-                    className="labelholder"
-                    required
-                    type="text"
-                    placeholder="*******"
-                  />
-                </Form.Group>
-                <Form.Group as={Col} md="6" lg="6" xs="12">
-                  <Form.Label className="formlabel">
-                    Confirm new password*
-                  </Form.Label>
-                  <Form.Control
-                    onChange={handleInputChange}
-                 
-                
-                    className="labelholder"
-                    required
-                    type="password"
-                    placeholder="*******"
-                  />
-                </Form.Group>
-              </Row>
             </Col>
           </Row>
           <button type="submit" className="rounded-4 p-3 mt-4 mb-4">
             Save Changes
           </button>
         </Form>
+
+        {updateSuccess && (
+          <Alert variant="success" className="slide-in-info">
+            User details updated successfully!
+          </Alert>
+        )}
       </Row>
     </div>
   );

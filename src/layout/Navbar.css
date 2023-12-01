@@ -234,4 +234,14 @@ background-color: white;
 .headerbar .accordion-item:hover {
     border: 1px solid #000066 !important;
       color: #000066 !important;
-}
+}@media screen and (min-width: 1600px) and (max-width: 4300px) {
+  .headerbar {
+      display: flex !important;
+      justify-content: center !important;
+        width: 100% !important;
+    }
+
+    
+
+    
+  }
