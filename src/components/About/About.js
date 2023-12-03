@@ -130,7 +130,6 @@ const About = () => {
                     success.
                     <br />
                     <p className="mt-2">
-                     
                       Choose Elite Enterprise – Where Excellence Meets
                       Innovation.
                     </p>
@@ -145,44 +144,129 @@ const About = () => {
             lg={2}
             xs={1}
             md={2}
-            className="mt-5 pt-lg-5 px-lg-5 px-md-5 px-3"
+            className="mt-5 pt-lg-5 px-lg-5 ms-lg-2 px-md-5 px-3"
             style={{ background: "#F9F8F8" }}
           >
-            <Col className="px-xl-5  mt-xxl-5 px-xxl-5">
-              <div className="whychoosediv px-xl-5 mx-xl-5 px-lg-1 pt-lg-3 pt-xl-5">
+            <Col className="px-xl-2 mt-xxl-2 px-xxl-1">
+              <div className="whychoosediv px-xl-2 mx-xl-2 px-lg-1 pt-lg-3 pt-xl-2">
                 <h4>Why Choose us?</h4>
-                <h3>We do not buy from the open market & traders.</h3>
-                <p className="pt-xl-3 pb-xl-3">
-                  Simply dummy text of the printing and typesetting industry.
-                  Lorem had ceased to been the industry's standard the 1500s,
-                  when an unknown
-                </p>
+                <p>We do not buy from the open market & traders.</p>
                 <div
-                  className="rounded-pill p-3  col-lg-6 col-xl-8"
+                  className="rounded-pill p-3  col-lg-6  col-xl-7"
                   style={{ backgroundColor: "#FFDAA9", color: "#B27B60" }}
                 >
                   <FaRegCircle />
-                  &nbsp;<span>100% Natural Product</span>
+                  &nbsp;<span> Exclusivity in Sourcing</span>
                 </div>
                 <p className="pt-lg-3 ms-lg-5">
-                  Simply dummy text of the printing and typesetting industry
-                  Lorem Ipsum
+                  - We stand out by not purchasing from the open market or
+                  traders. Instead, we meticulously source our products through
+                  exclusive channels, ensuring the highest quality and
+                  authenticity.
                 </p>
                 <div
-                  className="rounded-pill p-3  col-lg-6  col-xl-8"
+                  className="rounded-pill p-3  col-lg-6 col-xl-7"
                   style={{ backgroundColor: "#FFDAA9", color: "#B27B60" }}
                 >
                   <FaRegCircle />
-                  &nbsp;<span> Increases resistance</span>
+                  &nbsp;<span>100% Natural Guarantee</span>
                 </div>
                 <p className="pt-lg-3 ms-lg-5">
-                  Filling, and temptingly healthy, our Biona Organic Granola
-                  with Wild Berries is just the thing
+                  - Our commitment to providing only 100% natural products sets
+                  us apart. We prioritize the well-being of our customers by
+                  delivering goods free from artificial additives,
+                  preservatives, or synthetic substances.
+                </p>
+                <div
+                  className="rounded-pill p-3  col-lg-6  col-xl-7"
+                  style={{ backgroundColor: "#FFDAA9", color: "#B27B60" }}
+                >
+                  <FaRegCircle />
+                  &nbsp;<span>Enhanced Resistance</span>
+                </div>
+                <p className="pt-lg-3 ms-lg-5">
+                  - Our products are curated with a focus on boosting immunity
+                  and increasing resistance. We understand the importance of a
+                  robust immune system in today's fast-paced world, and our
+                  offerings are tailored to support and strengthen your body's
+                  natural defenses.
+                </p>
+                <div
+                  className="rounded-pill p-3  col-lg-6  col-xl-7"
+                  style={{ backgroundColor: "#FFDAA9", color: "#B27B60" }}
+                >
+                  <FaRegCircle />
+                  &nbsp;<span> Quality Assurance</span>
+                </div>
+                <p className="pt-lg-3 ms-lg-5">
+                  - Rigorous quality control measures are implemented at every
+                  stage of production. From sourcing to packaging, our team
+                  ensures that each product adheres to the highest standards,
+                  providing you with the assurance of quality and safety.
+                </p>
+                <div
+                  className="rounded-pill p-3  col-lg-6  col-xl-7"
+                  style={{ backgroundColor: "#FFDAA9", color: "#B27B60" }}
+                >
+                  <FaRegCircle />
+                  &nbsp;<span>Transparency in Processes</span>
+                </div>
+                <p className="pt-lg-3 ms-lg-5">
+                  - We believe in transparency and take pride in sharing
+                  information about our sourcing, production, and testing
+                  processes. This openness is designed to build trust with our
+                  customers and showcase the integrity of our products.
+                </p>
+                <div
+                  className="rounded-pill p-3  col-lg-6  col-xl-7"
+                  style={{ backgroundColor: "#FFDAA9", color: "#B27B60" }}
+                >
+                  <FaRegCircle />
+                  &nbsp;<span> Customer-Centric Approach</span>
+                </div>
+                <p className="pt-lg-3 ms-lg-5">
+                  - Your satisfaction is our priority. We are dedicated to
+                  meeting and exceeding your expectations, offering excellent
+                  customer service, and addressing any concerns promptly. Your
+                  well-being is at the core of our business ethos.
+                </p>
+                <div
+                  className="rounded-pill p-3  col-lg-6  col-xl-7"
+                  style={{ backgroundColor: "#FFDAA9", color: "#B27B60" }}
+                >
+                  <FaRegCircle />
+                  &nbsp;<span> Environmentally Conscious Practices</span>
+                </div>
+                <p className="pt-lg-3 ms-lg-5">
+                  - Beyond just product quality, we are committed to
+                  sustainability. Our practices are designed to minimize
+                  environmental impact, from eco-friendly packaging to
+                  responsible sourcing, contributing to a healthier planet for
+                  future generations.
+                </p>
+                <div
+                  className="rounded-pill p-3  col-lg-6  col-xl-7"
+                  style={{ backgroundColor: "#FFDAA9", color: "#B27B60" }}
+                >
+                  <FaRegCircle />
+                  &nbsp;<span> Continuous Research and Development</span>
+                </div>
+                <p className="pt-lg-3 ms-lg-5">
+                  - We stay at the forefront of advancements in health and
+                  wellness. Our commitment to continuous research and
+                  development ensures that our products evolve to meet the
+                  ever-changing needs of our customers, providing innovative
+                  solutions for a healthier lifestyle.
+                </p>
+                <p className="mt-2">
+                  Choose us for a holistic experience that goes beyond products
+                  – a commitment to your health, well-being, and a sustainable
+                  future.
                 </p>
               </div>
             </Col>
-            <Col className="px-xl-5">
-              <img className="px-xl-4" src={chimg3} width="100%" alt="img3" />
+            <Col className="px-xl-5 mt-lg-5 pt-lg-5">
+              <img className="px-xl-4 mt-lg-5 pt-lg-5" src={chimg3} width="100%" alt="img3" />
             </Col>
             {/* Spacer row for larger screens */}
             <Row className="d-none d-lg-block pt-5 pb-5 mt-5 mb-5">
