@@ -7,12 +7,13 @@ const Privacypolicy = () => {
         <h3 className="text-center pb-4 pt-3">
           *Privacy Policy for The Elite Enterprise E-commerce Website*
         </h3>
+        <p className="pb-2">Last Updated: [Date]</p>
         <p>
-          Last Updated: [Date] At The Elite Enterprise, we are committed to
-          protecting your privacy. This Privacy Policy outlines how we collect,
-          use, disclose, and safeguard your personal information when you use
-          our website and services. By using our website, you consent to the
-          practices described in this policy.
+          At The Elite Enterprise, we are committed to protecting your privacy.
+          This Privacy Policy outlines how we collect, use, disclose, and
+          safeguard your personal information when you use our website and
+          services. By using our website, you consent to the practices described
+          in this policy.
         </p>
         <p>
           <h6 className="fw-bold ">*1. Information We Collect:*</h6>
@@ -82,14 +83,23 @@ const Privacypolicy = () => {
         <p>
           <h6 className="fw-bold">*6. Contact Information:* </h6>If you have any
           questions or concerns regarding our Privacy Policy, you can contact us
-          at: - Email: info@theeliteenterprise.in - Phone: +91 98202 44338
+          at:
+        </p>
+        <p>
+          <span className="fw-bold">- Email:</span>info@theeliteenterprise.in
+        </p>
+        <p>
+          <span className="fw-bold">- Phone: </span>+91 98202 44338
         </p>
         <p>
           <h6 className="fw-bold"> *7. Changes to Privacy Policy:*</h6> We
           reserve the right to update and modify this Privacy Policy at any
           time. Changes will be effective immediately upon posting on our
-          website. Please review this policy periodically for any updates. By
-          using The Elite Enterprise website, you agree to the terms of this
+          website. Please review this policy periodically for any updates.
+        </p>
+        <p className="pt-2">
+          
+          By using The Elite Enterprise website, you agree to the terms of this
           Privacy Policy. Your privacy is important to us, and we are dedicated
           to protecting your personal information.
         </p>

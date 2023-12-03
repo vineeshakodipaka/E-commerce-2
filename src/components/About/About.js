@@ -57,14 +57,14 @@ const About = () => {
                     benchmarks for quality and service in every endeavor.
                   </p>
                   <p>
-                    <h5 className="fw-bold"> *Our Commitment to</h5>
-                    Excellence* Elite Enterprise is not just a business; it's a
-                    commitment to excellence. We take pride in our unwavering
-                    dedication to delivering top-tier products and services
-                    tailored to meet the diverse needs of our clients. Our team
-                    of professionals brings a wealth of expertise to the table,
-                    ensuring that every project, big or small, is executed with
-                    precision and finesse.
+                    <h5 className="fw-bold"> *Our Commitment to Excellence*</h5>
+                    Elite Enterprise is not just a business; it's a commitment
+                    to excellence. We take pride in our unwavering dedication to
+                    delivering top-tier products and services tailored to meet
+                    the diverse needs of our clients. Our team of professionals
+                    brings a wealth of expertise to the table, ensuring that
+                    every project, big or small, is executed with precision and
+                    finesse.
                   </p>
                   <p>
                     <h5 className="fw-bold">
@@ -76,35 +76,39 @@ const About = () => {
                     earned, and we strive to earn it with every interaction. Our
                     commitment to ethical business practices sets us apart,
                     fostering enduring partnerships with our clients.
-                    *Innovative Solutions for a Dynamic World* The business
-                    landscape is ever-evolving, and at Elite Enterprise, we
-                    thrive in this dynamic environment. Our passion for
-                    innovation drives us to stay at the forefront of industry
-                    trends, offering cutting-edge solutions that empower our
-                    clients to navigate the challenges of today and tomorrow.
-                    *Our Competitive Edge* In a market brimming with
-                    competition, Elite Enterprise distinguishes itself through a
-                    combination of quality, agility, and a customer-centric
-                    ethos. We constantly analyze industry trends, adapting our
-                    strategies to stay ahead of the curve. Our commitment to
-                    continuous improvement propels us to explore new avenues and
-                    push the boundaries of what's possible.
+                  </p>
+                  <p>
+                    <h5 className="fw-bold">
+                      *Innovative Solutions for a Dynamic World*
+                    </h5>
+                    The business landscape is ever-evolving, and at Elite
+                    Enterprise, we thrive in this dynamic environment. Our
+                    passion for innovation drives us to stay at the forefront of
+                    industry trends, offering cutting-edge solutions that
+                    empower our clients to navigate the challenges of today and
+                    tomorrow.
+                  </p>
+                  <p>
+                    <h5 className="fw-bold">
+                      <h5 className="fw-bold">*Our Competitive Edge*</h5>
+                    </h5>
+                    In a market brimming with competition, Elite Enterprise
+                    distinguishes itself through a combination of quality,
+                    agility, and a customer-centric ethos. We constantly analyze
+                    industry trends, adapting our strategies to stay ahead of
+                    the curve. Our commitment to continuous improvement propels
+                    us to explore new avenues and push the boundaries of what's
+                    possible.
                   </p>
                   <p>
                     <h5 className="fw-bold"> *Client-Centric Approach*</h5>
-                    Excellence* Elite Enterprise is not just a business; it's a
-                    commitment to excellence. We take pride in our unwavering
-                    dedication to delivering top-tier products and services
-                    tailored to meet the diverse needs of our clients. Our team
-                    of professionals brings a wealth of expertise to the table,
-                    ensuring that every project, big or small, is executed with
-                    precision and finesse. At Elite Enterprise, our clients are
-                    at the heart of everything we do. We understand that each
-                    client is unique, with distinct needs and aspirations. Our
-                    client-centric approach ensures that we not only meet
-                    expectations but exceed them. We forge lasting relationships
-                    by delivering solutions that add tangible value to our
-                    clients' businesses.
+                    At Elite Enterprise, our clients are at the heart of
+                    everything we do. We understand that each client is unique,
+                    with distinct needs and aspirations. Our client-centric
+                    approach ensures that we not only meet expectations but
+                    exceed them. We forge lasting relationships by delivering
+                    solutions that add tangible value to our clients'
+                    businesses.
                   </p>
                   <p>
                     <h5 className="fw-bold"> *Collaborative Partnerships*</h5>
@@ -115,7 +119,6 @@ const About = () => {
                     our growth and success.
                   </p>
                   <p>
-                 
                     <h5 className="fw-bold">
                       *Elite Enterprise: Your Vision, Our Mission*
                     </h5>
@@ -124,8 +127,13 @@ const About = () => {
                     reliable services, or a trusted partner for your business,
                     Elite Enterprise is here to exceed your expectations. Join
                     us on this journey of excellence, where your success is our
-                    success. Choose Elite Enterprise – Where Excellence Meets
-                    Innovation.
+                    success.
+                    <br />
+                    <p className="mt-2">
+                     
+                      Choose Elite Enterprise – Where Excellence Meets
+                      Innovation.
+                    </p>
                   </p>
                 </div>
               </div>

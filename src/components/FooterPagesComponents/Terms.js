@@ -4,7 +4,7 @@ const Terms = () => {
   return (
     <div className="px-4 mx-lg-5 px-lg-5">
       <div className="px-lg-3">
-        <h3 className="text-center pb-4 pt-3">
+        <h3 className="text-center  pb-4 pt-3">
           *Terms and Conditions for The Elite Enterprise E-commerce Website*
         </h3>
         <p>
@@ -18,8 +18,9 @@ const Terms = () => {
           provide accurate and up-to-date product information. However, The
           Elite Enterprise is not responsible for any inaccuracies or
           discrepancies in product descriptions, images, or prices. For
-          clarifications, contact us at info@theeliteenterprise.in or +91 98202
-          44338.
+          clarifications, contact us at &nbsp;
+          <span className="fw-bold">info@theeliteenterprise.in</span>
+          &nbsp; or &nbsp; <span className="fw-bold">+91 98202 44338.</span>
         </p>
         <p>
           <h6 className="fw-bold">*3. Order Confirmation:*</h6> Once an order is
@@ -43,8 +44,10 @@ const Terms = () => {
         <p>
           <h6 className="fw-bold"> *6. Returns and Refunds:*</h6> Refer to our
           Return Policy for detailed information on returns and refunds. Contact
-          our support team at info@theeliteenterprise.in or +91 98202 44338 for
-          assistance.
+          our support team at &nbsp;
+          <span className="fw-bold">info@theeliteenterprise.in</span> &nbsp; or
+          &nbsp;
+          <span className="fw-bold">+91 98202 44338</span> for assistance.
         </p>
         <p>
           <h6 className="fw-bold"> *7. User Accounts:*</h6> Users are
@@ -75,7 +78,7 @@ const Terms = () => {
         <p>
           <span className="fw-bold">- Email:</span>info@theeliteenterprise.in
         </p>
-        <p >
+        <p>
           <span className="fw-bold">- Phone: </span>+91 98202 44338
         </p>
         For any inquiries or clarifications regarding these terms and

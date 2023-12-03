@@ -18,10 +18,10 @@ const Refund = () => {
           <h6 className="fw-bold"> *2. Return Procedure:*</h6> If you wish to
           request a refund, please contact us at &nbsp;
           <span className="fw-bold">info@theeliteenterprise.in</span> or
-          <span className="fw-bold"> +91 98202 44338</span>
-          within [number of days] days of receiving your order. Clearly state
-          the reason for your refund request, and our support team will guide
-          you through the return process.
+          <span className="fw-bold"> +91 98202 44338</span> &nbsp; within
+          [number of days] days of receiving your order. Clearly state the
+          reason for your refund request, and our support team will guide you
+          through the return process.
         </p>
         <p>
           <h6 className="fw-bold"> *3. Damaged or Defective Items:*</h6> In the
@@ -52,7 +52,8 @@ const Refund = () => {
         <p>
           <h6 className="fw-bold"> *7. Contact Information for Refunds:*</h6>
           <span className="fw-bold">- Email:</span>
-          &nbsp;info@theeliteenterprise.in<br/>
+          &nbsp;info@theeliteenterprise.in
+          <br />
           <span className="fw-bold">- Phone: </span>+91 98202 44338
         </p>
         <p>
@@ -65,11 +66,14 @@ const Refund = () => {
           <h6 className="fw-bold">*9. Updates to Refund Policy:*</h6> The Elite
           Enterprise reserves the right to update or modify this refund policy
           at any time without prior notice. Customers are encouraged to review
-          this policy periodically for any changes. For any inquiries or
-          assistance regarding refunds, please contact our customer support
-          using the provided contact information. The Elite Enterprise
-          appreciates your trust and aims to provide a seamless and satisfactory
-          shopping experience.
+          this policy periodically for any changes.
+          <p className="pt-2">
+           
+            For any inquiries or assistance regarding refunds, please contact
+            our customer support using the provided contact information. The
+            Elite Enterprise appreciates your trust and aims to provide a
+            seamless and satisfactory shopping experience.
+          </p>
         </p>
       </div>
     </div>
