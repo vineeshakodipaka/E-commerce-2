@@ -154,7 +154,7 @@ const Navbar = ({ handleShow2 }) => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar headerbar mt-lg-4 mb-lg-4 mx-xxxl-5 ms-xxxl-2 px-xxxl-5">
-      <div className="container mx-lg-3 mx-xl-5 px-xl-5 mx-xxl-5 px-xxl-5 mx-xxxl-2 ms-xxxl-2">
+      <div className="container mx-lg-3 mx-xl-2 px-xl-2 mx-xxl-5 px-xxl-5 mx-xxxl-2 ms-xxxl-2">
         <Link
           to="/"
           className={`ms-xxxl-5 nav-link nav-btns  ${
@@ -193,7 +193,7 @@ const Navbar = ({ handleShow2 }) => {
         >
           <div className="offcanvas-header"></div>
           <div className="offcanvas-body">
-            <ul className="navbar-nav ms-lg-3 ms-xl-5 px-xl-5 ms-xxl-5 px-xxl-5">
+            <ul className="navbar-nav ms-lg-3 ms-xl-5 px-xl-0 ms-xxl-5 px-xxl-5">
               <li className="nav-item px-xl-2 s-xxl-5 d-flex justify-content-between ">
                 <Link
                   to="/"

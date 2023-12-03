@@ -14,7 +14,7 @@ const cimgs = [
     link: "/refund", // Add a 'link' property for the URL to navigate,
     caption2:
       "Our commitment to your satisfaction is unwavering. If, for any reason, you're not completely satisfied with your purchase, our hassle-free return policy ensures a seamless process for returns and exchanges.",
-  },
+  }, 
   {
     img: cimg2,
     caption1: "100% Fresh",
