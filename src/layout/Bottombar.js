@@ -40,7 +40,7 @@ const Bottombar = ({ handleShow2 }) => {
 
           <Link
             to="/"
-            className={`b-link px-3  rounded-3 p-1 text-center ${
+            className={`b-link px-3  rounded-3 p-2 text-center ${
               activeButton === 0 ? "active" : ""
             }`}
             onMouseEnter={() => setActiveButton(0)}
